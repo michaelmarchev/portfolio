@@ -11,6 +11,10 @@ import { site } from "@/content/site";
  * `changeFrequency` from its literal type to `string`, which does not satisfy
  * `MetadataRoute.Sitemap` and fails the build.
  */
+
+// Required under `output: "export"` — see the note in robots.ts.
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 

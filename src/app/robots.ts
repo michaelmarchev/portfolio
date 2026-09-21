@@ -8,3 +8,7 @@ export default function robots(): MetadataRoute.Robots {
     host: site.url,
   };
 }
+
+// Required under `output: "export"`: robots.txt is a route handler, and Next
+// needs to be told explicitly to render it once at build time.
+export const dynamic = "force-static";
