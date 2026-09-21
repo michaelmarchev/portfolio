@@ -130,21 +130,6 @@ time; briefs and photographs coexist.
 Leave `orientation` alone unless the real crop genuinely differs — it drives
 both the plate ratio and the `next/image` sizing hints.
 
-### Wire up the contact form
-
-`src/components/contact/ContactForm.tsx` validates and POSTs JSON to
-`process.env.NEXT_PUBLIC_CONTACT_ENDPOINT`. Set it in `.env.local`:
-
-```
-NEXT_PUBLIC_CONTACT_ENDPOINT=https://formspree.io/f/xxxxxxx
-```
-
-Any service accepting `{ name, email, subject, message }` works — Formspree,
-Basin, or your own route handler at `/api/contact` using Resend.
-
-With the variable unset, a valid submission resolves into a prefilled `mailto:`
-link instead, so the page is never a dead end.
-
 ---
 
 ## Deploying to GitHub Pages
@@ -198,10 +183,9 @@ functions — so:
 
 ### Optional
 
-- **Contact form.** Add a repository variable `NEXT_PUBLIC_CONTACT_ENDPOINT`
-  (Settings → Secrets and variables → Actions → Variables) pointing at
-  Formspree, Basin or similar. The workflow passes it into the build. Without
-  it, a valid submission opens a prefilled `mailto:` link instead.
+- **Contact.** There is no form and no backend — the contact page lists the
+  email, phone and LinkedIn directly. Nothing to configure, nothing that can
+  silently drop a message.
 - **Custom domain.** Add it under Settings → Pages, then set
   `NEXT_PUBLIC_SITE_URL` to it in the workflow's build step and clear
   `NEXT_PUBLIC_BASE_PATH` — a custom domain serves from the root.

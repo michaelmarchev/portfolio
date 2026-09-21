@@ -24,6 +24,7 @@ section. No component needs a dark variant.
 | `--c-accent-text` | `#a8380b` | 5.76 : 1 | Orange **as text** |
 | `--c-accent` | `#e24e12` | 3.49 : 1 | Rules, ticks, marks — **never text** |
 | `--c-tick` | `#a9a69d` | 2.16 : 1 | Registration marks only |
+| `--signal-bright` | `#ff6a2b` | 6.39 : 1 *on `#151515`* | Solid-button label + border |
 
 ### Dark panel — on `#0e0e0e`
 
@@ -35,6 +36,19 @@ section. No component needs a dark variant.
 | `--c-fg-4` | `#807d76` | 4.70 : 1 |
 | `--c-accent` | `#ff6a2b` | 6.76 : 1 |
 | `--c-accent-text` | `#ff8049` | 7.75 : 1 |
+
+### The solid button
+
+A near-black chip (`#151515`), outlined and labelled in `--signal-bright`
+(`#ff6a2b`), that fills orange on hover and focus.
+
+The fill is deliberately **not** token-driven, so the button reads identically
+on eggshell and inside a dark panel. On a dark panel the fill is almost
+indistinguishable from the background, and the orange border is what
+delineates the button — 6.76 : 1 against the panel. The label is 6.39 : 1 on
+the fill; the hover state puts the panel background colour on the orange fill
+(5.76 : 1 light, 7.75 : 1 dark). Pressed archive filters use the same
+treatment.
 
 ### The orange rule
 
@@ -89,13 +103,20 @@ Measure is capped at `66ch` (`--measure`). No paragraph runs wider.
 ### 1. Datum rail
 
 A fixed hairline machinist's scale down the left edge — ticks every 24px,
-major every 96px — carrying a live cursor and a vertical readout of the scroll
-coordinate plus the current section label. It replaces a conventional progress
-bar with the instrument the work is actually about.
+major every 96px — carrying a live cursor and a vertical readout naming the
+current page. It replaces a conventional progress bar with the instrument the
+work is actually about.
+
+The readout is derived from `usePathname()`, not from measuring which section
+is on screen. Route state is exact and changes the moment the URL does. An
+earlier version scanned `[data-datum]` elements inside the scroll handler,
+which meant a client-side navigation left the old page's label showing until
+the visitor happened to scroll.
 
 Desktop only (`--rail: 4.5rem` at ≥1024px, `0px` below). Purely decorative:
 `pointer-events: none`, no semantic content, invisible to assistive tech. The
-scroll handler is rAF-throttled. Sections opt in with `<Section datum="...">`.
+cursor's scroll handler is rAF-throttled and re-measures on navigation, since
+a new page has a new height and fires no scroll event.
 
 ### 2. Specification plate
 
@@ -163,8 +184,6 @@ never gated behind an animation that will not run.
 - Archive filters are `<button aria-pressed>`, with the result count in an
   `aria-live` region.
 - Timeline entries use `aria-expanded` / `aria-controls`.
-- Form fields have real `<label>`s, `aria-invalid`, `aria-describedby` for
-  errors and hints, and a **single** `aria-live` status region.
 - Mobile nav traps nothing but handles Escape, returns focus to the trigger,
   and locks body scroll.
 - Plates expose `role="img"` with an `aria-label` naming the intended subject.
