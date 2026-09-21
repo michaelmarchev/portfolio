@@ -3,6 +3,11 @@
 Static Next.js site, deployed to GitHub Pages by GitHub Actions on every push
 to `main`. One setup step: **Settings → Pages → Source → GitHub Actions.**
 
+> **Replacing an earlier copy of this project?** Unzip with `-o` so every file
+> is overwritten, and delete `src/app/opengraph-image.tsx` if it still exists —
+> it is incompatible with the static export and is no longer part of this
+> project.
+
 Personal engineering portfolio. Next.js App Router, TypeScript, Tailwind CSS v4.
 
 All copy, metadata and image briefs live in `src/content/*`. You should almost
@@ -252,6 +257,13 @@ never installed and Next was never booted. Instead:
   all three.
 - **Workflow YAML** parses, and `public/og.png` was rendered and inspected at
   1200 × 630.
+- **Full typecheck against hand-written stubs.** Since `next` and
+  `@types/react` could not be installed, minimal declaration files for
+  `next`, `next/link`, `next/image`, `next/font/google`, `react` and `process`
+  were written so `tsc --strict` could actually check the source. That caught
+  two build-breaking errors: `changeFrequency` widening to `string` in
+  `sitemap.ts`, and `<Reveal id={...}>` being passed a prop the component did
+  not accept. `tsc` now exits clean, and no imports are unused.
 
 What that does **not** cover: the production build, React hydration, `next/font`
 loading, real device testing, and Lighthouse. Run

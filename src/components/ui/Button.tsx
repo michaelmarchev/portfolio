@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { asset, cn } from "@/lib/utils";
 
 type Variant = "solid" | "outline" | "quiet";
 
@@ -37,9 +37,10 @@ export function Button({
   const classes = cn(SHARED, STYLE[variant], className);
 
   if (external || download) {
+    // `next/link` prefixes the base path automatically; a plain <a> does not.
     return (
       <a
-        href={href}
+        href={external ? href : asset(href)}
         className={classes}
         download={download}
         {...(external ? { target: "_blank", rel: "noreferrer noopener" } : {})}

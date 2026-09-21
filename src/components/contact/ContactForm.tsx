@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { ButtonAction } from "@/components/ui/Button";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -61,7 +61,7 @@ export function ContactForm() {
     return `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const found = validate(values);
@@ -241,7 +241,9 @@ function Field({
           required={required}
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy}
-          onChange={(event) => onChange(event.target.value)}
+          onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+            onChange(event.target.value)
+          }
           className={cn(control, "resize-y leading-[1.65]")}
         />
       ) : (
@@ -254,7 +256,9 @@ function Field({
           autoComplete={autoComplete}
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy}
-          onChange={(event) => onChange(event.target.value)}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            onChange(event.target.value)
+          }
           className={control}
         />
       )}

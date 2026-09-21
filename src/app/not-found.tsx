@@ -3,10 +3,8 @@ import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { MetaLabel } from "@/components/ui/MetaLabel";
 
-export const metadata = {
-  title: "Not found",
-  robots: { index: false, follow: false },
-};
+// `not-found.tsx` is not a route, so it cannot export metadata. Under
+// `output: "export"` it becomes 404.html, which GitHub Pages serves natively.
 
 export default function NotFound() {
   return (

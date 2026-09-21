@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { nav, site } from "@/content/site";
-import { cn } from "@/lib/utils";
+import { asset, cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -90,7 +90,7 @@ export function SiteHeader() {
             </Link>
           ))}
           <a
-            href={site.resume}
+            href={asset(site.resume)}
             download
             className="u-meta border border-line-strong px-3.5 py-2 text-fg-2 no-underline transition-colors duration-200 hover:border-accent hover:text-accent-text focus-visible:border-accent"
           >
@@ -153,7 +153,7 @@ export function SiteHeader() {
           ))}
         </ul>
         <div className="flex flex-wrap gap-x-6 gap-y-2 px-[var(--gutter)] py-5">
-          <a href={site.resume} download className="u-meta text-fg-2 no-underline">
+          <a href={asset(site.resume)} download className="u-meta text-fg-2 no-underline">
             Download resume
           </a>
           <a href={`mailto:${site.email}`} className="u-meta text-fg-2 no-underline">

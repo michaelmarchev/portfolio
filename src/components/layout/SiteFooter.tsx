@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { nav, site } from "@/content/site";
 import { Container } from "./Container";
+import { asset } from "@/lib/utils";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -47,7 +48,7 @@ export function SiteFooter() {
                 </a>
               </li>
               <li>
-                <a href={site.resume} download className="u-link text-[0.9rem] text-fg-2">
+                <a href={asset(site.resume)} download className="u-link text-[0.9rem] text-fg-2">
                   {site.resumeLabel}
                 </a>
               </li>

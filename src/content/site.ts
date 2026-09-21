@@ -34,8 +34,18 @@ export const site = {
   linkedinLabel: "linkedin.com/in/michael-marchev",
   resume: "/michael-marchev-resume.pdf",
   resumeLabel: "Resume — PDF",
-  /** Replace with the deployed origin before launch; used for canonical + OG URLs. */
-  url: "https://michaelmarchev.com",
+  /**
+   * Full public URL of the deployed site, including any sub-path.
+   *
+   * Set by .github/workflows/deploy.yml from the repository name, e.g.
+   * https://username.github.io/my-portfolio — or https://username.github.io
+   * for a `<user>.github.io` repo. Override with NEXT_PUBLIC_SITE_URL if you
+   * later point a custom domain at the Pages site.
+   */
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(
+    /\/$/,
+    "",
+  ),
 } as const;
 
 export const differentiators = [

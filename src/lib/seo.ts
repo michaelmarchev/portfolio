@@ -1,6 +1,19 @@
 import type { Metadata } from "next";
 import { seoKeywords, site } from "@/content/site";
 
+/**
+ * Social card. A static PNG in /public rather than a generated
+ * `opengraph-image.tsx`: under `output: "export"` the generated file is
+ * emitted without an extension, and GitHub Pages then serves it as
+ * application/octet-stream instead of an image.
+ */
+const OG_IMAGE = {
+  url: `${site.url}/og.png`,
+  width: 1200,
+  height: 630,
+  alt: `${site.name} — Mechanical Engineer. Technical Lead.`,
+};
+
 const DEFAULT_DESCRIPTION =
   "Michael Marchev is a mechanical engineer and technical lead building precision physical systems: automated motion systems, precision test fixtures, human-centered devices and sustainable product concepts.";
 
@@ -15,19 +28,21 @@ export const baseMetadata: Metadata = {
   keywords: [...seoKeywords],
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
-  alternates: { canonical: "/" },
+  alternates: { canonical: `${site.url}/` },
   openGraph: {
     type: "website",
     siteName: site.name,
     locale: "en_US",
-    url: site.url,
+    url: `${site.url}/`,
     title: `${site.name} — Mechanical Engineer. Technical Lead.`,
     description: DEFAULT_DESCRIPTION,
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} — Mechanical Engineer`,
     description: DEFAULT_DESCRIPTION,
+    images: [OG_IMAGE.url],
   },
   robots: {
     index: true,
@@ -44,17 +59,25 @@ export function pageMetadata(options: {
   path: string;
 }): Metadata {
   const { title, description, path } = options;
+  // Absolute URLs throughout: with a base path in play, a root-relative
+  // "/projects" would drop the sub-path the site is actually served from.
+  const url = `${site.url}${path.endsWith("/") ? path : `${path}/`}`;
   return {
     title,
     description,
-    alternates: { canonical: path },
+    alternates: { canonical: url },
     openGraph: {
       title: `${title} — ${site.name}`,
       description,
-      url: path,
+      url,
       type: "website",
+      images: [OG_IMAGE],
     },
-    twitter: { title: `${title} — ${site.name}`, description },
+    twitter: {
+      title: `${title} — ${site.name}`,
+      description,
+      images: [OG_IMAGE.url],
+    },
   };
 }
 

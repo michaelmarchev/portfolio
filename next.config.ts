@@ -30,6 +30,12 @@ const nextConfig: NextConfig = {
     deviceSizes: [360, 480, 640, 828, 1080, 1280, 1600, 1920, 2560],
   },
 
+  eslint: {
+    // Lint is a separate command (`npm run lint`), not a deploy gate. A style
+    // rule should never be the reason a site fails to publish.
+    ignoreDuringBuilds: true,
+  },
+
   reactStrictMode: true,
   poweredByHeader: false,
 };

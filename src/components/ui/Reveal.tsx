@@ -13,11 +13,14 @@ export function Reveal({
   className,
   delay = 0,
   as = "div",
+  id,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   as?: "div" | "li" | "section" | "article";
+  /** Case-study sections are deep-link targets, so the id has to pass through. */
+  id?: string;
 }) {
   // One ref type covers the small set of allowed tags; the cast keeps the
   // component polymorphic without an escape hatch on the JSX itself.
@@ -56,6 +59,7 @@ export function Reveal({
   return (
     <Tag
       ref={ref}
+      id={id}
       data-reveal=""
       style={delay ? ({ "--reveal-delay": `${delay}ms` } as React.CSSProperties) : undefined}
       className={cn(className)}
