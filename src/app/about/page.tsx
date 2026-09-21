@@ -24,7 +24,7 @@ export default function AboutPage() {
       <Section space="tight" datum="About" className="pt-12 md:pt-16">
         <Container wide>
           <MetaLabel as="p">About</MetaLabel>
-          <h1 className="text-h1 mt-4 max-w-[24ch] text-fg">{about.headline}</h1>
+          <h1 className="text-h1 mt-7 max-w-[24ch] text-fg">{about.headline}</h1>
         </Container>
       </Section>
 

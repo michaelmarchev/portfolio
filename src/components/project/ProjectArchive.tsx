@@ -127,8 +127,9 @@ function FilterButton({
       aria-pressed={pressed}
       className={cn(
         "u-meta border px-3 py-2 transition-colors duration-200",
+        // Pressed matches the solid Button: black chip, orange label.
         pressed
-          ? "border-fg bg-fg text-bg"
+          ? "border-signal-bright bg-ink text-signal-bright"
           : "border-line text-fg-3 hover:border-line-strong hover:text-fg",
       )}
     >

@@ -72,7 +72,7 @@ export function ProjectSpread({
             <span className="u-meta text-fg-4">{project.timeline}</span>
           </div>
 
-          <h3 className={cn("mt-3 text-fg", isFeature ? "text-h1" : "text-h2")}>
+          <h3 className={cn("mt-5 text-fg", isFeature ? "text-h1" : "text-h2")}>
             <Link href={href} className="caption-shift inline-block no-underline">
               {project.title}
             </Link>

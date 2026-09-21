@@ -15,7 +15,7 @@ export function ApproachSection() {
               Engineering approach
             </MetaLabel>
             <p className="text-h2 max-w-[34ch] text-fg">{site.approachLong}</p>
-            <p className="mt-7 max-w-[56ch] text-[1.0625rem] leading-[1.7] text-fg-2">
+            <p className="mt-9 max-w-[56ch] text-[1.0625rem] leading-[1.7] text-fg-2">
               {site.approach}
             </p>
           </div>

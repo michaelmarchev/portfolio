@@ -59,8 +59,8 @@ export function Timeline({ entries }: { entries: ExperienceEntry[] }) {
                 <h3 className="text-[1.25rem] font-medium leading-[1.25] tracking-[-0.018em] text-fg">
                   {entry.role}
                 </h3>
-                <p className="mt-1.5 text-caption text-fg-3">{entry.organization}</p>
-                <p className="mt-4 max-w-[62ch] text-[1.0625rem] leading-[1.65] text-fg-2">
+                <p className="mt-3 text-caption text-fg-3">{entry.organization}</p>
+                <p className="mt-5 max-w-[62ch] text-[1.0625rem] leading-[1.65] text-fg-2">
                   {entry.summary}
                 </p>
 

@@ -11,8 +11,19 @@ interface BaseProps {
 }
 
 const STYLE: Record<Variant, string> = {
+  /*
+   * A near-black chip, outlined and labelled in signal orange, that fills
+   * orange on hover and focus.
+   *
+   * The fill is fixed rather than token-driven so the button reads the same on
+   * eggshell and inside a dark panel. On a dark panel the fill is almost
+   * indistinguishable from the background, so the orange border is what
+   * delineates the button — 6.76:1 against the panel. The orange label is
+   * 6.39:1 on the fill, and the hover state puts the panel background colour
+   * on the orange fill (5.76:1 light, 7.75:1 dark).
+   */
   solid:
-    "bg-fg text-bg border border-fg hover:bg-accent-text hover:border-accent-text focus-visible:bg-accent-text focus-visible:border-accent-text",
+    "bg-ink text-signal-bright border border-signal-bright hover:bg-accent-text hover:border-accent-text hover:text-bg focus-visible:bg-accent-text focus-visible:border-accent-text focus-visible:text-bg",
   outline:
     "border border-line-strong text-fg hover:border-accent hover:text-accent-text focus-visible:border-accent",
   quiet: "border border-transparent text-fg-2 hover:text-accent-text",

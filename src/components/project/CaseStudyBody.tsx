@@ -25,7 +25,7 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
                 <span className="u-meta text-fg-4">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h2 className="text-h3 mt-2 max-w-[22ch] text-fg">
+                <h2 className="text-h3 mt-4 max-w-[22ch] text-fg">
                   {section.title}
                 </h2>
               </div>

@@ -20,10 +20,10 @@ export default function ToolkitPage() {
       <Section space="tight" datum="Toolkit" className="pt-12 md:pt-16">
         <Container wide>
           <MetaLabel as="p">Toolkit</MetaLabel>
-          <h1 className="text-h1 mt-4 max-w-[24ch] text-fg">
+          <h1 className="text-h1 mt-7 max-w-[24ch] text-fg">
             Capabilities, stated as specifications.
           </h1>
-          <p className="mt-6 max-w-[58ch] text-[1.0625rem] leading-[1.7] text-fg-2">
+          <p className="mt-8 max-w-[58ch] text-[1.0625rem] leading-[1.7] text-fg-2">
             No proficiency bars. Each group lists the tools and methods, and one
             sentence on how the capability is actually applied to hardware.
           </p>

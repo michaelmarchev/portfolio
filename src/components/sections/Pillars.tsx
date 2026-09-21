@@ -26,10 +26,10 @@ export function Pillars() {
                 <span className="u-meta block text-fg-4">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 text-[1.125rem] font-medium leading-[1.25] tracking-[-0.015em] text-fg">
+                <h3 className="mt-4 text-[1.125rem] font-medium leading-[1.25] tracking-[-0.015em] text-fg">
                   {pillar.title}
                 </h3>
-                <p className="mt-2.5 max-w-[34ch] text-caption leading-[1.6] text-fg-2">
+                <p className="mt-4 max-w-[34ch] text-caption leading-[1.6] text-fg-2">
                   {pillar.body}
                 </p>
               </div>

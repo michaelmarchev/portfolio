@@ -15,8 +15,8 @@ export function SpecTile({ group, index }: { group: ToolkitGroup; index: number 
         <MetaLabel className="text-fg-4">
           {String(index + 1).padStart(2, "0")} / Capability
         </MetaLabel>
-        <h3 className="mt-3 text-h3 text-fg">{group.category}</h3>
-        <p className="mt-4 max-w-[42ch] text-caption leading-[1.65] text-fg-2">
+        <h3 className="mt-5 text-h3 text-fg">{group.category}</h3>
+        <p className="mt-5 max-w-[42ch] text-caption leading-[1.65] text-fg-2">
           {group.application}
         </p>
       </div>

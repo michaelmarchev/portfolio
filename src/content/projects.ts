@@ -355,459 +355,9 @@ export const projects: Project[] = [
     confidentiality:
       "Published with proprietary Lumafield information withheld. No internal scanner designs, radiation measurements, acceptance criteria or customer data appear on this page. All performance figures are stated design targets for an in-development system.",
   },
-
-  /* ==============================================================
-     02 — SAGEWARE TEXTILE UPCYCLING SYSTEM
-     ============================================================== */
-  {
-    slug: "sageware-textile-upcycling",
-    index: "02",
-    title: "Sageware Textile Upcycling System",
-    shortTitle: "Sageware",
-    organization: "Generate Product Development Studio",
-    role: "Mechanical Engineer",
-    timeline: "September 2025 – December 2025",
-    status: "Complete",
-    theme: "light",
-    accent: "#6B7F4E",
-    categories: [
-      "Product Development",
-      "Sustainability",
-      "Automation",
-      "Manufacturing",
-      "Additive Manufacturing",
-    ],
-    projectType: [
-      "Product Development",
-      "Sustainability",
-      "Automation",
-      "Tooling",
-      "Additive Manufacturing",
-    ],
-    cardSummary:
-      "Designed tooling and fixtures for a compact automated system that converts hard-to-process fabric scraps into jewelry beads.",
-    summary:
-      "Developed a compact, automated system intended to transform fabric scraps into jewelry beads, supporting a more circular approach to textile waste.",
-    tools: ["Onshape", "SLA (high-temperature resin)", "Machined steel inserts", "Shop tools"],
-    team: "Generate product-development team",
-    focus: ["Tooling design", "Material behavior", "Repeatability", "Compact packaging", "Safe operation"],
-    specs: [
-      { label: "Input", value: "Mixed fabric scrap, inconsistent weave and thickness" },
-      { label: "Output", value: "Formed jewelry beads" },
-      { label: "Tooling", value: "Machined sharp steel cutting/stamping inserts" },
-      { label: "Fixture", value: "High-temperature SLA resin, machined inserts bonded in" },
-      { label: "Packaging", value: "Compact benchtop envelope" },
-      { label: "Process", value: "Hardening, cutting/stamping, forming" },
-    ],
-    hero: {
-      id: "sageware-hero",
-      orientation: "panoramic",
-      kind: "photograph",
-      label: "02.0 — SYSTEM",
-      subject:
-        "The compact benchtop system with fabric scrap at the infeed and finished beads at the outfeed, tooling visible mid-frame.",
-      composition:
-        "Wide, slightly elevated three-quarter view; process reading left to right; loose scrap and finished beads both in frame.",
-      lighting:
-        "Warm directional daylight, soft shadow, textile color allowed to carry the frame; light neutral surface.",
-      purpose:
-        "Set Sageware apart from the industrial work — material-rich, colorful, tactile, product-scale.",
-      caption: "Benchtop upcycling system: fabric scrap in, formed beads out.",
-      status: "prototype",
-    },
-    card: {
-      id: "sageware-card",
-      orientation: "wide",
-      kind: "macro",
-      label: "02 — MATERIAL",
-      subject:
-        "Macro of hardened fabric mid-process beside a sharp steel stamping insert, cut edges clearly visible.",
-      composition: "Very close crop, fibers and cut edge in sharp focus, insert entering from frame edge.",
-      lighting: "Warm raking light to pick up weave, fiber ends and the polish on the steel.",
-      purpose: "Lead with material, not machinery — the fabric is the hard part of this project.",
-      status: "prototype",
-    },
-    sections: [
-      {
-        id: "opportunity",
-        title: "Textile waste and the product opportunity",
-        body: [
-          "Offcuts and remnants are among the least recoverable parts of the textile stream. They are mixed in composition, small, inconsistent, and cheap — which makes them expensive to sort and easy to landfill.",
-          "Sageware approached that from the product end: find an output worth making from difficult input. Jewelry beads are small, tolerate variation in source material, and carry enough value per gram to justify a process. The engineering question became whether a compact, reliable machine could produce them from scrap consistently.",
-        ],
-      },
-      {
-        id: "material",
-        title: "Why fabric scrap is difficult to process",
-        body: [
-          "Fabric is not a machining material. It is compliant, anisotropic, variable in thickness, and it frays — so it deflects away from an edge instead of shearing cleanly, and no two pieces load into a fixture the same way.",
-          "The process therefore stabilizes the material before touching it with tooling. Once hardened, the fabric behaves closer to a sheet material: it supports a cutting edge, holds a stamped form, and can be located in a fixture repeatably. Nearly every tooling decision downstream followed from that change of state.",
-        ],
-        media: [
-          {
-            id: "sageware-macro",
-            orientation: "macro",
-            kind: "macro",
-            label: "02.1 — MATERIAL",
-            subject:
-              "Macro sequence of the same fabric in three states: raw scrap, hardened blank, finished bead.",
-            composition: "Three tight frames at identical scale and angle so the change of state is the only variable.",
-            lighting: "Consistent warm side light across all three; shallow depth of field; dark neutral ground.",
-            purpose: "Make the central insight of the project legible in one image: change the material state first.",
-            caption:
-              "Raw scrap, hardened blank, finished bead. Hardening is what makes the fabric cuttable and locatable.",
-            status: "prototype",
-          },
-        ],
-      },
-      {
-        id: "concept",
-        title: "The compact automation concept",
-        body: [
-          "The brief called for a machine that fits on a bench and runs without an operator managing each piece. Compactness is not just packaging here — it sets the stroke lengths, the tooling size, and how much room there is for the material to move between stations.",
-          "Working within that envelope meant combining functions. Stations that located, cut and formed in fewer motions won over sequences that were easier to design but needed more travel and more transfers, since every transfer is a chance for a compliant blank to shift.",
-        ],
-      },
-      {
-        id: "tooling",
-        title: "Tooling and fixture design",
-        body: [
-          "My contribution was the tooling and fixturing: the parts that actually touch the material. Cutting hardened fabric needs a genuinely sharp edge with enough support behind it that the blank cannot fold rather than shear, and clearance that lets the cut piece release instead of wedging.",
-          "Fixturing had to locate a part that is nominally flat but never quite. The approach was to constrain the blank where the geometry mattered for the cut, and deliberately leave it free elsewhere — over-constraining a compliant part just moves the error somewhere less visible.",
-        ],
-        list: [
-          "Edge geometry and support set by how hardened fabric fails, not by a generic sheet-metal rule.",
-          "Clearance designed for release, so cut pieces don't wedge and jam the cycle.",
-          "Blanks constrained only where they affect the cut; freedom left elsewhere by intent.",
-          "Pinch points and guarding considered as part of tooling design.",
-        ],
-      },
-      {
-        id: "inserts",
-        title: "Steel inserts in a high-temperature SLA fixture",
-        body: [
-          "The fixture combined two manufacturing methods for two different reasons. Sharp steel inserts do the cutting and stamping, because nothing printable holds an edge against fabric for a useful number of cycles. The surrounding fixture body was printed in high-temperature SLA resin, which tolerated the process temperatures while letting the geometry iterate in a day.",
-          "That split was the enabling decision: wear-critical features in machined steel, everything else in a printed body that could change between trials. It kept iteration fast without accepting tooling that would dull after a handful of parts.",
-        ],
-        media: [
-          {
-            id: "sageware-insert",
-            orientation: "detail",
-            kind: "photograph",
-            label: "02.2 — TOOLING",
-            subject:
-              "Close-up of a machined steel cutting/stamping insert seated in the high-temperature SLA fixture body.",
-            composition: "Tight three-quarter crop showing the joint between steel and printed resin, edge catching the light.",
-            lighting: "Hard raking key on the steel edge, softer fill on the resin so both materials read distinctly.",
-            purpose: "Show the hybrid tooling strategy — machined where wear matters, printed where iteration matters.",
-            caption:
-              "Machined steel insert in a printed high-temperature fixture body. Wear-critical features in steel, iterable geometry in resin.",
-            status: "final",
-          },
-        ],
-      },
-      {
-        id: "trials",
-        title: "Prototyping and material trials",
-        body: [
-          "Tooling for a variable material gets designed by trial. Each fixture revision ran a batch across a deliberate spread of fabrics — different weaves, thicknesses and fiber blends — and the failures were more informative than the successes.",
-          "Frayed edges, incomplete cuts, blanks lifting and pieces sticking in the cavity each pointed at a specific geometric cause. Iterating the printed body against those modes, while keeping the steel edges fixed, was the fastest available loop.",
-        ],
-        media: [
-          {
-            id: "sageware-iterations",
-            orientation: "landscape",
-            kind: "prototype",
-            label: "02.3 — ITERATION",
-            subject: "Lineup of fixture iterations in order, with sample parts produced by each.",
-            composition: "Flat overhead, evenly spaced left to right, each fixture paired with its output sample.",
-            lighting: "Even soft light, minimal shadow, warm neutral background so resin color reads consistently.",
-            purpose: "Make the iteration loop visible and show that the geometry was earned, not guessed.",
-            caption: "Fixture revisions with the parts each produced. Steel edges held constant; the printed body carried the changes.",
-            status: "prototype",
-          },
-        ],
-      },
-      {
-        id: "tradeoffs",
-        title: "Reliability, safety and compactness tradeoffs",
-        body: [
-          "The three requirements pulled against each other. Reliability wanted generous clearances and simple motions; compactness wanted short strokes and combined stations; safety wanted cutting edges enclosed and hands away from anything that moves.",
-          "Where they conflicted, reliability and safety won. A machine that jams once every twenty parts is not automated in any meaningful sense, and sharp tooling in a benchtop product has to be guarded by geometry rather than by instructions.",
-        ],
-      },
-      {
-        id: "outcome",
-        title: "Outcome and learning",
-        body: [
-          "By the end of the term the team had a compact automated concept that produced beads from fabric scrap, with tooling and fixturing that handled a realistic spread of input material.",
-          "The lesson I carried forward is about sequencing: with a difficult material, the highest-leverage move is usually to change the material's state so ordinary mechanical design can work on it — rather than designing ever more clever tooling around the raw behavior.",
-        ],
-      },
-    ],
-    gallery: [
-      {
-        id: "sageware-g1",
-        orientation: "portrait",
-        kind: "photograph",
-        label: "02.4 — PROCESS",
-        subject: "Hands loading fabric scrap into the fixture during a trial run.",
-        composition: "Portrait crop, hands and fixture filling frame, machine context softly out of focus behind.",
-        lighting: "Warm window light, honest workshop setting.",
-        purpose: "Keep the human scale of a benchtop product visible.",
-        status: "prototype",
-      },
-      {
-        id: "sageware-g2",
-        orientation: "landscape",
-        kind: "exploded-view",
-        label: "02.5 — TOOLING CAD",
-        subject: "Exploded CAD view of the fixture stack: base, printed body, steel inserts, clamp and retainers.",
-        composition: "Vertical explosion along the press axis with thin leader lines and part callouts.",
-        lighting: "Clean neutral render, matte materials, steel differentiated from resin by material, not color grading.",
-        purpose: "Show the assembly logic and how the inserts are retained and replaced.",
-        status: "final",
-      },
-      {
-        id: "sageware-g3",
-        orientation: "square",
-        kind: "photograph",
-        label: "02.6 — OUTPUT",
-        subject: "Finished beads arranged to show color and form variation across source fabrics.",
-        composition: "Overhead, loose grid, enough beads to read variation without becoming a product-catalog shot.",
-        lighting: "Soft warm light, gentle shadow, saturated textile color.",
-        purpose: "Close the loop from waste stream to object someone would actually wear.",
-        status: "final",
-      },
-    ],
-    reflection: [
-      "Sageware taught me how much of tooling design is really material characterization. I could not design a good edge until I understood how hardened fabric fails, and I could not learn that from a datasheet.",
-      "It also made hybrid manufacturing a habit rather than a novelty: decide which features carry wear, buy or machine those, and print everything that should still be allowed to change.",
-    ],
-  },
-
-  /* ==============================================================
-     03 — UPLIFT MOBILITY DEVICE
-     ============================================================== */
-  {
-    slug: "uplift-mobility-device",
-    index: "03",
-    title: "Uplift Mobility Device",
-    shortTitle: "Uplift",
-    organization: "Generate Product Development Studio",
-    role: "Mechanical Engineer",
-    timeline: "December 2024 – April 2025",
-    status: "Prototype complete",
-    theme: "light",
-    accent: "#3E5C76",
-    categories: [
-      "Medical / Human-Centered Design",
-      "Product Development",
-      "Additive Manufacturing",
-      "Manufacturing",
-    ],
-    projectType: [
-      "Human-Centered Design",
-      "Product Development",
-      "Mechanisms",
-      "Prototyping",
-      "Electromechanical Integration",
-    ],
-    cardSummary:
-      "Developed prototypes and mechanical interfaces for a powered mobility walker with integrated seating.",
-    summary:
-      "Co-developed an advanced mobility walker with powered legs and an integrated seat to support people with limited mobility.",
-    tools: ["Onshape", "FDM (PLA)", "SLA (Grey Pro)", "Shop tools"],
-    team: "Mechanical and electrical sub-teams at Generate",
-    focus: ["Mechanisms", "Human factors", "Integration", "Weight", "Fast iteration"],
-    specs: [
-      { label: "Device", value: "Powered walker with integrated seat" },
-      { label: "Users", value: "People with limited mobility and sit-to-stand difficulty" },
-      { label: "My scope", value: "Conduit linkages, mechanical interfaces, mech/elec integration" },
-      { label: "Prototyping", value: "FDM PLA and SLA Grey Pro, iterated in Onshape" },
-      { label: "Integration", value: "Motors, electronics housings, battery protection" },
-    ],
-    hero: {
-      id: "uplift-hero",
-      orientation: "panoramic",
-      kind: "prototype",
-      label: "03.0 — DEVICE",
-      subject:
-        "The full walker prototype, seat deployed, powered leg linkages visible, standing at human scale.",
-      composition:
-        "Eye-level wide shot with the device roughly a third into frame, clean floor plane, silhouette reading clearly against a plain wall.",
-      lighting:
-        "Soft daylight from one side, warm neutral wall, gentle floor shadow; honest prototype finish left visible.",
-      purpose:
-        "Lead with the human scale and the purpose of the device, not with its mechanism detail.",
-      caption: "Powered walker prototype with integrated seat.",
-      status: "prototype",
-    },
-    card: {
-      id: "uplift-card",
-      orientation: "wide",
-      kind: "prototype",
-      label: "03 — MOBILITY",
-      subject: "Three-quarter view of the prototype with strong silhouette and the leg linkage mid-travel.",
-      composition: "Wide crop, device offset left, generous negative space to the right for text.",
-      lighting: "Soft directional daylight, plain background, no clinical staging.",
-      purpose: "Signal human-centered work between two hardware-heavy projects.",
-      status: "prototype",
-    },
-    sections: [
-      {
-        id: "need",
-        title: "User need and design opportunity",
-        body: [
-          "For many people with limited mobility, the hardest part of the day is not walking — it is standing up, and knowing there is somewhere to sit. A standard walker helps with one and ignores the other, so users either carry a separate seat or plan routes around where they can rest.",
-          "Uplift set out to combine both: powered assistance through the sit-to-stand transition, with a seat integrated into the frame rather than bolted on. That made the mechanism and the human factors inseparable from the start.",
-        ],
-      },
-      {
-        id: "requirements",
-        title: "Mobility, stability, seating and actuation requirements",
-        body: [
-          "The device has to be stable through a transition in which the user's center of mass moves substantially — the least stable moment is exactly the moment the user most needs support. It also has to be light enough to be manoeuvred by the person using it, which puts stability and mass in direct conflict.",
-          "Seating added geometry constraints: the seat has to be at a usable height, clear of the legs in both states, and reachable without the user turning around. Those requirements bounded the linkage design more tightly than the actuation did.",
-        ],
-        list: [
-          "Stable support through the full sit-to-stand transition, not just at the endpoints.",
-          "Light enough to manoeuvre unaided.",
-          "Seat clear of the leg mechanism in both deployed and stowed states.",
-          "Powered assistance with predictable, unsurprising motion.",
-          "Nothing sharp, pinching or exposed within reach of a user's hands.",
-        ],
-      },
-      {
-        id: "architecture",
-        title: "Early concepts and system architecture",
-        body: [
-          "Early work was about eliminating architectures rather than perfecting one. Configurations were laid out, checked for interference through their full range, and discarded where the seat fouled the legs, the footprint grew beyond doorway width, or the linkage needed force where a user's hands would be.",
-          "What survived was an architecture where the powered legs and the seat shared a frame and a coordinated motion, so a single transition served both functions instead of asking the user to operate two systems.",
-        ],
-        media: [
-          {
-            id: "uplift-exploded",
-            orientation: "landscape",
-            kind: "exploded-view",
-            label: "03.1 — ARCHITECTURE",
-            subject: "Exploded CAD view of the device: frame, leg linkages, seat assembly, actuation and electronics housing.",
-            composition: "Exploded along the frame axis, thin leader lines, subassemblies grouped and numbered.",
-            lighting: "Neutral studio render, matte finish, dark ground, no reflective drama.",
-            purpose: "Show how seat, legs and electronics share one frame.",
-            status: "concept",
-          },
-        ],
-      },
-      {
-        id: "linkages",
-        title: "Linkage and conduit iterations",
-        body: [
-          "I led iterative development of the conduit linkages in Onshape — the parts that route and constrain motion between the frame and the powered legs. Linkages are unforgiving: a few millimetres of change at a pivot moves the whole path and can turn a smooth transition into a bind at one end of travel.",
-          "The loop was deliberately tight. Model a revision, print it, assemble it into the prototype, run it through full travel by hand, find where it bound or flexed, and change one thing. Most revisions changed a single dimension or a single fillet.",
-        ],
-        media: [
-          {
-            id: "uplift-linkage",
-            orientation: "landscape",
-            kind: "prototype",
-            label: "03.2 — ITERATION",
-            subject: "Series of printed conduit linkage iterations laid out in chronological order.",
-            composition: "Flat overhead, left to right by revision, consistent spacing and orientation.",
-            lighting: "Even soft light, minimal shadow, print layer lines visible.",
-            purpose: "Make the design process legible: many small, evidence-driven changes.",
-            caption: "Conduit linkage revisions in order. Most changed one dimension in response to one observed bind or flex.",
-            status: "prototype",
-          },
-        ],
-      },
-      {
-        id: "printing",
-        title: "FDM and SLA prototype development",
-        body: [
-          "The two processes did different jobs. FDM in PLA was for fast form and fit checks where a part only needed to hold its shape long enough to be assessed. SLA in Grey Pro was for parts that had to be loaded and actually moved, where print anisotropy and layer adhesion would otherwise dominate the result.",
-          "Choosing between them was itself a design decision. Testing a load path on an FDM part and concluding the geometry was wrong, when the process was wrong, is a mistake that costs a whole iteration.",
-        ],
-      },
-      {
-        id: "integration",
-        title: "Mechanical and electrical integration",
-        body: [
-          "I coordinated with the electrical sub-team to integrate motors, house electronics and protect the battery. On a device people lean on, this is structural work: motor mounts carry real load, and an enclosure that flexes changes the alignment of whatever it holds.",
-          "The interface discipline was to fix the things the other team depended on early — mounting locations, available volume, cable routing — and then let both sides iterate inside those boundaries without breaking each other's work.",
-        ],
-        list: [
-          "Motor mounting treated as a load-bearing interface, not a bracket.",
-          "Electronics volume and cable routes reserved early in the frame layout.",
-          "Battery protected against impact and intrusion by geometry, not by warnings.",
-          "Interfaces frozen ahead of detail design so both sub-teams could work in parallel.",
-        ],
-      },
-      {
-        id: "battery",
-        title: "Battery protection and electronics housing",
-        body: [
-          "A battery on a mobility device sits low, near the floor, on a machine that will be bumped into door frames and curbs. The housing was designed for that reality: protected on the exposed faces, retained so it cannot shift in a knock, and serviceable without dismantling the frame.",
-          "Serviceability was a real requirement rather than a nicety. A device that has to be partly disassembled to change a battery is a device that will be used with a failing battery.",
-        ],
-      },
-      {
-        id: "evaluation",
-        title: "Prototype evaluation and design lessons",
-        body: [
-          "The prototype was assessed by running the transition repeatedly and watching for the things users would notice: motion that felt abrupt, flex that felt unsafe, and geometry that put a hand somewhere it shouldn't be.",
-          "The clearest lesson was that on a human-centered device, perceived stability and actual stability are separate requirements. A mechanism can be entirely adequate and still feel wrong — and for someone deciding whether to trust their weight to it, feeling wrong is a failure.",
-        ],
-      },
-    ],
-    gallery: [
-      {
-        id: "uplift-g1",
-        orientation: "portrait",
-        kind: "photograph",
-        label: "03.3 — IN USE",
-        subject: "The prototype in a realistic setting — a hallway or room, at a scale a user would encounter.",
-        composition: "Portrait orientation, device in context, floor and doorway visible for scale reference.",
-        lighting: "Available indoor light, warm, unstaged.",
-        purpose: "Place the device in the world it is meant to work in.",
-        status: "prototype",
-      },
-      {
-        id: "uplift-g2",
-        orientation: "detail",
-        kind: "photograph",
-        label: "03.4 — LINKAGE",
-        subject: "Close-up of a printed conduit linkage installed on the frame, fasteners and pivot visible.",
-        composition: "Tight crop along the linkage, pivot at the intersection of thirds.",
-        lighting: "Directional light raking across print layers and hardware.",
-        purpose: "Show the actual assembled interface rather than a render of it.",
-        status: "prototype",
-      },
-      {
-        id: "uplift-g3",
-        orientation: "landscape",
-        kind: "diagram",
-        label: "03.5 — HUMAN FACTORS",
-        subject: "Diagram of the sit-to-stand transition with the user's center-of-mass path and the device's support geometry overlaid.",
-        composition: "Side elevation, three positions through the transition, CoM path as a traced line.",
-        lighting: "Flat vector artwork on eggshell, user shown as a neutral silhouette.",
-        purpose: "Explain why the least stable moment is the one that needed the most design attention.",
-        caption: "Support geometry through the transition. The least stable instant is when the user most needs the device to be predictable.",
-        status: "concept",
-      },
-    ],
-    reflection: [
-      "Uplift is where I learned to treat the electrical team's constraints as part of my own design space. Reserving volume and routes early cost me some elegance and saved the project weeks.",
-      "It also set a standard I have kept: on anything a person's weight or safety depends on, I want the mechanism to feel as trustworthy as the analysis says it is.",
-    ],
-  },
-
-  /* ==============================================================
-     04 — PRECISION OPTICAL POSITIONING FIXTURE
-     ============================================================== */
   {
     slug: "precision-optical-positioning-fixture",
-    index: "04",
+    index: "02",
     title: "Precision Optical Positioning Fixture",
     shortTitle: "Optical Fixture",
     organization: "Stryker Endoscopy",
@@ -847,7 +397,7 @@ export const projects: Project[] = [
       id: "stryker-hero",
       orientation: "panoramic",
       kind: "cad-render",
-      label: "04.0 — REPRESENTATIVE",
+      label: "02.0 — REPRESENTATIVE",
       subject:
         "Abstract precision motion-stage assembly: stacked linear and rotary stages, micrometer adjusters, kinematic mounts and an optical rail, with no product under test present.",
       composition:
@@ -908,7 +458,7 @@ export const projects: Project[] = [
             id: "stryker-axes",
             orientation: "landscape",
             kind: "diagram",
-            label: "04.1 — AXES",
+            label: "02.1 — AXES",
             subject:
               "Abstract multi-axis motion diagram: eight degrees of freedom labelled by type, with the kinematic stack order shown from base to tool point.",
             composition: "Clean isometric linework on dark ground; motorized and manual axes distinguished by line weight, not color alone.",
@@ -939,7 +489,7 @@ export const projects: Project[] = [
             id: "stryker-cage",
             orientation: "portrait",
             kind: "photograph",
-            label: "04.2 — REPRESENTATIVE",
+            label: "02.2 — REPRESENTATIVE",
             subject:
               "Representative blackout enclosure: a matte-black panelled test cage with a sealed access door, cable pass-throughs and internal optical rail, nothing identifiable inside.",
             composition: "Portrait, straight-on, enclosure filling frame, one panel open to show interior depth and light trapping.",
@@ -970,7 +520,7 @@ export const projects: Project[] = [
             id: "stryker-test",
             orientation: "landscape",
             kind: "photograph",
-            label: "04.3 — REPRESENTATIVE",
+            label: "02.3 — REPRESENTATIVE",
             subject:
               "Representative reliability-testing imagery: a load frame with a generic specimen in custom grips, or a thermal chamber interior with instrumentation, no product visible.",
             composition: "Landscape, machine-forward, grips and instrumentation legible, specimen deliberately anonymous.",
@@ -995,7 +545,7 @@ export const projects: Project[] = [
         id: "stryker-g1",
         orientation: "detail",
         kind: "cad-render",
-        label: "04.4 — CONCEPTUAL",
+        label: "02.4 — CONCEPTUAL",
         subject: "Abstract render of a kinematic mount and micrometer adjuster with graduation marks and a coordinate stamp.",
         composition: "Macro crop, single component centered, deep negative space around it.",
         lighting: "Single hard key on near-black, strong specular edge, no fill.",
@@ -1006,7 +556,7 @@ export const projects: Project[] = [
         id: "stryker-g2",
         orientation: "landscape",
         kind: "diagram",
-        label: "04.5 — ALIGNMENT",
+        label: "02.5 — ALIGNMENT",
         subject: "Optical alignment and coordinate-system graphic: beam path, datum planes, tool-point offset and adjustment directions.",
         composition: "Orthographic, generous margins, thin linework, labelled datums and a single beam path across frame.",
         lighting: "Pale steel linework on near-black with the beam path in orange.",
@@ -1018,7 +568,7 @@ export const projects: Project[] = [
         id: "stryker-g3",
         orientation: "square",
         kind: "data",
-        label: "04.6 — METHOD",
+        label: "02.6 — METHOD",
         subject: "Abstracted test-method visualization: a repeatability scatter about a target, or a settling-time trace, with axes labelled generically.",
         composition: "Square, single chart, thin rules, no gridline clutter, values unlabelled or normalized.",
         lighting: "Flat chart on near-black, pale linework, one orange series.",
@@ -1034,10 +584,444 @@ export const projects: Project[] = [
     confidentiality:
       "This case study is intentionally general. It contains no proprietary device information, unreleased product details, internal drawings, internal performance data, customer information or specific Stryker technologies. All imagery is representative, conceptual or non-confidential and is labelled as such.",
   },
-
-  /* ==============================================================
-     05 — HELMET IMPACT MECHANICS RESEARCH
-     ============================================================== */
+  {
+    slug: "sageware-textile-upcycling",
+    index: "03",
+    title: "Sageware Textile Upcycling System",
+    shortTitle: "Sageware",
+    organization: "Generate Product Development Studio",
+    role: "Mechanical Engineer",
+    timeline: "September 2025 – December 2025",
+    status: "Complete",
+    theme: "light",
+    accent: "#6B7F4E",
+    categories: [
+      "Product Development",
+      "Sustainability",
+      "Automation",
+      "Manufacturing",
+      "Additive Manufacturing",
+    ],
+    projectType: [
+      "Product Development",
+      "Sustainability",
+      "Automation",
+      "Tooling",
+      "Additive Manufacturing",
+    ],
+    cardSummary:
+      "Designed tooling and fixtures for a compact automated system that converts hard-to-process fabric scraps into jewelry beads.",
+    summary:
+      "Developed a compact, automated system intended to transform fabric scraps into jewelry beads, supporting a more circular approach to textile waste.",
+    tools: ["Onshape", "SLA (high-temperature resin)", "Machined steel inserts", "Shop tools"],
+    team: "Generate product-development team",
+    focus: ["Tooling design", "Material behavior", "Repeatability", "Compact packaging", "Safe operation"],
+    specs: [
+      { label: "Input", value: "Mixed fabric scrap, inconsistent weave and thickness" },
+      { label: "Output", value: "Formed jewelry beads" },
+      { label: "Tooling", value: "Machined sharp steel cutting/stamping inserts" },
+      { label: "Fixture", value: "High-temperature SLA resin, machined inserts bonded in" },
+      { label: "Packaging", value: "Compact benchtop envelope" },
+      { label: "Process", value: "Hardening, cutting/stamping, forming" },
+    ],
+    hero: {
+      id: "sageware-hero",
+      orientation: "panoramic",
+      kind: "photograph",
+      label: "03.0 — SYSTEM",
+      subject:
+        "The compact benchtop system with fabric scrap at the infeed and finished beads at the outfeed, tooling visible mid-frame.",
+      composition:
+        "Wide, slightly elevated three-quarter view; process reading left to right; loose scrap and finished beads both in frame.",
+      lighting:
+        "Warm directional daylight, soft shadow, textile color allowed to carry the frame; light neutral surface.",
+      purpose:
+        "Set Sageware apart from the industrial work — material-rich, colorful, tactile, product-scale.",
+      caption: "Benchtop upcycling system: fabric scrap in, formed beads out.",
+      status: "prototype",
+    },
+    card: {
+      id: "sageware-card",
+      orientation: "wide",
+      kind: "macro",
+      label: "02 — MATERIAL",
+      subject:
+        "Macro of hardened fabric mid-process beside a sharp steel stamping insert, cut edges clearly visible.",
+      composition: "Very close crop, fibers and cut edge in sharp focus, insert entering from frame edge.",
+      lighting: "Warm raking light to pick up weave, fiber ends and the polish on the steel.",
+      purpose: "Lead with material, not machinery — the fabric is the hard part of this project.",
+      status: "prototype",
+    },
+    sections: [
+      {
+        id: "opportunity",
+        title: "Textile waste and the product opportunity",
+        body: [
+          "Offcuts and remnants are among the least recoverable parts of the textile stream. They are mixed in composition, small, inconsistent, and cheap — which makes them expensive to sort and easy to landfill.",
+          "Sageware approached that from the product end: find an output worth making from difficult input. Jewelry beads are small, tolerate variation in source material, and carry enough value per gram to justify a process. The engineering question became whether a compact, reliable machine could produce them from scrap consistently.",
+        ],
+      },
+      {
+        id: "material",
+        title: "Why fabric scrap is difficult to process",
+        body: [
+          "Fabric is not a machining material. It is compliant, anisotropic, variable in thickness, and it frays — so it deflects away from an edge instead of shearing cleanly, and no two pieces load into a fixture the same way.",
+          "The process therefore stabilizes the material before touching it with tooling. Once hardened, the fabric behaves closer to a sheet material: it supports a cutting edge, holds a stamped form, and can be located in a fixture repeatably. Nearly every tooling decision downstream followed from that change of state.",
+        ],
+        media: [
+          {
+            id: "sageware-macro",
+            orientation: "macro",
+            kind: "macro",
+            label: "03.1 — MATERIAL",
+            subject:
+              "Macro sequence of the same fabric in three states: raw scrap, hardened blank, finished bead.",
+            composition: "Three tight frames at identical scale and angle so the change of state is the only variable.",
+            lighting: "Consistent warm side light across all three; shallow depth of field; dark neutral ground.",
+            purpose: "Make the central insight of the project legible in one image: change the material state first.",
+            caption:
+              "Raw scrap, hardened blank, finished bead. Hardening is what makes the fabric cuttable and locatable.",
+            status: "prototype",
+          },
+        ],
+      },
+      {
+        id: "concept",
+        title: "The compact automation concept",
+        body: [
+          "The brief called for a machine that fits on a bench and runs without an operator managing each piece. Compactness is not just packaging here — it sets the stroke lengths, the tooling size, and how much room there is for the material to move between stations.",
+          "Working within that envelope meant combining functions. Stations that located, cut and formed in fewer motions won over sequences that were easier to design but needed more travel and more transfers, since every transfer is a chance for a compliant blank to shift.",
+        ],
+      },
+      {
+        id: "tooling",
+        title: "Tooling and fixture design",
+        body: [
+          "My contribution was the tooling and fixturing: the parts that actually touch the material. Cutting hardened fabric needs a genuinely sharp edge with enough support behind it that the blank cannot fold rather than shear, and clearance that lets the cut piece release instead of wedging.",
+          "Fixturing had to locate a part that is nominally flat but never quite. The approach was to constrain the blank where the geometry mattered for the cut, and deliberately leave it free elsewhere — over-constraining a compliant part just moves the error somewhere less visible.",
+        ],
+        list: [
+          "Edge geometry and support set by how hardened fabric fails, not by a generic sheet-metal rule.",
+          "Clearance designed for release, so cut pieces don't wedge and jam the cycle.",
+          "Blanks constrained only where they affect the cut; freedom left elsewhere by intent.",
+          "Pinch points and guarding considered as part of tooling design.",
+        ],
+      },
+      {
+        id: "inserts",
+        title: "Steel inserts in a high-temperature SLA fixture",
+        body: [
+          "The fixture combined two manufacturing methods for two different reasons. Sharp steel inserts do the cutting and stamping, because nothing printable holds an edge against fabric for a useful number of cycles. The surrounding fixture body was printed in high-temperature SLA resin, which tolerated the process temperatures while letting the geometry iterate in a day.",
+          "That split was the enabling decision: wear-critical features in machined steel, everything else in a printed body that could change between trials. It kept iteration fast without accepting tooling that would dull after a handful of parts.",
+        ],
+        media: [
+          {
+            id: "sageware-insert",
+            orientation: "detail",
+            kind: "photograph",
+            label: "03.2 — TOOLING",
+            subject:
+              "Close-up of a machined steel cutting/stamping insert seated in the high-temperature SLA fixture body.",
+            composition: "Tight three-quarter crop showing the joint between steel and printed resin, edge catching the light.",
+            lighting: "Hard raking key on the steel edge, softer fill on the resin so both materials read distinctly.",
+            purpose: "Show the hybrid tooling strategy — machined where wear matters, printed where iteration matters.",
+            caption:
+              "Machined steel insert in a printed high-temperature fixture body. Wear-critical features in steel, iterable geometry in resin.",
+            status: "final",
+          },
+        ],
+      },
+      {
+        id: "trials",
+        title: "Prototyping and material trials",
+        body: [
+          "Tooling for a variable material gets designed by trial. Each fixture revision ran a batch across a deliberate spread of fabrics — different weaves, thicknesses and fiber blends — and the failures were more informative than the successes.",
+          "Frayed edges, incomplete cuts, blanks lifting and pieces sticking in the cavity each pointed at a specific geometric cause. Iterating the printed body against those modes, while keeping the steel edges fixed, was the fastest available loop.",
+        ],
+        media: [
+          {
+            id: "sageware-iterations",
+            orientation: "landscape",
+            kind: "prototype",
+            label: "03.3 — ITERATION",
+            subject: "Lineup of fixture iterations in order, with sample parts produced by each.",
+            composition: "Flat overhead, evenly spaced left to right, each fixture paired with its output sample.",
+            lighting: "Even soft light, minimal shadow, warm neutral background so resin color reads consistently.",
+            purpose: "Make the iteration loop visible and show that the geometry was earned, not guessed.",
+            caption: "Fixture revisions with the parts each produced. Steel edges held constant; the printed body carried the changes.",
+            status: "prototype",
+          },
+        ],
+      },
+      {
+        id: "tradeoffs",
+        title: "Reliability, safety and compactness tradeoffs",
+        body: [
+          "The three requirements pulled against each other. Reliability wanted generous clearances and simple motions; compactness wanted short strokes and combined stations; safety wanted cutting edges enclosed and hands away from anything that moves.",
+          "Where they conflicted, reliability and safety won. A machine that jams once every twenty parts is not automated in any meaningful sense, and sharp tooling in a benchtop product has to be guarded by geometry rather than by instructions.",
+        ],
+      },
+      {
+        id: "outcome",
+        title: "Outcome and learning",
+        body: [
+          "By the end of the term the team had a compact automated concept that produced beads from fabric scrap, with tooling and fixturing that handled a realistic spread of input material.",
+          "The lesson I carried forward is about sequencing: with a difficult material, the highest-leverage move is usually to change the material's state so ordinary mechanical design can work on it — rather than designing ever more clever tooling around the raw behavior.",
+        ],
+      },
+    ],
+    gallery: [
+      {
+        id: "sageware-g1",
+        orientation: "portrait",
+        kind: "photograph",
+        label: "03.4 — PROCESS",
+        subject: "Hands loading fabric scrap into the fixture during a trial run.",
+        composition: "Portrait crop, hands and fixture filling frame, machine context softly out of focus behind.",
+        lighting: "Warm window light, honest workshop setting.",
+        purpose: "Keep the human scale of a benchtop product visible.",
+        status: "prototype",
+      },
+      {
+        id: "sageware-g2",
+        orientation: "landscape",
+        kind: "exploded-view",
+        label: "03.5 — TOOLING CAD",
+        subject: "Exploded CAD view of the fixture stack: base, printed body, steel inserts, clamp and retainers.",
+        composition: "Vertical explosion along the press axis with thin leader lines and part callouts.",
+        lighting: "Clean neutral render, matte materials, steel differentiated from resin by material, not color grading.",
+        purpose: "Show the assembly logic and how the inserts are retained and replaced.",
+        status: "final",
+      },
+      {
+        id: "sageware-g3",
+        orientation: "square",
+        kind: "photograph",
+        label: "03.6 — OUTPUT",
+        subject: "Finished beads arranged to show color and form variation across source fabrics.",
+        composition: "Overhead, loose grid, enough beads to read variation without becoming a product-catalog shot.",
+        lighting: "Soft warm light, gentle shadow, saturated textile color.",
+        purpose: "Close the loop from waste stream to object someone would actually wear.",
+        status: "final",
+      },
+    ],
+    reflection: [
+      "Sageware taught me how much of tooling design is really material characterization. I could not design a good edge until I understood how hardened fabric fails, and I could not learn that from a datasheet.",
+      "It also made hybrid manufacturing a habit rather than a novelty: decide which features carry wear, buy or machine those, and print everything that should still be allowed to change.",
+    ],
+  },
+  {
+    slug: "uplift-mobility-device",
+    index: "04",
+    title: "Uplift Mobility Device",
+    shortTitle: "Uplift",
+    organization: "Generate Product Development Studio",
+    role: "Mechanical Engineer",
+    timeline: "December 2024 – April 2025",
+    status: "Prototype complete",
+    theme: "light",
+    accent: "#3E5C76",
+    categories: [
+      "Medical / Human-Centered Design",
+      "Product Development",
+      "Additive Manufacturing",
+      "Manufacturing",
+    ],
+    projectType: [
+      "Human-Centered Design",
+      "Product Development",
+      "Mechanisms",
+      "Prototyping",
+      "Electromechanical Integration",
+    ],
+    cardSummary:
+      "Developed prototypes and mechanical interfaces for a powered mobility walker with integrated seating.",
+    summary:
+      "Co-developed an advanced mobility walker with powered legs and an integrated seat to support people with limited mobility.",
+    tools: ["Onshape", "FDM (PLA)", "SLA (Grey Pro)", "Shop tools"],
+    team: "Mechanical and electrical sub-teams at Generate",
+    focus: ["Mechanisms", "Human factors", "Integration", "Weight", "Fast iteration"],
+    specs: [
+      { label: "Device", value: "Powered walker with integrated seat" },
+      { label: "Users", value: "People with limited mobility and sit-to-stand difficulty" },
+      { label: "My scope", value: "Conduit linkages, mechanical interfaces, mech/elec integration" },
+      { label: "Prototyping", value: "FDM PLA and SLA Grey Pro, iterated in Onshape" },
+      { label: "Integration", value: "Motors, electronics housings, battery protection" },
+    ],
+    hero: {
+      id: "uplift-hero",
+      orientation: "panoramic",
+      kind: "prototype",
+      label: "04.0 — DEVICE",
+      subject:
+        "The full walker prototype, seat deployed, powered leg linkages visible, standing at human scale.",
+      composition:
+        "Eye-level wide shot with the device roughly a third into frame, clean floor plane, silhouette reading clearly against a plain wall.",
+      lighting:
+        "Soft daylight from one side, warm neutral wall, gentle floor shadow; honest prototype finish left visible.",
+      purpose:
+        "Lead with the human scale and the purpose of the device, not with its mechanism detail.",
+      caption: "Powered walker prototype with integrated seat.",
+      status: "prototype",
+    },
+    card: {
+      id: "uplift-card",
+      orientation: "wide",
+      kind: "prototype",
+      label: "03 — MOBILITY",
+      subject: "Three-quarter view of the prototype with strong silhouette and the leg linkage mid-travel.",
+      composition: "Wide crop, device offset left, generous negative space to the right for text.",
+      lighting: "Soft directional daylight, plain background, no clinical staging.",
+      purpose: "Signal human-centered work between two hardware-heavy projects.",
+      status: "prototype",
+    },
+    sections: [
+      {
+        id: "need",
+        title: "User need and design opportunity",
+        body: [
+          "For many people with limited mobility, the hardest part of the day is not walking — it is standing up, and knowing there is somewhere to sit. A standard walker helps with one and ignores the other, so users either carry a separate seat or plan routes around where they can rest.",
+          "Uplift set out to combine both: powered assistance through the sit-to-stand transition, with a seat integrated into the frame rather than bolted on. That made the mechanism and the human factors inseparable from the start.",
+        ],
+      },
+      {
+        id: "requirements",
+        title: "Mobility, stability, seating and actuation requirements",
+        body: [
+          "The device has to be stable through a transition in which the user's center of mass moves substantially — the least stable moment is exactly the moment the user most needs support. It also has to be light enough to be manoeuvred by the person using it, which puts stability and mass in direct conflict.",
+          "Seating added geometry constraints: the seat has to be at a usable height, clear of the legs in both states, and reachable without the user turning around. Those requirements bounded the linkage design more tightly than the actuation did.",
+        ],
+        list: [
+          "Stable support through the full sit-to-stand transition, not just at the endpoints.",
+          "Light enough to manoeuvre unaided.",
+          "Seat clear of the leg mechanism in both deployed and stowed states.",
+          "Powered assistance with predictable, unsurprising motion.",
+          "Nothing sharp, pinching or exposed within reach of a user's hands.",
+        ],
+      },
+      {
+        id: "architecture",
+        title: "Early concepts and system architecture",
+        body: [
+          "Early work was about eliminating architectures rather than perfecting one. Configurations were laid out, checked for interference through their full range, and discarded where the seat fouled the legs, the footprint grew beyond doorway width, or the linkage needed force where a user's hands would be.",
+          "What survived was an architecture where the powered legs and the seat shared a frame and a coordinated motion, so a single transition served both functions instead of asking the user to operate two systems.",
+        ],
+        media: [
+          {
+            id: "uplift-exploded",
+            orientation: "landscape",
+            kind: "exploded-view",
+            label: "04.1 — ARCHITECTURE",
+            subject: "Exploded CAD view of the device: frame, leg linkages, seat assembly, actuation and electronics housing.",
+            composition: "Exploded along the frame axis, thin leader lines, subassemblies grouped and numbered.",
+            lighting: "Neutral studio render, matte finish, dark ground, no reflective drama.",
+            purpose: "Show how seat, legs and electronics share one frame.",
+            status: "concept",
+          },
+        ],
+      },
+      {
+        id: "linkages",
+        title: "Linkage and conduit iterations",
+        body: [
+          "I led iterative development of the conduit linkages in Onshape — the parts that route and constrain motion between the frame and the powered legs. Linkages are unforgiving: a few millimetres of change at a pivot moves the whole path and can turn a smooth transition into a bind at one end of travel.",
+          "The loop was deliberately tight. Model a revision, print it, assemble it into the prototype, run it through full travel by hand, find where it bound or flexed, and change one thing. Most revisions changed a single dimension or a single fillet.",
+        ],
+        media: [
+          {
+            id: "uplift-linkage",
+            orientation: "landscape",
+            kind: "prototype",
+            label: "04.2 — ITERATION",
+            subject: "Series of printed conduit linkage iterations laid out in chronological order.",
+            composition: "Flat overhead, left to right by revision, consistent spacing and orientation.",
+            lighting: "Even soft light, minimal shadow, print layer lines visible.",
+            purpose: "Make the design process legible: many small, evidence-driven changes.",
+            caption: "Conduit linkage revisions in order. Most changed one dimension in response to one observed bind or flex.",
+            status: "prototype",
+          },
+        ],
+      },
+      {
+        id: "printing",
+        title: "FDM and SLA prototype development",
+        body: [
+          "The two processes did different jobs. FDM in PLA was for fast form and fit checks where a part only needed to hold its shape long enough to be assessed. SLA in Grey Pro was for parts that had to be loaded and actually moved, where print anisotropy and layer adhesion would otherwise dominate the result.",
+          "Choosing between them was itself a design decision. Testing a load path on an FDM part and concluding the geometry was wrong, when the process was wrong, is a mistake that costs a whole iteration.",
+        ],
+      },
+      {
+        id: "integration",
+        title: "Mechanical and electrical integration",
+        body: [
+          "I coordinated with the electrical sub-team to integrate motors, house electronics and protect the battery. On a device people lean on, this is structural work: motor mounts carry real load, and an enclosure that flexes changes the alignment of whatever it holds.",
+          "The interface discipline was to fix the things the other team depended on early — mounting locations, available volume, cable routing — and then let both sides iterate inside those boundaries without breaking each other's work.",
+        ],
+        list: [
+          "Motor mounting treated as a load-bearing interface, not a bracket.",
+          "Electronics volume and cable routes reserved early in the frame layout.",
+          "Battery protected against impact and intrusion by geometry, not by warnings.",
+          "Interfaces frozen ahead of detail design so both sub-teams could work in parallel.",
+        ],
+      },
+      {
+        id: "battery",
+        title: "Battery protection and electronics housing",
+        body: [
+          "A battery on a mobility device sits low, near the floor, on a machine that will be bumped into door frames and curbs. The housing was designed for that reality: protected on the exposed faces, retained so it cannot shift in a knock, and serviceable without dismantling the frame.",
+          "Serviceability was a real requirement rather than a nicety. A device that has to be partly disassembled to change a battery is a device that will be used with a failing battery.",
+        ],
+      },
+      {
+        id: "evaluation",
+        title: "Prototype evaluation and design lessons",
+        body: [
+          "The prototype was assessed by running the transition repeatedly and watching for the things users would notice: motion that felt abrupt, flex that felt unsafe, and geometry that put a hand somewhere it shouldn't be.",
+          "The clearest lesson was that on a human-centered device, perceived stability and actual stability are separate requirements. A mechanism can be entirely adequate and still feel wrong — and for someone deciding whether to trust their weight to it, feeling wrong is a failure.",
+        ],
+      },
+    ],
+    gallery: [
+      {
+        id: "uplift-g1",
+        orientation: "portrait",
+        kind: "photograph",
+        label: "04.3 — IN USE",
+        subject: "The prototype in a realistic setting — a hallway or room, at a scale a user would encounter.",
+        composition: "Portrait orientation, device in context, floor and doorway visible for scale reference.",
+        lighting: "Available indoor light, warm, unstaged.",
+        purpose: "Place the device in the world it is meant to work in.",
+        status: "prototype",
+      },
+      {
+        id: "uplift-g2",
+        orientation: "detail",
+        kind: "photograph",
+        label: "04.4 — LINKAGE",
+        subject: "Close-up of a printed conduit linkage installed on the frame, fasteners and pivot visible.",
+        composition: "Tight crop along the linkage, pivot at the intersection of thirds.",
+        lighting: "Directional light raking across print layers and hardware.",
+        purpose: "Show the actual assembled interface rather than a render of it.",
+        status: "prototype",
+      },
+      {
+        id: "uplift-g3",
+        orientation: "landscape",
+        kind: "diagram",
+        label: "04.5 — HUMAN FACTORS",
+        subject: "Diagram of the sit-to-stand transition with the user's center-of-mass path and the device's support geometry overlaid.",
+        composition: "Side elevation, three positions through the transition, CoM path as a traced line.",
+        lighting: "Flat vector artwork on eggshell, user shown as a neutral silhouette.",
+        purpose: "Explain why the least stable moment is the one that needed the most design attention.",
+        caption: "Support geometry through the transition. The least stable instant is when the user most needs the device to be predictable.",
+        status: "concept",
+      },
+    ],
+    reflection: [
+      "Uplift is where I learned to treat the electrical team's constraints as part of my own design space. Reserving volume and routes early cost me some elegance and saved the project weeks.",
+      "It also set a standard I have kept: on anything a person's weight or safety depends on, I want the mechanism to feel as trustworthy as the analysis says it is.",
+    ],
+  },
   {
     slug: "helmet-impact-mechanics",
     index: "05",
@@ -1236,10 +1220,6 @@ export const projects: Project[] = [
       "It is also why I now push to define the pass criteria before the first run on any test I set up.",
     ],
   },
-
-  /* ==============================================================
-     06 — REPAIR AS ENGINEERING
-     ============================================================== */
   {
     slug: "repair-as-engineering",
     index: "06",
@@ -1406,11 +1386,16 @@ export const projects: Project[] = [
    Derived helpers
    -------------------------------------------------------------- */
 
+/**
+ * Homepage selection, in display order. The first entry gets the large
+ * `feature` spread, so this order is a curatorial choice and is deliberately
+ * independent of archive order.
+ */
 export const featuredSlugs = [
+  "precision-optical-positioning-fixture",
   "x-ray-scanner-lumafield",
   "sageware-textile-upcycling",
   "uplift-mobility-device",
-  "precision-optical-positioning-fixture",
 ] as const;
 
 export function getProject(slug: string): Project | undefined {

@@ -21,6 +21,8 @@
   --aluminum: #a9a69d;
   --signal: #e24e12;
   --signal-text: #a8380b;
+  /* Orange tuned for the near-black button fill: 6.39:1 on #151515. */
+  --signal-bright: #ff6a2b;
   --void: #0e0e0e;
   --void-2: #171716;
 
@@ -104,6 +106,7 @@
   --color-steel: #6e6e67;
   --color-aluminum: #a9a69d;
   --color-signal: #e24e12;
+  --color-signal-bright: #ff6a2b;
   --color-void: #0e0e0e;
 
   --font-sans: var(--font-archivo), "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;

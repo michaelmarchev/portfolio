@@ -13,10 +13,10 @@ export default function NotFound() {
         <MetaLabel as="p" tone="accent">
           404 / Out of envelope
         </MetaLabel>
-        <h1 className="text-h1 mt-5 max-w-[22ch] text-fg">
+        <h1 className="text-h1 mt-7 max-w-[22ch] text-fg">
           That coordinate is outside the travel limits.
         </h1>
-        <p className="mt-6 max-w-[48ch] text-[1.0625rem] leading-[1.7] text-fg-2">
+        <p className="mt-8 max-w-[48ch] text-[1.0625rem] leading-[1.7] text-fg-2">
           The page you asked for does not exist — it may have been renamed, or
           the link may be incomplete.
         </p>

@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next";
 import { projects } from "@/content/projects";
 import { site } from "@/content/site";
 
+/** Required under `output: "export"` — see the note in robots.ts. */
+export const dynamic = "force-static";
+
 /**
  * Static routes plus one entry per case study. New projects added to
  * `src/content/projects.ts` appear here automatically.
@@ -11,10 +14,6 @@ import { site } from "@/content/site";
  * `changeFrequency` from its literal type to `string`, which does not satisfy
  * `MetadataRoute.Sitemap` and fails the build.
  */
-
-// Required under `output: "export"` — see the note in robots.ts.
-export const dynamic = "force-static";
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 

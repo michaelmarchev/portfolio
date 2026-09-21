@@ -22,7 +22,7 @@ export function CaseStudyHero({ project }: { project: Project }) {
           <MetaRun items={[project.status, project.timeline]} />
         </div>
 
-        <h1 className="text-h1 mt-5 max-w-[24ch] text-fg">{project.title}</h1>
+        <h1 className="text-h1 mt-7 max-w-[24ch] text-fg">{project.title}</h1>
         <p className="text-lead mt-6 max-w-[62ch] text-fg-2">{project.summary}</p>
 
         <div className="mt-10">
