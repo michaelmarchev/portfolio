@@ -1,5 +1,8 @@
 # Michael Marchev — Portfolio
 
+Static Next.js site, deployed to GitHub Pages by GitHub Actions on every push
+to `main`. One setup step: **Settings → Pages → Source → GitHub Actions.**
+
 Personal engineering portfolio. Next.js App Router, TypeScript, Tailwind CSS v4.
 
 All copy, metadata and image briefs live in `src/content/*`. You should almost
@@ -27,13 +30,21 @@ Requires Node 18.18+ (Node 20+ recommended for Next 15).
 **This repository has never been built.** It was authored in an environment
 with no access to the npm registry, so `node_modules` was never installed and
 the dev server was never started. See [Verification](#verification) for what
-*was* checked. Run `npm run build && npm run typecheck` as your first action.
+*was* checked. Run `npm install && npm run build` as your first action — and
+note that the first push will also run that build in GitHub Actions, where any
+failure will show up in the Actions tab.
 
 ---
 
 ## Structure
 
 ```
+.github/workflows/deploy.yml   builds the static export, publishes to Pages
+public/
+  .nojekyll                    stops Jekyll eating the _next/ directory
+  og.png                       social card
+  images/                      real photography goes here
+  michael-marchev-resume.pdf
 src/
   app/                      routes (App Router)
     layout.tsx              fonts, datum rail, skip link, JSON-LD
@@ -41,7 +52,7 @@ src/
     projects/page.tsx       archive with filters
     projects/[slug]/        case studies (statically generated)
     about/ experience/ toolkit/ contact/
-    not-found.tsx  sitemap.ts  robots.ts  opengraph-image.tsx
+    not-found.tsx  sitemap.ts  robots.ts
     globals.css             all design tokens and custom CSS
   components/
     layout/                 Container, Section, SiteHeader, SiteFooter,
@@ -131,17 +142,74 @@ link instead, so the page is never a dead end.
 
 ---
 
-## Before deploying
+## Deploying to GitHub Pages
 
-1. **Set the real origin.** `site.url` in `src/content/site.ts` is
-   `https://michaelmarchev.com`. It drives canonical URLs, Open Graph URLs,
-   `sitemap.xml` and `robots.txt`. Nothing else needs changing.
-2. Set `NEXT_PUBLIC_CONTACT_ENDPOINT` if you want the form to send.
-3. Replace `public/michael-marchev-resume.pdf` when the resume changes.
-4. `npm run build && npm run typecheck && npm run lint`.
+The repo is configured for this already. You need to do one thing:
 
-Deploy on Vercel with defaults — no configuration needed. Every route is
-static except the form's client-side submit.
+**Settings → Pages → Build and deployment → Source → GitHub Actions.**
+
+Then push to `main`. The workflow at `.github/workflows/deploy.yml` installs,
+builds a static export and publishes it. The first run takes 2–3 minutes;
+watch it in the Actions tab.
+
+Your site lands at `https://<username>.github.io/<repo-name>/`.
+
+### You do not need to set the repo name anywhere
+
+The workflow reads it from `GITHUB_REPOSITORY` and derives both the base path
+and the canonical URL:
+
+| Repo | Base path | Site URL |
+| --- | --- | --- |
+| `you/michael-marchev-portfolio` | `/michael-marchev-portfolio` | `https://you.github.io/michael-marchev-portfolio` |
+| `you/you.github.io` | *(none)* | `https://you.github.io` |
+
+Rename or fork the repo and it keeps working. Locally, `npm run dev` serves
+from the root with no base path, which is what you want.
+
+### How it is set up for static hosting
+
+GitHub Pages serves static files only — no Node server, no serverless
+functions — so:
+
+- `output: "export"` in `next.config.ts` emits plain HTML/CSS/JS to `out/`.
+- `images.unoptimized: true`, because the image optimizer is a server feature.
+  **Size and compress images before putting them in `/public`** — nothing will
+  do it for you now.
+- `trailingSlash: true`, so routes emit `projects/index.html` rather than
+  `projects.html`. Directory indexes are what Pages resolves reliably.
+- `public/.nojekyll` stops Jekyll from running. Without it, Jekyll ignores
+  `_next/` (leading underscore) and the site renders with no CSS or
+  JavaScript. The workflow re-creates this file as a safety net.
+- `not-found.tsx` becomes `404.html`, which Pages serves natively.
+- The social card is a static `public/og.png`. A generated
+  `opengraph-image.tsx` is emitted without a file extension under static
+  export, and Pages then serves it as `application/octet-stream` rather than
+  an image — so it is a real PNG instead.
+- `sitemap.xml` and `robots.txt` are generated at build time and work fine.
+- `asset()` in `src/lib/utils.ts` prefixes the base path on plain
+  `<a href="/...">` links. `next/link` and `next/image` do this themselves;
+  raw anchors do not, which would otherwise 404 the resume download.
+
+### Optional
+
+- **Contact form.** Add a repository variable `NEXT_PUBLIC_CONTACT_ENDPOINT`
+  (Settings → Secrets and variables → Actions → Variables) pointing at
+  Formspree, Basin or similar. The workflow passes it into the build. Without
+  it, a valid submission opens a prefilled `mailto:` link instead.
+- **Custom domain.** Add it under Settings → Pages, then set
+  `NEXT_PUBLIC_SITE_URL` to it in the workflow's build step and clear
+  `NEXT_PUBLIC_BASE_PATH` — a custom domain serves from the root.
+- **Lockfile.** Run `npm install` once locally and commit `package-lock.json`.
+  The workflow switches to `npm ci` automatically when it finds one.
+- Replace `public/michael-marchev-resume.pdf` when the resume changes.
+
+### What static hosting costs you
+
+Image optimization (hence the note about compressing manually), and any future
+server-side feature — route handlers, server actions, ISR, middleware. If you
+later want those, deploy the same repo on Vercel: remove `output: "export"`,
+`trailingSlash` and `images.unoptimized`, and it works without other changes.
 
 ---
 
@@ -178,7 +246,13 @@ never installed and Next was never booted. Instead:
 - **CSS parse.** 102 rules, with the container query, reduced-motion block,
   dark-panel inversion, print styles and all three keyframe sets intact, and no
   console errors.
+- **Base-path derivation.** The workflow's repo-name logic was run against
+  `you/project-repo`, `you/you.github.io` and a mixed-case
+  `You/You.github.io`, producing the correct base path and canonical URL in
+  all three.
+- **Workflow YAML** parses, and `public/og.png` was rendered and inspected at
+  1200 × 630.
 
 What that does **not** cover: the production build, React hydration, `next/font`
-loading, `next/image` optimization, real device testing, and Lighthouse. Run
+loading, real device testing, and Lighthouse. Run
 those locally.
