@@ -115,6 +115,19 @@ headers are the page name. Copy in `src/content/*` is factual — roles, dates,
 what was built, what was measured — and anything more interpretive is the
 owner's to write, not the template's.
 
+### Layers — the one rule you cannot break
+
+`globals.css` declares its resets inside `@layer base`. **They must stay
+there.** Unlayered CSS outranks every `@layer`, Tailwind's `utilities`
+included — so while `h1, h2, h3, h4 { margin: 0 }` and `p { margin: 0 }` sat
+unlayered, they silently beat every `mt-*` utility on a heading or a
+paragraph. All vertical spacing between headings and body copy computed to
+zero no matter what the components specified. Measured in a browser: `mt-12`
+on an `h1` resolved to `0px`; the same class on a `div` resolved to `48px`.
+
+Conversely, the narrow-slot plate overrides are intentionally *outside* the
+layer, because their job is to beat the type-scale utilities.
+
 ### Spacing around large type
 
 Large type gets clearance on **both** sides — the gap above a heading and the

@@ -414,7 +414,7 @@ export const projects: Project[] = [
       id: "stryker-card",
       orientation: "wide",
       kind: "cad-render",
-      label: "04 — PRECISION",
+      label: "02 — PRECISION",
       subject: "Dark, exact detail crop of a micrometer adjuster and stage dovetail with fine graduation marks in focus.",
       composition: "Extreme close crop, strong diagonal, graduations legible, everything else falling to black.",
       lighting: "Single hard raking key on near-black ground; specular highlight along one machined edge only.",

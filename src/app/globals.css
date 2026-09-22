@@ -142,6 +142,17 @@
    BASE
    ========================================================================== */
 
+/*
+ * These resets MUST stay inside `@layer base`.
+ *
+ * Unlayered CSS outranks every @layer, including Tailwind's `utilities`. While
+ * this block sat unlayered, `h1, h2, h3, h4 { margin: 0 }` and `p { margin: 0 }`
+ * silently beat every `mt-*` utility on a heading or paragraph — so all
+ * vertical spacing between headings and body copy was zero regardless of what
+ * the components asked for.
+ */
+@layer base {
+
 *,
 *::before,
 *::after {
@@ -208,6 +219,7 @@ hr {
   border: 0;
   border-top: 1px solid var(--c-line);
   margin: 0;
+}
 }
 
 /* ==========================================================================

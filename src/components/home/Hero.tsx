@@ -1,17 +1,20 @@
-import { GantryHero } from "@/components/graphics/GantryHero";
+import { SpecPlate } from "@/components/media/SpecPlate";
 import { Button } from "@/components/ui/Button";
 import { MetaRun } from "@/components/ui/MetaLabel";
+import { getProject } from "@/content/projects";
 import { education, site } from "@/content/site";
 
 /**
  * Homepage hero.
  *
  * Asymmetric split: the reading column carries the name and positioning, and
- * the dark panel carries the flagship system at scale. On small screens the
- * type comes first and the drawing follows full-width, so the first screen is
- * never a wall of text or an image with nothing to read.
+ * the dark panel carries the lead project at scale. On small screens the type
+ * comes first and the image follows full-width, so the first screen is never a
+ * wall of text or an image with nothing to read.
  */
 export function Hero() {
+  const lead = getProject("precision-optical-positioning-fixture");
+
   return (
     <section
       data-datum="Index"
@@ -88,27 +91,35 @@ export function Hero() {
         >
           <div className="flex items-start justify-between gap-6">
             <p className="u-meta text-accent">
-              01
+              {lead?.index}
               <span aria-hidden="true" className="px-2 text-fg-4">
                 /
               </span>
-              X-Ray Scanner for Lumafield
+              {lead?.title}
             </p>
-            <p className="u-meta hidden text-fg-4 sm:block">Fig. 01 — Axonometric</p>
+            <p className="u-meta hidden shrink-0 text-fg-4 sm:block">
+              {lead?.timeline}
+            </p>
           </div>
 
-          <div className="relative -mx-4 my-6 aspect-[4/3] w-[calc(100%+2rem)] text-fg lg:my-0 lg:aspect-auto lg:h-full lg:flex-1">
-            <GantryHero />
+          <div className="my-6 lg:my-0 lg:flex lg:flex-1 lg:items-center">
+            {lead && (
+              <SpecPlate
+                image={lead.hero}
+                detail="brief"
+                priority
+                sizes="(min-width: 1024px) 53vw, 100vw"
+                ratio="4 / 3"
+                className="w-full"
+              />
+            )}
           </div>
 
           <div className="flex flex-col gap-3 border-t border-line pt-5 sm:flex-row sm:items-baseline sm:justify-between">
             <p className="text-caption max-w-[46ch] text-fg-2">
-              Automated 5-axis shielding-verification scanner — target: 1 mm
-              repeatability.
+              {lead?.cardSummary}
             </p>
-            <p className="u-meta shrink-0 text-fg-4">
-              Drawing — real CAD render to be imported
-            </p>
+            <p className="u-meta shrink-0 text-fg-4">Non-confidential summary</p>
           </div>
         </div>
       </div>

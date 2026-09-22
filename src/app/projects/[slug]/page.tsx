@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { GantryHero } from "@/components/graphics/GantryHero";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { GalleryGrid } from "@/components/media/GalleryGrid";
@@ -48,6 +49,39 @@ export default async function ProjectPage({
   return (
     <article>
       <CaseStudyHero project={project} />
+
+      {/*
+        Purpose-drawn axonometric of the 7 ft x 7 ft x 4 ft gantry, at a
+        verified 80 units per foot. It belongs to this one project, so it is
+        rendered here rather than in the shared hero.
+      */}
+      {project.slug === "x-ray-scanner-lumafield" && (
+        <Section space="tight" panel="dark" className="border-t border-line" datum={project.title}>
+          <Container wide>
+            <div
+              data-panel="dark"
+              className="flex flex-col gap-6 text-fg"
+            >
+              <div className="flex items-start justify-between gap-6">
+                <p className="u-meta text-accent">Fig. 01 — Axonometric</p>
+                <p className="u-meta hidden shrink-0 text-fg-4 sm:block">
+                  Drawing — real CAD render to be imported
+                </p>
+              </div>
+
+              <div className="aspect-[4/3] w-full text-fg sm:aspect-[16/9]">
+                <GantryHero />
+              </div>
+
+              <p className="text-caption max-w-[62ch] border-t border-line pt-5 text-fg-2">
+                Frame, scanner envelope, five-axis carriage and traced scan path,
+                with a 5 ft 10 in figure for scale.
+              </p>
+            </div>
+          </Container>
+        </Section>
+      )}
+
       <CaseStudyMeta project={project} />
 
       <Section space="default" datum={project.title}>
