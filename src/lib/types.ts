@@ -88,8 +88,7 @@ export interface CaseStudySection {
 
 export type ProjectCategory =
   | "Technical Leadership"
-  | "Automation"
-  | "Motion Systems"
+  | "Automation / Motion Systems"
   | "Product Development"
   | "R&D Testing"
   | "Medical / Human-Centered Design"
@@ -97,8 +96,7 @@ export type ProjectCategory =
   | "Manufacturing"
   | "Research"
   | "Additive Manufacturing"
-  | "Experimental Design"
-  | "Repair + Serviceability";
+  | "Experimental Design";
 
 /** Light sections sit on eggshell; dark sections are reserved for precision R&D work. */
 export type Theme = "light" | "dark";

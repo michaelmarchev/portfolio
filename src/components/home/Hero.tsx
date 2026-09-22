@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SpecPlate } from "@/components/media/SpecPlate";
 import { Button } from "@/components/ui/Button";
 import { MetaRun } from "@/components/ui/MetaLabel";
@@ -39,24 +40,24 @@ export function Hero() {
 
             <h1
               id="hero-name"
-              className="text-display mt-12 text-fg"
+              className="text-display mt-16 text-fg"
             >
               Michael
               <br />
               Marchev
             </h1>
 
-            <p className="text-h2 mt-12 max-w-[24ch] text-graphite">
+            <p className="text-h2 mt-16 max-w-[24ch] text-graphite">
               Mechanical engineer.
             </p>
 
-            <p className="text-lead mt-10 max-w-[54ch] text-fg-2">
+            <p className="text-lead mt-12 max-w-[54ch] text-fg-2">
               {site.heroSupport}
             </p>
 
-            <MetaRun items={site.descriptor} separator="•" className="mt-7" />
+            <MetaRun items={site.descriptor} separator="•" className="mt-10" />
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-10 flex flex-wrap items-center gap-3">
               <Button href="/projects" variant="solid">
                 Explore selected work
               </Button>
@@ -115,12 +116,39 @@ export function Hero() {
             )}
           </div>
 
-          <div className="flex flex-col gap-3 border-t border-line pt-5 sm:flex-row sm:items-baseline sm:justify-between">
-            <p className="text-caption max-w-[46ch] text-fg-2">
-              {lead?.cardSummary}
-            </p>
-            <p className="u-meta shrink-0 text-fg-4">Non-confidential summary</p>
-          </div>
+          {lead && (
+            <div className="flex flex-col gap-6 border-t border-line pt-6">
+              <p className="text-caption max-w-[52ch] text-fg-2">
+                {lead.cardSummary}
+              </p>
+
+              <dl className="m-0 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
+                <div>
+                  <dt className="u-meta text-fg-4">Role</dt>
+                  <dd className="mt-1.5 text-caption text-fg-2">{lead.role}</dd>
+                </div>
+                <div>
+                  <dt className="u-meta text-fg-4">Focus</dt>
+                  <dd className="mt-1.5 text-caption text-fg-2">
+                    {lead.projectType.slice(0, 3).join(" · ")}
+                  </dd>
+                </div>
+              </dl>
+
+              <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3">
+                <Link
+                  href={`/projects/${lead.slug}`}
+                  className="u-meta u-link text-accent-text"
+                >
+                  Read the case study
+                </Link>
+                <Link href="/projects" className="u-meta u-link text-fg-3">
+                  All work
+                </Link>
+                <span className="u-meta text-fg-4">Non-confidential summary</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

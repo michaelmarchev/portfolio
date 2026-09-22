@@ -60,9 +60,8 @@ export const toolkit: ToolkitGroup[] = [
     id: "mechanical-systems",
     category: "Mechanical Systems",
     application:
-      "I have taken enough machines apart to know where wear concentrates, and I use that to judge whether a design's load path and service access are honest.",
+      "Motion systems, precision positioning, and repair of engines, transmissions and power equipment.",
     items: [
-      "Mechanisms",
       "Motion systems",
       "Precision positioning",
       "Gantries",

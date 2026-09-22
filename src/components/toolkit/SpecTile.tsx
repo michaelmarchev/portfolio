@@ -4,7 +4,11 @@ import type { ToolkitGroup } from "@/lib/types";
 /**
  * A capability, stated as a specification rather than a score. Deliberately no
  * bars or percentages: the tools are listed, and one sentence says how the
- * capability is actually used.
+ * capability is used.
+ *
+ * The column headings ("Capability" / "Tools + methods") are printed once at
+ * the top of the page rather than repeated above every tile — the grid makes
+ * the two columns obvious after the first row.
  */
 export function SpecTile({ group, index }: { group: ToolkitGroup; index: number }) {
   return (
@@ -12,28 +16,27 @@ export function SpecTile({ group, index }: { group: ToolkitGroup; index: number 
       <span aria-hidden="true" className="absolute left-0 top-0 h-[3px] w-10 bg-accent" />
 
       <div>
-        <MetaLabel className="text-fg-4">
-          {String(index + 1).padStart(2, "0")} / Capability
-        </MetaLabel>
-        <h3 className="mt-5 text-h3 text-fg">{group.category}</h3>
-        <p className="mt-6 max-w-[42ch] text-caption leading-[1.65] text-fg-2">
+        <div className="flex items-baseline gap-3">
+          <MetaLabel className="text-fg-4">
+            {String(index + 1).padStart(2, "0")}
+          </MetaLabel>
+          <h3 className="text-h3 text-fg">{group.category}</h3>
+        </div>
+        <p className="mt-5 max-w-[42ch] text-caption leading-[1.65] text-fg-2">
           {group.application}
         </p>
       </div>
 
-      <div>
-        <MetaLabel className="text-fg-4">Tools + methods</MetaLabel>
-        <ul className="mt-4 m-0 flex list-none flex-wrap gap-x-2 gap-y-2 p-0">
-          {group.items.map((item) => (
-            <li
-              key={item}
-              className="u-mono border border-line bg-bg-deep px-2.5 py-1.5 text-[0.75rem] leading-none text-fg-2"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="m-0 flex list-none flex-wrap gap-x-2 gap-y-2 p-0">
+        {group.items.map((item) => (
+          <li
+            key={item}
+            className="u-mono border border-line bg-bg-deep px-2.5 py-1.5 text-[0.75rem] leading-none text-fg-2"
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
     </article>
   );
 }

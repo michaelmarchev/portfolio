@@ -28,7 +28,7 @@ export default function HomePage() {
           <MetaLabel as="h2" tone="strong">
             Selected work
           </MetaLabel>
-          <MetaLabel>04 projects · 2023—2026</MetaLabel>
+          <MetaLabel>{String(featured.length).padStart(2, "0")} projects · 2023—2026</MetaLabel>
         </Container>
       </Section>
 

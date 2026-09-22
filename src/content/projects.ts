@@ -11,8 +11,7 @@ import type { Project, ProjectCategory } from "@/lib/types";
 
 export const projectCategories: ProjectCategory[] = [
   "Technical Leadership",
-  "Automation",
-  "Motion Systems",
+  "Automation / Motion Systems",
   "Product Development",
   "R&D Testing",
   "Medical / Human-Centered Design",
@@ -21,7 +20,6 @@ export const projectCategories: ProjectCategory[] = [
   "Research",
   "Additive Manufacturing",
   "Experimental Design",
-  "Repair + Serviceability",
 ];
 
 export const projects: Project[] = [
@@ -41,8 +39,7 @@ export const projects: Project[] = [
     theme: "light",
     categories: [
       "Technical Leadership",
-      "Automation",
-      "Motion Systems",
+      "Automation / Motion Systems",
       "Experimental Design",
       "Manufacturing",
     ],
@@ -368,7 +365,7 @@ export const projects: Project[] = [
     categories: [
       "R&D Testing",
       "Experimental Design",
-      "Motion Systems",
+      "Automation / Motion Systems",
       "Medical / Human-Centered Design",
     ],
     projectType: [
@@ -598,14 +595,14 @@ export const projects: Project[] = [
     categories: [
       "Product Development",
       "Sustainability",
-      "Automation",
+      "Automation / Motion Systems",
       "Manufacturing",
       "Additive Manufacturing",
     ],
     projectType: [
       "Product Development",
       "Sustainability",
-      "Automation",
+      "Automation / Motion Systems",
       "Tooling",
       "Additive Manufacturing",
     ],
@@ -1221,16 +1218,16 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "repair-as-engineering",
+    slug: "power-equipment-mechanical-repair",
     index: "06",
-    title: "Repair as Engineering",
+    title: "Power Equipment Mechanical Repair",
     shortTitle: "Repair",
     organization: "Richey & Clapper Inc.",
     role: "Power Equipment Mechanic / STIHL Certified Silver Technician",
     timeline: "May 2025 – August 2025",
     status: "Complete",
     theme: "light",
-    categories: ["Repair + Serviceability", "Manufacturing", "Motion Systems"],
+    categories: ["Manufacturing", "Automation / Motion Systems"],
     projectType: [
       "Repair",
       "Diagnostics",
@@ -1392,7 +1389,6 @@ export const projects: Project[] = [
  * independent of archive order.
  */
 export const featuredSlugs = [
-  "precision-optical-positioning-fixture",
   "x-ray-scanner-lumafield",
   "sageware-textile-upcycling",
   "uplift-mobility-device",

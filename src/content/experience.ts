@@ -65,7 +65,7 @@ export const experience: ExperienceEntry[] = [
     timeline: "May 2025 – August 2025",
     start: "2025-05",
     kind: "trade",
-    projectSlug: "repair-as-engineering",
+    projectSlug: "power-equipment-mechanical-repair",
     summary:
       "Diagnosed, repaired and modified petrol, diesel and electric power equipment across engines, drivetrains and hydraulics.",
     detail: [
