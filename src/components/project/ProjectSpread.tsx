@@ -80,7 +80,7 @@ export function ProjectSpread({
 
           <p
             className={cn(
-              "mt-4 max-w-[58ch] text-fg-2",
+              "mt-7 max-w-[58ch] text-fg-2",
               isFeature ? "text-lead" : "text-[1.0625rem] leading-[1.65]",
             )}
           >

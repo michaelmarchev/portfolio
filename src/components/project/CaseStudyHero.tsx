@@ -23,7 +23,7 @@ export function CaseStudyHero({ project }: { project: Project }) {
         </div>
 
         <h1 className="text-h1 mt-7 max-w-[24ch] text-fg">{project.title}</h1>
-        <p className="text-lead mt-6 max-w-[62ch] text-fg-2">{project.summary}</p>
+        <p className="text-lead mt-8 max-w-[62ch] text-fg-2">{project.summary}</p>
 
         <div className="mt-10">
           <MediaFigure

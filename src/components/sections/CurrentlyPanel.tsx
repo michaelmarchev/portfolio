@@ -15,7 +15,7 @@ export function CurrentlyPanel() {
             <p className="text-h3 max-w-[48ch] text-fg">{site.currently}</p>
             <Link
               href="/projects/x-ray-scanner-lumafield"
-              className="u-meta mt-6 inline-block border-b border-line-strong pb-1.5 text-fg no-underline transition-colors duration-200 hover:border-accent hover:text-accent-text focus-visible:border-accent"
+              className="u-meta mt-8 inline-block border-b border-line-strong pb-1.5 text-fg no-underline transition-colors duration-200 hover:border-accent hover:text-accent-text focus-visible:border-accent"
             >
               Read the case study
             </Link>

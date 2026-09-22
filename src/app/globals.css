@@ -182,7 +182,8 @@ p {
 
 ::selection {
   background: var(--signal);
-  color: #fff;
+  /* Ink, not white: white on the signal orange is only 3.94:1. Ink is 4.64:1. */
+  color: var(--ink);
 }
 
 :focus-visible {

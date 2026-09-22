@@ -12,18 +12,20 @@ interface BaseProps {
 
 const STYLE: Record<Variant, string> = {
   /*
-   * A near-black chip, outlined and labelled in signal orange, that fills
-   * orange on hover and focus.
+   * A near-black chip with a signal-orange label. Only the text colour marks
+   * it out — no outline.
    *
-   * The fill is fixed rather than token-driven so the button reads the same on
-   * eggshell and inside a dark panel. On a dark panel the fill is almost
-   * indistinguishable from the background, so the orange border is what
-   * delineates the button — 6.76:1 against the panel. The orange label is
-   * 6.39:1 on the fill, and the hover state puts the panel background colour
-   * on the orange fill (5.76:1 light, 7.75:1 dark).
+   * The border is kept but tinted with `--c-line-strong`, which resolves to a
+   * translucent ink on eggshell (invisible against the fill) and a translucent
+   * light on a dark panel (a faint hairline). Without it the chip would have
+   * no edge at all on the dark closing panel, where the fill is within
+   * 1.06 : 1 of the background.
+   *
+   * Label 6.39 : 1 on the fill. Hover puts the panel background colour on the
+   * orange fill: 5.76 : 1 light, 7.75 : 1 dark.
    */
   solid:
-    "bg-ink text-signal-bright border border-signal-bright hover:bg-accent-text hover:border-accent-text hover:text-bg focus-visible:bg-accent-text focus-visible:border-accent-text focus-visible:text-bg",
+    "bg-ink text-signal-bright border border-line-strong hover:bg-accent-text hover:border-accent-text hover:text-bg focus-visible:bg-accent-text focus-visible:border-accent-text focus-visible:text-bg",
   outline:
     "border border-line-strong text-fg hover:border-accent hover:text-accent-text focus-visible:border-accent",
   quiet: "border border-transparent text-fg-2 hover:text-accent-text",

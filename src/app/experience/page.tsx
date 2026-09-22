@@ -91,7 +91,7 @@ export default function ExperiencePage() {
               <p className="mt-4 text-caption text-fg-3">
                 {education.school} · {education.location}
               </p>
-              <p className="u-meta mt-5 text-accent-text">{education.expected}</p>
+              <p className="u-meta mt-4 text-accent-text">{education.expected}</p>
 
               <dl className="m-0 mt-8 grid grid-cols-1 gap-x-10 border-t border-line sm:grid-cols-2">
                 <div className="border-b border-line py-4">

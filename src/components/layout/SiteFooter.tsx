@@ -14,7 +14,7 @@ export function SiteFooter() {
             <p className="text-h3 max-w-[22ch] text-fg">{site.closingLine}</p>
             <a
               href={`mailto:${site.email}`}
-              className="u-link mt-4 inline-block text-[0.95rem] text-fg-2"
+              className="u-link mt-5 inline-block text-[0.95rem] text-fg-2"
             >
               {site.email}
             </a>

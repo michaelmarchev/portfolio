@@ -47,9 +47,7 @@ export function ProjectArchive({
               onClick={() => setActive(null)}
             >
               All work
-              <span aria-hidden="true" className="ml-2 text-fg-4">
-                {projects.length}
-              </span>
+              <Count pressed={active === null}>{projects.length}</Count>
             </FilterButton>
           </li>
           {usable.map((category) => {
@@ -63,9 +61,7 @@ export function ProjectArchive({
                   onClick={() => setActive(active === category ? null : category)}
                 >
                   {category}
-                  <span aria-hidden="true" className="ml-2 text-fg-4">
-                    {count}
-                  </span>
+                  <Count pressed={active === category}>{count}</Count>
                 </FilterButton>
               </li>
             );
@@ -111,6 +107,28 @@ function isWide(i: number): boolean {
   return pos === 0 || pos === 3;
 }
 
+/**
+ * The count beside a filter label. `text-fg-4` only manages 3.56 : 1 on the
+ * pressed chip's black fill, so the pressed state uses the tick tone instead
+ * (7.50 : 1).
+ */
+function Count({
+  children,
+  pressed,
+}: {
+  children: React.ReactNode;
+  pressed: boolean;
+}) {
+  return (
+    <span
+      aria-hidden="true"
+      className={pressed ? "ml-2 text-tick" : "ml-2 text-fg-4"}
+    >
+      {children}
+    </span>
+  );
+}
+
 function FilterButton({
   children,
   pressed,
@@ -127,9 +145,9 @@ function FilterButton({
       aria-pressed={pressed}
       className={cn(
         "u-meta border px-3 py-2 transition-colors duration-200",
-        // Pressed matches the solid Button: black chip, orange label.
+        // Pressed matches the solid Button: black chip, orange label, no outline.
         pressed
-          ? "border-signal-bright bg-ink text-signal-bright"
+          ? "border-line-strong bg-ink text-signal-bright"
           : "border-line text-fg-3 hover:border-line-strong hover:text-fg",
       )}
     >
@@ -156,13 +174,13 @@ function ArchiveCard({ project, wide }: { project: Project; wide: boolean }) {
         </div>
         <h3
           className={cn(
-            "caption-shift mt-2 text-fg",
+            "caption-shift mt-4 text-fg",
             wide ? "text-h3" : "text-[1.125rem] leading-[1.25] tracking-[-0.01em]",
           )}
         >
           {project.title}
         </h3>
-        <p className="mt-2 max-w-[52ch] text-caption text-fg-2">
+        <p className="mt-4 max-w-[52ch] text-caption text-fg-2">
           {project.cardSummary}
         </p>
       </Link>

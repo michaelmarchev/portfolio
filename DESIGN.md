@@ -24,7 +24,7 @@ section. No component needs a dark variant.
 | `--c-accent-text` | `#a8380b` | 5.76 : 1 | Orange **as text** |
 | `--c-accent` | `#e24e12` | 3.49 : 1 | Rules, ticks, marks — **never text** |
 | `--c-tick` | `#a9a69d` | 2.16 : 1 | Registration marks only |
-| `--signal-bright` | `#ff6a2b` | 6.39 : 1 *on `#151515`* | Solid-button label + border |
+| `--signal-bright` | `#ff6a2b` | 6.39 : 1 *on `#151515`* | Solid-button label |
 
 ### Dark panel — on `#0e0e0e`
 
@@ -39,16 +39,21 @@ section. No component needs a dark variant.
 
 ### The solid button
 
-A near-black chip (`#151515`), outlined and labelled in `--signal-bright`
-(`#ff6a2b`), that fills orange on hover and focus.
+A near-black chip (`#151515`) with a signal-orange label
+(`--signal-bright`, `#ff6a2b`), filling orange on hover and focus. Only the
+text colour marks it out — there is no outline.
 
 The fill is deliberately **not** token-driven, so the button reads identically
-on eggshell and inside a dark panel. On a dark panel the fill is almost
-indistinguishable from the background, and the orange border is what
-delineates the button — 6.76 : 1 against the panel. The label is 6.39 : 1 on
-the fill; the hover state puts the panel background colour on the orange fill
-(5.76 : 1 light, 7.75 : 1 dark). Pressed archive filters use the same
-treatment.
+on eggshell and inside a dark panel. The border is retained but tinted with
+`--c-line-strong`, which resolves to a translucent ink on eggshell (invisible
+against the fill) and a translucent light on a dark panel (a faint hairline).
+Without it the chip would have no edge at all on the dark closing panel, where
+the fill sits within 1.06 : 1 of the background.
+
+Label 6.39 : 1 on the fill. Hover puts the panel background colour on the
+orange fill: 5.76 : 1 light, 7.75 : 1 dark. Pressed archive filters use the
+same treatment, with their count in `--c-tick` (7.50 : 1) rather than
+`--c-fg-4`, which manages only 3.56 : 1 against the black fill.
 
 ### The orange rule
 
@@ -95,6 +100,15 @@ Every size is a fluid `clamp()` on the `@theme` scale:
 | `--text-meta` | `0.6875rem` | `.u-meta` |
 
 Measure is capped at `66ch` (`--measure`). No paragraph runs wider.
+
+### Spacing around large type
+
+Large type gets clearance on **both** sides — the gap above a heading and the
+gap below it are set together. Loosening only the top pushes the whole block
+down the page without making the block itself any easier to read, which is the
+opposite of the intent. Box padding and the gaps between a block and its
+neighbouring sections are left alone; the vertical rhythm of a section is set
+by `Section`'s `space` prop, not by heading margins.
 
 ---
 

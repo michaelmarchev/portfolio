@@ -11,7 +11,7 @@ export function NextProject({ project }: { project: Project }) {
         <MetaLabel as="h2">Next project</MetaLabel>
         <Link
           href={`/projects/${project.slug}`}
-          className="group mt-5 flex flex-col gap-3 no-underline sm:flex-row sm:items-baseline sm:justify-between"
+          className="group mt-5 flex flex-col gap-5 no-underline sm:flex-row sm:items-baseline sm:justify-between"
         >
           <span className="text-h2 caption-shift max-w-[26ch] text-fg">
             {project.title}

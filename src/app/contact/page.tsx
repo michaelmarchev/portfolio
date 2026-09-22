@@ -51,11 +51,11 @@ export default function ContactPage() {
           <Reveal className="grid gap-x-16 gap-y-14 lg:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] lg:items-start">
             <div>
               <MetaLabel as="h2">Direct</MetaLabel>
-              <dl className="m-0 mt-7 border-t border-line">
+              <dl className="m-0 mt-6 border-t border-line">
                 {DETAILS.map((detail) => (
                   <div
                     key={detail.label}
-                    className="grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-4 border-b border-line py-5"
+                    className="grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-4 border-b border-line py-4"
                   >
                     <dt className="u-meta text-fg-4">{detail.label}</dt>
                     <dd className="ml-0 text-[1.0625rem] text-fg-2">
@@ -77,7 +77,7 @@ export default function ContactPage() {
                 ))}
               </dl>
 
-              <div className="mt-9 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-wrap gap-3">
                 <Button href={`mailto:${site.email}`} variant="solid" external>
                   Email me
                 </Button>
@@ -89,18 +89,18 @@ export default function ContactPage() {
 
             <div>
               <MetaLabel as="h2">What I am looking for</MetaLabel>
-              <ul className="m-0 mt-7 list-none border-t border-line p-0">
+              <ul className="m-0 mt-6 list-none border-t border-line p-0">
                 {INTERESTS.map((item) => (
                   <li
                     key={item}
-                    className="border-b border-line py-5 text-caption leading-[1.65] text-fg-2"
+                    className="border-b border-line py-4 text-caption leading-[1.65] text-fg-2"
                   >
                     {item}
                   </li>
                 ))}
               </ul>
 
-              <p className="mt-9 max-w-[42ch] text-caption leading-[1.7] text-fg-3">
+              <p className="mt-8 max-w-[42ch] text-caption leading-[1.7] text-fg-3">
                 Work at Stryker and on the Lumafield project is described here
                 only at a non-confidential level. I am happy to discuss approach
                 and reasoning in more depth directly.
