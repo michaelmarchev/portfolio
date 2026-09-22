@@ -186,12 +186,40 @@ functions — so:
 - **Contact.** There is no form and no backend — the contact page lists the
   email, phone and LinkedIn directly. Nothing to configure, nothing that can
   silently drop a message.
-- **Custom domain.** Add it under Settings → Pages, then set
-  `NEXT_PUBLIC_SITE_URL` to it in the workflow's build step and clear
-  `NEXT_PUBLIC_BASE_PATH` — a custom domain serves from the root.
+- **Changing the domain.** Two places, both hardcoded on purpose: `url` in
+  `src/content/site.ts` and the comment in `next.config.ts`. If you ever move
+  back to a `username.github.io/repo-name` URL you will also need to restore
+  `basePath` and `assetPrefix` in `next.config.ts` and set `BASE_PATH` in
+  `src/lib/utils.ts`.
 - **Lockfile.** Run `npm install` once locally and commit `package-lock.json`.
   The workflow switches to `npm ci` automatically when it finds one.
 - Replace `public/michael-marchev-resume.pdf` when the resume changes.
+
+### Custom domain
+
+The site is configured for **michaelmarchev.com**, served from the domain root.
+There is no `basePath`, and the canonical origin is hardcoded in
+`src/content/site.ts` — not read from a CI variable, so a workflow change
+cannot silently reintroduce a `/repo-name` prefix into every asset URL.
+
+DNS (Namecheap → Advanced DNS), with Namecheap's default parking records
+deleted first:
+
+| Type | Host | Value | TTL |
+| --- | --- | --- | --- |
+| A | `@` | `185.199.108.153` | Automatic |
+| A | `@` | `185.199.109.153` | Automatic |
+| A | `@` | `185.199.110.153` | Automatic |
+| A | `@` | `185.199.111.153` | Automatic |
+| CNAME | `www` | `<username>.github.io.` | Automatic |
+
+On GitHub: Settings → Pages → Custom domain → the bare domain, then tick
+**Enforce HTTPS** once the certificate is issued.
+
+No `CNAME` file is needed. GitHub only creates one when publishing from a
+branch; with a custom Actions workflow it is ignored and not required.
+
+---
 
 ### What static hosting costs you
 

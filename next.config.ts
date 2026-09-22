@@ -1,23 +1,18 @@
 import type { NextConfig } from "next";
 
 /**
- * Configured for GitHub Pages.
+ * Configured for GitHub Pages on the custom domain michaelmarchev.com.
  *
  * Pages serves static files only — no Node server, no serverless functions —
  * so the site is exported to plain HTML/CSS/JS at build time.
  *
- * `NEXT_PUBLIC_BASE_PATH` is set by .github/workflows/deploy.yml from the
- * repository name: `/my-portfolio` for a project repo, empty for a
- * `<user>.github.io` repo. Leaving it unset (local `npm run dev`) serves from
- * the root, which is what you want locally.
+ * There is deliberately no `basePath` here. The site is served from the root of
+ * its own domain, so asset URLs must start at `/`. A base path is only needed
+ * when serving from `username.github.io/repo-name`, and hardcoding its absence
+ * means no environment variable or workflow step can reintroduce it.
  */
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
 const nextConfig: NextConfig = {
   output: "export",
-
-  basePath,
-  assetPrefix: basePath || undefined,
 
   // Emits `projects/index.html` rather than `projects.html`, which is the
   // directory-index behaviour GitHub Pages resolves reliably.

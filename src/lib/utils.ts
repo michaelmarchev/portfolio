@@ -49,16 +49,12 @@ export function slugify(value: string): string {
 }
 
 /**
- * Base path the site is served from.
- *
- * On GitHub Pages a project repo is served from `/<repo-name>`, not the domain
- * root. The deploy workflow sets NEXT_PUBLIC_BASE_PATH automatically from the
- * repository name (and leaves it empty for a `<user>.github.io` repo).
- *
- * `next/link` and `next/image` prefix this for you. Plain `<a href="/...">`
- * and anything you build by hand does not — use `asset()` for those.
+ * Base path the site is served from. Empty: the site lives at the root of
+ * michaelmarchev.com. Kept as a single point of change in case that ever moves
+ * back under a sub-path — `next/link` and `next/image` handle the prefix
+ * themselves, but a plain `<a href="/...">` does not.
  */
-export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+export const BASE_PATH = "";
 
 /** Prefix a root-relative path with the base path. Leaves absolute URLs alone. */
 export function asset(path: string): string {

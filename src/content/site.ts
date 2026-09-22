@@ -31,17 +31,11 @@ export const site = {
   resume: "/michael-marchev-resume.pdf",
   resumeLabel: "Resume — PDF",
   /**
-   * Full public URL of the deployed site, including any sub-path.
-   *
-   * Set by .github/workflows/deploy.yml from the repository name, e.g.
-   * https://username.github.io/my-portfolio — or https://username.github.io
-   * for a `<user>.github.io` repo. Override with NEXT_PUBLIC_SITE_URL if you
-   * later point a custom domain at the Pages site.
+   * Canonical origin. Hardcoded, because it drives canonical URLs, Open Graph
+   * URLs, sitemap.xml and robots.txt — all of which must be right in the
+   * published HTML, and none of which should depend on a CI variable.
    */
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(
-    /\/$/,
-    "",
-  ),
+  url: "https://michaelmarchev.com",
 } as const;
 
 export const capabilityBand = [
