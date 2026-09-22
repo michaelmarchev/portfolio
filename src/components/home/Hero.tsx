@@ -36,22 +36,18 @@ export function Hero() {
 
             <h1
               id="hero-name"
-              className="text-display mt-8 text-fg"
+              className="text-display mt-12 text-fg"
             >
               Michael
               <br />
               Marchev
             </h1>
 
-            <p className="text-h2 mt-9 max-w-[24ch] text-graphite">
+            <p className="text-h2 mt-12 max-w-[24ch] text-graphite">
               Mechanical engineer.
-              <br />
-              Technical lead.
-              <br />
-              Builder of precise physical systems.
             </p>
 
-            <p className="text-lead mt-9 max-w-[54ch] text-fg-2">
+            <p className="text-lead mt-10 max-w-[54ch] text-fg-2">
               {site.heroSupport}
             </p>
 

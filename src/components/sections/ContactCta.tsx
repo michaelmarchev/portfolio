@@ -13,9 +13,8 @@ export function ContactCta({ datum = "Contact" }: { datum?: string }) {
           <div>
             <h2 className="text-h1 max-w-[20ch] text-fg">{site.closingLine}</h2>
             <p className="mt-8 max-w-[48ch] text-[1.0625rem] leading-[1.7] text-fg-2">
-              I am interested in mechanical design, product development and R&D
-              work where the hardware has to perform in the real world. Open to
-              co-op, internship and project conversations.
+              Open to co-op, internship and project conversations in mechanical
+              design, product development and R&amp;D.
             </p>
           </div>
 

@@ -2,17 +2,16 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { MediaFigure } from "@/components/media/MediaFigure";
 import { ContactCta } from "@/components/sections/ContactCta";
-import { Pillars } from "@/components/sections/Pillars";
 import { MetaLabel } from "@/components/ui/MetaLabel";
 import { Reveal } from "@/components/ui/Reveal";
 import { about, aboutMedia } from "@/content/about";
-import { education, site } from "@/content/site";
+import { education } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "About",
   description:
-    "Michael Marchev is a Mechanical Engineering and Design student at Northeastern University who works across the full arc of physical problem-solving: concepts, mechanisms, CAD, prototypes, testing and refinement.",
+    "I am a Mechanical Engineering and Design student at Northeastern University. Automated motion systems, precision fixtures, mobility devices and product design.",
   path: "/about",
 });
 
@@ -23,8 +22,7 @@ export default function AboutPage() {
     <>
       <Section space="tight" datum="About" className="pt-12 md:pt-16">
         <Container wide>
-          <MetaLabel as="p">About</MetaLabel>
-          <h1 className="text-h1 mt-7 max-w-[24ch] text-fg">{about.headline}</h1>
+          <h1 className="text-h1 max-w-[24ch] text-fg">About</h1>
         </Container>
       </Section>
 
@@ -65,18 +63,13 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Pillars />
-
       <Section space="default" datum="About">
         <Container wide>
           <Reveal className="grid gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
             <div>
-              <MetaLabel as="h2">Outside the lab and shop</MetaLabel>
+              <MetaLabel as="h2">Outside of work</MetaLabel>
               <p className="mt-6 max-w-[54ch] text-lead text-fg-2">
                 {about.personal}
-              </p>
-              <p className="mt-6 max-w-[54ch] text-caption leading-[1.7] text-fg-3">
-                {site.positioning}
               </p>
             </div>
 

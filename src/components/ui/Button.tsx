@@ -12,20 +12,12 @@ interface BaseProps {
 
 const STYLE: Record<Variant, string> = {
   /*
-   * A near-black chip with a signal-orange label. Only the text colour marks
-   * it out — no outline.
-   *
-   * The border is kept but tinted with `--c-line-strong`, which resolves to a
-   * translucent ink on eggshell (invisible against the fill) and a translucent
-   * light on a dark panel (a faint hairline). Without it the chip would have
-   * no edge at all on the dark closing panel, where the fill is within
-   * 1.06 : 1 of the background.
-   *
-   * Label 6.39 : 1 on the fill. Hover puts the panel background colour on the
-   * orange fill: 5.76 : 1 light, 7.75 : 1 dark.
+   * Colours live in `.btn-solid` in globals.css, deliberately: the orange
+   * label is the only thing marking this control out, and a Tailwind colour
+   * utility that fails to generate leaves the text inheriting black on a black
+   * fill — invisible. Real CSS cannot fail that way.
    */
-  solid:
-    "bg-ink text-signal-bright border border-line-strong hover:bg-accent-text hover:border-accent-text hover:text-bg focus-visible:bg-accent-text focus-visible:border-accent-text focus-visible:text-bg",
+  solid: "btn-solid border",
   outline:
     "border border-line-strong text-fg hover:border-accent hover:text-accent-text focus-visible:border-accent",
   quiet: "border border-transparent text-fg-2 hover:text-accent-text",

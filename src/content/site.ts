@@ -5,10 +5,10 @@
 
 export const site = {
   name: "Michael Marchev",
-  headline: "Mechanical Engineer. Technical Lead. Builder of precise physical systems.",
-  heroAlt: "Mechanical engineer designing systems that move, measure, test, and improve.",
+  headline: "Mechanical engineer",
+  heroAlt: "Mechanical engineer based in Boston, MA.",
   heroSupport:
-    "I lead and build mechanical systems from early concepts through CAD, prototyping, integration, and validation—at the intersection of precision hardware, product development, and human-centered design.",
+    "I design and build mechanical systems: CAD, prototyping, integration, and testing.",
   descriptor: [
     "Technical Leadership",
     "R&D",
@@ -18,13 +18,9 @@ export const site = {
     "Testing",
   ],
   positioning:
-    "Michael Marchev is a mechanical engineer and builder who turns ambiguous physical problems into tested, manufacturable solutions. His work spans precision experimental fixtures, large-scale automated motion systems, human-centered mobility devices, circular-material product concepts, fabrication, mechanical repair, and biomedical-impact research.",
-  approach:
-    "I use mechanical design as a way to make complex physical problems understandable: define the constraints, build the system, measure what matters, and refine until the solution works in the real world.",
-  approachLong:
-    "I work best where design intent meets physical reality: translating an idea into a mechanism, fixture, prototype, experiment, or manufacturable part—and learning quickly through testing.",
+    "I work on precision fixtures, automated motion systems, mobility devices, product concepts, fabrication, and mechanical repair.",
   currently:
-    "Currently serving as Mechanical Engineering Technical Lead on an in-development automated X-ray emission-scanning system for Lumafield.",
+    "I am the Mechanical Engineering Technical Lead on an in-development automated X-ray emission-scanning system for Lumafield.",
   closingLine: "Let’s build something useful.",
   location: "Boston, MA",
   email: "marchev.m@northeastern.edu",
@@ -47,15 +43,6 @@ export const site = {
     "",
   ),
 } as const;
-
-export const differentiators = [
-  "Blends CAD and design intent with real shop, repair, fabrication, and prototyping experience.",
-  "Designs precision test systems and performs the validation work that proves them out.",
-  "Moves across product development, automation, experimental fixtures, mechanisms, and human-centered design.",
-  "Thinks at both system and component scale: from sub-10-micron positioning to a 7 ft × 7 ft × 4 ft gantry.",
-  "Understands manufacturability, assembly, serviceability, tolerances, materials, and real-world failure modes.",
-  "Brings technical leadership, communication, mentoring, and cross-functional collaboration.",
-] as const;
 
 export const capabilityBand = [
   "Mechanical Systems",

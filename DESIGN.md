@@ -43,6 +43,12 @@ A near-black chip (`#151515`) with a signal-orange label
 (`--signal-bright`, `#ff6a2b`), filling orange on hover and focus. Only the
 text colour marks it out — there is no outline.
 
+Its colours are written as real CSS in `.btn-solid`, not as Tailwind colour
+utilities. The label colour is the *only* thing distinguishing this control, so
+it must not depend on a theme key resolving at build time: if the utility fails
+to generate, `color` falls back to inherit and the text disappears into the
+black fill. This happened in production once.
+
 The fill is deliberately **not** token-driven, so the button reads identically
 on eggshell and inside a dark panel. The border is retained but tinted with
 `--c-line-strong`, which resolves to a translucent ink on eggshell (invisible
@@ -100,6 +106,14 @@ Every size is a fluid `clamp()` on the `@theme` scale:
 | `--text-meta` | `0.6875rem` | `.u-meta` |
 
 Measure is capped at `66ch` (`--measure`). No paragraph runs wider.
+
+### Voice
+
+First person throughout. No third-person biography, no "engineering approach"
+or "how I work" narration, no taglines beyond a plain role statement. Page
+headers are the page name. Copy in `src/content/*` is factual — roles, dates,
+what was built, what was measured — and anything more interpretive is the
+owner's to write, not the template's.
 
 ### Spacing around large type
 

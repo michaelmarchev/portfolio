@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Contact",
   description:
-    "Get in touch with Michael Marchev — mechanical engineer in Boston, MA. Open to co-op, internship and project conversations in mechanical design, product development and R&D.",
+    "I am a mechanical engineer in Boston, MA. Open to co-op, internship and project conversations in mechanical design, product development and R&D.",
   path: "/contact",
 });
 
@@ -26,10 +26,10 @@ const DETAILS = [
 ];
 
 const INTERESTS = [
-  "Mechanical design and product development roles where the hardware has to perform.",
+  "Mechanical design and product development.",
   "R&D and test engineering: fixtures, experiments, verification and validation.",
   "Motion systems, precision positioning and automation.",
-  "Co-op, internship and project conversations for 2027 and beyond.",
+  "Co-op and internship positions.",
 ];
 
 export default function ContactPage() {
@@ -40,8 +40,7 @@ export default function ContactPage() {
           <MetaLabel as="p">Contact</MetaLabel>
           <h1 className="text-h1 mt-7 max-w-[20ch] text-fg">{site.closingLine}</h1>
           <p className="mt-8 max-w-[54ch] text-[1.0625rem] leading-[1.7] text-fg-2">
-            The fastest way to reach me is email. I read everything and reply to
-            anything specific.
+            Email is the fastest way to reach me.
           </p>
         </Container>
       </Section>
@@ -88,7 +87,7 @@ export default function ContactPage() {
             </div>
 
             <div>
-              <MetaLabel as="h2">What I am looking for</MetaLabel>
+              <MetaLabel as="h2">Looking for</MetaLabel>
               <ul className="m-0 mt-6 list-none border-t border-line p-0">
                 {INTERESTS.map((item) => (
                   <li
@@ -101,9 +100,8 @@ export default function ContactPage() {
               </ul>
 
               <p className="mt-8 max-w-[42ch] text-caption leading-[1.7] text-fg-3">
-                Work at Stryker and on the Lumafield project is described here
-                only at a non-confidential level. I am happy to discuss approach
-                and reasoning in more depth directly.
+                My work at Stryker and on the Lumafield project is described here
+                only at a non-confidential level.
               </p>
             </div>
           </Reveal>

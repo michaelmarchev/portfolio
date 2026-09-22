@@ -12,7 +12,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Experience",
   description:
-    "R&D mechanical engineering co-op at Stryker Endoscopy, mechanical engineering technical lead at Generate Product Development Studio, power equipment mechanic, NSF-funded research program coordinator and published research assistant.",
+    "My roles: R&D mechanical engineering co-op at Stryker Endoscopy, mechanical engineering technical lead at Generate Product Development Studio, power equipment mechanic, research program coordinator and published research assistant.",
   path: "/experience",
 });
 
@@ -21,14 +21,10 @@ export default function ExperiencePage() {
     <>
       <Section space="tight" datum="Experience" className="pt-12 md:pt-16">
         <Container wide>
-          <MetaLabel as="p">Experience</MetaLabel>
-          <h1 className="text-h1 mt-7 max-w-[26ch] text-fg">
-            Engineering, research, leadership and the shop floor.
-          </h1>
+          <h1 className="text-h1 max-w-[26ch] text-fg">Experience</h1>
           <p className="mt-8 max-w-[58ch] text-[1.0625rem] leading-[1.7] text-fg-2">
-            Nine roles across medical-device R&D, product development, automation,
-            equipment repair, university research and student leadership. Expand
-            an entry for what the work actually involved.
+            Nine roles in medical-device R&D, product development, automation,
+            equipment repair, research and student leadership.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
             <Button href={site.resume} variant="outline" download>
@@ -59,10 +55,7 @@ export default function ExperiencePage() {
         <Container wide>
           <Reveal className="grid gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
             <div>
-              <MetaLabel as="h2">Leadership + community</MetaLabel>
-              <p className="mt-6 max-w-[34ch] text-h3 text-fg">
-                Programs run, teams led, and students taught.
-              </p>
+              <MetaLabel as="h2">Leadership</MetaLabel>
             </div>
 
             <ul className="m-0 list-none border-t border-line p-0">

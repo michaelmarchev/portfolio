@@ -171,8 +171,3 @@ export interface Credential {
   issuer: string;
 }
 
-export interface Pillar {
-  id: string;
-  title: string;
-  body: string;
-}

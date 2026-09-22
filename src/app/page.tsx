@@ -2,7 +2,6 @@ import { Hero } from "@/components/home/Hero";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { ProjectSpread } from "@/components/project/ProjectSpread";
-import { ApproachSection } from "@/components/sections/ApproachSection";
 import { CapabilityBand } from "@/components/sections/CapabilityBand";
 import { ContactCta } from "@/components/sections/ContactCta";
 import { CurrentlyPanel } from "@/components/sections/CurrentlyPanel";
@@ -13,7 +12,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Mechanical Engineer. Technical Lead.",
   description:
-    "Michael Marchev leads and builds mechanical systems from concept through CAD, prototyping, integration and validation — precision motion systems, test fixtures, human-centered devices and sustainable product concepts.",
+    "I design and build mechanical systems: precision motion systems, test fixtures, mobility devices and product concepts. CAD, prototyping, integration and testing.",
   path: "/",
 });
 
@@ -42,7 +41,6 @@ export default function HomePage() {
         />
       ))}
 
-      <ApproachSection />
       <CapabilityBand />
       <CurrentlyPanel />
       <ContactCta />

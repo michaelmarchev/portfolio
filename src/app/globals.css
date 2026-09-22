@@ -430,6 +430,33 @@ hr {
   align-items: baseline;
 }
 
+/*
+ * Solid button / pressed filter chip.
+ *
+ * Written as real CSS rather than Tailwind colour utilities. The label colour
+ * is the only thing distinguishing this control, so it must never depend on a
+ * theme key resolving at build time — if the utility fails to generate, the
+ * colour falls back to inherit and the text disappears into the black fill.
+ * These properties are set here and nowhere else.
+ */
+.btn-solid {
+  background-color: var(--ink);
+  color: var(--signal-bright);
+  border-color: var(--c-line-strong);
+}
+
+.btn-solid:hover,
+.btn-solid:focus-visible {
+  background-color: var(--c-accent-text);
+  border-color: var(--c-accent-text);
+  color: var(--c-bg);
+}
+
+/* The count beside a pressed filter label. */
+.btn-solid .btn-solid__aux {
+  color: var(--aluminum);
+}
+
 /* Tighten the plate copy when the slot is short (portrait cards, macro crops). */
 .plate[data-density="compact"] .plate__spec {
   gap: 0.3rem;

@@ -122,7 +122,7 @@ function Count({
   return (
     <span
       aria-hidden="true"
-      className={pressed ? "ml-2 text-tick" : "ml-2 text-fg-4"}
+      className={pressed ? "btn-solid__aux ml-2" : "ml-2 text-fg-4"}
     >
       {children}
     </span>
@@ -145,9 +145,9 @@ function FilterButton({
       aria-pressed={pressed}
       className={cn(
         "u-meta border px-3 py-2 transition-colors duration-200",
-        // Pressed matches the solid Button: black chip, orange label, no outline.
+        // Pressed matches the solid Button (see `.btn-solid` in globals.css).
         pressed
-          ? "border-line-strong bg-ink text-signal-bright"
+          ? "btn-solid"
           : "border-line text-fg-3 hover:border-line-strong hover:text-fg",
       )}
     >

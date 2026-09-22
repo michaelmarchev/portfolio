@@ -2,14 +2,17 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
+  # Lets you re-run a deploy from the Actions tab without pushing.
   workflow_dispatch:
 
+# Required by actions/deploy-pages.
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# One deploy at a time; don't cancel a run that is mid-publish.
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -27,6 +30,9 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      # GitHub Pages serves a project repo from /<repo-name>, but a repo named
+      # <user>.github.io from the domain root. Work out which this is so the
+      # base path and canonical URLs are right without hardcoding anything.
       - name: Derive base path
         id: paths
         run: |
@@ -41,6 +47,9 @@ jobs:
             echo "site_url=https://$owner.github.io/$repo" >> "$GITHUB_OUTPUT"
           fi
 
+      # No package-lock.json is committed yet. Run `npm install` locally once
+      # and commit the lockfile, and this switches to the faster, reproducible
+      # `npm ci` automatically.
       - name: Install dependencies
         run: |
           if [ -f package-lock.json ]; then npm ci; else npm install; fi
@@ -49,9 +58,11 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_PATH: ${{ steps.paths.outputs.base_path }}
           NEXT_PUBLIC_SITE_URL: ${{ steps.paths.outputs.site_url }}
-          NEXT_PUBLIC_CONTACT_ENDPOINT: ${{ vars.NEXT_PUBLIC_CONTACT_ENDPOINT }}
         run: npm run build
 
+      # Belt and braces: public/.nojekyll is copied into out/ by Next, but if
+      # it ever goes missing, Jekyll would silently drop the _next/ directory
+      # and the site would render unstyled with no JavaScript.
       - name: Ensure .nojekyll
         run: touch out/.nojekyll
 

@@ -1,38 +1,13 @@
-import type { ImageBrief, Pillar } from "@/lib/types";
+import type { ImageBrief } from "@/lib/types";
 
 export const about = {
-  headline: "Engineering is most interesting when it leaves the screen.",
   body: [
-    "Michael Marchev is a Mechanical Engineering and Design student at Northeastern University who enjoys the complete arc of physical problem-solving: defining a need, generating concepts, creating mechanisms, modeling systems, building prototypes, testing performance, and refining designs based on what the hardware reveals.",
-    "His work ranges from large-scale automated gantry systems and precision experimental fixtures to assistive mobility devices, sustainable product concepts, biomedical mechanics research, and equipment repair. Across these environments, Michael brings a practical builder mindset informed by CAD, fabrication, testing, motion systems, and direct experience with materials and mechanisms.",
-    "He is especially interested in work where mechanical performance has a clear purpose: making measurements more repeatable, testing safer and more useful, products easier to use, systems more reliable, or physical processes more sustainable.",
+    "I am a Mechanical Engineering and Design student at Northeastern University, graduating in May 2028.",
+    "I have worked on automated gantry systems, precision experimental fixtures, assistive mobility devices, sustainable product concepts, biomedical mechanics research, and equipment repair.",
   ],
   personal:
-    "Outside the lab and shop, Michael enjoys running, hiking, skiing, soccer, audio, violin, piano, DJing, wellness, and studying the mechanical design embedded in everyday objects.",
+    "Outside of work: running, hiking, skiing, soccer, audio, violin, piano, and DJing.",
 } as const;
-
-export const pillars: Pillar[] = [
-  {
-    id: "build-to-learn",
-    title: "Build to learn",
-    body: "Prototypes, fixtures, and test systems are tools for asking better questions.",
-  },
-  {
-    id: "design-for-reality",
-    title: "Design for reality",
-    body: "Account for manufacturability, assembly, tolerance, material behavior, serviceability, and real constraints from the beginning.",
-  },
-  {
-    id: "test-with-intent",
-    title: "Test with intent",
-    body: "Create experiments that support useful engineering decisions, not simply data collection.",
-  },
-  {
-    id: "engineer-for-people",
-    title: "Engineer for people",
-    body: "Technical performance matters most when it improves safety, independence, usability, opportunity, or trust.",
-  },
-];
 
 /** Portrait and supporting collage for the About page. */
 export const aboutMedia: ImageBrief[] = [
@@ -42,7 +17,7 @@ export const aboutMedia: ImageBrief[] = [
     kind: "portrait",
     label: "P.1 — PORTRAIT",
     subject:
-      "Michael at a workbench or beside a machine he built, working rather than posing — hands engaged, eyes on the work.",
+      "Me at a workbench or beside a machine I built, working rather than posing — hands engaged, eyes on the work.",
     composition:
       "Portrait orientation, three-quarter body, subject offset to one side with the workspace legible behind; no crossed arms, no studio backdrop.",
     lighting:
