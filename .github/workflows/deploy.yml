@@ -2,17 +2,14 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
-  # Lets you re-run a deploy from the Actions tab without pushing.
+    branches: [main, master]
   workflow_dispatch:
 
-# Required by actions/deploy-pages.
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# One deploy at a time; don't cancel a run that is mid-publish.
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -30,22 +27,31 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      # GitHub Pages serves a project repo from /<repo-name>, but a repo named
-      # <user>.github.io from the domain root. Work out which this is so the
-      # base path and canonical URLs are right without hardcoding anything.
+      # Work out the base path and canonical URL without hardcoding anything.
+      #
+      #  - Custom domain (repository variable SITE_DOMAIN set): served from the
+      #    domain root, so no base path.
+      #  - <user>.github.io repo: also the domain root.
+      #  - Any other repo: served from /<repo-name>.
       - name: Derive base path
         id: paths
+        env:
+          SITE_DOMAIN: ${{ vars.SITE_DOMAIN }}
         run: |
           owner=$(echo "${GITHUB_REPOSITORY%%/*}" | tr '[:upper:]' '[:lower:]')
           repo="${GITHUB_REPOSITORY#*/}"
           repo_lc=$(echo "$repo" | tr '[:upper:]' '[:lower:]')
-          if [ "$repo_lc" = "$owner.github.io" ]; then
+          if [ -n "$SITE_DOMAIN" ]; then
+            echo "base_path=" >> "$GITHUB_OUTPUT"
+            echo "site_url=https://$SITE_DOMAIN" >> "$GITHUB_OUTPUT"
+          elif [ "$repo_lc" = "$owner.github.io" ]; then
             echo "base_path=" >> "$GITHUB_OUTPUT"
             echo "site_url=https://$owner.github.io" >> "$GITHUB_OUTPUT"
           else
             echo "base_path=/$repo" >> "$GITHUB_OUTPUT"
             echo "site_url=https://$owner.github.io/$repo" >> "$GITHUB_OUTPUT"
           fi
+          echo "Resolved: $(cat "$GITHUB_OUTPUT")"
 
       # No package-lock.json is committed yet. Run `npm install` locally once
       # and commit the lockfile, and this switches to the faster, reproducible
