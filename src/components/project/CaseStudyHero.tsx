@@ -20,18 +20,6 @@ export function CaseStudyHero({ project }: { project: Project }) {
   const dark = project.theme === "dark";
   const logo = logoFor(project.organization);
 
-  /*
-   * Where the details table goes.
-   *
-   * A portrait lead image fills the right column on its own, so the details
-   * belong under the title on the left. A landscape one is short and leaves
-   * room beneath it, so the details sit there instead — beside the title
-   * rather than pushing it further down.
-   */
-  const hero = project.hero;
-  const detailsOnRight =
-    !!hero.width && !!hero.height && hero.width / hero.height >= 1;
-
   const details: Array<{ term: string; value: string }> = [
     { term: "Role", value: project.role },
     { term: "Organization", value: project.organization },
@@ -65,18 +53,17 @@ export function CaseStudyHero({ project }: { project: Project }) {
               {project.summary}
             </p>
 
-            {!detailsOnRight && <DetailList details={details} />}
+            <DetailList details={details} />
           </div>
 
           {/* --- Lead image, and the details when there is room beneath it --- */}
-          <div className={detailsOnRight ? undefined : "lg:sticky lg:top-28"}>
+          <div className="lg:sticky lg:top-28">
             <MediaFigure
-              image={hero}
+              image={project.hero}
               detail="full"
               priority
               sizes="(min-width: 1024px) 46vw, 100vw"
             />
-            {detailsOnRight && <DetailList details={details} />}
           </div>
         </div>
       </Container>

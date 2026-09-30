@@ -64,25 +64,36 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
 
                 {section.media && section.media.length > 0 && (
                   /*
-                   * Capped width, side by side from `sm` up. Full column width
-                   * made a nine-image case study an unreasonable scroll;
-                   * portrait photographs were the worst offenders.
+                   * CSS columns, not a grid. Figures here have wildly
+                   * different aspect ratios — a panoramic CAD strip next to a
+                   * portrait photograph — and grid rows forced every item in a
+                   * row to the tallest one's height, leaving big gaps. Columns
+                   * let each figure take only the height it needs and the next
+                   * one packs straight beneath it.
+                   *
+                   * `break-inside-avoid` keeps a figure and its caption
+                   * together; `wide` images opt out of the column flow.
                    */
-                  <div className="mt-10 grid max-w-[62rem] grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
+                  <div className="mt-10 max-w-[62rem] [column-gap:1.75rem] sm:[columns:2]">
                     {section.media.map((image) => (
-                      <MediaFigure
+                      <div
                         key={image.id}
-                        image={image}
-                        detail="full"
-                        // Dimensioned drawings span both columns — detail matters
-                        // more than rhythm for those.
-                        className={image.wide ? "sm:col-span-2" : undefined}
-                        sizes={
+                        className={
                           image.wide
-                            ? "(min-width: 1024px) 62vw, 94vw"
-                            : "(min-width: 1024px) 31vw, (min-width: 640px) 38vw, 94vw"
+                            ? "mb-8 break-inside-avoid sm:[column-span:all]"
+                            : "mb-8 break-inside-avoid"
                         }
-                      />
+                      >
+                        <MediaFigure
+                          image={image}
+                          detail="full"
+                          sizes={
+                            image.wide
+                              ? "(min-width: 1024px) 62vw, 94vw"
+                              : "(min-width: 1024px) 31vw, (min-width: 640px) 38vw, 94vw"
+                          }
+                        />
+                      </div>
                     ))}
                   </div>
                 )}

@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
  */
 export function FlipWords({
   words,
-  interval = 3000,
+  interval = 2000,
   className,
 }: {
   words: readonly string[];

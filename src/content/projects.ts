@@ -100,33 +100,7 @@ export const projects: Project[] = [
       caption: "The bench inside its blackout cage.",
     },
     sections: [
-      {
-        id: "purpose",
-        title: "Purpose",
-        body: [
-          "Precisely constraining and moving optical devices with respect to a target.",
-          "The existing optics bench was completely manual.",
-        ],
-        media: [
-          {
-            id: "stryker-test",
-            orientation: "detail",
-            kind: "photograph",
-            label: "01.3 — EXISTING BENCH",
-            subject: "The existing manual optics bench.",
-            composition: "Landscape, machine-forward, grips and instrumentation legible, specimen deliberately anonymous.",
-            lighting: "Cool lab lighting, moderate contrast, dark surround.",
-            purpose: "Evidence of hands-on V&V experience across mechanical and environmental testing.",
-            caption: "The fully manual bench this replaced — every axis set by hand.",
-            status: "final",
-            src: "/images/optics-bench-existing-manual.jpg",
-            alt: "The existing fully manual optics bench: an optical rail with manual stages and a monitor on the benchtop.",
-            width: 2000,
-            height: 1500,
-          },
-        ],
-      },
-      {
+            {
         id: "imatest",
         title: "Imatest manual adjustment",
         body: [
@@ -134,22 +108,6 @@ export const projects: Project[] = [
           "The light pad kept its functionality, and the offset of the light box was designed in.",
         ],
         media: [
-          {
-            id: "stryker-axes",
-            orientation: "panoramic",
-            kind: "diagram",
-            label: "01.1 — AXES",
-            subject: "Target stage rails and manual adjustment plate.",
-            composition: "Clean isometric linework on dark ground; motorized and manual axes distinguished by line weight, not color alone.",
-            lighting: "Vector diagram, pale steel linework on near-black, single blue accent on the tool point.",
-            purpose: "Show that the architecture was reasoned about as a stack-up, without revealing the real assembly.",
-            caption: "Target stage rails and the manual adjustment plate beneath the light box.",
-            status: "final",
-            src: "/images/optics-bench-imatest-stage-cad.png",
-            alt: "CAD detail of the target stage rails and the manual adjustment plate that sits beneath the light box.",
-            width: 713,
-            height: 301,
-          },
           {
             id: "stryker-g3",
             orientation: "portrait",
@@ -290,33 +248,7 @@ export const projects: Project[] = [
           },
         ],
       },
-      {
-        id: "tower",
-        title: "Tower mounting",
-        body: [
-          "Tower retention force was too low.",
-          "The recession was increased to allow placement of two magnets.",
-        ],
-        media: [
-          {
-            id: "stryker-g7",
-            orientation: "square",
-            kind: "cad-render",
-            label: "01.10 — TOWER MOUNTING",
-            subject: "CAD of the recessed tower mount with two magnets.",
-            composition: "As shot on the bench.",
-            lighting: "Available light.",
-            purpose: "Document the build and the fixture family as delivered.",
-            caption: "Tower retention was too weak; the recess was deepened for a second magnet.",
-            status: "final",
-            src: "/images/optics-bench-tower-mount-cad.png",
-            alt: "CAD detail of a recessed mounting pocket sized for two cylindrical magnets.",
-            width: 500,
-            height: 489,
-          },
-        ],
-      },
-      {
+            {
         id: "fixtures",
         title: "Fixtures",
         body: [
@@ -431,6 +363,32 @@ export const projects: Project[] = [
           },
         ],
       },
+{
+        id: "tower",
+        title: "Tower mounting",
+        body: [
+          "Tower retention force was too low.",
+          "The recession was increased to allow placement of two magnets.",
+        ],
+        media: [
+          {
+            id: "stryker-g7",
+            orientation: "square",
+            kind: "cad-render",
+            label: "01.10 — TOWER MOUNTING",
+            subject: "CAD of the recessed tower mount with two magnets.",
+            composition: "As shot on the bench.",
+            lighting: "Available light.",
+            purpose: "Document the build and the fixture family as delivered.",
+            caption: "Tower retention was too weak; the recess was deepened for a second magnet.",
+            status: "final",
+            src: "/images/optics-bench-tower-mount-cad.png",
+            alt: "CAD detail of a recessed mounting pocket sized for two cylindrical magnets.",
+            width: 500,
+            height: 489,
+          },
+        ],
+      },
       {
         id: "build",
         title: "Build",
@@ -517,9 +475,9 @@ export const projects: Project[] = [
       "Medical Devices",
     ],
     cardSummary:
-      "Fixtures for laser intensity, coupler retention, focus ring torque, button force and panel insertion testing.",
+      "Fixtures for laser intensity, interface reliability, focus ring torque and vibration testing.",
     summary:
-      "Test fixtures for a camera head, coupler and camera control unit: laser intensity, coupler retention, focus ring torque, button force, and panel insertion and removal.",
+      "Test fixtures for a camera head, coupler and camera control unit: laser intensity, interface reliability, focus ring torque, and front cover vibration testing.",
     tools: [
       "SOLIDWORKS",
       "Creo",
@@ -537,10 +495,10 @@ export const projects: Project[] = [
       "Measurement repeatability",
     ],
     specs: [
-      { label: "Fixtures delivered", value: "6" },
+      { label: "Fixtures delivered", value: "4" },
       { label: "Design revisions", value: "5 on the laser fixture alone" },
       { label: "Print processes", value: "MJF, MJP for alignment-critical features" },
-      { label: "Test types", value: "Optical, torque, force, vibration, lifecycle" },
+      { label: "Test types", value: "Optical, torque, vibration, lifecycle" },
       { label: "Subsystems", value: "Camera head, coupler, camera control unit" },
     ],
     hero: {
@@ -563,18 +521,18 @@ export const projects: Project[] = [
     card: {
       id: "fixtures-card",
       orientation: "detail",
-      kind: "photograph",
+      kind: "cad-render",
       label: "02 — DESIGN FOR TEST",
       subject: "The laser intensity fixture as built.",
       composition: "Isometric, full assembly in frame.",
       lighting: "Flat CAD shading on a pale ground.",
       purpose: "Read as precision test equipment at card size.",
-      caption: "The laser intensity fixture as built.",
+      caption: "Laser intensity fixture, full configuration.",
       status: "final",
-      src: "/images/thermopile-fixture-built.jpg",
-      alt: "A machined and printed test fixture on a bench, holding a coupler in line with a sensor along a graduated rail.",
-      width: 2000,
-      height: 1500,
+      src: "/images/thermopile-fixture-cad.png",
+      alt: "CAD assembly of the laser intensity fixture in its full configuration, with the source, a scope body and the sensor in line along a rail.",
+      width: 875,
+      height: 712,
     },
     sections: [
       {
@@ -854,10 +812,9 @@ export const projects: Project[] = [
       },
       {
         id: "ccu",
-        title: "Camera control unit",
+        title: "Camera control unit — front cover and vibration",
         body: [
           "Front cover mounting and cable receptacle changes needed cable receptacle backout resilience verified under vibration.",
-          "A new rear panel needed insertion and removal force verified not to vary significantly with use. The existing fixture was updated to the new dimensions.",
         ],
         media: [
           {
@@ -892,39 +849,6 @@ export const projects: Project[] = [
             alt: "An electronics enclosure strapped to a vibration table with instrumentation cables attached.",
             width: 2000,
             height: 1500,
-          },
-          {
-            id: "fixtures-ccu-panel",
-            orientation: "portrait",
-            kind: "photograph",
-            label: "02.9 — INSERTION FORCE",
-            subject: "The rear panel fixture on the load frame.",
-            composition: "Vertical, fixture and panel in frame.",
-            lighting: "Bench lighting.",
-            purpose: "Show the insertion and removal force setup.",
-            caption: "Rear panel insertion and removal force, measured over repeated cycles.",
-            status: "final",
-            src: "/images/ccu-rear-panel-fixture.jpg",
-            alt: "A panel held in a test fixture beneath the crosshead of a materials testing machine.",
-            width: 1440,
-            height: 1920,
-          },
-          {
-            id: "fx-g8",
-            orientation: "landscape",
-            kind: "cad-render",
-            label: "02.17 — REAR PANEL FIXTURE",
-            subject: "CAD of the rear panel fixture, updated to the new dimensions.",
-            composition: "As drawn.",
-            lighting: "Flat CAD shading.",
-            purpose: "Document the fixture family.",
-            caption: "The rear panel fixture, updated to the new panel dimensions.",
-            status: "final",
-            src: "/images/ccu-rear-panel-fixture-cad.png",
-            alt: "CAD view of a rectangular fixture block with a central opening and two mounting bosses.",
-            width: 767,
-            height: 588,
-            wide: true,
           },
           {
             id: "fx-g9",
@@ -1923,6 +1847,7 @@ export const projects: Project[] = [
  * independent of archive order.
  */
 export const featuredSlugs = [
+  "stryker-fixture-designs",
   "x-ray-scanner-lumafield",
   "sageware-textile-upcycling",
   "uplift-mobility-device",

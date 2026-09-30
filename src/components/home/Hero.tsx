@@ -107,14 +107,19 @@ export function Hero() {
             </p>
           </div>
 
-          <div className="my-6 lg:my-0 lg:flex lg:flex-1 lg:items-center lg:justify-center">
+          {/* The image sizes to the height the panel gives it, so it grows to
+              nearly meet the label above and the summary below without
+              changing the panel's own height. Tailwind emits responsive
+              variants after base utilities, so `lg:w-auto` wins over the
+              plate's own `w-full` at desktop. */}
+          <div className="my-4 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:py-4">
             {lead && (
               <SpecPlate
                 image={lead.hero}
                 detail="brief"
                 priority
-                sizes="(min-width: 1024px) 38vw, 100vw"
-                className="mx-auto w-full max-w-[26rem]"
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="mx-auto w-full max-w-[30rem] lg:h-full lg:max-h-full lg:w-auto lg:max-w-none"
               />
             )}
           </div>

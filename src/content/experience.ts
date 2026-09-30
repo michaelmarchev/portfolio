@@ -34,7 +34,7 @@ export const experience: ExperienceEntry[] = [
       "Built a $25,000 precision optical-positioning fixture for experimental testing and ran mechanical and environmental verification and validation.",
     detail: [
       "Built a proprietary precision optical-positioning fixture supporting sub-10-micron accuracy across four motorized and four manual axes, inside a complete blackout cage.",
-      "Designed and iterated six one-off test fixtures across a camera head, coupler and camera control unit: laser intensity measurement, coupler retention, focus-ring torque over lifecycle, button actuation force, and panel insertion and removal.",
+      "Designed and iterated one-off test fixtures across a camera head, coupler and camera control unit: laser intensity measurement, interface mechanical reliability, focus-ring torque over lifecycle, and front cover vibration testing.",
       "Performed verification and validation testing: vibration, thermal exposure, laser intensity and mechanical reliability.",
       "Used HALT equipment, standard and torsional Instrons, a vibration table, and MJF and MJP printing for alignment-critical features.",
       "Worked to medical-device R&D standards for experimental control, documentation and repeatability.",
