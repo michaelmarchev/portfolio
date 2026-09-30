@@ -47,8 +47,7 @@ export default async function ProjectPage({
   const next = getNextProject(project.slug);
 
   return (
-    // Hard corners inside a case study: see `.media-round` in globals.css.
-    <article data-media="square">
+    <article>
       <CaseStudyHero project={project} />
 
       {/*

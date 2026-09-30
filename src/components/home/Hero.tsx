@@ -102,7 +102,9 @@ export function Hero() {
               changing the panel's own height. Tailwind emits responsive
               variants after base utilities, so `lg:w-auto` wins over the
               plate's own `w-full` at desktop. */}
-          <div className="my-4 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:py-4">
+          {/* Left padding reserves the gutter the radius callout lives in, so the
+              note is never clipped by the panel's overflow. */}
+          <div className="my-4 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:pb-4 lg:pl-[11.5rem] lg:pt-16">
             {lead && (
               <Link
                 href={`/projects/${lead.slug}`}
@@ -112,7 +114,7 @@ export function Hero() {
                 {/* Calls out the fillet on the image's own corner. Keep the
                     radius in step with `--radius-media` in globals.css. */}
                 <RadiusCallout
-                  radius={6}
+                  radius={10}
                   className="pointer-events-none absolute left-0 top-0 z-10 text-fg-3"
                 />
                 <SpecPlate
