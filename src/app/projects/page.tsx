@@ -7,7 +7,7 @@ import { projectCategories, projects } from "@/content/projects";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Work",
+  title: "Projects",
   description:
     "Six mechanical engineering projects: an automated five-axis X-ray scanning gantry, a precision optical test fixture, a textile-upcycling system, a powered mobility device, helmet impact-mechanics research, and equipment repair.",
   path: "/projects",
@@ -16,17 +16,17 @@ export const metadata = pageMetadata({
 export default function ProjectsPage() {
   return (
     <>
-      <Section space="tight" datum="Work" className="pt-12 md:pt-16">
+      <Section space="tight" datum="Projects" className="pt-12 md:pt-16">
         <Container wide>
-          <AnimatedTitle className="text-h1 max-w-[26ch] text-fg">Work</AnimatedTitle>
+          <AnimatedTitle className="text-h1 max-w-[26ch] text-fg">Projects</AnimatedTitle>
           <p className="mt-8 max-w-[60ch] text-[1.0625rem] leading-[1.7] text-fg-2">
-            Six projects in automation, precision motion, product design,
-            research and repair.
+            Five projects in automation, precision motion, product design and
+            research.
           </p>
         </Container>
       </Section>
 
-      <Section space="tight" datum="Work">
+      <Section space="tight" datum="Projects">
         <Container wide>
           <ProjectArchive projects={projects} categories={projectCategories} />
         </Container>

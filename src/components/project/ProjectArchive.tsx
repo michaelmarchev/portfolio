@@ -46,7 +46,7 @@ export function ProjectArchive({
               pressed={active === null}
               onClick={() => setActive(null)}
             >
-              All work
+              All projects
               <Count pressed={active === null}>{projects.length}</Count>
             </FilterButton>
           </li>

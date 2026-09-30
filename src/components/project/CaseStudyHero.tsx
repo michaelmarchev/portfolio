@@ -28,12 +28,14 @@ export function CaseStudyHero({ project }: { project: Project }) {
         </AnimatedTitle>
         <p className="text-lead mt-8 max-w-[62ch] text-fg-2">{project.summary}</p>
 
-        <div className="mt-10">
+        {/* ~75% width: at full bleed the opening image pushed the whole case
+            study below the fold. */}
+        <div className="mt-10 max-w-[69%]">
           <MediaFigure
             image={project.hero}
             detail="full"
             priority
-            sizes="(min-width: 1024px) 92vw, 100vw"
+            sizes="(min-width: 1024px) 69vw, 100vw"
           />
         </div>
       </Container>

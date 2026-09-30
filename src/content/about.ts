@@ -10,6 +10,22 @@ export const about = {
 } as const;
 
 /** Portrait and supporting collage for the About page. */
+/** Homepage headshot slot. Set `src` and `alt` to go live. */
+export const headshot: ImageBrief = {
+  id: "headshot",
+  orientation: "landscape",
+  kind: "portrait",
+  label: "P.0 — HEADSHOT",
+  subject:
+    "Head-and-shoulders portrait, neutral expression, plain or workshop background.",
+  composition:
+    "Landscape crop with the head off-centre, room to the side; eyes on the upper third.",
+  lighting: "Soft directional light from one side, gentle fill, no hard shadow.",
+  purpose: "Put a face beside the name on the homepage.",
+  caption: "Headshot.",
+  status: "concept",
+};
+
 export const aboutMedia: ImageBrief[] = [
   {
     id: "about-portrait",

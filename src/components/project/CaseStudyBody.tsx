@@ -74,7 +74,14 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
                         key={image.id}
                         image={image}
                         detail="full"
-                        sizes="(min-width: 1024px) 31vw, (min-width: 640px) 38vw, 94vw"
+                        // Dimensioned drawings span both columns — detail matters
+                        // more than rhythm for those.
+                        className={image.wide ? "sm:col-span-2" : undefined}
+                        sizes={
+                          image.wide
+                            ? "(min-width: 1024px) 62vw, 94vw"
+                            : "(min-width: 1024px) 31vw, (min-width: 640px) 38vw, 94vw"
+                        }
                       />
                     ))}
                   </div>

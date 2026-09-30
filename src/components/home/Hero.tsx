@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/Button";
 import { MetaRun } from "@/components/ui/MetaLabel";
 import { getProject } from "@/content/projects";
 import { education, site } from "@/content/site";
+import { headshot } from "@/content/about";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
+import { FlipWords } from "@/components/home/FlipWords";
 
 /**
  * Homepage hero.
@@ -25,7 +27,7 @@ export function Hero() {
     >
       <div className="grid lg:min-h-[calc(100svh-4.25rem)] lg:grid-cols-[minmax(0,47fr)_minmax(0,53fr)]">
         {/* --- Reading column --- */}
-        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:pr-[clamp(2rem,4vw,4.5rem)]">
+        <div className="flex flex-col justify-start px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:pr-[clamp(2rem,4vw,4.5rem)]">
           <div className="max-w-[46rem]">
             <p className="u-meta text-fg-3">
               {site.location}
@@ -44,7 +46,7 @@ export function Hero() {
             </AnimatedTitle>
 
             <p className="text-h2 mt-16 max-w-[24ch] text-fg-2">
-              Mechanical engineer.
+              <FlipWords words={site.roles} />
             </p>
 
             <MetaRun items={site.descriptor} separator="•" className="mt-10" />
@@ -75,6 +77,16 @@ export function Hero() {
               </a>
             </div>
           </div>
+
+          {/* Fills the height the tall right-hand panel creates, rather than
+              letting the type drift to the vertical centre. */}
+          <div className="mt-12 max-w-[20rem] lg:mt-auto lg:pt-12">
+            <SpecPlate
+              image={headshot}
+              detail="label"
+              sizes="(min-width: 1024px) 20vw, 60vw"
+            />
+          </div>
         </div>
 
         {/* --- Flagship system, dark panel --- */}
@@ -95,14 +107,14 @@ export function Hero() {
             </p>
           </div>
 
-          <div className="my-6 lg:my-0 lg:flex lg:flex-1 lg:items-center">
+          <div className="my-6 lg:my-0 lg:flex lg:flex-1 lg:items-center lg:justify-center">
             {lead && (
               <SpecPlate
                 image={lead.hero}
                 detail="brief"
                 priority
-                sizes="(min-width: 1024px) 53vw, 100vw"
-                className="w-full"
+                sizes="(min-width: 1024px) 38vw, 100vw"
+                className="mx-auto w-full max-w-[26rem]"
               />
             )}
           </div>
@@ -134,7 +146,7 @@ export function Hero() {
                   Read the case study
                 </Link>
                 <Link href="/projects" className="u-meta u-link text-fg-3">
-                  All work
+                  All projects
                 </Link>
                 <span className="u-meta text-fg-4">Non-confidential summary</span>
               </div>

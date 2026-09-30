@@ -6,6 +6,8 @@
 export const site = {
   name: "Michael Marchev",
   headline: "Mechanical engineer",
+  /** Cycled on the homepage, one every five seconds. */
+  roles: ["Mechanical engineer.", "Designer."],
   heroAlt: "Mechanical engineer based in Boston, MA.",
   descriptor: [
     "Technical Leadership",
@@ -49,7 +51,7 @@ export const capabilityBand = [
 
 export const nav = [
   { href: "/", label: "Index", datum: "00" },
-  { href: "/projects", label: "Work", datum: "01" },
+  { href: "/projects", label: "Projects", datum: "01" },
   { href: "/about", label: "About", datum: "02" },
   { href: "/experience", label: "Experience", datum: "03" },
   { href: "/toolkit", label: "Toolkit", datum: "04" },

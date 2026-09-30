@@ -61,6 +61,11 @@ export interface ImageBrief {
   /** Intrinsic pixel size of the real asset, if known. */
   width?: number;
   height?: number;
+  /**
+   * Render across the full width of a case-study section rather than in the
+   * two-column grid. For dimensioned drawings, where detail matters.
+   */
+  wide?: boolean;
 }
 
 /** A labelled key/value row in a case-study specification table. */

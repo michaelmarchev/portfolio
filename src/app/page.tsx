@@ -23,10 +23,10 @@ export default function HomePage() {
     <>
       <Hero />
 
-      <Section datum="Selected work" space="tight" id="selected-work">
+      <Section datum="Selected projects" space="tight" id="selected-work">
         <Container wide className="flex flex-wrap items-baseline justify-between gap-4">
           <MetaLabel as="h2" tone="strong">
-            Selected work
+            Selected projects
           </MetaLabel>
           <MetaLabel>{String(featured.length).padStart(2, "0")} projects · 2023—2026</MetaLabel>
         </Container>
