@@ -79,10 +79,13 @@ export function Hero() {
           </div>
         </div>
 
-        {/* --- Flagship system, dark panel --- */}
+        {/* --- Flagship system, dark panel ---
+             Deliberately no `overflow-hidden`: the radius callout on the lead
+             image runs out past this panel's left edge into the reading
+             column. */}
         <div
           data-panel="dark"
-          className="relative flex flex-col justify-between overflow-hidden bg-void px-[var(--gutter)] py-8 text-fg lg:px-10 lg:py-12"
+          className="relative flex flex-col justify-between bg-void px-[var(--gutter)] py-8 text-fg lg:px-10 lg:py-12"
         >
           <div className="flex items-start justify-between gap-6">
             <p className="u-meta text-accent">
@@ -102,9 +105,7 @@ export function Hero() {
               changing the panel's own height. Tailwind emits responsive
               variants after base utilities, so `lg:w-auto` wins over the
               plate's own `w-full` at desktop. */}
-          {/* Left padding reserves the gutter the radius callout lives in, so the
-              note is never clipped by the panel's overflow. */}
-          <div className="my-4 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:pb-4 lg:pl-[11.5rem] lg:pt-16">
+          <div className="my-4 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:py-4">
             {lead && (
               <Link
                 href={`/projects/${lead.slug}`}
@@ -113,10 +114,10 @@ export function Hero() {
               >
                 {/* Calls out the fillet on the image's own corner. Keep the
                     radius in step with `--radius-media` in globals.css. */}
-                <RadiusCallout
-                  radius={10}
-                  className="pointer-events-none absolute left-0 top-0 z-10 text-fg-3"
-                />
+                {/* `text-steel` rather than a panel token: the note ends up on the
+                    eggshell reading column, where the dark panel's own greys are
+                    far too light (2.9:1). Steel reads on both. */}
+                <RadiusCallout radius={10} className="z-10 text-steel" />
                 <SpecPlate
                   image={lead.hero}
                   detail="brief"

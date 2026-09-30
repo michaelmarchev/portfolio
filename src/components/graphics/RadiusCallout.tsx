@@ -1,32 +1,40 @@
+import { cn } from "@/lib/utils";
+
 /**
  * Engineering-drawing radius callout for the corner fillets.
  *
  * Reads the way a drawing calls out a repeated fillet: an arrow pointing in at
- * the outside of the top-left corner, a leader with a shoulder running out to
- * the left, and the note `4X R10px` — four instances, radius ten.
+ * the outside of the image's top-left corner, a leader running out to the
+ * left, and the note `4X R10px` — four instances, radius ten.
  *
- * The arc is drawn at TRUE size, sitting exactly on the image's corner, so the
- * SVG is never scaled — everything else is enlarged in the SVG's own units
- * instead. An exaggerated arc reads as a mistake when the real corner is
- * visibly tighter than the one drawn over it.
+ * Nothing is drawn on the corner itself. An arc traced over the image's own
+ * rounded corner reads as a second, detached corner floating beside it — the
+ * image already shows the fillet, so the callout only has to point at it.
  *
- * Positioning: SVG point (CORNER_X, CORNER_Y) is the image's top-left corner,
- * and the element offsets itself by exactly that much. Everything left of it —
- * the leader and the whole note — therefore sits outside the image.
+ * ## Why the leader is a DOM element rather than part of the SVG
  *
- * Purely decorative: `aria-hidden`, and it never takes pointer events, so the
- * image beneath stays clickable.
+ * The leader has to finish *outside* the dark panel, in the reading column,
+ * while the image stays exactly where it is. The gap beside the image is not
+ * fixed: the image is centred in the panel and the panel grows with the
+ * viewport, so the clearance measured about 179px at 1280 and 349px at 1920. A
+ * fixed-length leader tuned to cross at one width sits inside the panel at
+ * another.
+ *
+ * So only the diagonal and arrowhead are SVG, anchored to the corner; the
+ * horizontal run is a flexing rule whose container width tracks the viewport
+ * (`26.9vw`, the measured rate at which that clearance grows). That keeps a
+ * roughly constant overhang past the panel edge at any width.
+ *
+ * Purely decorative: `aria-hidden`, and it never takes pointer events.
  */
 
-/** Where the image's top-left corner sits in this SVG's coordinates. */
-const CORNER_X = 168;
-const CORNER_Y = 64;
+/** The image's top-left corner, in the arrow SVG's own coordinates. */
+const CORNER_X = 48;
+const CORNER_Y = 30;
+/** Where the diagonal meets the horizontal rule. */
+const SHOULDER_X = 18;
+const SHOULDER_Y = 0;
 
-/** The leader's shoulder — where the diagonal meets the horizontal run. */
-const SHOULDER_X = 140;
-const SHOULDER_Y = 36;
-
-/** Arrowhead size. */
 const HEAD_LEN = 15;
 const HEAD_HALF_WIDTH = 5.2;
 
@@ -41,85 +49,80 @@ export function RadiusCallout({
   instances?: number;
   className?: string;
 }) {
-  const r = radius;
-
   // Arrow tip, just outside the corner on the diagonal.
   const tipX = CORNER_X - 6;
   const tipY = CORNER_Y - 6;
 
   /*
-   * Arrowhead, built from the leader's own direction rather than guessed.
-   * The barbs go BACK along the leader from the tip — an earlier version put
-   * them on the far side and then rotated 180°, which landed them on the far
-   * side again, so the head appeared to point away from the corner and float
-   * off the end of the tail.
+   * Arrowhead built from the leader's own direction. The barbs go BACK along
+   * the leader from the tip — an earlier version put them on the far side and
+   * then rotated 180°, which landed them on the far side again, so the head
+   * pointed away from the corner and floated off the end of the tail.
    */
   const dx = tipX - SHOULDER_X;
   const dy = tipY - SHOULDER_Y;
   const len = Math.hypot(dx, dy);
   const ux = dx / len;
   const uy = dy / len;
-  // Base centre: one head-length back up the leader.
   const baseX = tipX - ux * HEAD_LEN;
   const baseY = tipY - uy * HEAD_LEN;
-  // Perpendicular to the leader.
   const px = -uy * HEAD_HALF_WIDTH;
   const py = ux * HEAD_HALF_WIDTH;
 
   return (
-    <svg
+    <div
       aria-hidden="true"
-      className={className}
-      width="200"
-      height="104"
-      viewBox="0 0 200 104"
-      fill="none"
+      className={cn(
+        "pointer-events-none absolute right-full flex flex-col items-start",
+        className,
+      )}
       style={{
-        pointerEvents: "none",
-        transform: `translate(-${CORNER_X}px, -${CORNER_Y}px)`,
+        // Container top sits above the image's top edge; the arrow SVG then
+        // reaches back down to the corner.
+        top: -46,
+        // Tracks the clearance beside the centred image so the note keeps a
+        // consistent overhang past the panel's left edge.
+        width: "calc(26.9vw - 20px)",
+        minWidth: 210,
+        maxWidth: 520,
       }}
     >
-      <g stroke="currentColor" strokeWidth="1.1" vectorEffect="non-scaling-stroke">
-        {/* The fillet, at true size, on the corner itself. */}
-        <path
-          d={`M${CORNER_X} ${CORNER_Y + r} A ${r} ${r} 0 0 1 ${CORNER_X + r} ${CORNER_Y}`}
-          strokeWidth="1.5"
-          opacity="0.9"
-        />
-        {/* Extension lines continuing along the two edges it joins. */}
-        <path
-          d={`M${CORNER_X} ${CORNER_Y + r} L${CORNER_X} ${CORNER_Y + r + 16}`}
-          opacity="0.4"
-        />
-        <path
-          d={`M${CORNER_X + r} ${CORNER_Y} L${CORNER_X + r + 16} ${CORNER_Y}`}
-          opacity="0.4"
-        />
-
-        {/* Leader: diagonal off the corner, then a horizontal shoulder left.
-            It stops at the arrowhead's base so the two read as one stroke. */}
-        <path
-          d={`M${baseX} ${baseY} L${SHOULDER_X} ${SHOULDER_Y} L10 ${SHOULDER_Y}`}
-          opacity="0.9"
-        />
-      </g>
-
-      {/* Filled head, apex exactly on the tip. */}
-      <path
-        d={`M${tipX} ${tipY} L${baseX + px} ${baseY + py} L${baseX - px} ${baseY - py} Z`}
-        fill="currentColor"
-      />
-
-      <text
-        x="10"
-        y="28"
-        fill="currentColor"
-        fontFamily="var(--font-mono)"
-        fontSize="13"
-        letterSpacing="1.4"
+      <span
+        className="u-mono whitespace-nowrap text-[0.8125rem] leading-none"
+        style={{ letterSpacing: "0.1em" }}
       >
         {instances}X R{radius}px
-      </text>
-    </svg>
+      </span>
+
+      <div className="mt-2 flex w-full items-start">
+        {/* Horizontal run — flexes to fill whatever gap there is. */}
+        {/* Overlaps the SVG by SHOULDER_X so the rule meets the diagonal. */}
+        <span
+          className="h-px flex-1 bg-current opacity-90"
+          style={{ marginRight: -SHOULDER_X }}
+        />
+
+        <svg
+          width="52"
+          height="52"
+          viewBox="0 0 52 52"
+          fill="none"
+          className="-mt-px shrink-0"
+        >
+          <path
+            d={`M${SHOULDER_X} ${SHOULDER_Y} L${baseX} ${baseY}`}
+            stroke="currentColor"
+            strokeWidth="1.1"
+            vectorEffect="non-scaling-stroke"
+            opacity="0.9"
+          />
+          {/* Filled head, apex exactly on the tip. */}
+          <path
+            d={`M${tipX} ${tipY} L${baseX + px} ${baseY + py} L${baseX - px} ${baseY - py} Z`}
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+    </div>
   );
 }
