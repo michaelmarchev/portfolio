@@ -13,17 +13,20 @@ export const about = {
 /** Homepage headshot slot. Set `src` and `alt` to go live. */
 export const headshot: ImageBrief = {
   id: "headshot",
-  orientation: "landscape",
+  orientation: "portrait",
   kind: "portrait",
   label: "P.0 — HEADSHOT",
   subject:
     "Head-and-shoulders portrait, neutral expression, plain or workshop background.",
   composition:
-    "Landscape crop with the head off-centre, room to the side; eyes on the upper third.",
+    "Head and shoulders, eyes on the upper third, cropped at mid-chest.",
   lighting: "Soft directional light from one side, gentle fill, no hard shadow.",
   purpose: "Put a face beside the name on the homepage.",
-  caption: "Headshot.",
-  status: "concept",
+  status: "final",
+  src: "/images/headshot.jpg",
+  alt: "Michael Marchev, head and shoulders, in a suit and tie in a university atrium.",
+  width: 1200,
+  height: 1500,
 };
 
 export const aboutMedia: ImageBrief[] = [

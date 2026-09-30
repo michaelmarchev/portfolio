@@ -47,14 +47,23 @@ export function ProjectSpread({
             !isFeature && (flip ? "lg:order-2" : "lg:order-1"),
           )}
         >
-          <MediaFigure
-            image={project.card}
-            detail={isFeature ? "full" : "brief"}
-            sizes={
-              isFeature ? "(min-width: 1024px) 92vw, 100vw" : "(min-width: 1024px) 48vw, 100vw"
-            }
-            ratio={isFeature ? "21 / 9" : undefined}
-          />
+          {/*
+            The image links into the case study as well as the title.
+            `tabIndex={-1}` keeps it out of the tab order so keyboard users
+            get one stop per project, not two — but it is deliberately NOT
+            `aria-hidden`, which would also hide the figure's caption from
+            screen readers.
+          */}
+          <Link href={href} className="block no-underline" tabIndex={-1}>
+            <MediaFigure
+              image={project.card}
+              detail={isFeature ? "full" : "brief"}
+              sizes={
+                isFeature ? "(min-width: 1024px) 92vw, 100vw" : "(min-width: 1024px) 48vw, 100vw"
+              }
+              ratio={isFeature ? "21 / 9" : undefined}
+            />
+          </Link>
         </div>
 
         {/* --- Text --- */}

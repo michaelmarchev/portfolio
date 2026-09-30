@@ -80,11 +80,11 @@ export function Hero() {
 
           {/* Fills the height the tall right-hand panel creates, rather than
               letting the type drift to the vertical centre. */}
-          <div className="mt-12 max-w-[20rem] lg:mt-auto lg:pt-12">
+          <div className="mt-12 max-w-[15rem] lg:mt-auto lg:pt-12">
             <SpecPlate
               image={headshot}
               detail="label"
-              sizes="(min-width: 1024px) 20vw, 60vw"
+              sizes="(min-width: 1024px) 15vw, 55vw"
             />
           </div>
         </div>
@@ -114,13 +114,19 @@ export function Hero() {
               plate's own `w-full` at desktop. */}
           <div className="my-4 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:py-4">
             {lead && (
-              <SpecPlate
-                image={lead.hero}
-                detail="brief"
-                priority
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                className="mx-auto w-full max-w-[30rem] lg:h-full lg:max-h-full lg:w-auto lg:max-w-none"
-              />
+              <Link
+                href={`/projects/${lead.slug}`}
+                className="flex h-full w-full items-center justify-center no-underline"
+                aria-label={`${lead.title} — case study`}
+              >
+                <SpecPlate
+                  image={lead.hero}
+                  detail="brief"
+                  priority
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="mx-auto w-full max-w-[27rem] lg:h-[90%] lg:max-h-full lg:w-auto lg:max-w-none"
+                />
+              </Link>
             )}
           </div>
 

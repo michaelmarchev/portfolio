@@ -36,7 +36,8 @@ export default function HomePage() {
         <ProjectSpread
           key={project.slug}
           project={project}
-          variant={i === 0 ? "feature" : "split"}
+          // `flip` puts the media on the right. Alternating from the first
+          // one keeps the rhythm without singling out the lead project.
           flip={i % 2 === 0}
         />
       ))}
