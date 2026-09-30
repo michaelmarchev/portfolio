@@ -139,18 +139,20 @@ export default async function ProjectPage({
         </Section>
       )}
 
-      <Section space="default" panel="deep" className="border-t border-line" datum={project.title}>
-        <Container wide>
-          <Reveal className="grid gap-x-10 gap-y-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
-            <MetaLabel as="h2">Reflection</MetaLabel>
-            <div className="prose-editorial">
-              {project.reflection.map((paragraph) => (
-                <p key={paragraph.slice(0, 32)}>{paragraph}</p>
-              ))}
-            </div>
-          </Reveal>
-        </Container>
-      </Section>
+      {project.reflection.length > 0 && (
+        <Section space="default" panel="deep" className="border-t border-line" datum={project.title}>
+          <Container wide>
+            <Reveal className="grid gap-x-10 gap-y-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
+              <MetaLabel as="h2">Reflection</MetaLabel>
+              <div className="prose-editorial">
+                {project.reflection.map((paragraph) => (
+                  <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+                ))}
+              </div>
+            </Reveal>
+          </Container>
+        </Section>
+      )}
 
       {project.confidentiality && (
         <Section space="tight" className="border-t border-line" datum={project.title}>

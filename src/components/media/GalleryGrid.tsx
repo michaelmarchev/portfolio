@@ -8,26 +8,20 @@ import { MediaFigure } from "./MediaFigure";
  */
 export function GalleryGrid({ images }: { images: ImageBrief[] }) {
   return (
-    <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2">
-      {images.map((image, i) => {
+    // Three across on desktop. A gallery of eleven assets at half-width was a
+    // very long scroll, and these are reference images rather than features.
+    <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-3">
+      {images.map((image) => {
         const full =
-          image.orientation === "wide" ||
-          image.orientation === "panoramic" ||
-          image.orientation === "landscape";
+          image.orientation === "wide" || image.orientation === "panoramic";
         return (
           <MediaFigure
             key={image.id}
             image={image}
-            detail={full ? "full" : "brief"}
-            sizes={
-              full
-                ? "(min-width: 1024px) 70vw, 100vw"
-                : "(min-width: 768px) 35vw, 100vw"
-            }
-            className={full ? "md:col-span-2" : undefined}
+            detail="brief"
+            sizes="(min-width: 768px) 27vw, 45vw"
+            className={full ? "col-span-2 md:col-span-1" : undefined}
             priority={false}
-            // Stagger nothing: the grid reveals as one block with its section.
-            ratio={i === 0 && full ? "16 / 9" : undefined}
           />
         );
       })}
