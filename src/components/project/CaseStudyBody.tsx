@@ -64,17 +64,17 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
 
                 {section.media && section.media.length > 0 && (
                   /*
-                   * Capped width, and side by side from `sm` up. At full column
-                   * width a case study with nine images became an unreasonable
-                   * scroll; portrait photographs were the worst offenders.
+                   * Capped width, side by side from `sm` up. Full column width
+                   * made a nine-image case study an unreasonable scroll;
+                   * portrait photographs were the worst offenders.
                    */
-                  <div className="mt-9 grid max-w-[34rem] grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
+                  <div className="mt-9 grid max-w-[46rem] grid-cols-1 gap-x-7 gap-y-9 sm:grid-cols-2">
                     {section.media.map((image) => (
                       <MediaFigure
                         key={image.id}
                         image={image}
                         detail="brief"
-                        sizes="(min-width: 1024px) 17vw, (min-width: 640px) 22vw, 90vw"
+                        sizes="(min-width: 1024px) 23vw, (min-width: 640px) 30vw, 92vw"
                       />
                     ))}
                   </div>

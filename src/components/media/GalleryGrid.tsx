@@ -8,9 +8,9 @@ import { MediaFigure } from "./MediaFigure";
  */
 export function GalleryGrid({ images }: { images: ImageBrief[] }) {
   return (
-    // Three across on desktop. A gallery of eleven assets at half-width was a
-    // very long scroll, and these are reference images rather than features.
-    <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-3">
+    // Two across, three on wide screens. Eleven assets at half-width was a very
+    // long scroll; three across everywhere made them too small to read.
+    <div className="grid grid-cols-1 gap-x-7 gap-y-9 sm:grid-cols-2 xl:grid-cols-3">
       {images.map((image) => {
         const full =
           image.orientation === "wide" || image.orientation === "panoramic";
@@ -19,8 +19,8 @@ export function GalleryGrid({ images }: { images: ImageBrief[] }) {
             key={image.id}
             image={image}
             detail="brief"
-            sizes="(min-width: 768px) 27vw, 45vw"
-            className={full ? "col-span-2 md:col-span-1" : undefined}
+            sizes="(min-width: 1280px) 25vw, (min-width: 640px) 36vw, 92vw"
+            className={full ? "sm:col-span-2 xl:col-span-1" : undefined}
             priority={false}
           />
         );
