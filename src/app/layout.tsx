@@ -5,6 +5,7 @@ import { DatumRail } from "@/components/layout/DatumRail";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SkipLink } from "@/components/layout/SkipLink";
+import { FlutterHover } from "@/components/layout/FlutterHover";
 import { baseMetadata, personJsonLd } from "@/lib/seo";
 import "./globals.css";
 
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <SkipLink />
+        <FlutterHover />
         <DatumRail />
         <div className="lg:pl-[var(--rail)]">
           <SiteHeader />

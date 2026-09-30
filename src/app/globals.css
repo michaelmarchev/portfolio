@@ -101,7 +101,7 @@
   --c-fg-4: #918e86;
 }
 
-:root[data-theme="dark"] [data-panel="dark"].bg-void {
+:root[data-theme="dark"] .bg-void {
   background-color: var(--void-2);
 }
 
@@ -470,6 +470,7 @@ hr {
  * The full string stays readable to assistive technology via aria-label on the
  * wrapper, with the letter spans hidden.
  */
+/* Stagger is set by AnimatedTitle (51ms per letter). */
 .title-letter {
   display: inline-block;
   white-space: pre;
@@ -483,6 +484,37 @@ hr {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/*
+ * Hover flutter.
+ *
+ * A short wobble fired once when the pointer enters a colour-changing inline
+ * control, and once again when it leaves. Deliberately not a CSS `:hover`
+ * animation: CSS can start one on enter but has no way to fire a separate one
+ * on leave, so `FlutterHover` in the root layout adds this class on
+ * pointerover/pointerout and removes it on animationend.
+ */
+.is-fluttering {
+  animation: flutter 0.34s cubic-bezier(0.34, 0.9, 0.36, 1) both;
+}
+
+@keyframes flutter {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  22% {
+    transform: translate3d(0, -0.09em, 0) rotate(-0.9deg);
+  }
+  48% {
+    transform: translate3d(0, 0.05em, 0) rotate(0.7deg);
+  }
+  74% {
+    transform: translate3d(0, -0.03em, 0) rotate(-0.35deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
 }
 
@@ -650,6 +682,10 @@ hr {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+
+  .is-fluttering {
+    animation: none !important;
   }
 
   .title-letter {

@@ -2,6 +2,7 @@ import { MediaFigure } from "@/components/media/MediaFigure";
 import { Container } from "@/components/layout/Container";
 import { MetaRun } from "@/components/ui/MetaLabel";
 import type { Project } from "@/lib/types";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 
 /**
  * Case-study opening: number, title, one-sentence outcome, then the hero
@@ -22,7 +23,9 @@ export function CaseStudyHero({ project }: { project: Project }) {
           <MetaRun items={[project.status, project.timeline]} />
         </div>
 
-        <h1 className="text-h1 mt-7 max-w-[24ch] text-fg">{project.title}</h1>
+        <AnimatedTitle className="text-h1 mt-7 max-w-[24ch] text-fg">
+          {project.title}
+        </AnimatedTitle>
         <p className="text-lead mt-8 max-w-[62ch] text-fg-2">{project.summary}</p>
 
         <div className="mt-10">

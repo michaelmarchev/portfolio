@@ -42,7 +42,9 @@ export function Section({
       className={cn(
         "relative",
         panel === "dark" && "bg-void text-fg",
-        panel === "deep" && "bg-paper-deep",
+        // `bg-bg-deep`, not `bg-paper-deep`: the latter is the raw light
+        // value and would stay eggshell in the dark theme.
+        panel === "deep" && "bg-bg-deep",
         SPACE[space],
         className,
       )}

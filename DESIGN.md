@@ -78,6 +78,12 @@ Two: light and dark, both from one semantic `--c-*` scale. The dark values are
 declared once and shared by `[data-panel="dark"]` and
 `:root[data-theme="dark"]`, so no component needs a dark variant.
 
+Panel backgrounds must use the semantic utilities — `bg-bg-deep`, not
+`bg-paper-deep`, and `text-fg-2`, not `text-graphite`. The raw palette names
+are fixed values and stay light in the dark theme, which is exactly how the
+Experience leadership band and most of the Toolkit page ended up eggshell on a
+near-black page.
+
 One wrinkle: in the dark theme the page is already near-black, so a dark
 *panel* would vanish. Those get the lifted `--void-2` surface instead — and the
 muted greys lift with them, because `#807d76` is 4.70 : 1 on `#0e0e0e` but only
@@ -88,10 +94,25 @@ inline, synchronous script in `<head>` applies the stored value before first
 paint — anything deferred, or set from an effect, produces a flash of the wrong
 theme on every load. First visit follows `prefers-color-scheme`.
 
+### Hover flutter
+
+Inline links and buttons wobble once when the pointer arrives and once when it
+leaves. This cannot be done in CSS: `:hover` can start an animation on enter,
+but there is no selector for "the pointer just left", so the exit animation has
+no trigger. `FlutterHover` in the root layout attaches one delegated
+`pointerover`/`pointerout` pair to the document and toggles `.is-fluttering`.
+
+It is scoped to elements whose computed `display` is inline, which excludes
+block-level wrappers — the archive cards wrap an entire image and caption in a
+`Link`, and wobbling a whole card would be absurd. Opt an element out with
+`data-no-flutter`. Skipped entirely under `prefers-reduced-motion: reduce`.
+
 ### Page titles
 
 `AnimatedTitle` splits the heading into per-letter spans that fade up on a
-34 ms stagger. The wrapper carries the full string as `aria-label` and the
+51 ms stagger. It runs on the homepage name (where a `\n` becomes a line break
+and the stagger carries across it, so both lines read as one sweep), on every
+page title, and on every case-study title. The wrapper carries the full string as `aria-label` and the
 spans are `aria-hidden`, so screen readers read the word, not the letters. It
 is keyed on the pathname so a client-side navigation replays the reveal instead
 of reusing DOM nodes whose animation has already finished. Under

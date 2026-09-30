@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { MetaRun } from "@/components/ui/MetaLabel";
 import { getProject } from "@/content/projects";
 import { education, site } from "@/content/site";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 
 /**
  * Homepage hero.
@@ -38,21 +39,12 @@ export function Hero() {
               {education.expected.replace("Expected ", "")}
             </p>
 
-            <h1
-              id="hero-name"
-              className="text-display mt-16 text-fg"
-            >
-              Michael
-              <br />
-              Marchev
-            </h1>
+            <AnimatedTitle id="hero-name" className="text-display mt-16 text-fg">
+              {"Michael\nMarchev"}
+            </AnimatedTitle>
 
-            <p className="text-h2 mt-16 max-w-[24ch] text-graphite">
+            <p className="text-h2 mt-16 max-w-[24ch] text-fg-2">
               Mechanical engineer.
-            </p>
-
-            <p className="text-lead mt-12 max-w-[54ch] text-fg-2">
-              {site.heroSupport}
             </p>
 
             <MetaRun items={site.descriptor} separator="•" className="mt-10" />

@@ -7,8 +7,6 @@ export const site = {
   name: "Michael Marchev",
   headline: "Mechanical engineer",
   heroAlt: "Mechanical engineer based in Boston, MA.",
-  heroSupport:
-    "I design and build mechanical systems: CAD, prototyping, integration, and testing.",
   descriptor: [
     "Technical Leadership",
     "R&D",
