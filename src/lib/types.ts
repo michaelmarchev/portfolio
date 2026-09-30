@@ -124,7 +124,7 @@ export interface Project {
   summary: string;
   /** Sets the case-study hero treatment. */
   theme: Theme;
-  /** Optional per-project accent. Falls back to the site signal orange. */
+  /** Optional per-project accent. Falls back to the site signal blue. */
   accent?: string;
   hero: ImageBrief;
   /** Card image for the archive and homepage spreads. */

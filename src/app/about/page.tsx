@@ -4,6 +4,7 @@ import { MediaFigure } from "@/components/media/MediaFigure";
 import { ContactCta } from "@/components/sections/ContactCta";
 import { MetaLabel } from "@/components/ui/MetaLabel";
 import { Reveal } from "@/components/ui/Reveal";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { about, aboutMedia } from "@/content/about";
 import { education } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
@@ -22,7 +23,7 @@ export default function AboutPage() {
     <>
       <Section space="tight" datum="About" className="pt-12 md:pt-16">
         <Container wide>
-          <h1 className="text-h1 max-w-[24ch] text-fg">About</h1>
+          <AnimatedTitle className="text-h1 max-w-[24ch] text-fg">About</AnimatedTitle>
         </Container>
       </Section>
 

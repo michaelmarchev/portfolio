@@ -2,6 +2,7 @@ import Link from "next/link";
 import { nav, site } from "@/content/site";
 import { Container } from "./Container";
 import { asset } from "@/lib/utils";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -61,13 +62,17 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="u-meta text-fg-4">
-            © {year} Michael Marchev. All rights reserved.
-          </p>
-          <p className="u-meta text-fg-4">
-            Boston, MA · Designed and built for physical engineering work
-          </p>
+        <div className="mt-12 flex flex-col gap-6 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-2">
+            <p className="u-meta text-fg-4">
+              © {year} Michael Marchev. All rights reserved.
+            </p>
+            <p className="u-meta text-fg-4">
+              Boston, MA · Mechanical Engineering and Design
+            </p>
+          </div>
+
+          <ThemeToggle className="self-start sm:self-auto" />
         </div>
       </Container>
     </footer>

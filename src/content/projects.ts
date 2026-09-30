@@ -99,7 +99,7 @@ export const projects: Project[] = [
         "Three-quarter view of the gantry frame with the scanner envelope in place and one axis mid-travel.",
       composition:
         "Wide crop, horizon low, structure filling the upper two-thirds; leading lines along the top rail.",
-      lighting: "Dark neutral background, controlled directional light, restrained orange annotation marks.",
+      lighting: "Dark neutral background, controlled directional light, restrained blue annotation marks.",
       purpose: "Signal scale and ambition as the first project a visitor sees.",
       status: "concept",
     },
@@ -131,7 +131,7 @@ export const projects: Project[] = [
               "Side-by-side comparison graphic: a hand-traced survey path over a scanner face versus a machine-executed raster path over the same face.",
             composition:
               "Two panels sharing one baseline; the manual path drawn as an irregular freehand line, the automated path as a precise raster with consistent pitch and standoff callouts.",
-            lighting: "Flat vector artwork on eggshell; steel linework with the automated path in safety orange.",
+            lighting: "Flat vector artwork on eggshell; steel linework with the automated path in signal blue.",
             purpose:
               "Make the repeatability argument visually in one glance, without implying the manual method is unsafe.",
             caption:
@@ -172,7 +172,7 @@ export const projects: Project[] = [
               "Technical isometric of the five-axis architecture with each axis labelled, its travel indicated, and the kinematic chain from frame to detector shown in order.",
             composition:
               "Clean isometric line drawing, no shading; travel arrows on each axis; coordinate triad at the origin; detector tip highlighted at the end of the chain.",
-            lighting: "Vector linework, steel on eggshell, orange reserved for the active axis arrows.",
+            lighting: "Vector linework, steel on eggshell, blue reserved for the active axis arrows.",
             purpose:
               "Let a mechanical reader understand the kinematic chain and where compliance accumulates without reading the body copy.",
             caption:
@@ -204,7 +204,7 @@ export const projects: Project[] = [
               "Structural and alignment diagram: gantry span with exaggerated deflection under a moving carriage, dimension lines, datum marks and adjustment points.",
             composition:
               "Orthographic front elevation; true geometry in steel line, exaggerated deflected shape as a dashed overlay; datum triangles at the adjustment features.",
-            lighting: "Flat technical drawing treatment on eggshell with orange dimension witness lines.",
+            lighting: "Flat technical drawing treatment on eggshell with blue dimension witness lines.",
             purpose: "Show that the structural argument was made quantitatively, not assumed.",
             caption:
               "Deflected shape (exaggerated) versus true geometry. Position-dependent sag is the error source that most directly threatens the repeatability target.",
@@ -253,7 +253,7 @@ export const projects: Project[] = [
               "Motion-envelope diagram: scanner faces unfolded, with planned scan paths, pitch spacing and the reachable volume overlaid.",
             composition:
               "Plan and elevation pair; scanner faces as flat planes with raster paths drawn across them; reachable envelope as a light tint.",
-            lighting: "Flat diagram on eggshell; paths in safety orange at consistent weight.",
+            lighting: "Flat diagram on eggshell; paths in signal blue at consistent weight.",
             purpose: "Explain what 'coverage' concretely means for this system.",
             caption:
               "Planned path coverage across scanner faces. Pitch and standoff are the parameters that make successive scans comparable.",
@@ -459,7 +459,7 @@ export const projects: Project[] = [
             subject:
               "Abstract multi-axis motion diagram: eight degrees of freedom labelled by type, with the kinematic stack order shown from base to tool point.",
             composition: "Clean isometric linework on dark ground; motorized and manual axes distinguished by line weight, not color alone.",
-            lighting: "Vector diagram, pale steel linework on near-black, single orange accent on the tool point.",
+            lighting: "Vector diagram, pale steel linework on near-black, single blue accent on the tool point.",
             purpose: "Show that the architecture was reasoned about as a stack-up, without revealing the real assembly.",
             caption: "Conceptual eight-axis stack-up. Order matters: each axis inherits the compliance of everything beneath it.",
             status: "non-confidential",
@@ -556,7 +556,7 @@ export const projects: Project[] = [
         label: "02.5 — ALIGNMENT",
         subject: "Optical alignment and coordinate-system graphic: beam path, datum planes, tool-point offset and adjustment directions.",
         composition: "Orthographic, generous margins, thin linework, labelled datums and a single beam path across frame.",
-        lighting: "Pale steel linework on near-black with the beam path in orange.",
+        lighting: "Pale steel linework on near-black with the beam path in blue.",
         purpose: "Show the geometric reasoning behind alignment in a way that reveals nothing specific.",
         caption: "Conceptual alignment and datum scheme. Generalized illustration; no Stryker geometry represented.",
         status: "non-confidential",
@@ -568,7 +568,7 @@ export const projects: Project[] = [
         label: "02.6 — METHOD",
         subject: "Abstracted test-method visualization: a repeatability scatter about a target, or a settling-time trace, with axes labelled generically.",
         composition: "Square, single chart, thin rules, no gridline clutter, values unlabelled or normalized.",
-        lighting: "Flat chart on near-black, pale linework, one orange series.",
+        lighting: "Flat chart on near-black, pale linework, one blue series.",
         purpose: "Show familiarity with quantitative test interpretation without publishing any real data.",
         caption: "Illustrative method graphic with normalized axes. No internal Stryker data shown.",
         status: "non-confidential",
@@ -1075,7 +1075,7 @@ export const projects: Project[] = [
       label: "05 — RESEARCH",
       subject: "Helmet cross-section schematic with pad locations and force-propagation arrows through the pad stack.",
       composition: "Wide crop, section drawn in thin line, force arrows following the load path from shell to head form.",
-      lighting: "Flat vector artwork on eggshell; steel linework with orange force vectors.",
+      lighting: "Flat vector artwork on eggshell; steel linework with blue force vectors.",
       purpose: "Read immediately as research rather than product work.",
       status: "concept",
     },
@@ -1163,7 +1163,7 @@ export const projects: Project[] = [
             label: "05.3 — DATA",
             subject: "Force-deflection curves for pad specimens, with the fitted precompression state marked on each curve.",
             composition: "Single chart, thin axes, several series, precompression marked by a vertical datum on each curve.",
-            lighting: "Flat chart on eggshell; steel series lines, one orange datum marker.",
+            lighting: "Flat chart on eggshell; steel series lines, one blue datum marker.",
             purpose: "Show quantitative work and the specific quantity the research extracted.",
             caption: "Representative force-deflection behavior with the fitted state marked. Non-linear response is why the starting point matters.",
             status: "representative",
@@ -1206,7 +1206,7 @@ export const projects: Project[] = [
         label: "05.5 — MODEL",
         subject: "Simplified finite-element representation of the pad-and-shell system: coarse mesh, boundary conditions, load application point.",
         composition: "Square, mesh drawn as thin linework, constraints and load marked with standard symbols.",
-        lighting: "Flat diagram on eggshell, pale mesh, orange load arrow.",
+        lighting: "Flat diagram on eggshell, pale mesh, blue load arrow.",
         purpose: "Connect the bench measurement to the analysis it fed.",
         caption: "Simplified representation of the modelled system. Illustrative of the analysis approach, not the published mesh.",
         status: "representative",

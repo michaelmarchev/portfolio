@@ -29,7 +29,10 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = baseMetadata;
 
 export const viewport: Viewport = {
-  themeColor: "#f4f1eb",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f4f1eb" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e0e0e" },
+  ],
   colorScheme: "light",
   width: "device-width",
   initialScale: 1,
@@ -37,7 +40,26 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${dmMono.variable}`}>
+    <html
+      lang="en"
+      className={`${archivo.variable} ${dmMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/*
+          Applies the stored theme before first paint, so a returning visitor
+          who chose dark never sees a flash of the light theme. It has to be
+          inline and synchronous in <head> for that — any deferred script, or
+          setting the attribute from an effect, runs after the first paint.
+          `suppressHydrationWarning` above is because this mutates <html>
+          before React hydrates.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(!t){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.setAttribute("data-theme",t)}catch(e){document.documentElement.setAttribute("data-theme","light")}})();`,
+          }}
+        />
+      </head>
       <body>
         <SkipLink />
         <DatumRail />

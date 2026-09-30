@@ -5,6 +5,7 @@ import { ContactCta } from "@/components/sections/ContactCta";
 import { Button } from "@/components/ui/Button";
 import { MetaLabel } from "@/components/ui/MetaLabel";
 import { Reveal } from "@/components/ui/Reveal";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { experience, leadershipHighlights } from "@/content/experience";
 import { education, site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
@@ -21,7 +22,7 @@ export default function ExperiencePage() {
     <>
       <Section space="tight" datum="Experience" className="pt-12 md:pt-16">
         <Container wide>
-          <h1 className="text-h1 max-w-[26ch] text-fg">Experience</h1>
+          <AnimatedTitle className="text-h1 max-w-[26ch] text-fg">Experience</AnimatedTitle>
           <p className="mt-8 max-w-[58ch] text-[1.0625rem] leading-[1.7] text-fg-2">
             Nine roles in medical-device R&D, product development, automation,
             equipment repair, research and student leadership.

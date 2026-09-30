@@ -6,7 +6,7 @@
 
    Two typefaces: Archivo (grotesque, wayfinding lineage) for display, UI and
    body; DM Mono for metadata, coordinates, project numbers and specifications.
-   Eggshell field, charcoal ink, controlled safety orange. Dark panels are
+   Eggshell field, charcoal ink, controlled royal blue. Dark panels are
    reserved for precision R&D work.
    ========================================================================== */
 
@@ -19,10 +19,13 @@
   --graphite: #3b3b38;
   --steel: #6e6e67;
   --aluminum: #a9a69d;
-  --signal: #e24e12;
-  --signal-text: #a8380b;
-  /* Orange tuned for the near-black button fill: 6.39:1 on #151515. */
-  --signal-bright: #ff6a2b;
+  /* Royal blue. Decorative use (rules, ticks, dimension lines) and as a fill
+     that can carry light text: paper on --signal is 7.39:1. */
+  --signal: #1f3fbf;
+  /* Deep blue for text on eggshell: 10.02:1. */
+  --signal-text: #1a357f;
+  /* Tuned for the near-black button fill: 7.52:1 on #151515. */
+  --signal-bright: #7aa5ff;
   --void: #0e0e0e;
   --void-2: #171716;
 
@@ -38,7 +41,7 @@
   --c-line: rgb(21 21 21 / 0.14);
   --c-line-strong: rgb(21 21 21 / 0.32);
   --c-accent: var(--signal);
-  /* AA-compliant orange for text, and for fills that carry light text. */
+  /* AA-compliant blue for text, and for fills that carry light text. */
   --c-accent-text: var(--signal-text);
 
   /* --- layout --- */
@@ -67,9 +70,11 @@
   }
 }
 
-/* Dark panels: same tokens, inverted values. Any component built on the
-   semantic scale inverts automatically when nested inside one. */
-[data-panel="dark"] {
+/* Dark values, shared by two things: a dark *panel* inside the light theme,
+   and the site-wide dark *theme*. Any component built on the semantic scale
+   inverts automatically in either. */
+[data-panel="dark"],
+:root[data-theme="dark"] {
   --c-bg: var(--void);
   --c-bg-deep: var(--void-2);
   --c-fg: #f0ede6;
@@ -79,9 +84,25 @@
   --c-tick: #4a4843;
   --c-line: rgb(240 237 230 / 0.16);
   --c-line-strong: rgb(240 237 230 / 0.34);
-  --c-accent: #ff6a2b;
-  --c-accent-text: #ff8049;
+  --c-accent: #6e9bff;
+  --c-accent-text: #7fa6ff;
   color-scheme: dark;
+}
+
+/* In the dark theme the page is already near-black, so a "dark panel" would
+   vanish. Give it the slightly lifted surface instead, so panel sections stay
+   legible as sections.
+   The muted greys have to lift with it: #807d76 is 4.70:1 on #0e0e0e but only
+   4.37:1 on #171716, which fails AA. */
+:root[data-theme="dark"] [data-panel="dark"] {
+  --c-bg: var(--void-2);
+  --c-bg-deep: #1e1e1c;
+  --c-fg-3: #96928a;
+  --c-fg-4: #918e86;
+}
+
+:root[data-theme="dark"] [data-panel="dark"].bg-void {
+  background-color: var(--void-2);
 }
 
 @theme inline {
@@ -105,8 +126,8 @@
   --color-graphite: #3b3b38;
   --color-steel: #6e6e67;
   --color-aluminum: #a9a69d;
-  --color-signal: #e24e12;
-  --color-signal-bright: #ff6a2b;
+  --color-signal: #1f3fbf;
+  --color-signal-bright: #7aa5ff;
   --color-void: #0e0e0e;
 
   --font-sans: var(--font-archivo), "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -193,8 +214,8 @@ p {
 
 ::selection {
   background: var(--signal);
-  /* Ink, not white: white on the signal orange is only 3.94:1. Ink is 4.64:1. */
-  color: var(--ink);
+  /* Paper, not ink: ink on the royal blue is 2.02:1; paper is 7.39:1. */
+  color: var(--paper);
 }
 
 :focus-visible {
@@ -443,6 +464,29 @@ hr {
 }
 
 /*
+ * Page-title reveal: each letter fades up into place, staggered by index.
+ *
+ * The delay is set per-letter as an inline custom property by AnimatedTitle.
+ * The full string stays readable to assistive technology via aria-label on the
+ * wrapper, with the letter spans hidden.
+ */
+.title-letter {
+  display: inline-block;
+  white-space: pre;
+  opacity: 0;
+  transform: translateY(0.45em);
+  animation: letter-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation-delay: var(--letter-delay, 0ms);
+}
+
+@keyframes letter-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*
  * Solid button / pressed filter chip.
  *
  * Written as real CSS rather than Tailwind colour utilities. The label colour
@@ -606,6 +650,12 @@ hr {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+
+  .title-letter {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
   }
 
   [data-reveal] {

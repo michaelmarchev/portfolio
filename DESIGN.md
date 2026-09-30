@@ -1,7 +1,8 @@
 # Design system
 
 Precision engineering, art-directed like an editorial object. Eggshell field,
-charcoal ink, one controlled safety orange. Everything lives in
+charcoal ink, one controlled royal blue. A light and a dark theme, both
+derived from the same semantic token scale. Everything lives in
 `src/app/globals.css`.
 
 ---
@@ -21,10 +22,10 @@ section. No component needs a dark variant.
 | `--c-fg-2` | `#3b3b38` | 9.97 : 1 | Body copy |
 | `--c-fg-3` | `#5d5d56` | 5.88 : 1 | Captions, metadata |
 | `--c-fg-4` | `#6e6e67` | 4.56 : 1 | Smallest labels — AA floor |
-| `--c-accent-text` | `#a8380b` | 5.76 : 1 | Orange **as text** |
-| `--c-accent` | `#e24e12` | 3.49 : 1 | Rules, ticks, marks — **never text** |
+| `--c-accent-text` | `#1a357f` | 10.02 : 1 | Blue **as text** |
+| `--c-accent` | `#1f3fbf` | 7.39 : 1 | Rules, ticks, marks, and fills carrying light text |
 | `--c-tick` | `#a9a69d` | 2.16 : 1 | Registration marks only |
-| `--signal-bright` | `#ff6a2b` | 6.39 : 1 *on `#151515`* | Solid-button label |
+| `--signal-bright` | `#7aa5ff` | 7.52 : 1 *on `#151515`* | Solid-button label |
 
 ### Dark panel — on `#0e0e0e`
 
@@ -34,14 +35,14 @@ section. No component needs a dark variant.
 | `--c-fg-2` | `#b9b5ac` | 9.44 : 1 |
 | `--c-fg-3` | `#8b8780` | 5.40 : 1 |
 | `--c-fg-4` | `#807d76` | 4.70 : 1 |
-| `--c-accent` | `#ff6a2b` | 6.76 : 1 |
-| `--c-accent-text` | `#ff8049` | 7.75 : 1 |
+| `--c-accent` | `#6e9bff` | 7.17 : 1 |
+| `--c-accent-text` | `#7fa6ff` | 8.09 : 1 |
 
 ### The solid button
 
-A near-black chip (`#151515`) with a signal-orange label
-(`--signal-bright`, `#ff6a2b`), filling orange on hover and focus. Only the
-text colour marks it out — there is no outline.
+A near-black chip (`#151515`) with a signal-blue label (`--signal-bright`,
+`#7aa5ff`), filling deep blue on hover and focus. Only the text colour marks it
+out — there is no outline.
 
 Its colours are written as real CSS in `.btn-solid`, not as Tailwind colour
 utilities. The label colour is the *only* thing distinguishing this control, so
@@ -50,70 +51,51 @@ to generate, `color` falls back to inherit and the text disappears into the
 black fill. This happened in production once.
 
 The fill is deliberately **not** token-driven, so the button reads identically
-on eggshell and inside a dark panel. The border is retained but tinted with
-`--c-line-strong`, which resolves to a translucent ink on eggshell (invisible
-against the fill) and a translucent light on a dark panel (a faint hairline).
-Without it the chip would have no edge at all on the dark closing panel, where
-the fill sits within 1.06 : 1 of the background.
+on eggshell and inside a dark panel. The border is tinted with
+`--c-line-strong`, invisible against the fill on eggshell and a faint hairline
+on a dark surface.
 
-Label 6.39 : 1 on the fill. Hover puts the panel background colour on the
-orange fill: 5.76 : 1 light, 7.75 : 1 dark. Pressed archive filters use the
-same treatment, with their count in `--c-tick` (7.50 : 1) rather than
-`--c-fg-4`, which manages only 3.56 : 1 against the black fill.
+Label 7.52 : 1 on the fill. Hover puts the surface colour on the blue fill:
+10.02 : 1 light, 8.09 : 1 dark. Pressed archive filters use the same treatment,
+with their count in `--c-tick`.
 
-### The orange rule
+### The blue rule
 
-`#e24e12` on eggshell is **3.49 : 1** — it fails AA for body text and fails as
-a fill behind light text. So:
+- Blue as text → `--c-accent-text`: `#1a357f` on eggshell (10.02 : 1),
+  `#7fa6ff` on dark (8.09 : 1).
+- `--c-accent` (`#1f3fbf`) is for rules, ticks and dimension lines, and unlike
+  the orange it replaced it *can* carry light text — paper on it is 7.39 : 1,
+  which is why `::selection` is paper-on-blue rather than ink-on-blue.
+- `--c-tick` stays a neutral grey so hairlines are never mistaken for a text
+  colour.
 
-- Orange as text → `--c-accent-text` (`#a8380b`), never `--c-accent`.
-- Orange as a fill → decoration only. Solid buttons fill with `--c-fg` and
-  shift to `--c-accent-text` on hover, not `--c-accent`.
-- `--c-tick` exists so hairlines and registration marks can be light without
-  anyone mistaking them for a text colour.
+Blue appears on maybe 2% of any screen: coordinates, one rule per section,
+dimension lines, the active filter. It marks *measurement*, not emphasis.
 
-Orange appears on maybe 2% of any given screen: coordinates, one rule per
-section, dimension lines, the survey probe, the active filter. It marks
-*measurement*, not emphasis.
+### Themes
 
----
+Two: light and dark, both from one semantic `--c-*` scale. The dark values are
+declared once and shared by `[data-panel="dark"]` and
+`:root[data-theme="dark"]`, so no component needs a dark variant.
 
-## Type
+One wrinkle: in the dark theme the page is already near-black, so a dark
+*panel* would vanish. Those get the lifted `--void-2` surface instead — and the
+muted greys lift with them, because `#807d76` is 4.70 : 1 on `#0e0e0e` but only
+4.37 : 1 on `#171716`, which fails AA.
 
-Two faces, loaded via `next/font` with `display: swap`.
+`ThemeToggle` writes `data-theme` on `<html>` and persists to localStorage. An
+inline, synchronous script in `<head>` applies the stored value before first
+paint — anything deferred, or set from an effect, produces a flash of the wrong
+theme on every load. First visit follows `prefers-color-scheme`.
 
-**Archivo** — display, UI and body. A grotesque with wayfinding lineage:
-signage, dimension stamps, plate labels. Chosen instead of the expected
-editorial serif because the subject is machines, and because a serif display
-face over cream is the most common look in this genre.
+### Page titles
 
-**DM Mono** — metadata only. Project numbers, coordinates, specification
-labels, axis names. Applied through `.u-meta` (uppercase, `0.14em` tracking,
-tabular figures) so the mono register is *earned* — it appears only where the
-content genuinely is metadata.
-
-Every size is a fluid `clamp()` on the `@theme` scale:
-
-| Token | Size | Use |
-| --- | --- | --- |
-| `--text-display` | `clamp(2.9rem, 8.2vw, 7.5rem)` | The name, once |
-| `--text-h1` | `clamp(2.1rem, 5vw, 4rem)` | Page and case-study titles |
-| `--text-h2` | `clamp(1.6rem, 3vw, 2.6rem)` | Section statements |
-| `--text-h3` | `1.375rem` | Sub-headings |
-| `--text-lead` | `clamp(1.05rem, 1.35vw, 1.3rem)` | Intro paragraphs |
-| `--text-body` | `1rem` / 1.68 | Body |
-| `--text-caption` | `0.8125rem` | Captions, list items |
-| `--text-meta` | `0.6875rem` | `.u-meta` |
-
-Measure is capped at `66ch` (`--measure`). No paragraph runs wider.
-
-### Voice
-
-First person throughout. No third-person biography, no "engineering approach"
-or "how I work" narration, no taglines beyond a plain role statement. Page
-headers are the page name. Copy in `src/content/*` is factual — roles, dates,
-what was built, what was measured — and anything more interpretive is the
-owner's to write, not the template's.
+`AnimatedTitle` splits the heading into per-letter spans that fade up on a
+34 ms stagger. The wrapper carries the full string as `aria-label` and the
+spans are `aria-hidden`, so screen readers read the word, not the letters. It
+is keyed on the pathname so a client-side navigation replays the reveal instead
+of reusing DOM nodes whose animation has already finished. Under
+`prefers-reduced-motion: reduce` the letters are simply visible.
 
 ### Layers — the one rule you cannot break
 
@@ -241,8 +223,8 @@ The brief pins the palette, and cream-plus-warm-accent is a well-worn look, so
 differentiation went elsewhere:
 
 - No serif display face, which is the genre's default move.
-- A true saturated safety orange (`#e24e12`) rather than the muted clay tone
-  that shows up everywhere.
+- A deep royal blue (`#1f3fbf`) against warm eggshell, rather than the muted
+  clay or terracotta that shows up everywhere.
 - The datum rail instead of a progress bar.
 - A purpose-drawn axonometric of the actual 7 ft × 7 ft × 4 ft gantry, at a
   verified 80 units per foot with a correctly scaled 5 ft 10 in figure —

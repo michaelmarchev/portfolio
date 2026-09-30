@@ -2,6 +2,7 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { ProjectArchive } from "@/components/project/ProjectArchive";
 import { ContactCta } from "@/components/sections/ContactCta";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { projectCategories, projects } from "@/content/projects";
 import { pageMetadata } from "@/lib/seo";
 
@@ -17,7 +18,7 @@ export default function ProjectsPage() {
     <>
       <Section space="tight" datum="Work" className="pt-12 md:pt-16">
         <Container wide>
-          <h1 className="text-h1 max-w-[26ch] text-fg">Work</h1>
+          <AnimatedTitle className="text-h1 max-w-[26ch] text-fg">Work</AnimatedTitle>
           <p className="mt-8 max-w-[60ch] text-[1.0625rem] leading-[1.7] text-fg-2">
             Six projects in automation, precision motion, product design,
             research and repair.

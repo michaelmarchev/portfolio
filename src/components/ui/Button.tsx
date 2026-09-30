@@ -12,7 +12,7 @@ interface BaseProps {
 
 const STYLE: Record<Variant, string> = {
   /*
-   * Colours live in `.btn-solid` in globals.css, deliberately: the orange
+   * Colours live in `.btn-solid` in globals.css, deliberately: the blue
    * label is the only thing marking this control out, and a Tailwind colour
    * utility that fails to generate leaves the text inheriting black on a black
    * fill — invisible. Real CSS cannot fail that way.

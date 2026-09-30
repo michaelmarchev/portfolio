@@ -3,6 +3,7 @@ import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { MetaLabel } from "@/components/ui/MetaLabel";
 import { Reveal } from "@/components/ui/Reveal";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
@@ -38,10 +39,9 @@ export default function ContactPage() {
       <Section space="tight" datum="Contact" className="pt-12 md:pt-16">
         <Container wide>
           <MetaLabel as="p">Contact</MetaLabel>
-          <h1 className="text-h1 mt-7 max-w-[20ch] text-fg">{site.closingLine}</h1>
-          <p className="mt-8 max-w-[54ch] text-[1.0625rem] leading-[1.7] text-fg-2">
-            Email is the fastest way to reach me.
-          </p>
+          <AnimatedTitle className="text-h1 mt-7 max-w-[20ch] text-fg">
+            {site.closingLine}
+          </AnimatedTitle>
         </Container>
       </Section>
 

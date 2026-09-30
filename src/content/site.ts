@@ -21,7 +21,7 @@ export const site = {
     "I work on precision fixtures, automated motion systems, mobility devices, product concepts, fabrication, and mechanical repair.",
   currently:
     "I am the Mechanical Engineering Technical Lead on an in-development automated X-ray emission-scanning system for Lumafield.",
-  closingLine: "Let’s build something useful.",
+  closingLine: "Let’s build.",
   location: "Boston, MA",
   email: "marchev.m@northeastern.edu",
   phone: "+1 (617) 943-6574",

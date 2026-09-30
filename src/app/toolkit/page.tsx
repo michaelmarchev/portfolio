@@ -4,6 +4,7 @@ import { ContactCta } from "@/components/sections/ContactCta";
 import { SpecTile } from "@/components/toolkit/SpecTile";
 import { MetaLabel } from "@/components/ui/MetaLabel";
 import { Reveal } from "@/components/ui/Reveal";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { credentials, languages, toolkit } from "@/content/toolkit";
 import { pageMetadata } from "@/lib/seo";
 
@@ -22,7 +23,7 @@ export default function ToolkitPage() {
         <Container wide>
           <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:items-start">
             <div>
-              <h1 className="text-h1 max-w-[24ch] text-fg">Toolkit</h1>
+              <AnimatedTitle className="text-h1 max-w-[24ch] text-fg">Toolkit</AnimatedTitle>
               <p className="mt-8 max-w-[46ch] text-[1.0625rem] leading-[1.7] text-fg-2">
                 Tools, methods and credentials.
               </p>
@@ -30,35 +31,23 @@ export default function ToolkitPage() {
 
             <div>
               <MetaLabel as="h2">Credentials</MetaLabel>
-              <ul className="m-0 mt-6 list-none border-t border-line p-0">
+              {/* Two columns, one rule: compact enough to sit beside the
+                  header rather than running down the page. */}
+              <ul className="m-0 mt-6 grid list-none grid-cols-1 gap-x-8 gap-y-5 border-t border-line p-0 pt-5 sm:grid-cols-2">
                 {credentials.map((credential) => (
-                  <li
-                    key={credential.abbr}
-                    className="grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-4 border-b border-line py-4"
-                  >
-                    <span className="u-meta text-accent-text">{credential.abbr}</span>
-                    <span className="text-caption leading-[1.5] text-fg-2">
+                  <li key={credential.abbr}>
+                    <span className="u-meta block text-accent-text">
+                      {credential.abbr}
+                    </span>
+                    <span className="mt-1.5 block text-caption leading-[1.45] text-fg-2">
                       {credential.name}
-                      <span className="block text-fg-4">{credential.issuer}</span>
+                    </span>
+                    <span className="u-meta mt-1 block text-fg-4">
+                      {credential.issuer}
                     </span>
                   </li>
                 ))}
               </ul>
-
-              <dl className="m-0 mt-10">
-                <MetaLabel as="h2">Languages</MetaLabel>
-                <div className="mt-6 border-t border-line">
-                  {languages.map((entry) => (
-                    <div
-                      key={entry.language}
-                      className="flex items-baseline justify-between gap-4 border-b border-line py-4"
-                    >
-                      <dt className="text-caption text-fg-2">{entry.language}</dt>
-                      <dd className="u-meta ml-0 text-fg-3">{entry.level}</dd>
-                    </div>
-                  ))}
-                </div>
-              </dl>
             </div>
           </div>
         </Container>
@@ -82,6 +71,26 @@ export default function ToolkitPage() {
                 <SpecTile key={group.id} group={group} index={i} />
               ))}
             </div>
+          </Reveal>
+        </Container>
+      </Section>
+
+      <Section space="tight" datum="Toolkit">
+        <Container wide>
+          <Reveal className="grid gap-x-16 gap-y-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start">
+            <MetaLabel as="h2">Languages</MetaLabel>
+
+            <dl className="m-0 grid grid-cols-1 gap-x-10 border-t border-line sm:grid-cols-2">
+              {languages.map((entry) => (
+                <div
+                  key={entry.language}
+                  className="flex items-baseline justify-between gap-4 border-b border-line py-4"
+                >
+                  <dt className="text-caption text-fg-2">{entry.language}</dt>
+                  <dd className="u-meta ml-0 text-fg-3">{entry.level}</dd>
+                </div>
+              ))}
+            </dl>
           </Reveal>
         </Container>
       </Section>
