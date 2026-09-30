@@ -490,9 +490,11 @@ hr {
 /*
  * Cycling role text (FlipWords).
  *
- * The track is a single clipped line: the outgoing word rotates up and out,
- * the incoming word rises from below into the same box. Both are positioned in
- * normal flow so the line keeps its height with one word or two.
+ * The two words are *sequenced*, not crossfaded: the outgoing word leaves
+ * completely, then the incoming one arrives after a delay equal to the exit
+ * duration. Running both at once left two legible words on top of each other.
+ * They also travel further than the line height (140%) so each is fully
+ * clipped before the other appears.
  */
 .flip-words {
   display: inline-block;
@@ -503,8 +505,8 @@ hr {
   position: relative;
   display: inline-block;
   overflow: hidden;
-  /* Room for the descenders the clip would otherwise cut. */
-  padding-bottom: 0.12em;
+  /* Room for descenders the clip would otherwise cut. */
+  padding-bottom: 0.14em;
 }
 
 .flip-words__word {
@@ -513,34 +515,42 @@ hr {
 }
 
 .flip-words__word.is-entering {
-  animation: flip-in 0.62s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: flip-in 0.46s cubic-bezier(0.18, 0.72, 0.3, 1) both;
+  /* Starts only once the outgoing word has cleared the box. */
+  animation-delay: 0.42s;
 }
 
 .flip-words__word.is-leaving {
   position: absolute;
   left: 0;
   top: 0;
-  animation: flip-out 0.62s cubic-bezier(0.55, 0.06, 0.68, 0.19) both;
+  animation: flip-out 0.4s cubic-bezier(0.6, 0.02, 0.8, 0.2) both;
 }
 
 @keyframes flip-in {
   from {
-    transform: translateY(105%) rotateX(-55deg);
+    transform: translateY(140%);
     opacity: 0;
   }
+  60% {
+    opacity: 1;
+  }
   to {
-    transform: translateY(0) rotateX(0deg);
+    transform: translateY(0);
     opacity: 1;
   }
 }
 
 @keyframes flip-out {
   from {
-    transform: translateY(0) rotateX(0deg);
+    transform: translateY(0);
+    opacity: 1;
+  }
+  40% {
     opacity: 1;
   }
   to {
-    transform: translateY(-105%) rotateX(55deg);
+    transform: translateY(-140%);
     opacity: 0;
   }
 }

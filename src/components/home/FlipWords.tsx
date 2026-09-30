@@ -18,11 +18,11 @@ import { cn } from "@/lib/utils";
  */
 export function FlipWords({
   words,
-  interval = 5000,
+  interval = 3000,
   className,
 }: {
   words: readonly string[];
-  /** Milliseconds each word is held. */
+  /** Milliseconds between flips. */
   interval?: number;
   className?: string;
 }) {
@@ -47,7 +47,7 @@ export function FlipWords({
   // a single span.
   useEffect(() => {
     if (previous === null) return;
-    const id = window.setTimeout(() => setPrevious(null), 700);
+    const id = window.setTimeout(() => setPrevious(null), 950);
     return () => window.clearTimeout(id);
   }, [previous]);
 

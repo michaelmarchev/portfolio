@@ -83,11 +83,19 @@ export function ProjectArchive({
 
       {/* Editorial rather than uniform: the first card in each pair of rows
           takes more width, so the grid never reads as a card kit. */}
-      <ul className="m-0 grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 md:grid-cols-6">
+      <ul
+        className={cn(
+          "m-0 grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 md:grid-cols-6",
+          // Dense flow backfills gaps: without it a 2-column card following a
+          // 4-column one can be pushed to the next row, leaving empty space
+          // above the card after it.
+          "md:[grid-auto-flow:dense]",
+        )}
+      >
         {visible.map((project, i) => (
           <li
             key={project.slug}
-            className={cn(isWide(i) ? "md:col-span-4" : "md:col-span-2")}
+            className={cn("self-start", isWide(i) ? "md:col-span-4" : "md:col-span-2")}
           >
             <ArchiveCard project={project} wide={isWide(i)} />
           </li>

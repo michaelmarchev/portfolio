@@ -31,7 +31,7 @@ export function SpecTile({ group, index }: { group: ToolkitGroup; index: number 
         {group.items.map((item) => (
           <li
             key={item}
-            className="u-mono border border-line bg-bg-deep px-2.5 py-1.5 text-[0.75rem] leading-none text-fg-2"
+            className="u-mono inline-flex h-7 items-center border border-line bg-bg-deep px-2.5 text-[0.75rem] leading-none text-fg-2"
           >
             {item}
           </li>

@@ -6,7 +6,6 @@ import { Section } from "@/components/layout/Section";
 import { GalleryGrid } from "@/components/media/GalleryGrid";
 import { CaseStudyBody } from "@/components/project/CaseStudyBody";
 import { CaseStudyHero } from "@/components/project/CaseStudyHero";
-import { CaseStudyMeta } from "@/components/project/CaseStudyMeta";
 import { NextProject } from "@/components/project/NextProject";
 import { SpecTable } from "@/components/project/SpecTable";
 import { ContactCta } from "@/components/sections/ContactCta";
@@ -81,8 +80,6 @@ export default async function ProjectPage({
           </Container>
         </Section>
       )}
-
-      <CaseStudyMeta project={project} />
 
       <Section space="default" datum={project.title}>
         <Container wide>

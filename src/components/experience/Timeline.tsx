@@ -5,6 +5,8 @@ import { useId, useState } from "react";
 import { MetaLabel } from "@/components/ui/MetaLabel";
 import type { ExperienceEntry } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/ui/Logo";
+import { logoFor } from "@/content/logos";
 
 const KIND_LABEL: Record<ExperienceEntry["kind"], string> = {
   engineering: "Engineering",
@@ -59,7 +61,13 @@ export function Timeline({ entries }: { entries: ExperienceEntry[] }) {
                 <h3 className="text-[1.25rem] font-medium leading-[1.25] tracking-[-0.018em] text-fg">
                   {entry.role}
                 </h3>
-                <p className="mt-4 text-caption text-fg-3">{entry.organization}</p>
+                <div className="mt-4 flex items-center gap-3">
+                  {(() => {
+                    const logo = logoFor(entry.organization);
+                    return logo ? <Logo logo={logo} size={22} /> : null;
+                  })()}
+                  <p className="text-caption text-fg-3">{entry.organization}</p>
+                </div>
                 <p className="mt-4 max-w-[62ch] text-[1.0625rem] leading-[1.65] text-fg-2">
                   {entry.summary}
                 </p>
