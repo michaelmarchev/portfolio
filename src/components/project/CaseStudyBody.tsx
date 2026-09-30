@@ -68,13 +68,13 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
                    * made a nine-image case study an unreasonable scroll;
                    * portrait photographs were the worst offenders.
                    */
-                  <div className="mt-9 grid max-w-[46rem] grid-cols-1 gap-x-7 gap-y-9 sm:grid-cols-2">
+                  <div className="mt-10 grid max-w-[62rem] grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
                     {section.media.map((image) => (
                       <MediaFigure
                         key={image.id}
                         image={image}
-                        detail="brief"
-                        sizes="(min-width: 1024px) 23vw, (min-width: 640px) 30vw, 92vw"
+                        detail="full"
+                        sizes="(min-width: 1024px) 31vw, (min-width: 640px) 38vw, 94vw"
                       />
                     ))}
                   </div>

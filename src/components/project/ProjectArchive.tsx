@@ -160,14 +160,23 @@ function ArchiveCard({ project, wide }: { project: Project; wide: boolean }) {
   return (
     <article className="group">
       <Link href={`/projects/${project.slug}`} className="block no-underline">
-        <SpecPlate
-          image={project.card}
-          detail={wide ? "brief" : "label"}
-          sizes={
-            wide ? "(min-width: 768px) 60vw, 100vw" : "(min-width: 768px) 32vw, 100vw"
-          }
-          ratio={wide ? "16 / 9" : "4 / 3"}
-        />
+        {/* No forced ratio: SpecPlate uses the asset's own aspect, so covers
+            are never cropped. Wide cards put the image beside the text so a
+            portrait cover stays large without stretching the row. */}
+        <div
+          className={cn(
+            wide && "md:grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-8",
+          )}
+        >
+          <SpecPlate
+            image={project.card}
+            detail={wide ? "brief" : "label"}
+            sizes={
+              wide ? "(min-width: 768px) 28vw, 100vw" : "(min-width: 768px) 32vw, 100vw"
+            }
+          />
+
+          <div className={cn(wide && "md:self-center")}>
         <div className="mt-4 flex items-baseline gap-3">
           <span className="u-meta text-accent-text">{project.index}</span>
           <span className="u-meta text-fg-4">{project.timeline}</span>
@@ -183,6 +192,8 @@ function ArchiveCard({ project, wide }: { project: Project; wide: boolean }) {
         <p className="mt-4 max-w-[52ch] text-caption text-fg-2">
           {project.cardSummary}
         </p>
+          </div>
+        </div>
       </Link>
 
       <dl className="mt-4 border-t border-line pt-3">

@@ -2,28 +2,22 @@
 
 import { useEffect } from "react";
 
-/** Milliseconds between letters — a touch quicker than the title reveal. */
+/** Milliseconds between letters. */
 const STAGGER = 26;
 const CLASS = "is-fluttering";
 const LETTER = "flutter-letter";
 
 /**
- * Lifts the letters of an inline link or button one at a time, once when the
- * pointer arrives and once when it leaves.
+ * Lifts the letters of a hovered control one at a time.
  *
- * Why JavaScript: CSS `:hover` can start an animation on enter, but there is
- * no selector for "the pointer just left", so the exit pass is impossible in
- * CSS alone. One delegated listener pair covers every control on the page,
- * including ones rendered later.
+ * Fires on pointer enter only — not on leave.
  *
- * The label is split into per-letter spans on first hover and left split
- * afterwards — the spans are inline and visually identical, so nothing shifts.
- * If React re-renders the link it collapses back to a text node, and the next
- * hover simply splits it again.
- *
- * Scope: elements whose computed `display` is inline. That deliberately
- * excludes block-level wrappers such as the archive cards, where a `Link`
- * wraps an entire image and caption.
+ * The hover target is the whole control, matching whatever already shifts and
+ * changes colour on hover. That means a block-level card counts: entering
+ * anywhere in the card flutters its title, exactly as the card's own
+ * `.caption-shift` transition already responds to `.group:hover`. Where a
+ * control has no designated shift target — a plain inline link — its own text
+ * is the target.
  */
 export function FlutterHover() {
   useEffect(() => {
@@ -55,34 +49,46 @@ export function FlutterHover() {
       }
     };
 
-    const eligible = (event: Event): HTMLElement | null => {
-      const node = event.target;
-      if (!(node instanceof Element)) return null;
-      const el = node.closest<HTMLElement>("a[href], button");
-      if (!el || el.dataset.noFlutter !== undefined) return null;
-      if (!getComputedStyle(el).display.startsWith("inline")) return null;
-      return el;
+    /**
+     * What should flutter for a given hovered control.
+     *
+     * `.caption-shift` is the element the design already moves on hover, so on
+     * a card it is the title rather than every word in the card. Falling back
+     * to the control itself covers inline links and buttons.
+     */
+    const targets = (control: HTMLElement): HTMLElement[] => {
+      const shifts = control.querySelectorAll<HTMLElement>(".caption-shift");
+      if (shifts.length > 0) return Array.from(shifts);
+      if (control.classList.contains("caption-shift")) return [control];
+      // A block-level control with no designated target would mean fluttering
+      // a whole card of text; skip it rather than guess.
+      if (!getComputedStyle(control).display.startsWith("inline")) return [];
+      return [control];
     };
 
-    const fire = (event: PointerEvent) => {
-      const el = eligible(event);
-      if (!el) return;
-      // Ignore movement between descendants of the same control — including
-      // between the letter spans this function just created.
+    const enter = (event: PointerEvent) => {
+      const node = event.target;
+      if (!(node instanceof Element)) return;
+
+      const control = node.closest<HTMLElement>("a[href], button");
+      if (!control || control.dataset.noFlutter !== undefined) return;
+
+      // Ignore movement between descendants of the same control.
       const related = event.relatedTarget;
-      if (related instanceof Node && el.contains(related)) return;
+      if (related instanceof Node && control.contains(related)) return;
 
-      split(el);
-
-      const letters = el.querySelectorAll<HTMLElement>(`.${LETTER}`);
-      letters.forEach((letter, i) => {
-        // Re-adding a class mid-animation is a no-op, so clear it and flush
-        // layout before re-adding, or a quick out-and-back would not replay.
-        letter.classList.remove(CLASS);
-        letter.style.setProperty("--flutter-delay", `${i * STAGGER}ms`);
-      });
-      void el.offsetWidth;
-      letters.forEach((letter) => letter.classList.add(CLASS));
+      for (const target of targets(control)) {
+        split(target);
+        const letters = target.querySelectorAll<HTMLElement>(`.${LETTER}`);
+        letters.forEach((letter, i) => {
+          // Re-adding a class mid-animation is a no-op, so clear it and flush
+          // layout before re-adding.
+          letter.classList.remove(CLASS);
+          letter.style.setProperty("--flutter-delay", `${i * STAGGER}ms`);
+        });
+        void target.offsetWidth;
+        letters.forEach((letter) => letter.classList.add(CLASS));
+      }
     };
 
     const clear = (event: AnimationEvent) => {
@@ -92,13 +98,11 @@ export function FlutterHover() {
       }
     };
 
-    document.addEventListener("pointerover", fire);
-    document.addEventListener("pointerout", fire);
+    document.addEventListener("pointerover", enter);
     document.addEventListener("animationend", clear, true);
 
     return () => {
-      document.removeEventListener("pointerover", fire);
-      document.removeEventListener("pointerout", fire);
+      document.removeEventListener("pointerover", enter);
       document.removeEventListener("animationend", clear, true);
     };
   }, []);

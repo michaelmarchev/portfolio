@@ -40,7 +40,17 @@ export function SpecPlate({
   /** Override the orientation's default aspect ratio. */
   ratio?: string;
 }) {
-  const aspect = ratio ?? RATIO[image.orientation];
+  /*
+   * A real asset uses its own aspect ratio, so `object-cover` never crops it.
+   * The orientation box governs the placeholder plate only — forcing a shot
+   * brief's box onto a real render is what clipped 64% off the Optics Bench
+   * card.
+   */
+  const natural =
+    image.src && image.width && image.height
+      ? `${image.width} / ${image.height}`
+      : undefined;
+  const aspect = natural ?? ratio ?? RATIO[image.orientation];
 
   if (image.src) {
     const px = RATIO_PX[image.orientation];
