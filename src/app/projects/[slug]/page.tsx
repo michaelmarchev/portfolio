@@ -13,6 +13,7 @@ import { MetaLabel } from "@/components/ui/MetaLabel";
 import { Reveal } from "@/components/ui/Reveal";
 import { getNextProject, getProject, projects } from "@/content/projects";
 import { pageMetadata } from "@/lib/seo";
+import { cn } from "@/lib/utils";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -46,7 +47,8 @@ export default async function ProjectPage({
   const next = getNextProject(project.slug);
 
   return (
-    <article>
+    // Hard corners inside a case study: see `.media-round` in globals.css.
+    <article data-media="square">
       <CaseStudyHero project={project} />
 
       {/*
@@ -86,20 +88,31 @@ export default async function ProjectPage({
           <Reveal className="grid gap-x-10 gap-y-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
             <SpecTable specs={project.specs} />
             <div>
-              <MetaLabel as="h2" className="mb-5">
-                Focus areas
-              </MetaLabel>
-              <ul className="m-0 grid list-none grid-cols-1 gap-0 border-t border-line p-0 sm:grid-cols-2">
-                {project.focus.map((item) => (
-                  <li
-                    key={item}
-                    className="border-b border-line py-3 text-[0.9375rem] text-fg-2"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <ul className="m-0 mt-6 flex list-none flex-wrap gap-2 p-0">
+              {/* Focus areas are optional — a project with none shows just its
+                  categories rather than an empty heading and rule. */}
+              {project.focus.length > 0 && (
+                <>
+                  <MetaLabel as="h2" className="mb-5">
+                    Focus areas
+                  </MetaLabel>
+                  <ul className="m-0 grid list-none grid-cols-1 gap-0 border-t border-line p-0 sm:grid-cols-2">
+                    {project.focus.map((item) => (
+                      <li
+                        key={item}
+                        className="border-b border-line py-3 text-[0.9375rem] text-fg-2"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              <ul
+                className={cn(
+                  "m-0 flex list-none flex-wrap gap-2 p-0",
+                  project.focus.length > 0 && "mt-6",
+                )}
+              >
                 {project.categories.map((c) => (
                   <li
                     key={c}

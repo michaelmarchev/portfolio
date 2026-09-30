@@ -5,7 +5,7 @@ import { ContactCta } from "@/components/sections/ContactCta";
 import { MetaLabel } from "@/components/ui/MetaLabel";
 import { Reveal } from "@/components/ui/Reveal";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
-import { about, aboutMedia } from "@/content/about";
+import { about, aboutMedia, headshot } from "@/content/about";
 import { education } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
@@ -16,7 +16,8 @@ export const metadata = pageMetadata({
   path: "/about",
 });
 
-const [portrait, ...collage] = aboutMedia;
+// The portrait slot is the real headshot; the rest of aboutMedia is the collage.
+const collage = aboutMedia.slice(1);
 
 export default function AboutPage() {
   return (
@@ -38,7 +39,7 @@ export default function AboutPage() {
 
             <div className="lg:sticky lg:top-28">
               <MediaFigure
-                image={portrait}
+                image={headshot}
                 detail="brief"
                 sizes="(min-width: 1024px) 34vw, 100vw"
               />

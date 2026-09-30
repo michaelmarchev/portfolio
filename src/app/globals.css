@@ -157,6 +157,9 @@
   --text-meta--letter-spacing: 0.14em;
 
   --radius-plate: 2px;
+  /* Corner radius on photographs and plates. Quoted by the dimension callout
+     on the homepage hero, so change both together. */
+  --radius-media: 6px;
 }
 
 /* ==========================================================================
@@ -485,6 +488,21 @@ hr {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/*
+ * Rounded media.
+ *
+ * Applied everywhere except inside a case study, where `[data-media="square"]`
+ * on the page resets it — technical figures read better with hard corners
+ * beside dimensioned drawings.
+ */
+.media-round {
+  border-radius: var(--radius-media);
+}
+
+[data-media="square"] .media-round {
+  border-radius: 0;
 }
 
 /*

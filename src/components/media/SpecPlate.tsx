@@ -56,7 +56,7 @@ export function SpecPlate({
     const px = RATIO_PX[image.orientation];
     return (
       <div
-        className={cn("relative w-full overflow-hidden bg-bg-deep", className)}
+        className={cn("media-round relative w-full overflow-hidden bg-bg-deep", className)}
         style={{ aspectRatio: aspect }}
       >
         <Image
@@ -75,7 +75,7 @@ export function SpecPlate({
 
   return (
     <div
-      className={cn("plate", className)}
+      className={cn("plate media-round", className)}
       style={{ aspectRatio: aspect }}
       data-density={detail === "full" ? undefined : "compact"}
       role="img"

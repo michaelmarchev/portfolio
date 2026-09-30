@@ -54,15 +54,13 @@ export const projects: Project[] = [
     summary:
       "Precisely constrains and moves optical devices with respect to a target. Four motorized and four manual axes, sub-10-micron, inside a blackout cage. Replaced a completely manual bench.",
     tools: ["SOLIDWORKS", "Creo", "HALT chamber", "Standard + torsional Instron", "One-off fixtures", "Excel"],
-    team: "R&D engineering team, Stryker Endoscopy",
-    focus: ["Precision positioning", "Optical isolation", "Design for test", "Verification + validation"],
+    focus: [],
     specs: [
-      { label: "Positioning accuracy", value: "Sub-10 micron" },
+      { label: "Positioning accuracy", value: "<10 micron" },
       { label: "Motorized axes", value: "4" },
       { label: "Manual axes", value: "4" },
       { label: "Optical control", value: "Complete blackout cage" },
       { label: "Fixture value", value: "≈ $25,000" },
-      { label: "V&V performed", value: "Vibration, thermal, laser intensity, mechanical reliability" },
     ],
     hero: {
       id: "stryker-hero",
@@ -503,16 +501,8 @@ export const projects: Project[] = [
       "Vibration table",
       "Manual mill + lathe",
     ],
-    team: "R&D Opto-Mechanical team, Stryker Endoscopy",
-    focus: [
-      "Design for test",
-      "Mechanical reliability",
-      "Rapid iteration",
-      "Measurement repeatability",
-    ],
+    focus: [],
     specs: [
-      { label: "Fixtures delivered", value: "4" },
-      { label: "Design revisions", value: "5 on the laser fixture alone" },
       { label: "Print processes", value: "MJF, MJP for alignment-critical features" },
       { label: "Test types", value: "Optical, torque, vibration, lifecycle" },
       { label: "Subsystems", value: "Camera head, coupler, camera control unit" },

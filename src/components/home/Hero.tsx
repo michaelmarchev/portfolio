@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/Button";
 import { MetaRun } from "@/components/ui/MetaLabel";
 import { getProject } from "@/content/projects";
 import { education, site } from "@/content/site";
-import { headshot } from "@/content/about";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { FlipWords } from "@/components/home/FlipWords";
+import { RadiusCallout } from "@/components/graphics/RadiusCallout";
 
 /**
  * Homepage hero.
@@ -27,7 +27,7 @@ export function Hero() {
     >
       <div className="grid lg:min-h-[calc(100svh-4.25rem)] lg:grid-cols-[minmax(0,47fr)_minmax(0,53fr)]">
         {/* --- Reading column --- */}
-        <div className="flex flex-col justify-start px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:pr-[clamp(2rem,4vw,4.5rem)]">
+        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:pr-[clamp(2rem,4vw,4.5rem)]">
           <div className="max-w-[46rem]">
             <p className="u-meta text-fg-3">
               {site.location}
@@ -77,16 +77,6 @@ export function Hero() {
               </a>
             </div>
           </div>
-
-          {/* Fills the height the tall right-hand panel creates, rather than
-              letting the type drift to the vertical centre. */}
-          <div className="mt-12 max-w-[15rem] lg:mt-auto lg:pt-12">
-            <SpecPlate
-              image={headshot}
-              detail="label"
-              sizes="(min-width: 1024px) 15vw, 55vw"
-            />
-          </div>
         </div>
 
         {/* --- Flagship system, dark panel --- */}
@@ -116,9 +106,15 @@ export function Hero() {
             {lead && (
               <Link
                 href={`/projects/${lead.slug}`}
-                className="flex h-full w-full items-center justify-center no-underline"
+                className="relative flex h-full w-full items-center justify-center no-underline"
                 aria-label={`${lead.title} — case study`}
               >
+                {/* Calls out the fillet on the image's own corner. Keep the
+                    radius in step with `--radius-media` in globals.css. */}
+                <RadiusCallout
+                  radius={6}
+                  className="pointer-events-none absolute left-0 top-0 z-10 text-fg-3"
+                />
                 <SpecPlate
                   image={lead.hero}
                   detail="brief"
