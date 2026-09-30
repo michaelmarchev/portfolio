@@ -102,7 +102,6 @@ export function Hero() {
                 detail="brief"
                 priority
                 sizes="(min-width: 1024px) 53vw, 100vw"
-                ratio="4 / 3"
                 className="w-full"
               />
             )}

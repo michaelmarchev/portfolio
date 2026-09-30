@@ -490,31 +490,33 @@ hr {
 /*
  * Hover flutter.
  *
- * A short wobble fired once when the pointer enters a colour-changing inline
- * control, and once again when it leaves. Deliberately not a CSS `:hover`
- * animation: CSS can start one on enter but has no way to fire a separate one
- * on leave, so `FlutterHover` in the root layout adds this class on
- * pointerover/pointerout and removes it on animationend.
+ * Each letter lifts in turn — the same motion as the title reveal, but fired
+ * on pointer enter and again on pointer leave. The per-letter stagger is set
+ * inline by FlutterHover, which splits the label into spans on first hover.
+ *
+ * Deliberately not a CSS `:hover` animation: CSS can start one on enter, but
+ * there is no selector for "the pointer just left", so the exit pass has no
+ * trigger.
  */
-.is-fluttering {
-  animation: flutter 0.34s cubic-bezier(0.34, 0.9, 0.36, 1) both;
+.flutter-letter {
+  display: inline-block;
+  white-space: pre;
 }
 
-@keyframes flutter {
+.flutter-letter.is-fluttering {
+  animation: flutter-lift 0.42s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation-delay: var(--flutter-delay, 0ms);
+}
+
+@keyframes flutter-lift {
   0% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
+    transform: translateY(0);
   }
-  22% {
-    transform: translate3d(0, -0.09em, 0) rotate(-0.9deg);
-  }
-  48% {
-    transform: translate3d(0, 0.05em, 0) rotate(0.7deg);
-  }
-  74% {
-    transform: translate3d(0, -0.03em, 0) rotate(-0.35deg);
+  45% {
+    transform: translateY(-0.3em);
   }
   100% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
+    transform: translateY(0);
   }
 }
 
@@ -684,7 +686,7 @@ hr {
     transition-duration: 0.001ms !important;
   }
 
-  .is-fluttering {
+  .flutter-letter.is-fluttering {
     animation: none !important;
   }
 
