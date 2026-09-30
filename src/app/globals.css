@@ -488,6 +488,18 @@ hr {
 }
 
 /*
+ * Black-on-transparent logos in the dark theme.
+ *
+ * `invert(1) hue-rotate(180deg)` flips lightness while returning hue to where
+ * it started, so a black wordmark becomes white and a blue mark stays blue.
+ * Only applied to the marks flagged in `@/content/logos` — on a full-colour
+ * crest the same filter shifts every hue badly.
+ */
+:root[data-theme="dark"] .logo--adapt {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/*
  * Cycling role text (FlipWords).
  *
  * The two words are *sequenced*, not crossfaded: the outgoing word leaves
@@ -509,7 +521,19 @@ hr {
   padding-bottom: 0.14em;
 }
 
+/* Reserves the width of the longest word so neither is clipped sideways. */
+.flip-words__sizer {
+  display: inline-block;
+  white-space: pre;
+  visibility: hidden;
+}
+
+/* Both words are absolutely positioned over the sizer, so the track's width
+   never depends on which word happens to be showing. */
 .flip-words__word {
+  position: absolute;
+  left: 0;
+  top: 0;
   display: inline-block;
   white-space: pre;
 }
@@ -521,9 +545,6 @@ hr {
 }
 
 .flip-words__word.is-leaving {
-  position: absolute;
-  left: 0;
-  top: 0;
   animation: flip-out 0.4s cubic-bezier(0.6, 0.02, 0.8, 0.2) both;
 }
 

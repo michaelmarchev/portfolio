@@ -29,6 +29,8 @@ export function FlipWords({
   const [index, setIndex] = useState(0);
   const [previous, setPrevious] = useState<number | null>(null);
 
+  const longest = words.reduce((a, b) => (b.length > a.length ? b : a), "");
+
   useEffect(() => {
     if (words.length < 2) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -59,6 +61,13 @@ export function FlipWords({
       <span className="sr-only">{words.join(", ")}</span>
 
       <span aria-hidden="true" className="flip-words__track">
+        {/*
+          A hidden sizer holding the longest word fixes the track's width.
+          Without it the track was only as wide as the *current* word, so a
+          longer outgoing word was clipped on the right as it left.
+        */}
+        <span className="flip-words__sizer">{longest}</span>
+
         {previous !== null && (
           <span key={`out-${previous}`} className="flip-words__word is-leaving">
             {words[previous]}

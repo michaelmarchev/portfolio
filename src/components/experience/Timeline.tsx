@@ -49,6 +49,16 @@ export function Timeline({ entries }: { entries: ExperienceEntry[] }) {
               />
 
               <div className="flex flex-col gap-1">
+                {/* Logo sits in the left rail rather than inline beside the
+                    organization name, so the column scans as a single
+                    identifying block. */}
+                {(() => {
+                  const logo = logoFor(entry.organization);
+                  return logo ? (
+                    <Logo logo={logo} size={26} className="mb-3" />
+                  ) : null;
+                })()}
+
                 <MetaLabel tone={entry.timeline === "Current" ? "accent" : "muted"}>
                   {entry.timeline}
                 </MetaLabel>
@@ -61,13 +71,7 @@ export function Timeline({ entries }: { entries: ExperienceEntry[] }) {
                 <h3 className="text-[1.25rem] font-medium leading-[1.25] tracking-[-0.018em] text-fg">
                   {entry.role}
                 </h3>
-                <div className="mt-4 flex items-center gap-3">
-                  {(() => {
-                    const logo = logoFor(entry.organization);
-                    return logo ? <Logo logo={logo} size={22} /> : null;
-                  })()}
-                  <p className="text-caption text-fg-3">{entry.organization}</p>
-                </div>
+                <p className="mt-4 text-caption text-fg-3">{entry.organization}</p>
                 <p className="mt-4 max-w-[62ch] text-[1.0625rem] leading-[1.65] text-fg-2">
                   {entry.summary}
                 </p>

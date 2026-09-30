@@ -20,6 +20,18 @@ export function CaseStudyHero({ project }: { project: Project }) {
   const dark = project.theme === "dark";
   const logo = logoFor(project.organization);
 
+  /*
+   * Where the details table goes.
+   *
+   * A portrait lead image fills the right column on its own, so the details
+   * belong under the title on the left. A landscape one is short and leaves
+   * room beneath it, so the details sit there instead — beside the title
+   * rather than pushing it further down.
+   */
+  const hero = project.hero;
+  const detailsOnRight =
+    !!hero.width && !!hero.height && hero.width / hero.height >= 1;
+
   const details: Array<{ term: string; value: string }> = [
     { term: "Role", value: project.role },
     { term: "Organization", value: project.organization },
@@ -39,50 +51,57 @@ export function CaseStudyHero({ project }: { project: Project }) {
         <div className="grid gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] lg:items-start">
           {/* --- Title, summary, details --- */}
           <div>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
               <span className="u-meta text-accent-text">{project.index}</span>
               <MetaRun items={[project.status, project.timeline]} />
+              {logo && <Logo logo={logo} size={24} />}
             </div>
 
             <AnimatedTitle className="text-h1 mt-7 max-w-[22ch] text-fg">
               {project.title}
             </AnimatedTitle>
 
-            {logo && (
-              <div className="mt-7">
-                <Logo logo={logo} size={26} />
-              </div>
-            )}
-
             <p className="text-lead mt-8 max-w-[52ch] text-fg-2">
               {project.summary}
             </p>
 
-            <dl className="m-0 mt-10 grid grid-cols-1 gap-x-8 gap-y-4 border-t border-line pt-6 sm:grid-cols-2">
-              {details.map((row) => (
-                <div key={row.term}>
-                  <MetaLabel as="dt" tone="muted">
-                    {row.term}
-                  </MetaLabel>
-                  <dd className="mt-1.5 ml-0 text-caption leading-[1.55] text-fg-2">
-                    {row.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            {!detailsOnRight && <DetailList details={details} />}
           </div>
 
-          {/* --- Lead image --- */}
-          <div className="lg:sticky lg:top-28">
+          {/* --- Lead image, and the details when there is room beneath it --- */}
+          <div className={detailsOnRight ? undefined : "lg:sticky lg:top-28"}>
             <MediaFigure
-              image={project.hero}
+              image={hero}
               detail="full"
               priority
               sizes="(min-width: 1024px) 46vw, 100vw"
             />
+            {detailsOnRight && <DetailList details={details} />}
           </div>
         </div>
       </Container>
     </header>
+  );
+}
+
+/** Role, organization, timeline, tools, team, project type. */
+function DetailList({
+  details,
+}: {
+  details: Array<{ term: string; value: string }>;
+}) {
+  return (
+    <dl className="m-0 mt-10 grid grid-cols-1 gap-x-8 gap-y-4 border-t border-line pt-6 sm:grid-cols-2">
+      {details.map((row) => (
+        <div key={row.term}>
+          <MetaLabel as="dt" tone="muted">
+            {row.term}
+          </MetaLabel>
+          <dd className="mt-1.5 ml-0 text-caption leading-[1.55] text-fg-2">
+            {row.value}
+          </dd>
+        </div>
+      ))}
+    </dl>
   );
 }

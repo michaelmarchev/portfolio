@@ -5,9 +5,12 @@
  * from experience entries and case studies — so the same Generate logo serves
  * all three Generate projects without repeating it in the data.
  *
- * Every logo sits on a light plate when rendered (`Logo` in
- * `@/components/ui/Logo`), because several are black or multi-coloured marks
- * that would be illegible on the dark theme and cannot simply be inverted.
+ * `invertOnDark` marks the logos that are essentially black-on-transparent.
+ * Those get `filter: invert(1) hue-rotate(180deg)` in the dark theme, which
+ * flips lightness while preserving hue — verified in a browser: the Generate
+ * ring goes white and its blue stays blue. The two full-colour marks are left
+ * alone, because the same filter turns the Richey crest teal and the
+ * VolunTeachable bulb brown.
  */
 export interface OrgLogo {
   id: string;
@@ -17,11 +20,14 @@ export interface OrgLogo {
   height: number;
   /** Lowercased substrings that identify this organization. */
   match: string[];
+  /** Black-on-transparent marks that need lightness inverted on dark. */
+  invertOnDark?: boolean;
 }
 
 export const orgLogos: OrgLogo[] = [
   {
     id: "generate",
+    invertOnDark: true,
     src: "/images/logo-generate.png",
     alt: "Generate Product Development Studio logo",
     width: 400,
@@ -30,6 +36,7 @@ export const orgLogos: OrgLogo[] = [
   },
   {
     id: "stryker",
+    invertOnDark: true,
     src: "/images/logo-stryker.png",
     alt: "Stryker logo",
     width: 400,
@@ -46,6 +53,7 @@ export const orgLogos: OrgLogo[] = [
   },
   {
     id: "stem-center",
+    invertOnDark: true,
     src: "/images/logo-stem.png",
     alt: "Northeastern University Center for STEM Education logo",
     width: 400,
