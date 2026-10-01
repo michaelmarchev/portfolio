@@ -7,6 +7,7 @@ import { education, site } from "@/content/site";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { FlipWords } from "@/components/home/FlipWords";
 import { RadiusCallout } from "@/components/graphics/RadiusCallout";
+import { CornerAccents } from "@/components/graphics/CornerAccents";
 
 /**
  * Homepage hero.
@@ -106,21 +107,35 @@ export function Hero() {
             {lead && (
               <Link
                 href={`/projects/${lead.slug}`}
-                className="relative flex h-full w-full items-center justify-center no-underline"
+                className="flex h-full w-full items-center justify-center no-underline"
                 aria-label={`${lead.title} — case study`}
               >
-                {/* Calls out the fillet on the image's own corner. Keep the
-                    radius in step with `--radius-media` in globals.css. */}
-                {/* Sits entirely inside this panel, in the gap beside the
-                    image. `text-fg-3` is the panel's own muted tone. */}
-                <RadiusCallout radius={10} className="z-10 text-fg-3" />
-                <SpecPlate
-                  image={lead.hero}
-                  detail="brief"
-                  priority
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  className="mx-auto w-full max-w-[27rem] lg:h-[90%] lg:max-h-full lg:w-auto lg:max-w-none"
-                />
+                {/*
+                  This wrapper must hug the image exactly, because the corner
+                  accents and the radius callout are positioned against it.
+                  Anchoring them to the Link instead put them against the full
+                  width of the image area, which is why the arrow floated well
+                  up and to the left of the actual corner.
+
+                  Height comes from the panel; width follows the asset's own
+                  aspect ratio, so the box is the image and nothing else.
+                */}
+                <div
+                  className="relative mx-auto w-full max-w-[27rem] lg:h-[90%] lg:w-auto lg:max-w-none"
+                  style={{
+                    aspectRatio: `${lead.hero.width} / ${lead.hero.height}`,
+                  }}
+                >
+                  <RadiusCallout radius={10} className="z-10 text-accent" />
+                  <SpecPlate
+                    image={lead.hero}
+                    detail="brief"
+                    priority
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="h-full w-full"
+                  />
+                  <CornerAccents radius={10} className="text-accent" />
+                </div>
               </Link>
             )}
           </div>

@@ -20,8 +20,15 @@ import { cn } from "@/lib/utils";
  * inside one fixed-size SVG sitting in the gap beside the image, so the
  * geometry is exact and independent of layout.
  *
- * Anchoring: the element is `right-full` with `top: -CORNER_Y`, which puts SVG
- * coordinate (WIDTH, CORNER_Y) exactly on the image's top-left corner.
+ * Anchoring: the parent must be a box that hugs the image exactly. The element
+ * is then offset so SVG coordinate (WIDTH, CORNER_Y) lands on the *painted*
+ * rounded corner rather than the bounding box's corner.
+ *
+ * Those are not the same point. With a radius `r` the box corner is empty —
+ * the arc's nearest approach to it is its 45° point, inset by
+ * `r · (1 − 1/√2)` ≈ 2.93px at r = 10 in both axes. Aiming at the box corner
+ * leaves the arrowhead floating off the curve, up and to the left of anything
+ * visible.
  *
  * Purely decorative: `aria-hidden`, and it never takes pointer events.
  */
@@ -33,7 +40,7 @@ const HEIGHT = 132;
 const CORNER_Y = 12;
 
 /** Horizontal run, from the corner leftwards. */
-const ELBOW_X = 56;
+const ELBOW_X = 90;
 /** Vertical run, from the elbow downwards. */
 const DROP_TO_Y = 88;
 
@@ -51,15 +58,25 @@ export function RadiusCallout({
   instances?: number;
   className?: string;
 }) {
-  // Tip sits on the corner; the head points right, so its base is to the left.
+  // Tip sits on the arc; the head points right, so its base is to the left.
   const tipX = WIDTH;
   const baseX = tipX - HEAD_LEN;
+
+  /**
+   * Inset from the bounding-box corner to the arc's 45° point — the closest
+   * part of the painted corner. Shifting the whole SVG by this much puts the
+   * tip on the curve.
+   */
+  const tangentInset = radius * (1 - Math.SQRT1_2);
 
   return (
     <svg
       aria-hidden="true"
-      className={cn("pointer-events-none absolute right-full", className)}
-      style={{ top: -CORNER_Y }}
+      className={cn("pointer-events-none absolute", className)}
+      style={{
+        top: -(CORNER_Y - tangentInset),
+        right: `calc(100% - ${tangentInset}px)`,
+      }}
       width={WIDTH}
       height={HEIGHT}
       viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
@@ -81,11 +98,13 @@ export function RadiusCallout({
         fill="currentColor"
       />
 
-      {/* Note, centred under the vertical run. */}
+      {/* Note, hanging off the foot of the vertical run and right-aligned to
+          it. Centring it under the line would push it to within a few px of
+          the image now that the horizontal run is short. */}
       <text
-        x={ELBOW_X}
+        x={ELBOW_X + 4}
         y={DROP_TO_Y + 20}
-        textAnchor="middle"
+        textAnchor="end"
         fill="currentColor"
         fontFamily="var(--font-mono)"
         fontSize="13"
