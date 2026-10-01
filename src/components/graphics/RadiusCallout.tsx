@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils";
  * Engineering-drawing radius callout for the corner fillets.
  *
  * Path of the leader, reading from the image outwards: an arrowhead touching
- * the image's top-left corner and pointing horizontally right at it, a short
- * horizontal run left, then a turn vertically down to the note `4X R10px` —
- * four instances, radius ten.
+ * the image's rounded top-left corner and pointing horizontally right at it, a
+ * short horizontal run left, then a turn vertically down — and the note
+ * `4X R10px` continues in that same direction, set vertically.
  *
  * Nothing is drawn on the corner itself. An arc traced over the image's own
  * rounded corner reads as a second, detached corner floating beside it.
@@ -34,7 +34,7 @@ import { cn } from "@/lib/utils";
  */
 
 const WIDTH = 132;
-const HEIGHT = 132;
+const HEIGHT = 200;
 
 /** The image's top-left corner is at (WIDTH, CORNER_Y). */
 const CORNER_Y = 12;
@@ -42,7 +42,7 @@ const CORNER_Y = 12;
 /** Horizontal run, from the corner leftwards. */
 const ELBOW_X = 90;
 /** Vertical run, from the elbow downwards. */
-const DROP_TO_Y = 88;
+const DROP_TO_Y = 80;
 
 const HEAD_LEN = 15;
 const HEAD_HALF_WIDTH = 5.2;
@@ -98,13 +98,19 @@ export function RadiusCallout({
         fill="currentColor"
       />
 
-      {/* Note, hanging off the foot of the vertical run and right-aligned to
-          it. Centring it under the line would push it to within a few px of
-          the image now that the horizontal run is short. */}
+      {/*
+        The note carries on downwards from the foot of the leader.
+
+        `rotate(90)` turns the text's advance direction from +x to +y, so it
+        reads top to bottom. Glyph "up" then points to +x, meaning the letters
+        sit to the right of their baseline — hence the small negative x offset,
+        which centres the column of type on the leader rather than letting it
+        drift toward the image.
+      */}
       <text
-        x={ELBOW_X + 4}
-        y={DROP_TO_Y + 20}
-        textAnchor="end"
+        x={ELBOW_X - 5}
+        y={DROP_TO_Y + 12}
+        transform={`rotate(90 ${ELBOW_X - 5} ${DROP_TO_Y + 12})`}
         fill="currentColor"
         fontFamily="var(--font-mono)"
         fontSize="13"
