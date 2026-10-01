@@ -3,51 +3,42 @@ import { cn } from "@/lib/utils";
 /**
  * Engineering-drawing radius callout for the corner fillets.
  *
- * An arrow touching the outside of the image's top-left corner, a short leader
- * running out to the left, and the note `4X R10px` sitting on that leader —
+ * Path of the leader, reading from the image outwards: an arrowhead touching
+ * the image's top-left corner and pointing horizontally right at it, a short
+ * horizontal run left, then a turn vertically down to the note `4X R10px` —
  * four instances, radius ten.
  *
  * Nothing is drawn on the corner itself. An arc traced over the image's own
  * rounded corner reads as a second, detached corner floating beside it.
  *
- * ## Geometry
+ * ## Why this is one self-contained SVG
  *
- * The wrapper is anchored `right-full bottom-full`, so its bottom-right corner
- * IS the image's top-left corner. The arrow SVG is the last, bottom-aligned
- * item in the row, so the SVG's own bottom-right lands on that same point —
- * which makes SVG coordinate (SIZE, SIZE) the image corner exactly, with no
- * offsets to keep in step. With `STANDOFF` at zero the tip sits on it.
+ * Earlier versions split the leader between a flexing DOM rule and an SVG so
+ * the note could finish outside the dark panel. That made its position depend
+ * on the panel's width, the image's centring and the viewport — three things
+ * that are awkward to reason about and easy to get wrong. Everything now lives
+ * inside one fixed-size SVG sitting in the gap beside the image, so the
+ * geometry is exact and independent of layout.
  *
- * Two different offsets join the rule to the diagonal, which is easy to get
- * wrong: vertically the rule lifts from the row's bottom (the SVG's bottom
- * edge) by `SIZE - shoulder`; horizontally its right edge already ends at the
- * SVG's LEFT edge, so it only reaches in by `shoulder`.
- *
- * ## Note on reach
- *
- * With a 100px rule the whole callout is about 217px wide, so it straddles the
- * dark panel's left edge at ~1280–1440 and sits inside the panel above that —
- * the clearance beside the centred image grows with the viewport (172px at
- * 1280, 342px at 1920). A leader long enough to always finish in the reading
- * column has to flex with that clearance; this one is fixed by request.
- * `RULE_LENGTH` is the single number to change if that trade needs revisiting.
+ * Anchoring: the element is `right-full` with `top: -CORNER_Y`, which puts SVG
+ * coordinate (WIDTH, CORNER_Y) exactly on the image's top-left corner.
  *
  * Purely decorative: `aria-hidden`, and it never takes pointer events.
  */
 
-/** The arrow SVG is square; its bottom-right corner is the image's corner. */
-const SIZE = 64;
-/** Gap between the tip and the corner. Zero: they touch. */
-const STANDOFF = 0;
-/** Where the diagonal meets the horizontal rule, measured from the corner. */
-const DIAGONAL = 34;
-/** Visible length of the horizontal run. */
-const RULE_LENGTH = 100;
+const WIDTH = 132;
+const HEIGHT = 132;
+
+/** The image's top-left corner is at (WIDTH, CORNER_Y). */
+const CORNER_Y = 12;
+
+/** Horizontal run, from the corner leftwards. */
+const ELBOW_X = 56;
+/** Vertical run, from the elbow downwards. */
+const DROP_TO_Y = 88;
 
 const HEAD_LEN = 15;
 const HEAD_HALF_WIDTH = 5.2;
-/** Label cap height, for centring it on the rule. */
-const LABEL_HALF = 6;
 
 export function RadiusCallout({
   radius = 10,
@@ -60,69 +51,48 @@ export function RadiusCallout({
   instances?: number;
   className?: string;
 }) {
-  const tip = SIZE - STANDOFF;
-  const shoulder = tip - DIAGONAL;
-  const liftFromBottom = SIZE - shoulder;
-  const reachIntoSvg = shoulder;
-
-  /*
-   * Arrowhead built from the leader's own direction — the barbs go BACK along
-   * the diagonal from the tip. An earlier version put them on the far side and
-   * then rotated 180°, which landed them on the far side again, so the head
-   * pointed away from the corner and floated off the end of the tail.
-   */
-  const u = Math.SQRT1_2; // the diagonal is exactly 45°
-  const baseX = tip - u * HEAD_LEN;
-  const baseY = tip - u * HEAD_LEN;
-  const px = -u * HEAD_HALF_WIDTH;
-  const py = u * HEAD_HALF_WIDTH;
+  // Tip sits on the corner; the head points right, so its base is to the left.
+  const tipX = WIDTH;
+  const baseX = tipX - HEAD_LEN;
 
   return (
-    <div
+    <svg
       aria-hidden="true"
-      className={cn(
-        "pointer-events-none absolute bottom-full right-full flex items-end",
-        className,
-      )}
+      className={cn("pointer-events-none absolute right-full", className)}
+      style={{ top: -CORNER_Y }}
+      width={WIDTH}
+      height={HEIGHT}
+      viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+      fill="none"
     >
-      {/* The note rides on the leader, centred on its line. */}
-      <span
-        className="u-mono whitespace-nowrap text-[0.8125rem] leading-none"
-        style={{ letterSpacing: "0.1em", marginBottom: liftFromBottom - LABEL_HALF }}
-      >
-        {instances}X R{radius}px
-      </span>
-
-      {/* Horizontal run, landing exactly on the diagonal's start point. */}
-      <span
-        className="ml-2.5 h-px bg-current opacity-90"
-        style={{
-          width: RULE_LENGTH,
-          marginBottom: liftFromBottom,
-          marginRight: -reachIntoSvg,
-        }}
+      {/* Leader: horizontal off the corner, then straight down to the note.
+          Starts at the arrowhead's base so the two read as one stroke. */}
+      <path
+        d={`M${baseX} ${CORNER_Y} L${ELBOW_X} ${CORNER_Y} L${ELBOW_X} ${DROP_TO_Y}`}
+        stroke="currentColor"
+        strokeWidth="1.1"
+        vectorEffect="non-scaling-stroke"
+        opacity="0.9"
       />
 
-      <svg
-        width={SIZE}
-        height={SIZE}
-        viewBox={`0 0 ${SIZE} ${SIZE}`}
-        fill="none"
-        className="shrink-0"
+      {/* Filled head, apex exactly on the corner, pointing right. */}
+      <path
+        d={`M${tipX} ${CORNER_Y} L${baseX} ${CORNER_Y - HEAD_HALF_WIDTH} L${baseX} ${CORNER_Y + HEAD_HALF_WIDTH} Z`}
+        fill="currentColor"
+      />
+
+      {/* Note, centred under the vertical run. */}
+      <text
+        x={ELBOW_X}
+        y={DROP_TO_Y + 20}
+        textAnchor="middle"
+        fill="currentColor"
+        fontFamily="var(--font-mono)"
+        fontSize="13"
+        letterSpacing="1.3"
       >
-        <path
-          d={`M${shoulder} ${shoulder} L${baseX} ${baseY}`}
-          stroke="currentColor"
-          strokeWidth="1.1"
-          vectorEffect="non-scaling-stroke"
-          opacity="0.9"
-        />
-        {/* Filled head, apex exactly on the tip. */}
-        <path
-          d={`M${tip} ${tip} L${baseX + px} ${baseY + py} L${baseX - px} ${baseY - py} Z`}
-          fill="currentColor"
-        />
-      </svg>
-    </div>
+        {instances}X R{radius}px
+      </text>
+    </svg>
   );
 }

@@ -79,13 +79,10 @@ export function Hero() {
           </div>
         </div>
 
-        {/* --- Flagship system, dark panel ---
-             Deliberately no `overflow-hidden`: the radius callout on the lead
-             image runs out past this panel's left edge into the reading
-             column. */}
+        {/* --- Flagship system, dark panel --- */}
         <div
           data-panel="dark"
-          className="relative flex flex-col justify-between bg-void px-[var(--gutter)] py-8 text-fg lg:px-10 lg:py-12"
+          className="relative flex flex-col justify-between overflow-hidden bg-void px-[var(--gutter)] py-8 text-fg lg:px-10 lg:py-12"
         >
           <div className="flex items-start justify-between gap-6">
             <p className="u-meta text-accent">
@@ -114,10 +111,9 @@ export function Hero() {
               >
                 {/* Calls out the fillet on the image's own corner. Keep the
                     radius in step with `--radius-media` in globals.css. */}
-                {/* `text-steel` rather than a panel token: the note ends up on the
-                    eggshell reading column, where the dark panel's own greys are
-                    far too light (2.9:1). Steel reads on both. */}
-                <RadiusCallout radius={10} className="z-10 text-steel" />
+                {/* Sits entirely inside this panel, in the gap beside the
+                    image. `text-fg-3` is the panel's own muted tone. */}
+                <RadiusCallout radius={10} className="z-10 text-fg-3" />
                 <SpecPlate
                   image={lead.hero}
                   detail="brief"
