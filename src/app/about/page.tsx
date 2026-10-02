@@ -16,9 +16,6 @@ export const metadata = pageMetadata({
   path: "/about",
 });
 
-// The portrait slot is the real headshot; the rest of aboutMedia is the collage.
-const collage = aboutMedia.slice(1);
-
 export default function AboutPage() {
   return (
     <>
@@ -31,9 +28,21 @@ export default function AboutPage() {
       <Section space="tight" datum="About">
         <Container wide>
           <Reveal className="grid gap-x-12 gap-y-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-start">
-            <div className="prose-editorial">
-              {about.body.map((paragraph) => (
-                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+            <div>
+              <div className="prose-editorial">
+                {about.body.map((paragraph) => (
+                  <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+                ))}
+              </div>
+
+              {aboutMedia.map((image) => (
+                <MediaFigure
+                  key={image.id}
+                  image={image}
+                  detail="brief"
+                  sizes="(min-width: 1024px) 30vw, 100vw"
+                  className="mt-12 max-w-[30rem]"
+                />
               ))}
             </div>
 
@@ -43,23 +52,6 @@ export default function AboutPage() {
                 detail="brief"
                 sizes="(min-width: 1024px) 34vw, 100vw"
               />
-            </div>
-          </Reveal>
-        </Container>
-      </Section>
-
-      <Section space="tight" datum="About">
-        <Container wide>
-          <Reveal>
-            <div className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-3">
-              {collage.map((image) => (
-                <MediaFigure
-                  key={image.id}
-                  image={image}
-                  detail="brief"
-                  sizes="(min-width: 640px) 30vw, 100vw"
-                />
-              ))}
             </div>
           </Reveal>
         </Container>

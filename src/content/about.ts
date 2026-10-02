@@ -28,50 +28,21 @@ export const headshot: ImageBrief = {
   height: 1500,
 };
 
-/** Supporting collage for the About page. */
+/** Work photos for the About page, shown under the text. */
 export const aboutMedia: ImageBrief[] = [
   {
-    id: "about-portrait",
+    id: "about-sageware",
     orientation: "portrait",
-    kind: "portrait",
-    label: "P.1 — PORTRAIT",
-    subject:
-      "Me at a workbench or beside a machine I built, working rather than posing — hands engaged, eyes on the work.",
-    composition:
-      "Portrait orientation, three-quarter body, subject offset to one side with the workspace legible behind; no crossed arms, no studio backdrop.",
-    lighting:
-      "Available workshop or lab light with one soft directional source; warm grade; honest environment.",
-    purpose:
-      "Establish a real person in a real workspace — credible rather than corporate.",
-  },
-  {
-    id: "about-collage-1",
-    orientation: "square",
-    kind: "sketch",
-    label: "P.2 — NOTEBOOK",
-    subject: "An open engineering notebook page: sketches, dimensions, a load-path diagram, calculations in the margin.",
-    composition: "Flat overhead, page filling the frame, pen linework legible.",
-    lighting: "Soft diffuse daylight, warm paper tone, minimal shadow.",
-    purpose: "Show the thinking that happens before CAD.",
-  },
-  {
-    id: "about-collage-2",
-    orientation: "square",
-    kind: "macro",
-    label: "P.3 — FABRICATION",
-    subject: "Macro of a fabrication detail — a fresh machined face, a tool mark, a finished weld or a printed part's layer lines.",
-    composition: "Extreme close crop, texture filling the frame, single surface in focus.",
-    lighting: "Hard raking key to bring out surface texture; dark surround.",
-    purpose: "Register the tactile, material side of the work.",
-  },
-  {
-    id: "about-collage-3",
-    orientation: "square",
     kind: "photograph",
-    label: "P.4 — OUTSIDE",
-    subject: "A running, hiking or skiing moment — landscape-forward, subject small or absent.",
-    composition: "Square crop, horizon high or low, no action-sports cliché.",
-    lighting: "Natural daylight, warm grade consistent with the rest of the site.",
-    purpose: "Give the page a human register without turning it into a lifestyle gallery.",
+    label: "P.1 — SAGEWARE",
+    subject: "Working inside the Sageware frame.",
+    composition: "As shot.",
+    lighting: "Available light.",
+    purpose: "Show the work in progress.",
+    caption: "Working on Sageware at Generate.",
+    src: "/images/about-sageware-build.jpg",
+    alt: "Michael Marchev working inside the Sageware machine's aluminium frame, with teammates at the same workshop table.",
+    width: 1500,
+    height: 2000,
   },
 ];

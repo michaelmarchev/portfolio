@@ -2,6 +2,7 @@ import { Container } from "@/components/layout/Container";
 import { MediaFigure } from "@/components/media/MediaFigure";
 import { Reveal } from "@/components/ui/Reveal";
 import type { CaseStudySection } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 /**
  * Case-study body.
@@ -74,7 +75,13 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
                    * `break-inside-avoid` keeps a figure and its caption
                    * together; `wide` images opt out of the column flow.
                    */
-                  <div className="mt-10 max-w-[62rem] [column-gap:1.75rem] sm:[columns:2]">
+                  <div
+                    className={cn(
+                      "max-w-[62rem] [column-gap:1.75rem] sm:[columns:2]",
+                      // An image-only section starts level with its title.
+                      (section.body.length > 0 || section.list) && "mt-10",
+                    )}
+                  >
                     {section.media.map((image) => (
                       <div
                         key={image.id}

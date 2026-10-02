@@ -132,6 +132,13 @@ export interface Project {
   hero: ImageBrief;
   /** Card image for the archive and homepage spreads. */
   card: ImageBrief;
+  /**
+   * A purpose-drawn illustration shown in place of the hero and card images.
+   * The X-Ray Scanner has no publishable CAD yet, so its axonometric drawing
+   * stands in on the case study, the homepage and the archive. The hero and
+   * card briefs still supply the label and caption.
+   */
+  drawing?: "gantry-axonometric";
   specs: Spec[];
   tools: string[];
   team?: string;

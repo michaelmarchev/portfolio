@@ -501,6 +501,19 @@ hr {
   }
 }
 
+/*
+ * The same reveal on SVG text — the homepage hero's drawing callouts. Each
+ * character is its own <text> element, because transforms do not apply to
+ * <tspan>; `fill-box` makes the 0.45em offset relative to the glyph.
+ */
+.callout-letter {
+  opacity: 0;
+  transform: translateY(0.45em);
+  transform-box: fill-box;
+  animation: letter-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation-delay: var(--letter-delay, 0ms);
+}
+
 /* Rounded media, on every page including case studies. */
 .media-round {
   border-radius: var(--radius-media);
@@ -809,7 +822,8 @@ hr {
     animation: none !important;
   }
 
-  .title-letter {
+  .title-letter,
+  .callout-letter {
     animation: none !important;
     opacity: 1;
     transform: none;

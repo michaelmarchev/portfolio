@@ -8,6 +8,8 @@ import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { FlipWords } from "@/components/home/FlipWords";
 import { RadiusCallout } from "@/components/graphics/RadiusCallout";
 import { CornerAccents } from "@/components/graphics/CornerAccents";
+import { DimensionCallouts } from "@/components/graphics/DimensionCallouts";
+import { FlyInText } from "@/components/ui/FlyInText";
 
 /**
  * Homepage hero.
@@ -104,13 +106,18 @@ export function Hero() {
               variants after base utilities, so `lg:w-auto` wins over the
               plate's own `w-full` at desktop.
 
-              The radius callout sits between the label row and the image,
-              its note's ink 15.5–26.5px above the image's top edge, so the
-              gap must stay at least 40px. Below lg that is `mt-11`; at lg the
-              centring room already gives 43–74px (measured from 1024×600 to
-              1920×1080 — the reading column sets the panel's height, so it
-              never gets short enough to squeeze the gap). */}
-          <div className="mb-4 mt-11 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:py-4">
+              The image carries drawing callouts on three sides, and each
+              needs room:
+              - above: the radius callout, ink 15.5–26.5px above the image —
+                at least 40px to the label row (`mt-11` below lg; the
+                centring room gives 43–74px at lg);
+              - right: the height dimension, ≈ 36px — the image is 2rem
+                narrower than the column below lg, and the panel padding
+                covers it at lg;
+              - below: the width dimension and the units note, ≈ 46px, or
+                ≈ 62px where the note wraps to two lines on a phone
+                (`mb-20` below lg, `lg:pb-12`). */}
+          <div className="mb-20 mt-11 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:pb-12 lg:pt-4">
             {lead && (
               <Link
                 href={`/projects/${lead.slug}`}
@@ -128,7 +135,7 @@ export function Hero() {
                   aspect ratio, so the box is the image and nothing else.
                 */}
                 <div
-                  className="relative mx-auto w-full max-w-[27rem] lg:h-[90%] lg:w-auto lg:max-w-none"
+                  className="relative mx-auto w-[calc(100%-2rem)] max-w-[27rem] lg:h-[90%] lg:w-auto lg:max-w-none"
                   style={{
                     aspectRatio: `${lead.hero.width} / ${lead.hero.height}`,
                   }}
@@ -142,6 +149,16 @@ export function Hero() {
                     className="h-full w-full"
                   />
                   <CornerAccents radius={10} strokeWidth={3.6} className="text-accent" />
+                  <DimensionCallouts delay={450} className="text-accent" />
+                  {/* General note, as on a drawing sheet: bottom right, under
+                      the width dimension. */}
+                  <p className="u-meta pointer-events-none absolute right-0 top-[calc(100%+1.875rem)] z-10 w-max max-w-[calc(100vw-4rem)] text-right text-fg-3">
+                    <FlyInText
+                      text="ALL UNITS ARE IN PIXELS UNLESS OTHERWISE NOTED"
+                      delay={1100}
+                      stagger={16}
+                    />
+                  </p>
                 </div>
               </Link>
             )}

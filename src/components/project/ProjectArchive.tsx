@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { GantryPlate } from "@/components/graphics/GantryFigure";
 import { SpecPlate } from "@/components/media/SpecPlate";
 import type { Project, ProjectCategory } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -176,13 +177,17 @@ function ArchiveCard({ project, wide }: { project: Project; wide: boolean }) {
             wide && "md:grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-8",
           )}
         >
-          <SpecPlate
-            image={project.card}
-            detail={wide ? "brief" : "label"}
-            sizes={
-              wide ? "(min-width: 768px) 28vw, 100vw" : "(min-width: 768px) 32vw, 100vw"
-            }
-          />
+          {project.drawing === "gantry-axonometric" ? (
+            <GantryPlate />
+          ) : (
+            <SpecPlate
+              image={project.card}
+              detail={wide ? "brief" : "label"}
+              sizes={
+                wide ? "(min-width: 768px) 28vw, 100vw" : "(min-width: 768px) 32vw, 100vw"
+              }
+            />
+          )}
 
           <div className={cn(wide && "md:self-center")}>
         <div className="mt-4 flex items-baseline gap-3">

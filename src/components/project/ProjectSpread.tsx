@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GantryFigure } from "@/components/graphics/GantryFigure";
 import { MediaFigure } from "@/components/media/MediaFigure";
 import { Reveal } from "@/components/ui/Reveal";
 import type { Project } from "@/lib/types";
@@ -55,14 +56,18 @@ export function ProjectSpread({
             screen readers.
           */}
           <Link href={href} className="block no-underline" tabIndex={-1}>
-            <MediaFigure
-              image={project.card}
-              detail={isFeature ? "full" : "brief"}
-              sizes={
-                isFeature ? "(min-width: 1024px) 92vw, 100vw" : "(min-width: 1024px) 48vw, 100vw"
-              }
-              ratio={isFeature ? "21 / 9" : undefined}
-            />
+            {project.drawing === "gantry-axonometric" ? (
+              <GantryFigure label={project.card.label} caption={project.card.caption} />
+            ) : (
+              <MediaFigure
+                image={project.card}
+                detail={isFeature ? "full" : "brief"}
+                sizes={
+                  isFeature ? "(min-width: 1024px) 92vw, 100vw" : "(min-width: 1024px) 48vw, 100vw"
+                }
+                ratio={isFeature ? "21 / 9" : undefined}
+              />
+            )}
           </Link>
         </div>
 

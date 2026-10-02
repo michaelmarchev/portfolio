@@ -1,3 +1,4 @@
+import { GantryFigure } from "@/components/graphics/GantryFigure";
 import { Container } from "@/components/layout/Container";
 import { MediaFigure } from "@/components/media/MediaFigure";
 import { Logo } from "@/components/ui/Logo";
@@ -58,12 +59,20 @@ export function CaseStudyHero({ project }: { project: Project }) {
 
           {/* --- Lead image, and the details when there is room beneath it --- */}
           <div className="lg:sticky lg:top-28">
-            <MediaFigure
-              image={project.hero}
-              detail="full"
-              priority
-              sizes="(min-width: 1024px) 46vw, 100vw"
-            />
+            {project.drawing === "gantry-axonometric" ? (
+              <GantryFigure
+                animate
+                label={project.hero.label}
+                caption={project.hero.caption}
+              />
+            ) : (
+              <MediaFigure
+                image={project.hero}
+                detail="full"
+                priority
+                sizes="(min-width: 1024px) 46vw, 100vw"
+              />
+            )}
           </div>
         </div>
       </Container>

@@ -60,15 +60,28 @@ const TEXT_GAP = 6;
  */
 const INK_MID = 4.5;
 
+/**
+ * DM Mono at 13px advances 7.8px per character; with the 1.3px letter
+ * spacing each character sits 9.1px after the last. Characters are placed
+ * individually so each can fly in on its own, like the page titles.
+ */
+export const CALLOUT_ADVANCE = 9.1;
+export const CALLOUT_CHAR = 7.8;
+/** Matches the title reveal's per-letter stagger (`AnimatedTitle`). */
+export const CALLOUT_STAGGER = 51;
+
 export function RadiusCallout({
   radius = 10,
   instances = 4,
+  delay = 200,
   className,
 }: {
   /** The fillet radius being called out, in CSS pixels. */
   radius?: number;
   /** How many corners carry it — the `4X` in the note. */
   instances?: number;
+  /** When the fly-in starts, in ms after the element appears. */
+  delay?: number;
   className?: string;
 }) {
   /**
@@ -97,32 +110,92 @@ export function RadiusCallout({
       viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
       fill="none"
     >
+      {/* Fly-in: the head fades in on the corner, the leader draws out from
+          it, then the note's characters rise into place one at a time. */}
+
       {/* Leader: straight up off the corner, then right to the note. Starts
-          at the arrowhead's base so the two read as one stroke. */}
+          at the arrowhead's base so the two read as one stroke, and draws in
+          that direction. */}
       <path
         d={`M${TIP_X} ${headBaseY} L${TIP_X} ${shoulderY} L${shoulderEndX} ${shoulderY}`}
         stroke="currentColor"
         strokeWidth="1.1"
         vectorEffect="non-scaling-stroke"
         opacity="0.9"
+        className="draw-line"
+        style={drawIn(headBaseY - shoulderY + RUN, delay + 150)}
       />
 
       {/* Filled head, apex exactly on the corner, pointing down. */}
       <path
         d={`M${TIP_X} ${TIP_Y} L${TIP_X - HEAD_HALF_WIDTH} ${headBaseY} L${TIP_X + HEAD_HALF_WIDTH} ${headBaseY} Z`}
         fill="currentColor"
+        className="fade-in"
+        style={fadeIn(delay)}
       />
 
-      <text
+      <CalloutText
+        text={`${instances}X R${radius}`}
         x={shoulderEndX + TEXT_GAP}
-        y={shoulderY + INK_MID}
-        fill="currentColor"
-        fontFamily="var(--font-mono)"
-        fontSize="13"
-        letterSpacing="1.3"
-      >
-        {instances}X R{radius}
-      </text>
+        baseline={shoulderY + INK_MID}
+        delay={delay + 450}
+      />
     </svg>
   );
+}
+
+/** Style for `.draw-line`: stroke draws on over its length. */
+export function drawIn(length: number, delay: number, duration = 600): React.CSSProperties {
+  return {
+    ["--len" as string]: Math.ceil(length) + 2,
+    ["--draw-delay" as string]: `${delay}ms`,
+    animationDuration: `${duration}ms`,
+  };
+}
+
+/** Style for `.fade-in`. */
+export function fadeIn(delay: number, duration = 400): React.CSSProperties {
+  return { ["--fade-delay" as string]: `${delay}ms`, animationDuration: `${duration}ms` };
+}
+
+/**
+ * A callout note set one `<text>` per character, so each can fly in like a
+ * title letter. Transforms do not apply to `<tspan>`, hence separate
+ * elements; DM Mono is monospaced, so the positions are exact. `x` is the
+ * left edge of the first character.
+ */
+export function CalloutText({
+  text,
+  x,
+  baseline,
+  delay,
+}: {
+  text: string;
+  x: number;
+  baseline: number;
+  delay: number;
+}) {
+  let shown = 0;
+  return (
+    <g fill="currentColor" fontFamily="var(--font-mono)" fontSize="13">
+      {Array.from(text).map((ch, i) =>
+        ch === " " ? null : (
+          <text
+            key={i}
+            x={x + i * CALLOUT_ADVANCE}
+            y={baseline}
+            className="callout-letter"
+            style={{ ["--letter-delay" as string]: `${delay + shown++ * CALLOUT_STAGGER}ms` }}
+          >
+            {ch}
+          </text>
+        ),
+      )}
+    </g>
+  );
+}
+
+/** Rendered width of a callout note, from its first ink to its last. */
+export function calloutWidth(text: string): number {
+  return text.length * CALLOUT_ADVANCE - (CALLOUT_ADVANCE - CALLOUT_CHAR);
 }
