@@ -5,7 +5,7 @@ import type { Project, ProjectCategory } from "@/lib/types";
  *
  * Order here sets the order everywhere: homepage spreads, archive, sitemap and
  * next/prev links. To add a project, append an object and give it the next
- * index. To add a real photograph, drop the file in /public/projects and set
+ * index. To add a real photograph, drop the file in /public/images and set
  * `src` + `alt` on the matching image brief.
  */
 
@@ -16,15 +16,13 @@ export const projectCategories: ProjectCategory[] = [
   "R&D Testing",
   "Medical / Human-Centered Design",
   "Sustainability",
-  "Manufacturing",
   "Research",
-  "Additive Manufacturing",
   "Experimental Design",
 ];
 
 export const projects: Project[] = [
   /* ==============================================================
-     01 — X-RAY SCANNER FOR LUMAFIELD
+     01 — PRECISION OPTICAL POSITIONING FIXTURE
      ============================================================== */
   {
     slug: "precision-optical-positioning-fixture",
@@ -50,7 +48,7 @@ export const projects: Project[] = [
       "Medical Devices",
     ],
     cardSummary:
-      "A five-axis optical positioning bench, sub-10-micron, replacing a fully manual setup.",
+      "An optical positioning bench with four motorized and four manual axes, sub-10-micron, replacing a fully manual setup.",
     summary:
       "Precisely constrains and moves optical devices with respect to a target. Four motorized and four manual axes, sub-10-micron, inside a blackout cage. Replaced a completely manual bench.",
     tools: ["SOLIDWORKS", "Creo", "HALT chamber", "Standard + torsional Instron", "One-off fixtures", "Excel"],
@@ -67,7 +65,7 @@ export const projects: Project[] = [
       orientation: "landscape",
       kind: "cad-render",
       label: "01.0 — GANTRY ASSEMBLY",
-      subject: "The five-axis gantry assembly with travel annotated on each axis.",
+      subject: "The gantry assembly with travel annotated on each axis.",
       composition:
         "Wide, low, tightly cropped so the stage stack fills the frame; coordinate triad and axis labels in the lower left; deliberately anonymous hardware.",
       lighting:
@@ -77,7 +75,7 @@ export const projects: Project[] = [
       caption: "The gantry assembly, with each axis of travel annotated.",
       status: "final",
       src: "/images/optics-bench-gantry-cad.jpg",
-      alt: "CAD assembly of the five-axis optical positioning gantry: a vertical tower on a two-axis base stage with an articulated head at the top, travel arrows marking each axis of motion.",
+      alt: "CAD assembly of the optical positioning gantry:a vertical tower on a two-axis base stage with an articulated head at the top, travel arrows marking each axis of motion.",
       width: 940,
       height: 1216,
     },
@@ -478,7 +476,6 @@ export const projects: Project[] = [
     categories: [
       "R&D Testing",
       "Experimental Design",
-      "Manufacturing",
       "Medical / Human-Centered Design",
     ],
     projectType: [
@@ -894,8 +891,8 @@ export const projects: Project[] = [
     categories: [
       "Technical Leadership",
       "Automation / Motion Systems",
+      "Product Development",
       "Experimental Design",
-      "Manufacturing",
     ],
     projectType: [
       "Technical Leadership",
@@ -959,21 +956,20 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        id: "why",
-        title: "Why automated shielding verification matters",
+        id: "system",
+        title: "System",
         body: [
-          "An industrial X-ray CT scanner is a shielded machine, and confirming that the shielding performs as designed means measuring the radiation field around it rather than trusting the drawing. That verification is routine, repeated, and consequential — it is the measurement that lets a team state plainly how a system behaves in the space around it.",
-          "The value of automating it is not speed alone. A measurement that a machine performs the same way every time can be compared across units, across builds, and across time. That turns a survey into a dataset.",
+          "A five-axis gantry, roughly 7 ft × 7 ft × 4 ft, to automate X-ray emission scans around Lumafield Neptune industrial CT scanners.",
+          "Target positioning repeatability: 1 mm.",
         ],
         note:
-          "This project is a measurement tool. Nothing here suggests that Lumafield scanners are unsafe or inadequately shielded; the work is intended to make routine shielding verification more systematic and repeatable.",
+          "This project is a measurement tool. Nothing here suggests that Lumafield scanners are unsafe or inadequately shielded.",
       },
       {
         id: "manual",
-        title: "The manual process and its repeatability limits",
+        title: "Manual process",
         body: [
-          "Today an operator traces a Thermo Fisher RadEye G20 survey meter slowly across the faces of the system by hand. It works, and experienced operators are good at it — but the path, the standoff distance, the dwell time and the coverage all depend on the person holding the instrument.",
-          "Two consequences follow. The scan takes a meaningful amount of an engineer's time, and results carry operator-to-operator variation that is difficult to separate from the thing being measured. Both are problems a motion system can address directly.",
+          "The scan is currently done by hand, tracing a Thermo Fisher RadEye G20 survey meter across the faces of the scanner.",
         ],
         media: [
           {
@@ -988,33 +984,26 @@ export const projects: Project[] = [
             lighting: "Flat vector artwork on eggshell; steel linework with the automated path in signal blue.",
             purpose:
             "Make the repeatability argument visually in one glance, without implying the manual method is unsafe.",
-            caption:
-            "Manual tracing versus a planned automated path. The difference the project targets is consistency of coverage, standoff and dwell — not the presence of shielding.",
+            caption: "Manual tracing versus a planned automated path.",
             status: "concept",
           },
         ],
       },
       {
         id: "requirements",
-        title: "Functional requirements and the scanning envelope",
-        body: [
-          "My first job as technical lead was to turn a measurement task into engineering requirements. What surfaces must be reached, at what standoff, in what orientation, and how precisely does the instrument need to return to a point for two scans to be comparable?",
-          "That produced the envelope: a working volume of roughly 7 ft × 7 ft × 4 ft around the scanner, reach to multiple faces without repositioning the frame, and a target positioning repeatability of 1 mm. Repeatability — returning to the same point — matters more here than absolute accuracy, because the comparison of interest is between scans.",
-        ],
+        title: "Requirements",
+        body: [],
         list: [
-          "Reach multiple scanner faces from a single fixed frame setup.",
-          "Hold the survey meter at a controlled standoff and orientation along each path.",
-          "Target 1 mm positioning repeatability across the working volume.",
-          "Fit, assemble and be serviced in the space the scanner already occupies.",
-          "Allow the instrument to be removed and recalibrated without disassembling the machine.",
+          "Reach multiple scanner faces from a fixed frame.",
+          "Hold the survey meter at a controlled standoff and orientation.",
+          "Target 1 mm positioning repeatability.",
         ],
       },
       {
         id: "architecture",
-        title: "Five-axis motion architecture",
+        title: "Motion architecture",
         body: [
-          "The system uses five motorized axes: gantry-scale linear travel to cover the volume, plus the additional degrees of freedom needed to hold the detector square to a surface as the path wraps around corners and across faces of differing orientation.",
-          "Choosing where to spend axes was the central architectural tradeoff. Every axis adds mass, cabling, cost and a stack-up of compliance that the end effector inherits. Axes that only exist to serve a small region of the path were candidates for removal in favor of fixturing or a re-run at a second orientation.",
+          "Five motorized axes, from the fixed frame to the survey-meter tip.",
         ],
         media: [
           {
@@ -1029,49 +1018,16 @@ export const projects: Project[] = [
             lighting: "Vector linework, steel on eggshell, blue reserved for the active axis arrows.",
             purpose:
             "Let a mechanical reader understand the kinematic chain and where compliance accumulates without reading the body copy.",
-            caption:
-            "Five-axis chain from fixed frame to survey-meter tip. Compliance accumulates along this order, which is why stiffness budget is allocated at the base.",
-            status: "concept",
-          },
-        ],
-      },
-      {
-        id: "scale",
-        title: "Designing at gantry scale: stiffness, deflection and alignment",
-        body: [
-          "At two metres of span, structure stops being a detail. A frame that is adequately strong can still be inadequately stiff: deflection under the moving mass, and sag that changes with position, both land directly on the measurement point as error.",
-          "So the stiffness budget is allocated before the aesthetics of the frame are settled. Span, section, bearing spacing and the location of the drive relative to the load are the levers. Alignment is treated the same way — the frame is designed to be squared and re-squared as a deliberate procedure, not assumed to arrive true from assembly.",
-        ],
-        list: [
-          "Deflection and position-dependent sag budgeted against the 1 mm repeatability target.",
-          "Bearing spacing and rail selection set by moment loads, not by axis length alone.",
-          "Adjustment features designed in, so squaring the frame is a procedure rather than a fight.",
-          "Assembly and transport considered early — the frame has to get into the room it works in.",
-        ],
-        media: [
-          {
-            id: "lumafield-structure",
-            orientation: "landscape",
-            kind: "diagram",
-            label: "03.3 — STRUCTURE",
-            subject:
-            "Structural and alignment diagram: gantry span with exaggerated deflection under a moving carriage, dimension lines, datum marks and adjustment points.",
-            composition:
-            "Orthographic front elevation; true geometry in steel line, exaggerated deflected shape as a dashed overlay; datum triangles at the adjustment features.",
-            lighting: "Flat technical drawing treatment on eggshell with blue dimension witness lines.",
-            purpose: "Show that the structural argument was made quantitatively, not assumed.",
-            caption:
-            "Deflected shape (exaggerated) versus true geometry. Position-dependent sag is the error source that most directly threatens the repeatability target.",
+            caption: "Five-axis chain from fixed frame to survey-meter tip.",
             status: "concept",
           },
         ],
       },
       {
         id: "end-effector",
-        title: "Survey-meter end effector and cable management",
+        title: "End effector",
         body: [
-          "The end effector holds a Thermo Fisher RadEye G20 — an instrument the team does not control and must not modify. It has to be held repeatably, at a known offset from the tool point, and be removable for calibration by someone wearing gloves.",
-          "Cable management is a first-order mechanical problem on a five-axis machine, not a finishing task. Cable carriers add drag and mass exactly where the system is least stiff, and a cable that snags is a failed scan and a damaged instrument. Routing is designed with the motion envelope, not after it.",
+          "Holds a Thermo Fisher RadEye G20 survey meter, with access for calibration.",
         ],
         media: [
           {
@@ -1091,64 +1047,23 @@ export const projects: Project[] = [
         ],
       },
       {
-        id: "coverage",
-        title: "Motion planning and measurement coverage",
-        body: [
-          "Coverage is the point of the machine. Paths are planned so the instrument sweeps each face with consistent pitch, standoff and dwell — the parameters that make one scan comparable to the next.",
-          "The mechanical design and the path plan constrain each other. A path that demands high acceleration in the least stiff part of the envelope is a path that will not repeat, so path design is treated as part of the mechanical design rather than a downstream software concern.",
-        ],
-        media: [
-          {
-            id: "lumafield-envelope",
-            orientation: "landscape",
-            kind: "diagram",
-            label: "03.5 — COVERAGE",
-            subject:
-            "Motion-envelope diagram: scanner faces unfolded, with planned scan paths, pitch spacing and the reachable volume overlaid.",
-            composition:
-            "Plan and elevation pair; scanner faces as flat planes with raster paths drawn across them; reachable envelope as a light tint.",
-            lighting: "Flat diagram on eggshell; paths in signal blue at consistent weight.",
-            purpose: "Explain what 'coverage' concretely means for this system.",
-            caption:
-            "Planned path coverage across scanner faces. Pitch and standoff are the parameters that make successive scans comparable.",
-            status: "concept",
-          },
-        ],
-      },
-      {
-        id: "validation",
-        title: "Prototype and validation plan",
-        body: [
-          "The plan is to prove the mechanics before trusting the measurement. Repeatability is characterized as a mechanical property first — commanding the machine to return to a set of points and measuring where the tool point actually lands, independent of any radiation reading.",
-          "Subsystems are prototyped ahead of the full frame: the end-effector interface, a single axis at representative span, and the cable routing through its full travel. The intent is to find the failure modes on a bench rather than on a two-metre machine.",
-        ],
+        id: "role",
+        title: "Role",
+        body: [],
         list: [
-          "Characterize positioning repeatability mechanically, before instrumented scanning.",
-          "Prototype the end effector and single-axis travel at representative span.",
-          "Exercise cable routing through full travel to surface snag and wear modes.",
-          "Define a squaring and calibration procedure that a technician can repeat.",
-        ],
-      },
-      {
-        id: "leadership",
-        title: "Leading the mechanical work",
-        body: [
-          "As technical lead I own the mechanical architecture and the decisions that follow from it: setting requirements, defining interfaces between sub-assemblies so people can work in parallel, and running design reviews where a choice gets made rather than deferred.",
-          "The practical part of the role is translation. Stakeholders describe a measurement problem; the electrical and controls sub-teams need motion envelopes, mounting interfaces and load cases. Holding that translation consistent — and writing down why a decision went the way it did — is most of what keeps a project of this size coherent.",
-        ],
-        list: [
-          "Set functional requirements, motion envelopes and mechanical interfaces.",
+          "Own the mechanical architecture and design direction.",
+          "Translate the measurement task into functional requirements, motion envelopes, load cases and mechanical interfaces for the electrical and controls sub-teams.",
           "Direct gantry, axis, mechanism, frame and end-effector decisions.",
-          "Run iterative design reviews and record the reasoning behind each decision.",
-          "Coordinate with electrical, controls and external stakeholders.",
+          "Run iterative design reviews and record the reasoning behind decisions.",
+          "Coordinate mechanical work across the project team.",
         ],
       },
       {
         id: "status",
-        title: "Current status and next milestones",
+        title: "Status",
         body: [
-          "The system is in development. Architecture and envelope are defined, mechanical design of the gantry and end effector is in progress, and subsystem prototyping is underway.",
-          "Next milestones: complete the single-axis repeatability prototype, close out the structural and alignment strategy at full span, and finalize the survey-meter interface for calibration access. Figures on this page are design targets; no repeatability, coverage or safety performance has been validated yet.",
+          "In development. Architecture and envelope are defined; mechanical design of the gantry and end effector, and subsystem prototyping, are in progress.",
+          "Figures on this page are design targets. No repeatability, coverage or safety performance has been validated yet.",
         ],
       },
     ],
@@ -1199,10 +1114,7 @@ export const projects: Project[] = [
         status: "concept",
       },
     ],
-    reflection: [
-      "The most useful thing I have done on this project is refuse to let 'precision' stay a vague ambition. Writing down repeatability as a target, deciding it mattered more than absolute accuracy, and then budgeting structure against it changed nearly every downstream decision.",
-      "Leading has also changed how I document. On a solo project the reasoning can live in my head; on a team the reasoning is the deliverable, because it is what lets four people design compatible parts at the same time.",
-    ],
+    reflection: [],
     confidentiality: "Proprietary information withheld.",
   },
   {
@@ -1220,8 +1132,6 @@ export const projects: Project[] = [
       "Product Development",
       "Sustainability",
       "Automation / Motion Systems",
-      "Manufacturing",
-      "Additive Manufacturing",
     ],
     projectType: [
       "Product Development",
@@ -1233,7 +1143,7 @@ export const projects: Project[] = [
     cardSummary:
       "Designed tooling and fixtures for a compact automated system that converts hard-to-process fabric scraps into jewelry beads.",
     summary:
-      "Developed a compact, automated system intended to transform fabric scraps into jewelry beads, supporting a more circular approach to textile waste.",
+      "A compact, automated system that upcycles fabric scraps into jewelry beads.",
     tools: ["Onshape", "SLA (high-temperature resin)", "Machined steel inserts", "Shop tools"],
     team: "Generate product-development team",
     focus: ["Tooling design", "Material behavior", "Repeatability", "Compact packaging", "Safe operation"],
@@ -1265,7 +1175,7 @@ export const projects: Project[] = [
       id: "sageware-card",
       orientation: "wide",
       kind: "macro",
-      label: "02 — MATERIAL",
+      label: "04 — MATERIAL",
       subject:
         "Macro of hardened fabric mid-process beside a sharp steel stamping insert, cut edges clearly visible.",
       composition: "Very close crop, fibers and cut edge in sharp focus, insert entering from frame edge.",
@@ -1275,19 +1185,17 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        id: "opportunity",
-        title: "Textile waste and the product opportunity",
+        id: "system",
+        title: "System",
         body: [
-          "Offcuts and remnants are among the least recoverable parts of the textile stream. They are mixed in composition, small, inconsistent, and cheap — which makes them expensive to sort and easy to landfill.",
-          "Sageware approached that from the product end: find an output worth making from difficult input. Jewelry beads are small, tolerate variation in source material, and carry enough value per gram to justify a process. The engineering question became whether a compact, reliable machine could produce them from scrap consistently.",
+          "A compact, automated system that upcycles fabric scraps into jewelry beads.",
         ],
       },
       {
         id: "material",
-        title: "Why fabric scrap is difficult to process",
+        title: "Material",
         body: [
-          "Fabric is not a machining material. It is compliant, anisotropic, variable in thickness, and it frays — so it deflects away from an edge instead of shearing cleanly, and no two pieces load into a fixture the same way.",
-          "The process therefore stabilizes the material before touching it with tooling. Once hardened, the fabric behaves closer to a sheet material: it supports a cutting edge, holds a stamped form, and can be located in a fixture repeatably. Nearly every tooling decision downstream followed from that change of state.",
+          "The fabric is hardened first, so it can be cut, stamped and located in a fixture.",
         ],
         media: [
           {
@@ -1300,40 +1208,16 @@ export const projects: Project[] = [
             composition: "Three tight frames at identical scale and angle so the change of state is the only variable.",
             lighting: "Consistent warm side light across all three; shallow depth of field; dark neutral ground.",
             purpose: "Make the central insight of the project legible in one image: change the material state first.",
-            caption:
-            "Raw scrap, hardened blank, finished bead. Hardening is what makes the fabric cuttable and locatable.",
+            caption: "Raw scrap, hardened blank, finished bead.",
             status: "prototype",
           },
         ],
       },
       {
-        id: "concept",
-        title: "The compact automation concept",
-        body: [
-          "The brief called for a machine that fits on a bench and runs without an operator managing each piece. Compactness is not just packaging here — it sets the stroke lengths, the tooling size, and how much room there is for the material to move between stations.",
-          "Working within that envelope meant combining functions. Stations that located, cut and formed in fewer motions won over sequences that were easier to design but needed more travel and more transfers, since every transfer is a chance for a compliant blank to shift.",
-        ],
-      },
-      {
         id: "tooling",
-        title: "Tooling and fixture design",
+        title: "Tooling and fixture",
         body: [
-          "My contribution was the tooling and fixturing: the parts that actually touch the material. Cutting hardened fabric needs a genuinely sharp edge with enough support behind it that the blank cannot fold rather than shear, and clearance that lets the cut piece release instead of wedging.",
-          "Fixturing had to locate a part that is nominally flat but never quite. The approach was to constrain the blank where the geometry mattered for the cut, and deliberately leave it free elsewhere — over-constraining a compliant part just moves the error somewhere less visible.",
-        ],
-        list: [
-          "Edge geometry and support set by how hardened fabric fails, not by a generic sheet-metal rule.",
-          "Clearance designed for release, so cut pieces don't wedge and jam the cycle.",
-          "Blanks constrained only where they affect the cut; freedom left elsewhere by intent.",
-          "Pinch points and guarding considered as part of tooling design.",
-        ],
-      },
-      {
-        id: "inserts",
-        title: "Steel inserts in a high-temperature SLA fixture",
-        body: [
-          "The fixture combined two manufacturing methods for two different reasons. Sharp steel inserts do the cutting and stamping, because nothing printable holds an edge against fabric for a useful number of cycles. The surrounding fixture body was printed in high-temperature SLA resin, which tolerated the process temperatures while letting the geometry iterate in a day.",
-          "That split was the enabling decision: wear-critical features in machined steel, everything else in a printed body that could change between trials. It kept iteration fast without accepting tooling that would dull after a handful of parts.",
+          "Machined sharp steel inserts cut and stamp the hardened fabric. The fixture body is high-temperature SLA resin, with the inserts seated in it.",
         ],
         media: [
           {
@@ -1346,18 +1230,16 @@ export const projects: Project[] = [
             composition: "Tight three-quarter crop showing the joint between steel and printed resin, edge catching the light.",
             lighting: "Hard raking key on the steel edge, softer fill on the resin so both materials read distinctly.",
             purpose: "Show the hybrid tooling strategy — machined where wear matters, printed where iteration matters.",
-            caption:
-            "Machined steel insert in a printed high-temperature fixture body. Wear-critical features in steel, iterable geometry in resin.",
+            caption: "Machined steel insert in a printed high-temperature fixture body.",
             status: "final",
           },
         ],
       },
       {
         id: "trials",
-        title: "Prototyping and material trials",
+        title: "Trials",
         body: [
-          "Tooling for a variable material gets designed by trial. Each fixture revision ran a batch across a deliberate spread of fabrics — different weaves, thicknesses and fiber blends — and the failures were more informative than the successes.",
-          "Frayed edges, incomplete cuts, blanks lifting and pieces sticking in the cavity each pointed at a specific geometric cause. Iterating the printed body against those modes, while keeping the steel edges fixed, was the fastest available loop.",
+          "Tooling geometry was iterated against a spread of fabric weaves, thicknesses and blends.",
         ],
         media: [
           {
@@ -1369,25 +1251,16 @@ export const projects: Project[] = [
             composition: "Flat overhead, evenly spaced left to right, each fixture paired with its output sample.",
             lighting: "Even soft light, minimal shadow, warm neutral background so resin color reads consistently.",
             purpose: "Make the iteration loop visible and show that the geometry was earned, not guessed.",
-            caption: "Fixture revisions with the parts each produced. Steel edges held constant; the printed body carried the changes.",
+            caption: "Fixture revisions with the parts each produced.",
             status: "prototype",
           },
         ],
       },
       {
-        id: "tradeoffs",
-        title: "Reliability, safety and compactness tradeoffs",
+        id: "constraints",
+        title: "Constraints",
         body: [
-          "The three requirements pulled against each other. Reliability wanted generous clearances and simple motions; compactness wanted short strokes and combined stations; safety wanted cutting edges enclosed and hands away from anything that moves.",
-          "Where they conflicted, reliability and safety won. A machine that jams once every twenty parts is not automated in any meaningful sense, and sharp tooling in a benchtop product has to be guarded by geometry rather than by instructions.",
-        ],
-      },
-      {
-        id: "outcome",
-        title: "Outcome and learning",
-        body: [
-          "By the end of the term the team had a compact automated concept that produced beads from fabric scrap, with tooling and fixturing that handled a realistic spread of input material.",
-          "The lesson I carried forward is about sequencing: with a difficult material, the highest-leverage move is usually to change the material's state so ordinary mechanical design can work on it — rather than designing ever more clever tooling around the raw behavior.",
+          "Reliability, compactness and safe operation. Cutting edges are guarded by geometry rather than instruction.",
         ],
       },
     ],
@@ -1426,10 +1299,7 @@ export const projects: Project[] = [
         status: "final",
       },
     ],
-    reflection: [
-      "Sageware taught me how much of tooling design is really material characterization. I could not design a good edge until I understood how hardened fabric fails, and I could not learn that from a datasheet.",
-      "It also made hybrid manufacturing a habit rather than a novelty: decide which features carry wear, buy or machine those, and print everything that should still be allowed to change.",
-    ],
+    reflection: [],
   },
   {
     slug: "uplift-mobility-device",
@@ -1445,8 +1315,6 @@ export const projects: Project[] = [
     categories: [
       "Medical / Human-Centered Design",
       "Product Development",
-      "Additive Manufacturing",
-      "Manufacturing",
     ],
     projectType: [
       "Human-Centered Design",
@@ -1456,192 +1324,194 @@ export const projects: Project[] = [
       "Electromechanical Integration",
     ],
     cardSummary:
-      "Developed prototypes and mechanical interfaces for a powered mobility walker with integrated seating.",
+      "A walker with powered legs and an integrated seat. Conduit linkages, mechanical interfaces and mechanical/electrical integration.",
     summary:
-      "Co-developed an advanced mobility walker with powered legs and an integrated seat to support people with limited mobility.",
+      "An advanced walker with powered legs and an integrated seat, for people with limited mobility.",
     tools: ["Onshape", "FDM (PLA)", "SLA (Grey Pro)", "Shop tools"],
     team: "Mechanical and electrical sub-teams at Generate",
     focus: ["Mechanisms", "Human factors", "Integration", "Weight", "Fast iteration"],
     specs: [
       { label: "Device", value: "Powered walker with integrated seat" },
-      { label: "Users", value: "People with limited mobility and sit-to-stand difficulty" },
+      { label: "Users", value: "People with limited mobility" },
       { label: "My scope", value: "Conduit linkages, mechanical interfaces, mech/elec integration" },
       { label: "Prototyping", value: "FDM PLA and SLA Grey Pro, iterated in Onshape" },
       { label: "Integration", value: "Motors, electronics housings, battery protection" },
     ],
     hero: {
       id: "uplift-hero",
-      orientation: "panoramic",
-      kind: "prototype",
+      orientation: "square",
+      kind: "photograph",
       label: "05.0 — DEVICE",
-      subject:
-        "The full walker prototype, seat deployed, powered leg linkages visible, standing at human scale.",
-      composition:
-        "Eye-level wide shot with the device roughly a third into frame, clean floor plane, silhouette reading clearly against a plain wall.",
-      lighting:
-        "Soft daylight from one side, warm neutral wall, gentle floor shadow; honest prototype finish left visible.",
-      purpose:
-        "Lead with the human scale and the purpose of the device, not with its mechanism detail.",
-      caption: "Powered walker prototype with integrated seat.",
+      subject: "The finished walker prototype, seat and powered legs visible.",
+      composition: "As shot.",
+      lighting: "Available light.",
+      purpose: "Show the finished device.",
+      caption: "The finished prototype, with powered legs, integrated seat and cable carriers on each side.",
       status: "prototype",
+      src: "/images/uplift-showcase.jpg",
+      alt: "The white walker prototype on display: aluminium tube frame, printed joints, a black seat, a backrest housing, handles with controls, and cable carriers running down each side to the powered legs.",
+      width: 1500,
+      height: 1480,
     },
     card: {
       id: "uplift-card",
-      orientation: "wide",
-      kind: "prototype",
-      label: "03 — MOBILITY",
-      subject: "Three-quarter view of the prototype with strong silhouette and the leg linkage mid-travel.",
-      composition: "Wide crop, device offset left, generous negative space to the right for text.",
-      lighting: "Soft directional daylight, plain background, no clinical staging.",
-      purpose: "Signal human-centered work between two hardware-heavy projects.",
-      status: "prototype",
+      orientation: "portrait",
+      kind: "cad-render",
+      label: "05 — MOBILITY",
+      subject: "Full CAD assembly of the walker.",
+      composition: "As drawn.",
+      lighting: "Flat CAD shading.",
+      purpose: "Full CAD assembly: frame, seat, backrest housing, handles and four powered legs.",
+      caption: "Full assembly.",
+      status: "final",
+      src: "/images/uplift-assembly-cad.png",
+      alt: "CAD assembly of the walker: tube frame, seat, backrest housing and handles above four powered legs on caster wheels.",
+      width: 652,
+      height: 737,
     },
     sections: [
       {
-        id: "need",
-        title: "User need and design opportunity",
+        id: "device",
+        title: "Device",
         body: [
-          "For many people with limited mobility, the hardest part of the day is not walking — it is standing up, and knowing there is somewhere to sit. A standard walker helps with one and ignores the other, so users either carry a separate seat or plan routes around where they can rest.",
-          "Uplift set out to combine both: powered assistance through the sit-to-stand transition, with a seat integrated into the frame rather than bolted on. That made the mechanism and the human factors inseparable from the start.",
-        ],
-      },
-      {
-        id: "requirements",
-        title: "Mobility, stability, seating and actuation requirements",
-        body: [
-          "The device has to be stable through a transition in which the user's center of mass moves substantially — the least stable moment is exactly the moment the user most needs support. It also has to be light enough to be manoeuvred by the person using it, which puts stability and mass in direct conflict.",
-          "Seating added geometry constraints: the seat has to be at a usable height, clear of the legs in both states, and reachable without the user turning around. Those requirements bounded the linkage design more tightly than the actuation did.",
-        ],
-        list: [
-          "Stable support through the full sit-to-stand transition, not just at the endpoints.",
-          "Light enough to manoeuvre unaided.",
-          "Seat clear of the leg mechanism in both deployed and stowed states.",
-          "Powered assistance with predictable, unsurprising motion.",
-          "Nothing sharp, pinching or exposed within reach of a user's hands.",
-        ],
-      },
-      {
-        id: "architecture",
-        title: "Early concepts and system architecture",
-        body: [
-          "Early work was about eliminating architectures rather than perfecting one. Configurations were laid out, checked for interference through their full range, and discarded where the seat fouled the legs, the footprint grew beyond doorway width, or the linkage needed force where a user's hands would be.",
-          "What survived was an architecture where the powered legs and the seat shared a frame and a coordinated motion, so a single transition served both functions instead of asking the user to operate two systems.",
+          "A walker with powered legs and an integrated seat, for people with limited mobility.",
         ],
         media: [
           {
-            id: "uplift-exploded",
-            orientation: "landscape",
-            kind: "exploded-view",
-            label: "05.1 — ARCHITECTURE",
-            subject: "Exploded CAD view of the device: frame, leg linkages, seat assembly, actuation and electronics housing.",
-            composition: "Exploded along the frame axis, thin leader lines, subassemblies grouped and numbered.",
-            lighting: "Neutral studio render, matte finish, dark ground, no reflective drama.",
-            purpose: "Show how seat, legs and electronics share one frame.",
-            status: "concept",
+            id: "uplift-assembly",
+            orientation: "portrait",
+            kind: "cad-render",
+            label: "05.1 — ASSEMBLY",
+            subject: "Full CAD assembly of the walker.",
+            composition: "As drawn.",
+            lighting: "Flat CAD shading.",
+            purpose: "Document the design.",
+            caption: "Full assembly: frame, seat, backrest housing, handles and four powered legs.",
+            status: "final",
+            src: "/images/uplift-assembly-cad.png",
+            alt: "CAD assembly of the walker: tube frame, seat, backrest housing and handles above four powered legs on caster wheels.",
+            width: 652,
+            height: 737,
           },
         ],
       },
       {
         id: "linkages",
-        title: "Linkage and conduit iterations",
+        title: "Conduit linkages",
         body: [
-          "I led iterative development of the conduit linkages in Onshape — the parts that route and constrain motion between the frame and the powered legs. Linkages are unforgiving: a few millimetres of change at a pivot moves the whole path and can turn a smooth transition into a bind at one end of travel.",
-          "The loop was deliberately tight. Model a revision, print it, assemble it into the prototype, run it through full travel by hand, find where it bound or flexed, and change one thing. Most revisions changed a single dimension or a single fillet.",
+          "I led iterative development of the conduit linkages in Onshape, printed in FDM PLA and SLA Grey Pro.",
         ],
         media: [
           {
-            id: "uplift-linkage",
+            id: "uplift-tee",
             orientation: "landscape",
-            kind: "prototype",
-            label: "05.2 — ITERATION",
-            subject: "Series of printed conduit linkage iterations laid out in chronological order.",
-            composition: "Flat overhead, left to right by revision, consistent spacing and orientation.",
-            lighting: "Even soft light, minimal shadow, print layer lines visible.",
-            purpose: "Make the design process legible: many small, evidence-driven changes.",
-            caption: "Conduit linkage revisions in order. Most changed one dimension in response to one observed bind or flex.",
-            status: "prototype",
+            kind: "cad-render",
+            label: "05.2 — TEE CONDUIT",
+            subject: "CAD of a three-way conduit linkage.",
+            composition: "As drawn.",
+            lighting: "Flat CAD shading.",
+            purpose: "Document the design.",
+            caption: "Three-way conduit linkage.",
+            status: "final",
+            src: "/images/uplift-tee-conduit-cad.png",
+            alt: "CAD view of a printed three-way tube connector with a vertical socket and two angled branches.",
+            width: 833,
+            height: 675,
           },
-        ],
-      },
-      {
-        id: "printing",
-        title: "FDM and SLA prototype development",
-        body: [
-          "The two processes did different jobs. FDM in PLA was for fast form and fit checks where a part only needed to hold its shape long enough to be assessed. SLA in Grey Pro was for parts that had to be loaded and actually moved, where print anisotropy and layer adhesion would otherwise dominate the result.",
-          "Choosing between them was itself a design decision. Testing a load path on an FDM part and concluding the geometry was wrong, when the process was wrong, is a mistake that costs a whole iteration.",
+          {
+            id: "uplift-elbow",
+            orientation: "landscape",
+            kind: "cad-render",
+            label: "05.3 — ELBOW CONDUIT",
+            subject: "CAD of a two-way conduit linkage.",
+            composition: "As drawn.",
+            lighting: "Flat CAD shading.",
+            purpose: "Document the design.",
+            caption: "Two-way conduit linkage.",
+            status: "final",
+            src: "/images/uplift-elbow-conduit-cad.png",
+            alt: "CAD view of a printed tube connector joining a vertical socket to an angled branch, with cross-drilled pin holes.",
+            width: 667,
+            height: 465,
+          },
+          {
+            id: "uplift-leg-mount",
+            orientation: "square",
+            kind: "cad-render",
+            label: "05.4 — LEG MOUNT",
+            subject: "CAD of a powered-leg mount.",
+            composition: "As drawn.",
+            lighting: "Flat CAD shading.",
+            purpose: "Document the design.",
+            caption: "Powered-leg mount.",
+            status: "final",
+            src: "/images/uplift-leg-mount-cad.png",
+            alt: "CAD view of a cylindrical housing with a three-bolt flange around a central bore.",
+            width: 482,
+            height: 472,
+          },
         ],
       },
       {
         id: "integration",
         title: "Mechanical and electrical integration",
         body: [
-          "I coordinated with the electrical sub-team to integrate motors, house electronics and protect the battery. On a device people lean on, this is structural work: motor mounts carry real load, and an enclosure that flexes changes the alignment of whatever it holds.",
-          "The interface discipline was to fix the things the other team depended on early — mounting locations, available volume, cable routing — and then let both sides iterate inside those boundaries without breaking each other's work.",
+          "I coordinated with the electrical sub-team to integrate the motors, house the electronics and protect the battery.",
         ],
-        list: [
-          "Motor mounting treated as a load-bearing interface, not a bracket.",
-          "Electronics volume and cable routes reserved early in the frame layout.",
-          "Battery protected against impact and intrusion by geometry, not by warnings.",
-          "Interfaces frozen ahead of detail design so both sub-teams could work in parallel.",
-        ],
-      },
-      {
-        id: "battery",
-        title: "Battery protection and electronics housing",
-        body: [
-          "A battery on a mobility device sits low, near the floor, on a machine that will be bumped into door frames and curbs. The housing was designed for that reality: protected on the exposed faces, retained so it cannot shift in a knock, and serviceable without dismantling the frame.",
-          "Serviceability was a real requirement rather than a nicety. A device that has to be partly disassembled to change a battery is a device that will be used with a failing battery.",
-        ],
-      },
-      {
-        id: "evaluation",
-        title: "Prototype evaluation and design lessons",
-        body: [
-          "The prototype was assessed by running the transition repeatedly and watching for the things users would notice: motion that felt abrupt, flex that felt unsafe, and geometry that put a hand somewhere it shouldn't be.",
-          "The clearest lesson was that on a human-centered device, perceived stability and actual stability are separate requirements. A mechanism can be entirely adequate and still feel wrong — and for someone deciding whether to trust their weight to it, feeling wrong is a failure.",
+        media: [
+          {
+            id: "uplift-battery-cad",
+            orientation: "landscape",
+            kind: "cad-render",
+            label: "05.5 — BATTERY HOUSING",
+            subject: "CAD of the battery housing.",
+            composition: "As drawn.",
+            lighting: "Flat CAD shading.",
+            purpose: "Document the design.",
+            caption: "Battery housing.",
+            status: "final",
+            src: "/images/uplift-battery-housing-cad.png",
+            alt: "CAD view of an open rectangular housing with four corner mounting ears and a cable cutout in one end wall.",
+            width: 880,
+            height: 665,
+          },
+          {
+            id: "uplift-battery-printed",
+            orientation: "portrait",
+            kind: "photograph",
+            label: "05.6 — OFF THE PRINTER",
+            subject: "The printed battery housing with supports attached.",
+            composition: "As shot.",
+            lighting: "Available light.",
+            purpose: "Document the build.",
+            caption: "The battery housing off the printer, tree supports still attached.",
+            status: "final",
+            src: "/images/uplift-battery-housing-printed.jpg",
+            alt: "A hand holding a white printed housing upside down, its underside covered in branching tree supports.",
+            width: 1500,
+            height: 2000,
+          },
+          {
+            id: "uplift-battery-built",
+            orientation: "portrait",
+            kind: "photograph",
+            label: "05.7 — BATTERY FITTED",
+            subject: "The printed battery housing with the battery seated.",
+            composition: "As shot.",
+            lighting: "Available light.",
+            purpose: "Document the build.",
+            caption: "The battery seated in its printed housing.",
+            status: "final",
+            src: "/images/uplift-battery-housing-built.jpg",
+            alt: "A blue battery pack seated in a white printed housing with corner mounting ears, its leads exiting through the end cutout.",
+            width: 1500,
+            height: 2000,
+          },
         ],
       },
     ],
-    gallery: [
-      {
-        id: "uplift-g1",
-        orientation: "portrait",
-        kind: "photograph",
-        label: "05.3 — IN USE",
-        subject: "The prototype in a realistic setting — a hallway or room, at a scale a user would encounter.",
-        composition: "Portrait orientation, device in context, floor and doorway visible for scale reference.",
-        lighting: "Available indoor light, warm, unstaged.",
-        purpose: "Place the device in the world it is meant to work in.",
-        status: "prototype",
-      },
-      {
-        id: "uplift-g2",
-        orientation: "detail",
-        kind: "photograph",
-        label: "05.4 — LINKAGE",
-        subject: "Close-up of a printed conduit linkage installed on the frame, fasteners and pivot visible.",
-        composition: "Tight crop along the linkage, pivot at the intersection of thirds.",
-        lighting: "Directional light raking across print layers and hardware.",
-        purpose: "Show the actual assembled interface rather than a render of it.",
-        status: "prototype",
-      },
-      {
-        id: "uplift-g3",
-        orientation: "landscape",
-        kind: "diagram",
-        label: "05.5 — HUMAN FACTORS",
-        subject: "Diagram of the sit-to-stand transition with the user's center-of-mass path and the device's support geometry overlaid.",
-        composition: "Side elevation, three positions through the transition, CoM path as a traced line.",
-        lighting: "Flat vector artwork on eggshell, user shown as a neutral silhouette.",
-        purpose: "Explain why the least stable moment is the one that needed the most design attention.",
-        caption: "Support geometry through the transition. The least stable instant is when the user most needs the device to be predictable.",
-        status: "concept",
-      },
-    ],
-    reflection: [
-      "Uplift is where I learned to treat the electrical team's constraints as part of my own design space. Reserving volume and routes early cost me some elegance and saved the project weeks.",
-      "It also set a standard I have kept: on anything a person's weight or safety depends on, I want the mechanism to feel as trustworthy as the analysis says it is.",
-    ],
+    gallery: [],
+    reflection: [],
   },
   {
     slug: "helmet-impact-mechanics",
@@ -1655,7 +1525,7 @@ export const projects: Project[] = [
     status: "Published",
     theme: "light",
     accent: "#4A5D6B",
-    categories: ["Research", "Experimental Design", "Medical / Human-Centered Design", "R&D Testing"],
+    categories: ["Research", "Experimental Design", "Medical / Human-Centered Design"],
     projectType: [
       "Research",
       "Experimental Mechanics",
@@ -1705,27 +1575,10 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        id: "question",
-        title: "The research question",
+        id: "research",
+        title: "Research",
         body: [
-          "A helmet's padding is never in its free state when it matters. Fitting the helmet already compresses the pads, and that starting condition changes how they respond to an impact — a pre-loaded foam is a different spring than a relaxed one.",
-          "The research asked how much precompression is actually present in a fitted advanced combat helmet system, and what that means for how force propagates during an impact.",
-        ],
-      },
-      {
-        id: "context",
-        title: "Helmet system and padding mechanics",
-        body: [
-          "Padding sits between two things that must not meet: a stiff shell and a head. It manages impact by deforming, and the shape of its force-deflection response is what determines how much load reaches the wearer and how quickly.",
-          "Foam responses are strongly non-linear. Where on that curve the pad begins — set by fit and precompression — therefore matters as much as the material itself.",
-        ],
-      },
-      {
-        id: "setup",
-        title: "Test setup",
-        body: [
-          "The setup had to hold a real helmet system in a realistic fitted state while still permitting controlled, measurable compression. Fixturing was the crux: a specimen held too rigidly does not represent a fitted helmet, and one held too loosely produces unrepeatable data.",
-          "Instrumentation captured force and deflection together, so each pad could be characterized as a response curve rather than a single number.",
+          "Impact mechanics and force propagation in advanced combat helmet systems.",
         ],
         media: [
           {
@@ -1737,47 +1590,16 @@ export const projects: Project[] = [
             composition: "Section view with clear labels and dimension lines; head form shown as a neutral outline.",
             lighting: "Flat technical drawing on eggshell, steel linework, restrained scientific color.",
             purpose: "Orient a reader who has never looked inside a helmet system.",
-            caption: "Pad locations and contact regions. Precompression varies by position, which is why pads were characterized individually.",
+            caption: "Pad locations and contact regions.",
             status: "concept",
           },
         ],
       },
       {
         id: "method",
-        title: "Measuring precompression",
+        title: "Method",
         body: [
-          "Precompression is awkward to measure because the quantity of interest is a condition, not an event. The approach was to characterize each pad's force-deflection behavior and then determine where in that response the fitted state sits.",
-          "Repeatability drove the procedure. Foams show rate dependence and recovery behavior, so loading rate, dwell time and rest between runs were held consistent — otherwise the specimen's history becomes an uncontrolled variable.",
-        ],
-      },
-      {
-        id: "propagation",
-        title: "Force propagation and why the model needed it",
-        body: [
-          "A finite-element model of a helmet impact is only as good as its boundary conditions. Assume the pads start unloaded and the model begins on the wrong part of a non-linear curve, which propagates into every predicted force and timing downstream.",
-          "Quantifying precompression experimentally gave the model a measured starting condition instead of an assumed one — a small input with an outsized effect on what the simulation predicts.",
-        ],
-        media: [
-          {
-            id: "helmet-force",
-            orientation: "landscape",
-            kind: "diagram",
-            label: "06.2 — LOAD PATH",
-            subject: "Force-propagation illustration: impact at the shell, load spreading through pads into the head form.",
-            composition: "Section view with scaled force vectors and a shaded load path; magnitude conveyed by arrow weight.",
-            lighting: "Flat artwork on eggshell; arrows in a single accent at graded weights.",
-            purpose: "Show the mechanism the research was trying to characterize.",
-            caption: "Load path from shell to head form. Where the pads begin on their response curve changes both magnitude and timing.",
-            status: "concept",
-          },
-        ],
-      },
-      {
-        id: "data",
-        title: "From experimental data to FEA",
-        body: [
-          "The output was a characterization of pad behavior in the fitted state, in a form a model could consume: response curves and precompression values by pad position.",
-          "Doing both halves — the bench work and the model's requirements — taught me to design experiments backwards from what the analysis needs, rather than measuring what is convenient and hoping it fits.",
+          "Quantified helmet padding precompression through experimental testing, as an input to finite-element analysis.",
         ],
         media: [
           {
@@ -1789,25 +1611,16 @@ export const projects: Project[] = [
             composition: "Single chart, thin axes, several series, precompression marked by a vertical datum on each curve.",
             lighting: "Flat chart on eggshell; steel series lines, one blue datum marker.",
             purpose: "Show quantitative work and the specific quantity the research extracted.",
-            caption: "Representative force-deflection behavior with the fitted state marked. Non-linear response is why the starting point matters.",
+            caption: "Representative force-deflection behavior with the fitted state marked.",
             status: "representative",
           },
         ],
       },
       {
         id: "publication",
-        title: "Publication and impact",
+        title: "Publication",
         body: [
-          "The research I contributed to was published in Annals of Biomedical Engineering, Volume 53. My contribution was the experimental characterization of padding precompression and the supporting measurement work.",
-          "Seeing a summer's bench work appear as one input line in a published model was a useful lesson in how research accumulates: small, careful measurements are what larger claims are built on.",
-        ],
-      },
-      {
-        id: "lessons",
-        title: "Lessons about experimental rigor",
-        body: [
-          "This project set my standards for experimental design. Control the specimen's history, define the procedure before the first run, and be honest about which variables you actually held constant.",
-          "It also gave me a healthy scepticism toward clean data. Precise numbers from a poorly fixtured specimen are still wrong, and they are harder to doubt because they look good.",
+          "Contributed to research published in Annals of Biomedical Engineering, Volume 53.",
         ],
       },
     ],
@@ -1836,10 +1649,7 @@ export const projects: Project[] = [
         status: "representative",
       },
     ],
-    reflection: [
-      "This was the first time I understood that an experiment is a designed object. The rig, the procedure and the order of operations are all design decisions, and they determine what the data can legitimately be used to say.",
-      "It is also why I now push to define the pass criteria before the first run on any test I set up.",
-    ],
+    reflection: [],
   },
 ];
 

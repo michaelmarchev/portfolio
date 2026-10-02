@@ -6,3 +6,8 @@ out
 *.tsbuildinfo
 .DS_Store
 .vercel
+
+# Local only — never commit
+CLAUDE.md
+Uplift Photos/
+.claude/

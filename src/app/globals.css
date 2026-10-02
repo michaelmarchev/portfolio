@@ -473,6 +473,17 @@ hr {
  * The full string stays readable to assistive technology via aria-label on the
  * wrapper, with the letter spans hidden.
  */
+/*
+ * Per-letter animations make every letter an inline-block, and the browser
+ * may wrap a line between any two inline-blocks — "Scanne / r". AnimatedTitle
+ * and FlutterHover therefore group each word's letters in `.letter-word`, so
+ * lines only break at the spaces between words.
+ */
+.letter-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 /* Stagger is set by AnimatedTitle (51ms per letter). */
 .title-letter {
   display: inline-block;
@@ -601,12 +612,8 @@ hr {
  * Hover flutter.
  *
  * Each letter lifts in turn — the same motion as the title reveal, but fired
- * on pointer enter and again on pointer leave. The per-letter stagger is set
- * inline by FlutterHover, which splits the label into spans on first hover.
- *
- * Deliberately not a CSS `:hover` animation: CSS can start one on enter, but
- * there is no selector for "the pointer just left", so the exit pass has no
- * trigger.
+ * on pointer enter only. The per-letter stagger is set inline by
+ * FlutterHover, which splits the label into spans on first hover.
  */
 .flutter-letter {
   display: inline-block;

@@ -9,8 +9,7 @@ export const about = {
     "Outside of work: running, hiking, skiing, soccer, audio, violin, piano, and DJing.",
 } as const;
 
-/** Portrait and supporting collage for the About page. */
-/** Homepage headshot slot. Set `src` and `alt` to go live. */
+/** Headshot on the About page. */
 export const headshot: ImageBrief = {
   id: "headshot",
   orientation: "portrait",
@@ -29,6 +28,7 @@ export const headshot: ImageBrief = {
   height: 1500,
 };
 
+/** Supporting collage for the About page. */
 export const aboutMedia: ImageBrief[] = [
   {
     id: "about-portrait",

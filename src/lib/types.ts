@@ -98,9 +98,7 @@ export type ProjectCategory =
   | "R&D Testing"
   | "Medical / Human-Centered Design"
   | "Sustainability"
-  | "Manufacturing"
   | "Research"
-  | "Additive Manufacturing"
   | "Experimental Design";
 
 /** Light sections sit on eggshell; dark sections are reserved for precision R&D work. */

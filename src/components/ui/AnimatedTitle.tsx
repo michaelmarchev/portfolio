@@ -49,15 +49,29 @@ export function AnimatedTitle({
       {lines.map((line, lineNo) => (
         <span key={`line-${lineNo}`} aria-hidden="true">
           {lineNo > 0 && <br />}
-          {Array.from(line).map((letter, i) => (
-            <span
-              key={`${letter}-${i}`}
-              className="title-letter"
-              style={{ ["--letter-delay" as string]: `${index++ * stagger}ms` }}
-            >
-              {letter}
-            </span>
-          ))}
+          {/* Letters are grouped per word (`.letter-word`) so a line can only
+              wrap between words. Spaces stay plain text, and still advance the
+              stagger so the timing matches the string. */}
+          {line.split(/(\s+)/).map((token, t) => {
+            if (token === "") return null;
+            if (/^\s+$/.test(token)) {
+              index += token.length;
+              return token;
+            }
+            return (
+              <span key={`w-${t}`} className="letter-word">
+                {Array.from(token).map((letter, i) => (
+                  <span
+                    key={`${letter}-${i}`}
+                    className="title-letter"
+                    style={{ ["--letter-delay" as string]: `${index++ * stagger}ms` }}
+                  >
+                    {letter}
+                  </span>
+                ))}
+              </span>
+            );
+          })}
         </span>
       ))}
     </Tag>

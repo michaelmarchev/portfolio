@@ -96,16 +96,21 @@ theme on every load. First visit follows `prefers-color-scheme`.
 
 ### Hover flutter
 
-Inline links and buttons wobble once when the pointer arrives and once when it
-leaves. This cannot be done in CSS: `:hover` can start an animation on enter,
-but there is no selector for "the pointer just left", so the exit animation has
-no trigger. `FlutterHover` in the root layout attaches one delegated
-`pointerover`/`pointerout` pair to the document and toggles `.is-fluttering`.
+Links and buttons lift their letters once when the pointer arrives.
+`FlutterHover` in the root layout attaches one delegated `pointerover` listener
+to the document, splits the target's text into letter spans on first hover, and
+toggles `.is-fluttering`.
 
-It is scoped to elements whose computed `display` is inline, which excludes
-block-level wrappers — the archive cards wrap an entire image and caption in a
-`Link`, and wobbling a whole card would be absurd. Opt an element out with
-`data-no-flutter`. Skipped entirely under `prefers-reduced-motion: reduce`.
+The target is the control's `.caption-shift` element if it has one (so a card
+flutters its title, not every word in it), otherwise the control itself if its
+computed `display` is inline. Block-level controls with no `.caption-shift` are
+skipped. Opt an element out with `data-no-flutter`. Skipped entirely under
+`prefers-reduced-motion: reduce`.
+
+Because the split replaces text nodes, a control whose label React changes
+must put that label in a keyed `.caption-shift` span (see `Timeline`).
+Otherwise React keeps updating the detached original and the visible label
+goes stale.
 
 ### Page titles
 

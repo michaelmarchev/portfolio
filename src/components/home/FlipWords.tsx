@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
  * what clips the motion into a flip rather than a slide over the layout.
  *
  * Under `prefers-reduced-motion: reduce` the cycle never starts and the first
- * word stays put — a word swapping itself out every five seconds is exactly
+ * word stays put — a word swapping itself out every two seconds is exactly
  * the kind of unrequested motion that setting exists to stop.
  */
 export function FlipWords({
@@ -57,7 +57,7 @@ export function FlipWords({
     <span className={cn("flip-words", className)}>
       {/* The full list is available to assistive tech as one static string;
           the animated spans are hidden so a screen reader is not told the
-          heading changed every five seconds. */}
+          heading changed every two seconds. */}
       <span className="sr-only">{words.join(", ")}</span>
 
       <span aria-hidden="true" className="flip-words__track">

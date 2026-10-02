@@ -6,7 +6,7 @@
 export const site = {
   name: "Michael Marchev",
   headline: "Mechanical engineer",
-  /** Cycled on the homepage, one every five seconds. */
+  /** Cycled on the homepage, one every two seconds. */
   roles: ["Mechanical engineer.", "Designer."],
   heroAlt: "Mechanical engineer based in Boston, MA.",
   descriptor: [

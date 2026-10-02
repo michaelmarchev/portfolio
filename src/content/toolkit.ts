@@ -9,7 +9,7 @@ export const toolkit: ToolkitGroup[] = [
     id: "design-cad",
     category: "Design + CAD",
     application:
-      "I model to be manufactured, not to look finished — assemblies carry the interfaces, tolerances and assembly order that the shop will actually need.",
+      "Part and product design in SOLIDWORKS, Creo and Onshape, with DFM and DFA.",
     items: [
       "SOLIDWORKS",
       "Creo",
@@ -24,7 +24,7 @@ export const toolkit: ToolkitGroup[] = [
     id: "prototyping",
     category: "Prototyping + Manufacturing",
     application:
-      "I choose the process for the question being asked: FDM for form and fit, SLA for parts that get loaded and moved, machined steel wherever wear decides the outcome.",
+      "FDM, SLA and MJP printing, fixtures, and machining.",
     items: [
       "FDM 3D printing",
       "SLA 3D printing",
@@ -41,7 +41,7 @@ export const toolkit: ToolkitGroup[] = [
     id: "testing",
     category: "Testing + Analysis",
     application:
-      "I design experiments backwards from the decision they need to support, and define what counts as a pass before the first run.",
+      "Vibration, thermal, laser-intensity and mechanical reliability testing, with analysis in MATLAB, Python, C++ and Excel.",
     items: [
       "Experimental design",
       "Verification + validation",

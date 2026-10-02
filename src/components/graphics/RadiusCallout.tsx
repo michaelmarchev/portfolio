@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
  * Path of the leader, reading from the image outwards: an arrowhead touching
  * the image's rounded top-left corner and pointing horizontally right at it, a
  * short horizontal run left, then a turn vertically down — and the note
- * `4X R10px` continues in that same direction, set vertically.
+ * `4X Ø20px` continues in that same direction, its characters stacked
+ * upright one below the other.
  *
  * Nothing is drawn on the corner itself. An arc traced over the image's own
  * rounded corner reads as a second, detached corner floating beside it.
@@ -34,7 +35,7 @@ import { cn } from "@/lib/utils";
  */
 
 const WIDTH = 132;
-const HEIGHT = 200;
+const HEIGHT = 215;
 
 /** The image's top-left corner is at (WIDTH, CORNER_Y). */
 const CORNER_Y = 12;
@@ -69,6 +70,9 @@ export function RadiusCallout({
    */
   const tangentInset = radius * (1 - Math.SQRT1_2);
 
+  /** Called out as a diameter, per the owner: `4X Ø20px` for r = 10. */
+  const note = `${instances}X Ø${radius * 2}px`;
+
   return (
     <svg
       aria-hidden="true"
@@ -99,25 +103,60 @@ export function RadiusCallout({
       />
 
       {/*
-        The note carries on downwards from the foot of the leader.
-
-        `rotate(90)` turns the text's advance direction from +x to +y, so it
-        reads top to bottom. Glyph "up" then points to +x, meaning the letters
-        sit to the right of their baseline — hence the small negative x offset,
-        which centres the column of type on the leader rather than letting it
-        drift toward the image.
+        The note carries on downwards from the foot of the leader, one upright
+        character per row, each centred on the leader's x. Stacked as separate
+        <text> elements rather than `writing-mode` + `text-orientation:
+        upright`, whose SVG support is uneven. A space takes half a row.
       */}
-      <text
-        x={ELBOW_X - 5}
-        y={DROP_TO_Y + 12}
-        transform={`rotate(90 ${ELBOW_X - 5} ${DROP_TO_Y + 12})`}
-        fill="currentColor"
-        fontFamily="var(--font-mono)"
-        fontSize="13"
-        letterSpacing="1.3"
-      >
-        {instances}X R{radius}px
-      </text>
+      {stack(note).map(({ ch, y }, i) =>
+        ch === "Ø" ? (
+          /* Drawn, not typeset: DM Mono's zero is slashed, so a typeset Ø
+             next to "20" reads as three near-identical glyphs. A circle with
+             a diagonal through it is the drawing-standard diameter sign. */
+          <g key={i} stroke="currentColor" strokeWidth="1.2" fill="none">
+            <circle cx={ELBOW_X} cy={y - CAP_MID} r={4.4} />
+            <line
+              x1={ELBOW_X - 5.8}
+              y1={y - CAP_MID + 5.8}
+              x2={ELBOW_X + 5.8}
+              y2={y - CAP_MID - 5.8}
+            />
+          </g>
+        ) : (
+          <text
+            key={i}
+            x={ELBOW_X}
+            y={y}
+            textAnchor="middle"
+            fill="currentColor"
+            fontFamily="var(--font-mono)"
+            fontSize="13"
+          >
+            {ch}
+          </text>
+        ),
+      )}
     </svg>
   );
+}
+
+/** Baseline of the first character, below the foot of the leader. */
+const NOTE_TOP = DROP_TO_Y + 16;
+/** Row pitch for the stacked note. */
+const ROW = 14.5;
+/** Half the cap height at 13px — centres the drawn Ø on the glyph rows. */
+const CAP_MID = 4.6;
+
+function stack(text: string) {
+  const rows: { ch: string; y: number }[] = [];
+  let y = NOTE_TOP;
+  for (const ch of Array.from(text)) {
+    if (ch === " ") {
+      y += ROW / 2;
+      continue;
+    }
+    rows.push({ ch, y });
+    y += ROW;
+  }
+  return rows;
 }

@@ -134,7 +134,7 @@ export function Hero() {
                     sizes="(min-width: 1024px) 40vw, 100vw"
                     className="h-full w-full"
                   />
-                  <CornerAccents radius={10} className="text-accent" />
+                  <CornerAccents radius={10} strokeWidth={3.6} className="text-accent" />
                 </div>
               </Link>
             )}

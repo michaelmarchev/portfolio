@@ -37,13 +37,25 @@ export function FlutterHover() {
         node = walker.nextNode();
       }
 
+      // Letters are grouped per word in `.letter-word`, so the inline-block
+      // letters can't wrap mid-word. Whitespace stays a plain text node.
       for (const text of texts) {
         const frag = document.createDocumentFragment();
-        for (const ch of Array.from(text.nodeValue ?? "")) {
-          const span = document.createElement("span");
-          span.className = LETTER;
-          span.textContent = ch;
-          frag.appendChild(span);
+        for (const token of (text.nodeValue ?? "").split(/(\s+)/)) {
+          if (token === "") continue;
+          if (/^\s+$/.test(token)) {
+            frag.appendChild(document.createTextNode(token));
+            continue;
+          }
+          const word = document.createElement("span");
+          word.className = "letter-word";
+          for (const ch of Array.from(token)) {
+            const span = document.createElement("span");
+            span.className = LETTER;
+            span.textContent = ch;
+            word.appendChild(span);
+          }
+          frag.appendChild(word);
         }
         text.parentNode?.replaceChild(frag, text);
       }

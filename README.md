@@ -1,14 +1,8 @@
 # Michael Marchev — Portfolio
 
-Static Next.js site, deployed to GitHub Pages by GitHub Actions on every push
-to `main`. One setup step: **Settings → Pages → Source → GitHub Actions.**
-
-> **Replacing an earlier copy of this project?** Unzip with `-o` so every file
-> is overwritten, and delete `src/app/opengraph-image.tsx` if it still exists —
-> it is incompatible with the static export and is no longer part of this
-> project.
-
-Personal engineering portfolio. Next.js App Router, TypeScript, Tailwind CSS v4.
+Personal engineering portfolio at **michaelmarchev.com**. Next.js App Router,
+TypeScript, Tailwind CSS v4, statically exported and deployed to GitHub Pages
+by GitHub Actions on every push to `main`.
 
 All copy, metadata and image briefs live in `src/content/*`. You should almost
 never need to touch a component to change what the site says.
@@ -25,19 +19,11 @@ npm run dev          # http://localhost:3000
 | Script | What it does |
 | --- | --- |
 | `npm run dev` | Dev server |
-| `npm run build` | Production build |
-| `npm run start` | Serve the production build |
+| `npm run build` | Static export to `out/` |
 | `npm run typecheck` | `tsc --noEmit` |
-| `npm run lint` | ESLint (`next/core-web-vitals`, `next/typescript`) |
+| `npm run lint` | ESLint (`next/core-web-vitals`, `next/typescript`) — not run during build |
 
-Requires Node 18.18+ (Node 20+ recommended for Next 15).
-
-**This repository has never been built.** It was authored in an environment
-with no access to the npm registry, so `node_modules` was never installed and
-the dev server was never started. See [Verification](#verification) for what
-*was* checked. Run `npm install && npm run build` as your first action — and
-note that the first push will also run that build in GitHub Actions, where any
-failure will show up in the Actions tab.
+Requires Node 20+.
 
 ---
 
@@ -48,7 +34,7 @@ failure will show up in the Actions tab.
 public/
   .nojekyll                    stops Jekyll eating the _next/ directory
   og.png                       social card
-  images/                      real photography goes here
+  images/                      all photography, CAD and logos
   michael-marchev-resume.pdf
 src/
   app/                      routes (App Router)
@@ -61,19 +47,19 @@ src/
     globals.css             all design tokens and custom CSS
   components/
     layout/                 Container, Section, SiteHeader, SiteFooter,
-                            DatumRail, SkipLink
-    ui/                     Button, MetaLabel, SectionHeading, Rule,
-                            TagList, Reveal
+                            DatumRail, SkipLink, FlutterHover, ThemeToggle
+    ui/                     Button, MetaLabel, AnimatedTitle, Reveal, Logo
     media/                  SpecPlate, MediaFigure, GalleryGrid
     project/                archive + case-study system
     sections/               reusable page sections
-    experience/ toolkit/ contact/ home/ graphics/
+    experience/ toolkit/ home/ graphics/
   content/                  ← edit here
     site.ts                 brand, nav, contact, education, SEO
     projects.ts             all six case studies
     experience.ts           roles
     toolkit.ts              capabilities, credentials, languages
-    about.ts                about copy, pillars, portrait briefs
+    about.ts                about copy, headshot, collage briefs
+    logos.ts                organization logos
   lib/
     types.ts                every content shape
     utils.ts                cn(), aspect ratios, slugify
@@ -97,186 +83,65 @@ all follow automatically. `src/lib/types.ts` documents every field.
 
 To feature it on the homepage, add its slug to `featuredSlugs`.
 
-### Swap an image brief for a real photo
+### Swap an image brief for a real image
 
 Every image slot is an `ImageBrief`. Until it has a `src`, it renders a
 **specification plate** stating the intended subject, framing, lighting and
 purpose of the shot. To go live with a real asset:
 
-1. Drop the file in `public/images/`.
-2. On that brief, set `src` and `alt`. Set `width`/`height` if you know them.
-
-```ts
-{
-  id: "gantry-full-system",
-  orientation: "wide",          // keep — it sets the aspect ratio
-  kind: "cad-render",
-  label: "01.1 — GANTRY, FULL SYSTEM",
-  subject: "...",               // keep — becomes the alt fallback
-  composition: "...",
-  lighting: "...",
-  purpose: "...",
-  caption: "The complete five-axis gantry.",
-  status: "final",
-  src: "/images/gantry-full-system.jpg",   // ← add
-  alt: "Five-axis gantry frame surrounding a CT scanner enclosure.",  // ← add
-}
-```
-
-The plate and the real image share the same aspect ratio, so **nothing in the
-layout moves**. The label and caption carry over. You can ship one image at a
-time; briefs and photographs coexist.
-
-Leave `orientation` alone unless the real crop genuinely differs — it drives
-both the plate ratio and the `next/image` sizing hints.
+1. Resize and compress it (there is no image optimization in a static export),
+   apply EXIF orientation, strip metadata, and drop it in `public/images/`.
+2. On that brief, set `src`, `alt`, `width` and `height`. **`width` and
+   `height` must match the file** — real images render at their own aspect
+   ratio, and a mismatch crops.
 
 ---
 
-## Deploying to GitHub Pages
+## Deployment
 
-The repo is configured for this already. You need to do one thing:
+GitHub Pages, custom domain, served from the domain root. Push to `main` and
+`.github/workflows/deploy.yml` installs, builds the static export and
+publishes it; watch it in the Actions tab.
 
-**Settings → Pages → Build and deployment → Source → GitHub Actions.**
+There is deliberately **no `basePath`**. The canonical origin is hardcoded in
+`src/content/site.ts` rather than read from a CI variable, so a workflow change
+cannot silently reintroduce a `/repo-name` prefix into every asset URL. If the
+domain ever changes, update `url` in `site.ts`; if the site ever moves under a
+sub-path, also restore `basePath`/`assetPrefix` in `next.config.ts` and set
+`BASE_PATH` in `src/lib/utils.ts`.
 
-Then push to `main`. The workflow at `.github/workflows/deploy.yml` installs,
-builds a static export and publishes it. The first run takes 2–3 minutes;
-watch it in the Actions tab.
+### Static-export requirements (all in place)
 
-Your site lands at `https://<username>.github.io/<repo-name>/`.
+- `output: "export"`, `trailingSlash: true` and `images.unoptimized: true` in
+  `next.config.ts`.
+- `public/.nojekyll` — without it Jekyll ignores `_next/` and the site renders
+  with no CSS or JavaScript. The workflow re-creates it as a safety net.
+- `export const dynamic = "force-static"` in `robots.ts` and `sitemap.ts`.
+- A static `public/og.png` rather than a generated `opengraph-image`, which
+  exports without a file extension and is served as
+  `application/octet-stream`.
+- `asset()` in `src/lib/utils.ts` for plain `<a href="/...">` links, which
+  `next/link` would otherwise prefix for you.
 
-### You do not need to set the repo name anywhere
+### DNS
 
-The workflow reads it from `GITHUB_REPOSITORY` and derives both the base path
-and the canonical URL:
+Namecheap → Advanced DNS, with the default parking records deleted:
 
-| Repo | Base path | Site URL |
+| Type | Host | Value |
 | --- | --- | --- |
-| `you/michael-marchev-portfolio` | `/michael-marchev-portfolio` | `https://you.github.io/michael-marchev-portfolio` |
-| `you/you.github.io` | *(none)* | `https://you.github.io` |
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `michaelmarchev.github.io.` |
 
-Rename or fork the repo and it keeps working. Locally, `npm run dev` serves
-from the root with no base path, which is what you want.
-
-### How it is set up for static hosting
-
-GitHub Pages serves static files only — no Node server, no serverless
-functions — so:
-
-- `output: "export"` in `next.config.ts` emits plain HTML/CSS/JS to `out/`.
-- `images.unoptimized: true`, because the image optimizer is a server feature.
-  **Size and compress images before putting them in `/public`** — nothing will
-  do it for you now.
-- `trailingSlash: true`, so routes emit `projects/index.html` rather than
-  `projects.html`. Directory indexes are what Pages resolves reliably.
-- `public/.nojekyll` stops Jekyll from running. Without it, Jekyll ignores
-  `_next/` (leading underscore) and the site renders with no CSS or
-  JavaScript. The workflow re-creates this file as a safety net.
-- `not-found.tsx` becomes `404.html`, which Pages serves natively.
-- The social card is a static `public/og.png`. A generated
-  `opengraph-image.tsx` is emitted without a file extension under static
-  export, and Pages then serves it as `application/octet-stream` rather than
-  an image — so it is a real PNG instead.
-- `sitemap.xml` and `robots.txt` are generated at build time and work fine.
-- `asset()` in `src/lib/utils.ts` prefixes the base path on plain
-  `<a href="/...">` links. `next/link` and `next/image` do this themselves;
-  raw anchors do not, which would otherwise 404 the resume download.
-
-### Optional
-
-- **Contact.** There is no form and no backend — the contact page lists the
-  email, phone and LinkedIn directly. Nothing to configure, nothing that can
-  silently drop a message.
-- **Changing the domain.** Two places, both hardcoded on purpose: `url` in
-  `src/content/site.ts` and the comment in `next.config.ts`. If you ever move
-  back to a `username.github.io/repo-name` URL you will also need to restore
-  `basePath` and `assetPrefix` in `next.config.ts` and set `BASE_PATH` in
-  `src/lib/utils.ts`.
-- **Lockfile.** Run `npm install` once locally and commit `package-lock.json`.
-  The workflow switches to `npm ci` automatically when it finds one.
-- Replace `public/michael-marchev-resume.pdf` when the resume changes.
-
-### Custom domain
-
-The site is configured for **michaelmarchev.com**, served from the domain root.
-There is no `basePath`, and the canonical origin is hardcoded in
-`src/content/site.ts` — not read from a CI variable, so a workflow change
-cannot silently reintroduce a `/repo-name` prefix into every asset URL.
-
-DNS (Namecheap → Advanced DNS), with Namecheap's default parking records
-deleted first:
-
-| Type | Host | Value | TTL |
-| --- | --- | --- | --- |
-| A | `@` | `185.199.108.153` | Automatic |
-| A | `@` | `185.199.109.153` | Automatic |
-| A | `@` | `185.199.110.153` | Automatic |
-| A | `@` | `185.199.111.153` | Automatic |
-| CNAME | `www` | `<username>.github.io.` | Automatic |
-
-On GitHub: Settings → Pages → Custom domain → the bare domain, then tick
-**Enforce HTTPS** once the certificate is issued.
-
-No `CNAME` file is needed. GitHub only creates one when publishing from a
-branch; with a custom Actions workflow it is ignored and not required.
-
----
-
-### What static hosting costs you
-
-Image optimization (hence the note about compressing manually), and any future
-server-side feature — route handlers, server actions, ISR, middleware. If you
-later want those, deploy the same repo on Vercel: remove `output: "export"`,
-`trailingSlash` and `images.unoptimized`, and it works without other changes.
+GitHub: Settings → Pages → Source → GitHub Actions; Custom domain → the bare
+domain; Enforce HTTPS.
 
 ---
 
 ## Confidentiality
 
-Stryker and Lumafield work is described only at a non-confidential level: no
-dimensions, tolerances, materials, part geometry or images that would disclose
-proprietary design. The case studies for those projects carry a standing notice
-and the image briefs specify representative or conceptual visuals rather than
-real hardware. Keep that constraint in mind when swapping in assets — **the
-plates for those two projects are deliberately not asking for photographs of
-the real thing.**
-
----
-
-## Verification
-
-The npm registry was unreachable while this was written, so dependencies were
-never installed and Next was never booted. Instead:
-
-- **Parse check.** All 52 TypeScript files compiled by `tsc` for syntax:
-  zero `TS1xxx` errors.
-- **Import resolution.** Every `@/...` specifier resolves to a real file, and
-  every named import matches an actual export in its target module.
-- **Contrast.** Every foreground/background pair in the token scale was
-  computed against WCAG. See `DESIGN.md`.
-- **Rendered visual QA.** `globals.css` and the hand-authored SVG were rendered
-  in headless Chromium and screenshotted, which caught and fixed: a scale
-  figure drawn at 3.4 ft while labelled 5 ft 10 in, an asymmetric figure
-  outline, three labels sitting on top of the lines they annotated, a survey
-  probe floating off its own scan path, a registration circle stretched into an
-  ellipse by `preserveAspectRatio="none"`, and specification-plate copy being
-  clipped to 39% of its height in mobile-width slots.
-- **CSS parse.** 102 rules, with the container query, reduced-motion block,
-  dark-panel inversion, print styles and all three keyframe sets intact, and no
-  console errors.
-- **Base-path derivation.** The workflow's repo-name logic was run against
-  `you/project-repo`, `you/you.github.io` and a mixed-case
-  `You/You.github.io`, producing the correct base path and canonical URL in
-  all three.
-- **Workflow YAML** parses, and `public/og.png` was rendered and inspected at
-  1200 × 630.
-- **Full typecheck against hand-written stubs.** Since `next` and
-  `@types/react` could not be installed, minimal declaration files for
-  `next`, `next/link`, `next/image`, `next/font/google`, `react` and `process`
-  were written so `tsc --strict` could actually check the source. That caught
-  two build-breaking errors: `changeFrequency` widening to `string` in
-  `sitemap.ts`, and `<Reveal id={...}>` being passed a prop the component did
-  not accept. `tsc` now exits clean, and no imports are unused.
-
-What that does **not** cover: the production build, React hydration, `next/font`
-loading, real device testing, and Lighthouse. Run
-those locally.
+Industry work is described only at a non-confidential level. Case studies for
+that work carry the notice `Proprietary information withheld.` Do not add
+imagery or detail for that work without the owner's sign-off.
