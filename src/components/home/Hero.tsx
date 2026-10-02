@@ -36,7 +36,7 @@ export function Hero() {
             start 3rem down), rather than centred in a column that is much
             taller than the text. */}
         <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:justify-start lg:pr-[clamp(2rem,4vw,4.5rem)] lg:py-12">
-          <div className="max-w-[46rem]">
+          <div className="max-w-[46rem] lg:flex lg:flex-1 lg:flex-col lg:justify-between">
             <p className="u-meta text-fg-3">
               {site.location}
               <span aria-hidden="true" className="px-2 text-fg-4">
@@ -59,38 +59,43 @@ export function Hero() {
 
             <MetaRun items={site.descriptor} separator="•" className="mt-10" />
 
-            <div className="mt-10 flex flex-wrap items-center gap-3">
-              <Button href="/projects" variant="solid">
-                Explore selected work
-              </Button>
-              <Button href={site.resume} variant="outline" download>
-                Download resume
-              </Button>
-            </div>
+            {/* Buttons and links move as one block. */}
+            <div className="mt-10">
+              <div className="flex flex-wrap items-center gap-3">
+                <Button href="/projects" variant="solid">
+                  Explore selected work
+                </Button>
+                <Button href={site.resume} variant="outline" download>
+                  Download resume
+                </Button>
+              </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
-              <a
-                href={site.linkedin}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="u-link text-[0.875rem] text-fg-3"
-              >
-                LinkedIn
-              </a>
-              <a
-                href={`mailto:${site.email}`}
-                className="u-link text-[0.875rem] text-fg-3"
-              >
-                {site.email}
-              </a>
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a
+                  href={site.linkedin}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="u-link text-[0.875rem] text-fg-3"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="u-link text-[0.875rem] text-fg-3"
+                >
+                  {site.email}
+                </a>
+              </div>
             </div>
           </div>
 
           {/* Logos of the organizations on the Experience page. At lg they
               sit at the foot of the column, level with the bottom of the
-              dark panel's content (both inset 3rem), filling the space below
-              the text without moving it. */}
-          <div className="mt-16 border-t border-line pt-6 lg:mt-auto">
+              dark panel's content (both inset 3rem). The text above takes the
+              rest of the height: its margins are minimum gaps, and
+              `justify-between` shares the leftover among them, so it ends
+              4rem above the logos' rule. */}
+          <div className="mt-16 border-t border-line pt-6">
             <Link href="/experience" className="u-meta u-link text-fg-4">
               Experience
             </Link>
