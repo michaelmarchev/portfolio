@@ -30,7 +30,10 @@ export function Hero() {
     >
       <div className="grid lg:min-h-[calc(100svh-4.25rem)] lg:grid-cols-[minmax(0,47fr)_minmax(0,53fr)]">
         {/* --- Reading column --- */}
-        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:pr-[clamp(2rem,4vw,4.5rem)]">
+        {/* Top-aligned at lg, level with the dark panel's label row (both
+            start 3rem down), rather than centred in a column that is much
+            taller than the text. */}
+        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:justify-start lg:pr-[clamp(2rem,4vw,4.5rem)] lg:pt-12">
           <div className="max-w-[46rem]">
             <p className="u-meta text-fg-3">
               {site.location}
@@ -149,12 +152,13 @@ export function Hero() {
                     className="h-full w-full"
                   />
                   <CornerAccents radius={10} strokeWidth={3.6} className="text-accent" />
-                  <DimensionCallouts delay={450} className="text-accent" />
+                  {/* Same grey as the units note. */}
+                  <DimensionCallouts delay={450} className="text-fg-3" />
                   {/* General note, as on a drawing sheet: bottom right, under
                       the width dimension. */}
                   <p className="u-meta pointer-events-none absolute right-0 top-[calc(100%+1.875rem)] z-10 w-max max-w-[calc(100vw-4rem)] text-right text-fg-3">
                     <FlyInText
-                      text="ALL UNITS ARE IN PIXELS UNLESS OTHERWISE NOTED"
+                      text="ALL UNITS IN PIXELS UNLESS OTHERWISE NOTED"
                       delay={1100}
                       stagger={16}
                     />
