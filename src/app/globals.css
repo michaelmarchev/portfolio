@@ -70,10 +70,8 @@
   }
 }
 
-/* Dark values, shared by two things: a dark *panel* inside the light theme,
-   and the site-wide dark *theme*. Any component built on the semantic scale
-   inverts automatically in either. */
-[data-panel="dark"],
+/* Dark values for the site-wide dark theme. Any component built on the
+   semantic scale inverts automatically. */
 :root[data-theme="dark"] {
   --c-bg: var(--void);
   --c-bg-deep: var(--void-2);
@@ -103,6 +101,22 @@
 
 :root[data-theme="dark"] .bg-void {
   background-color: var(--void-2);
+}
+
+/* In the light theme, panel sections (homepage hero, "Let's build", dark
+   project spreads, the gantry plate) take the light palette on the slightly
+   deeper eggshell — the light counterpart of the lifted dark surface above —
+   rather than staying near-black on a light page.
+   --c-fg-4 darkens with it: steel is 4.56:1 on paper but 4.12:1 on
+   paper-deep, which fails AA; #64645d is 4.79:1. */
+:root:not([data-theme="dark"]) [data-panel="dark"] {
+  --c-bg: var(--paper-deep);
+  --c-bg-deep: var(--paper);
+  --c-fg-4: #64645d;
+}
+
+:root:not([data-theme="dark"]) .bg-void {
+  background-color: var(--paper-deep);
 }
 
 @theme inline {

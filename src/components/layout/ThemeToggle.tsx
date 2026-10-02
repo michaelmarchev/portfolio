@@ -9,8 +9,8 @@ type Theme = "light" | "dark";
  * Light/dark switch.
  *
  * The theme is stored on `<html data-theme>`, which is what globals.css keys
- * the dark token values off. It persists in localStorage and, on first visit,
- * follows the operating system preference.
+ * the dark token values off. It persists in localStorage; with nothing stored
+ * the site is dark, whatever the operating system preference.
  *
  * An inline script in the root layout applies the stored value before first
  * paint, so there is no flash of the wrong theme. This component only reads

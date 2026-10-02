@@ -30,11 +30,8 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = baseMetadata;
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f1eb" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e0e0e" },
-  ],
-  colorScheme: "light",
+  themeColor: "#0e0e0e",
+  colorScheme: "dark light",
   width: "device-width",
   initialScale: 1,
 };
@@ -43,13 +40,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
+      data-theme="dark"
       className={`${archivo.variable} ${dmMono.variable}`}
       suppressHydrationWarning
     >
       <head>
         {/*
-          Applies the stored theme before first paint, so a returning visitor
-          who chose dark never sees a flash of the light theme. It has to be
+          Dark is the default (on <html> above, so it holds without JS too).
+          This applies a stored choice of light before first paint, so a
+          returning visitor who chose light never sees a flash of dark. It has to be
           inline and synchronous in <head> for that — any deferred script, or
           setting the attribute from an effect, runs after the first paint.
           `suppressHydrationWarning` above is because this mutates <html>
@@ -57,7 +56,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("theme");if(!t){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.setAttribute("data-theme",t)}catch(e){document.documentElement.setAttribute("data-theme","light")}})();`,
+            __html: `(function(){var t="dark";try{var s=localStorage.getItem("theme");if(s==="light")t="light"}catch(e){}document.documentElement.setAttribute("data-theme",t)})();`,
           }}
         />
       </head>
