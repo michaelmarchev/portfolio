@@ -30,12 +30,11 @@ export function Hero() {
     >
       <div className="grid lg:min-h-[calc(100svh-4.25rem)] lg:grid-cols-[minmax(0,47fr)_minmax(0,53fr)]">
         {/* --- Reading column --- */}
-        {/* At lg the text spans the column, top and bottom level with the
-            dark panel's content (both inset 3rem): the margins below are
-            minimum gaps, and `justify-between` shares the leftover height
-            among them so the column doesn't end in empty space. */}
-        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:justify-start lg:pr-[clamp(2rem,4vw,4.5rem)] lg:py-12">
-          <div className="max-w-[46rem] lg:flex lg:flex-1 lg:flex-col lg:justify-between">
+        {/* Top-aligned at lg, level with the dark panel's label row (both
+            start 3rem down), rather than centred in a column that is much
+            taller than the text. */}
+        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:justify-start lg:pr-[clamp(2rem,4vw,4.5rem)] lg:pt-12">
+          <div className="max-w-[46rem]">
             <p className="u-meta text-fg-3">
               {site.location}
               <span aria-hidden="true" className="px-2 text-fg-4">
@@ -58,33 +57,30 @@ export function Hero() {
 
             <MetaRun items={site.descriptor} separator="•" className="mt-10" />
 
-            {/* Buttons and links stay together as one block. */}
-            <div className="mt-10">
-              <div className="flex flex-wrap items-center gap-3">
-                <Button href="/projects" variant="solid">
-                  Explore selected work
-                </Button>
-                <Button href={site.resume} variant="outline" download>
-                  Download resume
-                </Button>
-              </div>
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              <Button href="/projects" variant="solid">
+                Explore selected work
+              </Button>
+              <Button href={site.resume} variant="outline" download>
+                Download resume
+              </Button>
+            </div>
 
-              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
-                <a
-                  href={site.linkedin}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="u-link text-[0.875rem] text-fg-3"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="u-link text-[0.875rem] text-fg-3"
-                >
-                  {site.email}
-                </a>
-              </div>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+              <a
+                href={site.linkedin}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="u-link text-[0.875rem] text-fg-3"
+              >
+                LinkedIn
+              </a>
+              <a
+                href={`mailto:${site.email}`}
+                className="u-link text-[0.875rem] text-fg-3"
+              >
+                {site.email}
+              </a>
             </div>
           </div>
         </div>
