@@ -143,7 +143,9 @@ export function Hero() {
                     aspectRatio: `${lead.hero.width} / ${lead.hero.height}`,
                   }}
                 >
-                  <RadiusCallout radius={10} className="z-10 text-accent" />
+                  {/* All the drawing marks — radius callout, corner accents,
+                      dimensions — share the units note's grey. */}
+                  <RadiusCallout radius={10} className="z-10 text-fg-3" />
                   <SpecPlate
                     image={lead.hero}
                     detail="brief"
@@ -151,8 +153,7 @@ export function Hero() {
                     sizes="(min-width: 1024px) 40vw, 100vw"
                     className="h-full w-full"
                   />
-                  <CornerAccents radius={10} strokeWidth={3.6} className="text-accent" />
-                  {/* Same grey as the units note. */}
+                  <CornerAccents radius={10} strokeWidth={3.6} className="text-fg-3" />
                   <DimensionCallouts delay={450} className="text-fg-3" />
                   {/* General note, as on a drawing sheet: bottom right, under
                       the width dimension. */}
