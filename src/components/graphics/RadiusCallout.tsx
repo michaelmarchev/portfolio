@@ -4,10 +4,11 @@ import { cn } from "@/lib/utils";
  * Engineering-drawing radius callout for the corner fillets.
  *
  * Path of the leader, reading from the image outwards: an arrowhead touching
- * the image's rounded top-left corner and pointing horizontally right at it, a
- * short horizontal run left, then a turn vertically down — and the note
- * `4X Ø20px` continues in that same direction, its characters stacked
- * upright one below the other.
+ * the image's rounded top-left corner and pointing straight down at it, a
+ * short vertical rise, then a turn to the right — and the note `4X R10`
+ * follows the horizontal shoulder, read left to right and centred on it, as a
+ * drawing note sits on its leader. The whole callout lives in the gap between
+ * the panel's label row and the top of the image.
  *
  * Nothing is drawn on the corner itself. An arc traced over the image's own
  * rounded corner reads as a second, detached corner floating beside it.
@@ -17,12 +18,13 @@ import { cn } from "@/lib/utils";
  * Earlier versions split the leader between a flexing DOM rule and an SVG so
  * the note could finish outside the dark panel. That made its position depend
  * on the panel's width, the image's centring and the viewport — three things
- * that are awkward to reason about and easy to get wrong. Everything now lives
- * inside one fixed-size SVG sitting in the gap beside the image, so the
- * geometry is exact and independent of layout.
+ * that are awkward to reason about and easy to get wrong. Everything lives
+ * inside one fixed-size SVG, so the geometry is exact and independent of
+ * layout. The one layout dependency is room: the Hero keeps at least 40px
+ * between the label row and the image so the note never touches the label.
  *
  * Anchoring: the parent must be a box that hugs the image exactly. The element
- * is then offset so SVG coordinate (WIDTH, CORNER_Y) lands on the *painted*
+ * is then offset so SVG coordinate (TIP_X, TIP_Y) lands on the *painted*
  * rounded corner rather than the bounding box's corner.
  *
  * Those are not the same point. With a radius `r` the box corner is empty —
@@ -34,19 +36,29 @@ import { cn } from "@/lib/utils";
  * Purely decorative: `aria-hidden`, and it never takes pointer events.
  */
 
-const WIDTH = 132;
-const HEIGHT = 215;
+const WIDTH = 110;
+const HEIGHT = 40;
 
-/** The image's top-left corner is at (WIDTH, CORNER_Y). */
-const CORNER_Y = 12;
-
-/** Horizontal run, from the corner leftwards. */
-const ELBOW_X = 90;
-/** Vertical run, from the elbow downwards. */
-const DROP_TO_Y = 80;
+/** The arrowhead's apex — the point that lands on the painted corner. */
+const TIP_X = 8;
+const TIP_Y = 36;
 
 const HEAD_LEN = 15;
 const HEAD_HALF_WIDTH = 5.2;
+
+/** Height of the horizontal shoulder above the image's top edge. */
+const SHOULDER_ABOVE_IMAGE = 21;
+/** Length of the shoulder, from the vertical rise to its end. */
+const RUN = 24;
+/** Gap between the end of the shoulder and the note. */
+const TEXT_GAP = 6;
+
+/**
+ * Half the ink height of the note in DM Mono at 13px (digits: 10px above the
+ * baseline, 1px below). Setting the baseline this far below the shoulder
+ * centres the type on it. Measured in the browser, not assumed.
+ */
+const INK_MID = 4.5;
 
 export function RadiusCallout({
   radius = 10,
@@ -59,10 +71,6 @@ export function RadiusCallout({
   instances?: number;
   className?: string;
 }) {
-  // Tip sits on the arc; the head points right, so its base is to the left.
-  const tipX = WIDTH;
-  const baseX = tipX - HEAD_LEN;
-
   /**
    * Inset from the bounding-box corner to the arc's 45° point — the closest
    * part of the painted corner. Shifting the whole SVG by this much puts the
@@ -70,93 +78,51 @@ export function RadiusCallout({
    */
   const tangentInset = radius * (1 - Math.SQRT1_2);
 
-  /** Called out as a diameter, per the owner: `4X Ø20px` for r = 10. */
-  const note = `${instances}X Ø${radius * 2}px`;
+  // The tip is `tangentInset` below the image's top edge, so the shoulder's
+  // height above that edge sets where it sits in SVG space.
+  const shoulderY = TIP_Y - tangentInset - SHOULDER_ABOVE_IMAGE;
+  const headBaseY = TIP_Y - HEAD_LEN;
+  const shoulderEndX = TIP_X + RUN;
 
   return (
     <svg
       aria-hidden="true"
-      className={cn("pointer-events-none absolute", className)}
+      className={cn("pointer-events-none absolute overflow-visible", className)}
       style={{
-        top: -(CORNER_Y - tangentInset),
-        right: `calc(100% - ${tangentInset}px)`,
+        top: tangentInset - TIP_Y,
+        left: tangentInset - TIP_X,
       }}
       width={WIDTH}
       height={HEIGHT}
       viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
       fill="none"
     >
-      {/* Leader: horizontal off the corner, then straight down to the note.
-          Starts at the arrowhead's base so the two read as one stroke. */}
+      {/* Leader: straight up off the corner, then right to the note. Starts
+          at the arrowhead's base so the two read as one stroke. */}
       <path
-        d={`M${baseX} ${CORNER_Y} L${ELBOW_X} ${CORNER_Y} L${ELBOW_X} ${DROP_TO_Y}`}
+        d={`M${TIP_X} ${headBaseY} L${TIP_X} ${shoulderY} L${shoulderEndX} ${shoulderY}`}
         stroke="currentColor"
         strokeWidth="1.1"
         vectorEffect="non-scaling-stroke"
         opacity="0.9"
       />
 
-      {/* Filled head, apex exactly on the corner, pointing right. */}
+      {/* Filled head, apex exactly on the corner, pointing down. */}
       <path
-        d={`M${tipX} ${CORNER_Y} L${baseX} ${CORNER_Y - HEAD_HALF_WIDTH} L${baseX} ${CORNER_Y + HEAD_HALF_WIDTH} Z`}
+        d={`M${TIP_X} ${TIP_Y} L${TIP_X - HEAD_HALF_WIDTH} ${headBaseY} L${TIP_X + HEAD_HALF_WIDTH} ${headBaseY} Z`}
         fill="currentColor"
       />
 
-      {/*
-        The note carries on downwards from the foot of the leader, one upright
-        character per row, each centred on the leader's x. Stacked as separate
-        <text> elements rather than `writing-mode` + `text-orientation:
-        upright`, whose SVG support is uneven. A space takes half a row.
-      */}
-      {stack(note).map(({ ch, y }, i) =>
-        ch === "Ø" ? (
-          /* Drawn, not typeset: DM Mono's zero is slashed, so a typeset Ø
-             next to "20" reads as three near-identical glyphs. A circle with
-             a diagonal through it is the drawing-standard diameter sign. */
-          <g key={i} stroke="currentColor" strokeWidth="1.2" fill="none">
-            <circle cx={ELBOW_X} cy={y - CAP_MID} r={4.4} />
-            <line
-              x1={ELBOW_X - 5.8}
-              y1={y - CAP_MID + 5.8}
-              x2={ELBOW_X + 5.8}
-              y2={y - CAP_MID - 5.8}
-            />
-          </g>
-        ) : (
-          <text
-            key={i}
-            x={ELBOW_X}
-            y={y}
-            textAnchor="middle"
-            fill="currentColor"
-            fontFamily="var(--font-mono)"
-            fontSize="13"
-          >
-            {ch}
-          </text>
-        ),
-      )}
+      <text
+        x={shoulderEndX + TEXT_GAP}
+        y={shoulderY + INK_MID}
+        fill="currentColor"
+        fontFamily="var(--font-mono)"
+        fontSize="13"
+        letterSpacing="1.3"
+      >
+        {instances}X R{radius}
+      </text>
     </svg>
   );
-}
-
-/** Baseline of the first character, below the foot of the leader. */
-const NOTE_TOP = DROP_TO_Y + 16;
-/** Row pitch for the stacked note. */
-const ROW = 14.5;
-/** Half the cap height at 13px — centres the drawn Ø on the glyph rows. */
-const CAP_MID = 4.6;
-
-function stack(text: string) {
-  const rows: { ch: string; y: number }[] = [];
-  let y = NOTE_TOP;
-  for (const ch of Array.from(text)) {
-    if (ch === " ") {
-      y += ROW / 2;
-      continue;
-    }
-    rows.push({ ch, y });
-    y += ROW;
-  }
-  return rows;
 }

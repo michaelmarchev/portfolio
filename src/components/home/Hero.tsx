@@ -102,8 +102,15 @@ export function Hero() {
               nearly meet the label above and the summary below without
               changing the panel's own height. Tailwind emits responsive
               variants after base utilities, so `lg:w-auto` wins over the
-              plate's own `w-full` at desktop. */}
-          <div className="my-4 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:py-4">
+              plate's own `w-full` at desktop.
+
+              The radius callout sits between the label row and the image,
+              its note's ink 15.5–26.5px above the image's top edge, so the
+              gap must stay at least 40px. Below lg that is `mt-11`; at lg the
+              centring room already gives 43–74px (measured from 1024×600 to
+              1920×1080 — the reading column sets the panel's height, so it
+              never gets short enough to squeeze the gap). */}
+          <div className="mb-4 mt-11 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:py-4">
             {lead && (
               <Link
                 href={`/projects/${lead.slug}`}
