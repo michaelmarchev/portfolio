@@ -10,6 +10,8 @@ import { RadiusCallout } from "@/components/graphics/RadiusCallout";
 import { CornerAccents } from "@/components/graphics/CornerAccents";
 import { DimensionCallouts } from "@/components/graphics/DimensionCallouts";
 import { FlyInText } from "@/components/ui/FlyInText";
+import { Logo } from "@/components/ui/Logo";
+import { orgLogos } from "@/content/logos";
 
 /**
  * Homepage hero.
@@ -33,7 +35,7 @@ export function Hero() {
         {/* Top-aligned at lg, level with the dark panel's label row (both
             start 3rem down), rather than centred in a column that is much
             taller than the text. */}
-        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:justify-start lg:pr-[clamp(2rem,4vw,4.5rem)] lg:pt-12">
+        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:justify-start lg:pr-[clamp(2rem,4vw,4.5rem)] lg:py-12">
           <div className="max-w-[46rem]">
             <p className="u-meta text-fg-3">
               {site.location}
@@ -82,6 +84,23 @@ export function Hero() {
                 {site.email}
               </a>
             </div>
+          </div>
+
+          {/* Logos of the organizations on the Experience page. At lg they
+              sit at the foot of the column, level with the bottom of the
+              dark panel's content (both inset 3rem), filling the space below
+              the text without moving it. */}
+          <div className="mt-16 border-t border-line pt-6 lg:mt-auto">
+            <Link href="/experience" className="u-meta u-link text-fg-4">
+              Experience
+            </Link>
+            <ul className="m-0 mt-5 flex list-none flex-wrap items-center gap-x-10 gap-y-6 p-0">
+              {orgLogos.map((logo) => (
+                <li key={logo.id}>
+                  <Logo logo={logo} size={logo.width / logo.height > 2 ? 26 : 40} />
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
