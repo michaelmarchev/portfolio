@@ -43,6 +43,13 @@
   --c-accent: var(--signal);
   /* AA-compliant blue for text, and for fills that carry light text. */
   --c-accent-text: var(--signal-text);
+  /* Drawing-sheet grid on the page background. Non-text only. */
+  --c-grid: rgb(21 21 21 / 0.025);
+  --c-grid-major: rgb(21 21 21 / 0.05);
+  /* Panel sections are a tint laid over the page rather than an opaque fill,
+     so the grid runs unbroken across them. Over --paper this composites to
+     exactly --paper-deep (#eae6dd). */
+  --c-panel: rgb(119 104 60 / 0.08);
 
   /* --- layout --- */
   --rail: 0px;
@@ -84,6 +91,10 @@
   --c-line-strong: rgb(240 237 230 / 0.34);
   --c-accent: #6e9bff;
   --c-accent-text: #7fa6ff;
+  --c-grid: rgb(240 237 230 / 0.03);
+  --c-grid-major: rgb(240 237 230 / 0.06);
+  /* Over --void this composites to exactly --void-2 (#171716). */
+  --c-panel: rgb(239 239 214 / 0.04);
   color-scheme: dark;
 }
 
@@ -117,6 +128,14 @@
 
 :root:not([data-theme="dark"]) .bg-void {
   background-color: var(--paper-deep);
+}
+
+/* Section-level panels: hero panel, Let's build, dark spreads, deep
+   sections. Same colour as the opaque surfaces above, but as a tint, so the
+   page grid shows through. Panels are only ever laid on the page itself —
+   never on another panel — so the composite is always exact. */
+.surface-panel {
+  background-color: var(--c-panel);
 }
 
 @theme inline {
@@ -206,6 +225,20 @@ html {
 body {
   margin: 0;
   background-color: var(--c-bg);
+  /* Drawing-sheet grid: 20px minor squares, a major line every 100px. On
+     <body> it paints the canvas, so it is one continuous sheet that scrolls
+     with the page; panels are translucent (`.surface-panel`) to keep it
+     unbroken. */
+  background-image:
+    linear-gradient(var(--c-grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c-grid-major) 1px, transparent 1px),
+    linear-gradient(var(--c-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c-grid) 1px, transparent 1px);
+  background-size:
+    100px 100px,
+    100px 100px,
+    20px 20px,
+    20px 20px;
   color: var(--c-fg);
   font-family: var(--font-sans);
   font-size: 1rem;

@@ -34,7 +34,7 @@ export function CaseStudyHero({ project }: { project: Project }) {
     <header
       data-panel={dark ? "dark" : undefined}
       data-datum={project.title}
-      className={dark ? "bg-void pb-12 pt-10 md:pb-16" : "pb-12 pt-10 md:pb-16"}
+      className={dark ? "surface-panel pb-12 pt-10 md:pb-16" : "pb-12 pt-10 md:pb-16"}
     >
       <Container wide>
         <div className="grid gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] lg:items-start">

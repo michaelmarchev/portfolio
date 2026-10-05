@@ -112,7 +112,7 @@ export function Hero() {
         {/* --- Flagship system, dark panel --- */}
         <div
           data-panel="dark"
-          className="relative flex flex-col justify-between overflow-hidden bg-void px-[var(--gutter)] py-8 text-fg lg:px-10 lg:py-12"
+          className="relative flex flex-col justify-between overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:px-10 lg:py-12"
         >
           <div className="flex items-start justify-between gap-6">
             <p className="u-meta text-accent">

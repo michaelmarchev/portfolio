@@ -41,10 +41,10 @@ export function Section({
       data-datum={datum}
       className={cn(
         "relative",
-        panel === "dark" && "bg-void text-fg",
+        panel === "dark" && "surface-panel text-fg",
         // `bg-bg-deep`, not `bg-paper-deep`: the latter is the raw light
         // value and would stay eggshell in the dark theme.
-        panel === "deep" && "bg-bg-deep",
+        panel === "deep" && "surface-panel",
         SPACE[space],
         className,
       )}

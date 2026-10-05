@@ -30,7 +30,7 @@ export function ProjectSpread({
       data-panel={project.theme === "dark" ? "dark" : undefined}
       className={cn(
         "group border-t border-line py-[clamp(3rem,7vh,6rem)]",
-        project.theme === "dark" && "bg-void",
+        project.theme === "dark" && "surface-panel",
       )}
     >
       <Reveal
