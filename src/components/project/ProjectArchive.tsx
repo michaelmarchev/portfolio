@@ -39,7 +39,7 @@ export function ProjectArchive({
 
   return (
     <>
-      <div className="border-y border-line py-5">
+      <div data-snap className="border-y border-line py-5">
         <h2 className="sr-only">Filter projects by category</h2>
         <ul className="m-0 flex list-none flex-wrap gap-x-2 gap-y-2 p-0">
           <li>
@@ -86,7 +86,7 @@ export function ProjectArchive({
           takes more width, so the grid never reads as a card kit. */}
       <ul
         className={cn(
-          "m-0 grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 md:grid-cols-6",
+          "m-0 grid list-none grid-cols-1 gap-x-8 gap-y-10 p-0 md:grid-cols-6",
           // Dense flow backfills gaps: without it a 2-column card following a
           // 4-column one can be pushed to the next row, leaving empty space
           // above the card after it.
@@ -96,6 +96,7 @@ export function ProjectArchive({
         {visible.map((project, i) => (
           <li
             key={project.slug}
+            data-snap
             className={cn("self-start", isWide(i) ? "md:col-span-4" : "md:col-span-2")}
           >
             <ArchiveCard project={project} wide={isWide(i)} />

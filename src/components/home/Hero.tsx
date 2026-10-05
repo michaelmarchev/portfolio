@@ -28,9 +28,18 @@ export function Hero() {
     <section
       data-datum="Index"
       aria-labelledby="hero-name"
-      className="relative border-b border-line"
+      className="relative"
     >
-      <div className="grid lg:min-h-[calc(100svh-4.25rem)] lg:grid-cols-[minmax(0,47fr)_minmax(0,53fr)]">
+      {/* `data-snap` and the column rounding put the panel's edges on the
+          page grid: its top is a major line, `GridSnap` rounds its height to
+          whole squares, and the reading column is rounded down to whole
+          squares so the panel's left edge falls on a vertical line. The
+          rule is on this grid rather than the section so the snapped height
+          includes it. */}
+      <div
+        data-snap
+        className="grid border-b border-line lg:min-h-[calc(100svh-4.25rem)] lg:grid-cols-[round(down,47%,20px)_minmax(0,1fr)]"
+      >
         {/* --- Reading column --- */}
         {/* Top-aligned at lg, level with the dark panel's label row (both
             start 3rem down), rather than centred in a column that is much

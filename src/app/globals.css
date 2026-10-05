@@ -239,6 +239,12 @@ body {
     100px 100px,
     20px 20px,
     20px 20px;
+  /* Origin at the top-left of the content: x at the datum rail's edge, y at
+     the bottom of the 4.25rem header and its 1px border — the top of <main>.
+     So a major line runs exactly along the hero's top edge, and `GridSnap`
+     measures every other block edge from the same origin. `GridSnap` sets
+     --grid-y to the measured value; the calc is the pre-hydration default. */
+  background-position: var(--rail) var(--grid-y, calc(4.25rem + 1px));
   color: var(--c-fg);
   font-family: var(--font-sans);
   font-size: 1rem;

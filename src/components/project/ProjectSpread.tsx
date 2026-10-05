@@ -26,6 +26,7 @@ export function ProjectSpread({
 
   return (
     <article
+      data-snap
       // A dark spread swaps in the inverted token set.
       data-panel={project.theme === "dark" ? "dark" : undefined}
       className={cn(

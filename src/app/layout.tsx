@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Archivo, DM_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { DatumRail } from "@/components/layout/DatumRail";
+import { GridSnap } from "@/components/layout/GridSnap";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SkipLink } from "@/components/layout/SkipLink";
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <SkipLink />
         <FlutterHover />
         <DatumRail />
+        <GridSnap />
         <div className="lg:pl-[var(--rail)]">
           <SiteHeader />
           <main id="main" tabIndex={-1}>
