@@ -48,8 +48,8 @@
   --c-grid-major: rgb(21 21 21 / 0.05);
   /* Panel sections are a tint laid over the page rather than an opaque fill,
      so the grid runs unbroken across them. Over --paper this composites to
-     exactly --paper-deep (#eae6dd). */
-  --c-panel: rgb(119 104 60 / 0.08);
+     #e5e1d6, the panel's --c-bg below. */
+  --c-panel: rgb(119 104 60 / 0.12);
 
   /* --- layout --- */
   --rail: 0px;
@@ -93,8 +93,8 @@
   --c-accent-text: #7fa6ff;
   --c-grid: rgb(240 237 230 / 0.03);
   --c-grid-major: rgb(240 237 230 / 0.06);
-  /* Over --void this composites to exactly --void-2 (#171716). */
-  --c-panel: rgb(239 239 214 / 0.04);
+  /* Over --void this composites to #1e1e1c, the panel's --c-bg below. */
+  --c-panel: rgb(239 239 214 / 0.07);
   color-scheme: dark;
 }
 
@@ -104,8 +104,10 @@
    The muted greys have to lift with it: #807d76 is 4.70:1 on #0e0e0e but only
    4.37:1 on #171716, which fails AA. */
 :root[data-theme="dark"] [data-panel="dark"] {
-  --c-bg: var(--void-2);
-  --c-bg-deep: #1e1e1c;
+  /* The panel tint's composite (see --c-panel), so opaque fills inside a
+     panel match it. Greys checked on it: #96928a 5.39:1, #918e86 5.10:1. */
+  --c-bg: #1e1e1c;
+  --c-bg-deep: #252523;
   --c-fg-3: #96928a;
   --c-fg-4: #918e86;
 }
@@ -117,11 +119,11 @@
 /* In the light theme, panel sections (homepage hero, "Let's build", dark
    project spreads, the gantry plate) take the light palette on the slightly
    deeper eggshell — the light counterpart of the lifted dark surface above —
-   rather than staying near-black on a light page.
-   --c-fg-4 darkens with it: steel is 4.56:1 on paper but 4.12:1 on
-   paper-deep, which fails AA; #64645d is 4.79:1. */
+   rather than staying near-black on a light page. --c-fg-4 darkens with it:
+   steel fails AA on the deeper surface. */
 :root:not([data-theme="dark"]) [data-panel="dark"] {
-  --c-bg: var(--paper-deep);
+  /* The panel tint's composite; #64645d is 4.56:1 on it. */
+  --c-bg: #e5e1d6;
   --c-bg-deep: var(--paper);
   --c-fg-4: #64645d;
 }
@@ -131,8 +133,8 @@
 }
 
 /* Section-level panels: hero panel, Let's build, dark spreads, deep
-   sections. Same colour as the opaque surfaces above, but as a tint, so the
-   page grid shows through. Panels are only ever laid on the page itself —
+   sections. A tint rather than an opaque fill, so the page grid shows
+   through. Panels are only ever laid on the page itself —
    never on another panel — so the composite is always exact. */
 .surface-panel {
   background-color: var(--c-panel);
@@ -225,6 +227,17 @@ html {
 body {
   margin: 0;
   background-color: var(--c-bg);
+  color: var(--c-fg);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.68;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+:root[data-grid] body {
   /* Drawing-sheet grid: 20px minor squares, a major line every 100px. On
      <body> it paints the canvas, so it is one continuous sheet that scrolls
      with the page; panels are translucent (`.surface-panel`) to keep it
@@ -239,20 +252,14 @@ body {
     100px 100px,
     20px 20px,
     20px 20px;
-  /* Origin at the top-left of the content: x at the datum rail's edge, y at
-     the bottom of the 4.25rem header and its 1px border — the top of <main>.
-     So a major line runs exactly along the hero's top edge, and `GridSnap`
-     measures every other block edge from the same origin. `GridSnap` sets
-     --grid-y to the measured value; the calc is the pre-hydration default. */
-  background-position: var(--rail) var(--grid-y, calc(4.25rem + 1px));
-  color: var(--c-fg);
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.68;
-  font-synthesis-weight: none;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  /* Origin: y at the top of <main> (below the 4.25rem header and its 1px
+     border), so a major line runs along the hero's top edge; x at the hero
+     panel's left edge, so one runs along that too. `GridSnap` measures both
+     and sets --grid-x / --grid-y, then sets data-grid on <html>. The grid is
+     drawn only from then on: a CSS estimate of the x origin can't account
+     for the scrollbar, and the grid jumping a square sideways on load looked
+     worse than it appearing a moment later. */
+  background-position: var(--grid-x) var(--grid-y);
 }
 
 h1,

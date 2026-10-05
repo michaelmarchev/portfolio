@@ -70,6 +70,19 @@ export function GridSnap() {
         "--grid-y",
         `${origin + window.scrollY}px`,
       );
+      // x origin: the homepage hero panel's left edge, so a major vertical
+      // line runs along it. At lg the hero's reading column is
+      // round(down, 47%, 20px) of <main>'s width (Hero.tsx); the same formula
+      // is used on every page so the grid never shifts between pages. Below
+      // lg the hero stacks and the panel starts at the content's left edge.
+      const box = main.getBoundingClientRect();
+      const lg = window.matchMedia("(min-width: 1024px)").matches;
+      const column = lg ? Math.floor((box.width * 0.47) / G) * G : 0;
+      document.documentElement.style.setProperty(
+        "--grid-x",
+        `${box.left + window.scrollX + column}px`,
+      );
+      document.documentElement.setAttribute("data-grid", "");
 
       // Grid lines are the first pixel row of each square. An edge counts as
       // on a line anywhere within that row, so a block that follows a 1px
