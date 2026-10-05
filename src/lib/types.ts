@@ -74,6 +74,8 @@ export interface Spec {
   value: string;
   /** Marks a figure as a design target rather than a measured result. */
   target?: boolean;
+  /** Renders the value as an external link. */
+  href?: string;
 }
 
 /** One numbered block of a case study. */
@@ -85,6 +87,8 @@ export interface CaseStudySection {
   body: string[];
   /** Optional bulleted list rendered after the body. */
   list?: string[];
+  /** External links rendered after the body and list, e.g. to a paper. */
+  links?: { label: string; href: string }[];
   /** Optional aside — a constraint, a tradeoff, or a confidentiality note. */
   note?: string;
   /** Media rendered with this section. */

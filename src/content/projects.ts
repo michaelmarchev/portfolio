@@ -1327,7 +1327,7 @@ export const projects: Project[] = [
     team: "University research group, Young Scholars’ Program",
     focus: ["Methodology", "Validation", "Investigation"],
     specs: [
-      { label: "Publication", value: "Annals of Biomedical Engineering 53, 946–955 (2025)" },
+      { label: "Publication", value: "Annals of Biomedical Engineering 53, 946–955 (2025)", href: "https://link.springer.com/article/10.1007/s10439-025-03677-3" },
       { label: "Article", value: "Measurement and Assessment of Head-to-Helmet Contact Forces" },
       { label: "Helmets", value: "Four sizes of Kevlar composite helmet, seven interior pads each" },
       { label: "Sensors", value: "A force sensitive resistor on each pad; custom chinstrap tension gauges" },
@@ -1465,7 +1465,10 @@ export const projects: Project[] = [
         body: [
           "Jennings, T., Tillman, A., Mukasa, D., Marchev, M., Müftü, S., Amini, R. Measurement and Assessment of Head-to-Helmet Contact Forces. Ann Biomed Eng 53, 946–955 (2025). https://doi.org/10.1007/s10439-025-03677-3",
           "Author contributions: Michael Marchev contributed toward methodology, validation, and investigation.",
-          "Text and figures on this page are from the article and its supplementary material, published open access under a Creative Commons Attribution 4.0 International License (creativecommons.org/licenses/by/4.0). Figures were resized.",
+          "Text and figures on this page are from the article and its supplementary material, published open access under a Creative Commons Attribution 4.0 International License (https://creativecommons.org/licenses/by/4.0/). Figures were resized.",
+        ],
+        links: [
+          { label: "Read the paper — Springer", href: "https://link.springer.com/article/10.1007/s10439-025-03677-3" },
         ],
       },
     ],

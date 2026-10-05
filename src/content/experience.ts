@@ -36,11 +36,11 @@ export const experience: ExperienceEntry[] = [
     summary:
       "Built a $25,000 precision optical-positioning fixture for experimental testing and ran mechanical and environmental verification and validation.",
     detail: [
-      "Designed a ±10 µm optical positioning bench in four motorized and four manual axes with a full blackout cage, including CNC and manual milling, assembly, testing, supplier management and control documentation.",
+      "Designed a <10 µm optical positioning bench in four motorized and four manual axes with a full blackout cage, including CNC and manual milling, assembly, testing, supplier management and control documentation.",
       "Designed and iterated one-off test fixtures across a camera head, coupler and camera control unit: laser intensity measurement, interface mechanical reliability, focus-ring torque over lifecycle, and front cover vibration testing.",
       "Led verification and validation testing: vibration, thermal, thermopile and mechanical reliability.",
       "Integrated HALT and standard and torsional Instrons with 3D-printed and machined one-off fixtures; used a vibration table, and MJF and MJP printing for alignment-critical features.",
-      "Optimized prototype manufacturing methods, saving $3,000 per quarter on material purchasing.",
+      "Optimized prototype manufacturing methods to reduce materials spending by 57%.",
       "Worked to medical-device R&D standards for experimental control, documentation and repeatability.",
     ],
   },
@@ -126,8 +126,8 @@ export const experience: ExperienceEntry[] = [
     summary:
       "Researched impact mechanics in advanced combat helmet systems; contributing research published in Annals of Biomedical Engineering, Vol. 53.",
     detail: [
-      "Researched impact mechanics and force propagation of advanced combat helmet systems.",
-      "Quantified precompression of helmet padding via experimental testing for finite-element analysis.",
+      "Researched impact mechanics and force propagation in advanced combat helmet systems.",
+      "Quantified precompression of helmet padding via experimental testing (89 subjects) for finite-element analysis.",
       "Contributed to research published in Annals of Biomedical Engineering, Volume 53.",
     ],
   },

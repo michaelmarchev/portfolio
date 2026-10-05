@@ -21,7 +21,13 @@ export function SpecTable({ specs, title = "Specifications" }: { specs: Spec[]; 
           >
             <dt className="u-meta pt-0.5 text-fg-4">{spec.label}</dt>
             <dd className="u-mono text-[0.9375rem] leading-[1.5] text-fg">
-              {spec.value}
+              {spec.href ? (
+                <a href={spec.href} target="_blank" rel="noreferrer noopener" className="u-link">
+                  {spec.value}
+                </a>
+              ) : (
+                spec.value
+              )}
               {spec.target && (
                 <span className="u-meta ml-3 align-[0.1em] text-accent-text">
                   target

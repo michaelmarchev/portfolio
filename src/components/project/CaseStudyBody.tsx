@@ -34,9 +34,28 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
               <div>
                 <div className="prose-editorial">
                   {section.body.map((paragraph) => (
-                    <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+                    <p key={paragraph.slice(0, 32)}>
+                      <Linkified text={paragraph} />
+                    </p>
                   ))}
                 </div>
+
+                {section.links && (
+                  <ul className="m-0 mt-7 flex list-none flex-wrap gap-x-8 gap-y-3 p-0">
+                    {section.links.map((link) => (
+                      <li key={link.href}>
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="u-meta u-link text-accent-text"
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
 
                 {section.list && (
                   <ul className="m-0 mt-7 list-none border-t border-line p-0">
@@ -110,5 +129,26 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
         </Reveal>
       ))}
     </div>
+  );
+}
+
+/** Full URLs in body copy (a citation's DOI, a licence) become links. */
+const URL_PATTERN = /(https?:\/\/[^\s)]+)/g;
+
+function Linkified({ text }: { text: string }) {
+  const parts = text.split(URL_PATTERN);
+  if (parts.length === 1) return <>{text}</>;
+  return (
+    <>
+      {parts.map((part, i) =>
+        i % 2 === 1 ? (
+          <a key={i} href={part} target="_blank" rel="noreferrer noopener" className="u-link break-all">
+            {part}
+          </a>
+        ) : (
+          part
+        ),
+      )}
+    </>
   );
 }

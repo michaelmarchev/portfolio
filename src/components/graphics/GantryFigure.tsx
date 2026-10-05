@@ -40,12 +40,12 @@ export function GantryFigure({
   className?: string;
 }) {
   return (
-    <figure className={cn("group m-0", className)}>
+    <figure className={cn("group @container m-0", className)}>
       <GantryPlate animate={animate} />
       {(label || caption) && (
-        <figcaption className="mt-3 flex flex-col gap-1 border-t border-line pt-3 sm:flex-row sm:items-baseline sm:gap-4">
+        <figcaption className="mt-3 flex flex-col gap-1 border-t border-line pt-3 @lg:flex-row @lg:items-baseline @lg:gap-4">
           <span className="u-meta shrink-0 text-fg-4">{label}</span>
-          <span className="text-caption text-fg-3">{caption}</span>
+          <span className="min-w-0 text-caption text-fg-3">{caption}</span>
         </figcaption>
       )}
     </figure>
