@@ -20,7 +20,7 @@ export const site = {
   positioning:
     "I work on precision fixtures, automated motion systems, mobility devices, product concepts, fabrication, and mechanical repair.",
   currently:
-    "I am the Mechanical Engineering Technical Lead on an in-development automated X-ray emission-scanning system for Lumafield.",
+    "I am the Mechanical Technical Lead on an in-development automated X-ray emission-scanning system for Lumafield.",
   closingLine: "Let’s build.",
   location: "Boston, MA",
   email: "marchev.m@northeastern.edu",
@@ -65,11 +65,12 @@ export const education = {
   location: "Boston, MA",
   activities: ["Generate — Hardware", "Northeastern Electric Racing", "Dean’s List"],
   coursework: [
+    "FEA & Design",
+    "Dynamics",
+    "Mechanics of Materials",
     "Thermodynamics",
     "Statics",
     "Materials Science",
-    "Physics 2",
-    "Differential Equations",
   ],
 } as const;
 

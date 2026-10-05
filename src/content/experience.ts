@@ -5,15 +5,18 @@ export const experience: ExperienceEntry[] = [
   {
     id: "generate-lumafield",
     organization: "Generate Product Development Studio / Lumafield Project",
-    role: "Mechanical Engineering Technical Lead",
+    role: "Mechanical Technical Lead",
     location: "Boston, MA",
-    timeline: "Current",
+    timeline: "July 2026 – Present",
     start: "2026-07",
     kind: "engineering",
     projectSlug: "x-ray-scanner-lumafield",
     summary:
       "Leading mechanical development of an automated five-axis gantry system designed to map X-ray emissions around Lumafield Neptune CT scanners.",
     detail: [
+      "Design the top-level architecture of a ≈200 ft³, five-axis motorized gantry for detecting and logging errant X-ray emissions of industrial CT scanners, saving ≈1 hr of operator time per unit.",
+      "Run team meetings, assign action items, and direct subsystem design for four mechanical engineers.",
+      "Manage integration between the mechanical, electrical/firmware and user-interaction systems.",
       "Own the mechanical architecture and design direction for a ≈7 ft × 7 ft × 4 ft, five-axis gantry, targeting 1 mm positioning repeatability.",
       "Translate a measurement task into functional requirements, motion envelopes, load cases and mechanical interfaces the electrical and controls sub-teams can build against.",
       "Direct gantry, axis, mechanism, frame and end-effector decisions, including the interface for a Thermo Fisher RadEye G20 survey meter.",
@@ -33,10 +36,11 @@ export const experience: ExperienceEntry[] = [
     summary:
       "Built a $25,000 precision optical-positioning fixture for experimental testing and ran mechanical and environmental verification and validation.",
     detail: [
-      "Built a proprietary precision optical-positioning fixture supporting sub-10-micron accuracy across four motorized and four manual axes, inside a complete blackout cage.",
+      "Designed a ±10 µm optical positioning bench in four motorized and four manual axes with a full blackout cage, including CNC and manual milling, assembly, testing, supplier management and control documentation.",
       "Designed and iterated one-off test fixtures across a camera head, coupler and camera control unit: laser intensity measurement, interface mechanical reliability, focus-ring torque over lifecycle, and front cover vibration testing.",
-      "Performed verification and validation testing: vibration, thermal exposure, laser intensity and mechanical reliability.",
-      "Used HALT equipment, standard and torsional Instrons, a vibration table, and MJF and MJP printing for alignment-critical features.",
+      "Led verification and validation testing: vibration, thermal, thermopile and mechanical reliability.",
+      "Integrated HALT and standard and torsional Instrons with 3D-printed and machined one-off fixtures; used a vibration table, and MJF and MJP printing for alignment-critical features.",
+      "Optimized prototype manufacturing methods, saving $3,000 per quarter on material purchasing.",
       "Worked to medical-device R&D standards for experimental control, documentation and repeatability.",
     ],
   },
@@ -52,8 +56,8 @@ export const experience: ExperienceEntry[] = [
     summary:
       "Designed tooling and fixturing for a compact automated system that upcycles fabric scraps into jewelry beads.",
     detail: [
-      "Created a fully automated, compact solution to reliably upcycle fabric scraps into jewelry beads.",
-      "Machined sharp steel inserts and developed a high-temperature SLA resin fixture to cut and stamp hardened fabric.",
+      "Automated reliable fabric upcycling through a compact, process-based bead production solution.",
+      "Formulated a robust cutting process with a machined steel stamp and a high-temperature SLA resin fixture, linearly actuated by a stepper motor, ball screw and linear rail, and integrated with the molding and dispensing systems.",
       "Iterated tooling geometry against a deliberate spread of fabric weaves, thicknesses and blends.",
       "Balanced reliability, compactness and safe operation, guarding cutting edges by geometry rather than instruction.",
     ],
@@ -69,7 +73,8 @@ export const experience: ExperienceEntry[] = [
     summary:
       "Diagnosed, repaired and modified petrol, diesel and electric power equipment across engines, drivetrains and hydraulics.",
     detail: [
-      "Repaired and maintained petrol, diesel and electric equipment: 2- and 4-stroke engines, transmissions, gearboxes, carburetors, belts, hydraulics, wheels and tires.",
+      "Fully rebuilt 2- and 4-stroke petrol, diesel and electric motors, transmissions, gearboxes and carburetors, and serviced belts, hydraulics and tires, across the full range of contractor-grade lawn machinery.",
+      "Performed cost and failure-mode analysis to determine the repair procedure and any custom parts modification.",
       "Modified and fabricated custom parts where correct replacements were unavailable.",
       "Diagnosed faults from customer-reported symptoms using systematic elimination rather than parts replacement.",
       "Earned STIHL Certified Silver Technician credential.",
@@ -88,7 +93,7 @@ export const experience: ExperienceEntry[] = [
       "Designed and manufactured an advanced walker with powered legs and an integrated seat for people with limited mobility.",
     detail: [
       "Designed and manufactured an advanced walker with powered legs and seat for low-mobility individuals.",
-      "Led iterative development of FDM and SLA 3D-printed PLA and Grey Pro conduit linkages in Onshape.",
+      "Iteratively developed stiff FDM and SLA 3D-printed PLA and Grey Pro conduit linkages in Onshape, on a powered walker with a raising and tilting seat and legs.",
       "Coordinated with the electrical sub-team to integrate motors, house electronics and protect the battery.",
       "Reserved electronics volume and cable routing early so both sub-teams could iterate in parallel.",
     ],
@@ -137,7 +142,7 @@ export const experience: ExperienceEntry[] = [
     summary:
       "Co-founded a global linguistic-exchange and mentorship program connecting more than 500 students and schools.",
     detail: [
-      "Founded a global linguistic exchange program for mentorship of underprivileged children overseas.",
+      "Founded a volunteer-based global linguistic exchange program for mentorship of underprivileged children overseas.",
       "Organized relationships with over 500 students and schools across South America, Asia and Europe.",
     ],
   },

@@ -9,7 +9,7 @@ export const toolkit: ToolkitGroup[] = [
     id: "design-cad",
     category: "Design + CAD",
     application:
-      "Part and product design in SOLIDWORKS, Creo and Onshape, with DFM and DFA.",
+      "Part and product design in SOLIDWORKS, Creo and Onshape, with DFM and DFA; layout in InDesign and Photoshop.",
     items: [
       "SOLIDWORKS",
       "Creo",
@@ -18,13 +18,15 @@ export const toolkit: ToolkitGroup[] = [
       "Part design",
       "DFM",
       "DFA",
+      "InDesign",
+      "Photoshop",
     ],
   },
   {
     id: "prototyping",
     category: "Prototyping + Manufacturing",
     application:
-      "FDM, SLA and MJP printing, fixtures, and machining.",
+      "FDM, SLA and MJP printing, fixtures, and CNC and manual milling.",
     items: [
       "FDM 3D printing",
       "SLA 3D printing",
@@ -33,7 +35,7 @@ export const toolkit: ToolkitGroup[] = [
       "Fixtures",
       "Shop tools",
       "Hand tools",
-      "Machining exposure",
+      "CNC + manual milling",
       "Material-driven iteration",
     ],
   },
@@ -50,6 +52,8 @@ export const toolkit: ToolkitGroup[] = [
       "Laser-intensity testing",
       "Mechanical reliability",
       "Test fixtures",
+      "HALT",
+      "Instron testing",
       "MATLAB",
       "Python",
       "C++",
@@ -73,6 +77,7 @@ export const toolkit: ToolkitGroup[] = [
       "Hydraulics",
       "Belts",
       "Wheels + tires",
+      "Failure-mode analysis",
       "Serviceability",
     ],
   },

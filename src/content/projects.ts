@@ -1478,7 +1478,7 @@ export const projects: Project[] = [
     title: "X-Ray Scanner for Lumafield",
     shortTitle: "X-Ray Scanner",
     organization: "Generate Product Development Studio / Lumafield project",
-    role: "Mechanical Engineering Technical Lead",
+    role: "Mechanical Technical Lead",
     timeline: "Current / In Development",
     status: "In development",
     inDevelopment: true,

@@ -13,7 +13,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Experience",
   description:
-    "My roles: R&D mechanical engineering co-op at Stryker Endoscopy, mechanical engineering technical lead at Generate Product Development Studio, power equipment mechanic, research program coordinator and published research assistant.",
+    "My roles: R&D mechanical engineering co-op at Stryker Endoscopy, mechanical technical lead at Generate Product Development Studio, power equipment mechanic, research program coordinator and published research assistant.",
   path: "/experience",
 });
 

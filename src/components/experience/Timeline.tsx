@@ -59,7 +59,7 @@ export function Timeline({ entries }: { entries: ExperienceEntry[] }) {
                   ) : null;
                 })()}
 
-                <MetaLabel tone={entry.timeline === "Current" ? "accent" : "muted"}>
+                <MetaLabel tone={entry.timeline.includes("Present") ? "accent" : "muted"}>
                   {entry.timeline}
                 </MetaLabel>
                 <MetaLabel className="text-fg-4">

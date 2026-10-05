@@ -6,7 +6,7 @@ export const about = {
     "I have worked on automated gantry systems, precision experimental fixtures, assistive mobility devices, sustainable product concepts, biomedical mechanics research, and equipment repair.",
   ],
   personal:
-    "Outside of work: running, hiking, skiing, soccer, audio, violin, piano, and DJing.",
+    "Outside of work: coffee, judo, audio and music, hiking, skiing, running, violin, piano, and soccer.",
 } as const;
 
 /** Headshot on the About page. */
