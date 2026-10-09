@@ -63,7 +63,6 @@ export const education = {
   degree: "BS, Mechanical Engineering and Design",
   expected: "Expected December 2028",
   location: "Boston, MA",
-  activities: ["Generate — Hardware", "Northeastern Electric Racing", "Dean’s List"],
   coursework: [
     "FEA & Design",
     "Dynamics",

@@ -48,13 +48,13 @@ export const projects: Project[] = [
       "Medical Devices",
     ],
     cardSummary:
-      "An optical positioning bench with four motorized and four manual axes, sub-10-micron, replacing a fully manual setup.",
+      "An optical positioning bench with four motorized and four manual axes, 10 µm resolution, replacing a fully manual setup.",
     summary:
-      "Precisely constrains and moves optical devices with respect to a target. Four motorized and four manual axes, sub-10-micron, inside a blackout cage. Replaced a completely manual bench.",
+      "Precisely constrains and moves optical devices with respect to a target. Four motorized and four manual axes, 10 µm resolution, inside a blackout cage. Replaced a completely manual bench.",
     tools: ["SOLIDWORKS", "Creo", "HALT chamber", "Standard + torsional Instron", "One-off fixtures", "Excel"],
     focus: [],
     specs: [
-      { label: "Positioning accuracy", value: "<10 micron" },
+      { label: "Positioning resolution", value: "10 µm" },
       { label: "Motorized axes", value: "4" },
       { label: "Manual axes", value: "4" },
       { label: "Optical control", value: "Complete blackout cage" },
@@ -1501,7 +1501,7 @@ export const projects: Project[] = [
       "Experimental Design",
     ],
     cardSummary:
-      "Leading development of a 5-axis, 7 ft × 7 ft × 4 ft gantry system to automate shielding-verification scans around an industrial X-ray CT scanner, targeting 1 mm repeatability.",
+      "Leading development of a 5-axis, 7 ft × 7 ft × 4 ft gantry system to automate shielding-verification scans around an industrial X-ray CT scanner, targeting 2–5 mm repeatability.",
     summary:
       "A gantry-based system that automatically sweeps a radiation sensor across Lumafield's CT scanners to detect leaks, replacing the current manual survey process.",
     tools: ["SOLIDWORKS", "Onshape", "FDM + SLA prototyping", "Linear motion components", "Excel"],
@@ -1516,7 +1516,7 @@ export const projects: Project[] = [
     specs: [
       { label: "Gantry envelope", value: "≈ 7 ft × 7 ft × 4 ft" },
       { label: "Motorized axes", value: "5" },
-      { label: "Positioning repeatability", value: "1 mm", target: true },
+      { label: "Positioning repeatability", value: "2–5 mm", target: true },
       { label: "Instrument", value: "Thermo Fisher RadEye G20 survey meter" },
       { label: "Subject", value: "Lumafield Neptune industrial X-ray CT scanner" },
       { label: "Scan coverage", value: "Automated paths across multiple scanner faces", target: true },

@@ -16,8 +16,9 @@ export const experience: ExperienceEntry[] = [
     detail: [
       "Design the top-level architecture of a ≈200 ft³, five-axis motorized gantry for detecting and logging errant X-ray emissions of industrial CT scanners, projected to save ≈1 hr of operator time per unit.",
       "Manage four mechanical engineers, direct subsystem design, assign action items, and run meetings.",
+      "Control frame and axis squareness and eliminate play in mounting for a projected 2–5 mm repeatability.",
       "Manage integration between the mechanical, electrical/firmware and user-interaction systems.",
-      "Own the mechanical architecture and design direction for a ≈7 ft × 7 ft × 4 ft, five-axis gantry, targeting 1 mm positioning repeatability.",
+      "Own the mechanical architecture and design direction for a ≈7 ft × 7 ft × 4 ft, five-axis gantry, targeting 2–5 mm positioning repeatability.",
       "Translate a measurement task into functional requirements, motion envelopes, load cases and mechanical interfaces the electrical and controls sub-teams can build against.",
       "Direct gantry, axis, mechanism, frame and end-effector decisions, including the interface for a Thermo Fisher RadEye G20 survey meter.",
       "Run iterative design reviews, record the reasoning behind decisions, and coordinate mechanical work across the project team.",

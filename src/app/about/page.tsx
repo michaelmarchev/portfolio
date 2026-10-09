@@ -81,12 +81,6 @@ export default function AboutPage() {
                   </dd>
                 </div>
                 <div className="border-b border-line py-4">
-                  <dt className="u-meta text-fg-4">Activities</dt>
-                  <dd className="mt-1.5 ml-0 text-caption leading-[1.6] text-fg-2">
-                    {education.activities.join(" · ")}
-                  </dd>
-                </div>
-                <div className="border-b border-line py-4">
                   <dt className="u-meta text-fg-4">Relevant coursework</dt>
                   <dd className="mt-1.5 ml-0 text-caption leading-[1.6] text-fg-2">
                     {education.coursework.join(" · ")}
