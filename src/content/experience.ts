@@ -14,8 +14,8 @@ export const experience: ExperienceEntry[] = [
     summary:
       "Leading mechanical development of an automated five-axis gantry system designed to map X-ray emissions around Lumafield Neptune CT scanners.",
     detail: [
-      "Design the top-level architecture of a ≈200 ft³, five-axis motorized gantry for detecting and logging errant X-ray emissions of industrial CT scanners, saving ≈1 hr of operator time per unit.",
-      "Run team meetings, assign action items, and direct subsystem design for four mechanical engineers.",
+      "Design the top-level architecture of a ≈200 ft³, five-axis motorized gantry for detecting and logging errant X-ray emissions of industrial CT scanners, projected to save ≈1 hr of operator time per unit.",
+      "Manage four mechanical engineers, direct subsystem design, assign action items, and run meetings.",
       "Manage integration between the mechanical, electrical/firmware and user-interaction systems.",
       "Own the mechanical architecture and design direction for a ≈7 ft × 7 ft × 4 ft, five-axis gantry, targeting 1 mm positioning repeatability.",
       "Translate a measurement task into functional requirements, motion envelopes, load cases and mechanical interfaces the electrical and controls sub-teams can build against.",
@@ -36,11 +36,11 @@ export const experience: ExperienceEntry[] = [
     summary:
       "Built a $25,000 precision optical-positioning fixture for experimental testing and ran mechanical and environmental verification and validation.",
     detail: [
-      "Designed a <10 µm optical positioning bench in four motorized and four manual axes with a full blackout cage, including CNC and manual milling, assembly, testing, supplier management and control documentation.",
+      "Designed a 10 µm resolution optics bench with four motorized and four manual axes and a full blackout cage, including supplier management, machining and anodization, build, testing and control documentation.",
       "Designed and iterated one-off test fixtures across a camera head, coupler and camera control unit: laser intensity measurement, interface mechanical reliability, focus-ring torque over lifecycle, and front cover vibration testing.",
-      "Led verification and validation testing: vibration, thermal, thermopile and mechanical reliability.",
-      "Integrated HALT and standard and torsional Instrons with 3D-printed and machined one-off fixtures; used a vibration table, and MJF and MJP printing for alignment-critical features.",
-      "Optimized prototype manufacturing methods to reduce materials spending by 57%.",
+      "Led verification and validation on next-generation endoscopy camera heads to establish patient and user safety and lifecycle factor of safety, and to support FDA compliance: vibration, thermal, thermopile and mechanical reliability testing.",
+      "Created custom FDM and milled fixturing to integrate prototypes with HALT and linear and torsional Instrons; used a vibration table, and MJF and MJP printing for alignment-critical features.",
+      "Optimized prototype manufacturing methods (MJP to FDM) to reduce materials spending by 57%.",
       "Worked to medical-device R&D standards for experimental control, documentation and repeatability.",
     ],
   },
@@ -74,7 +74,7 @@ export const experience: ExperienceEntry[] = [
       "Diagnosed, repaired and modified petrol, diesel and electric power equipment across engines, drivetrains and hydraulics.",
     detail: [
       "Fully rebuilt 2- and 4-stroke petrol, diesel and electric motors, transmissions, gearboxes and carburetors, and serviced belts, hydraulics and tires, across the full range of contractor-grade lawn machinery.",
-      "Performed cost and failure-mode analysis to determine the repair procedure and any custom parts modification.",
+      "Performed cost and failure-mode analysis to determine repair and parts modification procedures.",
       "Modified and fabricated custom parts where correct replacements were unavailable.",
       "Diagnosed faults from customer-reported symptoms using systematic elimination rather than parts replacement.",
       "Earned STIHL Certified Silver Technician credential.",
@@ -93,7 +93,7 @@ export const experience: ExperienceEntry[] = [
       "Designed and manufactured an advanced walker with powered legs and an integrated seat for people with limited mobility.",
     detail: [
       "Designed and manufactured an advanced walker with powered legs and seat for low-mobility individuals.",
-      "Iteratively developed stiff FDM and SLA 3D-printed PLA and Grey Pro conduit linkages in Onshape, on a powered walker with a raising and tilting seat and legs.",
+      "Iteratively developed static and dynamic stiff conduit linkages — FDM and SLA 3D-printed in PLA and Grey Pro, designed in Onshape — to withstand axial load and fully constrain relative motion on a powered walker with a raising and tilting seat and legs.",
       "Coordinated with the electrical sub-team to integrate motors, house electronics and protect the battery.",
       "Reserved electronics volume and cable routing early so both sub-teams could iterate in parallel.",
     ],
@@ -117,7 +117,7 @@ export const experience: ExperienceEntry[] = [
   {
     id: "ysp-research",
     organization: "Northeastern University Center for STEM Education — Young Scholars’ Program",
-    role: "Research Assistant",
+    role: "Research Assistant & Co-author",
     location: "Boston, MA",
     timeline: "June 2023 – August 2023",
     start: "2023-06",
@@ -142,7 +142,7 @@ export const experience: ExperienceEntry[] = [
     summary:
       "Co-founded a global linguistic-exchange and mentorship program connecting more than 500 students and schools.",
     detail: [
-      "Founded a volunteer-based global linguistic exchange program for mentorship of underprivileged children overseas.",
+      "Founded a global linguistic exchange program for virtual mentorship of underprivileged children.",
       "Organized relationships with over 500 students and schools across South America, Asia and Europe.",
     ],
   },

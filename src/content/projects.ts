@@ -1307,7 +1307,7 @@ export const projects: Project[] = [
     shortTitle: "Helmet Impact Research",
     organization:
       "Northeastern University Center for STEM Education / Young Scholars’ Program",
-    role: "Research Assistant",
+    role: "Research Assistant & Co-author",
     timeline: "June 2023 – August 2023",
     status: "Published",
     theme: "light",

@@ -2,11 +2,11 @@ import type { ImageBrief } from "@/lib/types";
 
 export const about = {
   body: [
-    "I am a Mechanical Engineering and Design student at Northeastern University, graduating in May 2028.",
+    "I am a Mechanical Engineering and Design student at Northeastern University, graduating in December 2028.",
     "I have worked on automated gantry systems, precision experimental fixtures, assistive mobility devices, sustainable product concepts, biomedical mechanics research, and equipment repair.",
   ],
   personal:
-    "Outside of work: coffee, judo, audio and music, hiking, skiing, running, violin, piano, and soccer.",
+    "Outside of work: espresso, judo, audio, music, hiking, skiing, running, violin, piano, and soccer.",
 } as const;
 
 /** Headshot on the About page. */

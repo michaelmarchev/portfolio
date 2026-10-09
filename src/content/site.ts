@@ -61,7 +61,7 @@ export const nav = [
 export const education = {
   school: "Northeastern University, College of Engineering",
   degree: "BS, Mechanical Engineering and Design",
-  expected: "Expected May 2028",
+  expected: "Expected December 2028",
   location: "Boston, MA",
   activities: ["Generate — Hardware", "Northeastern Electric Racing", "Dean’s List"],
   coursework: [
@@ -71,6 +71,10 @@ export const education = {
     "Thermodynamics",
     "Statics",
     "Materials Science",
+    "Physics 2",
+    "Calculus 3",
+    "Differential Equations and Linear Algebra",
+    "Design Perspectives + Process",
   ],
 } as const;
 

@@ -9,11 +9,12 @@ export const toolkit: ToolkitGroup[] = [
     id: "design-cad",
     category: "Design + CAD",
     application:
-      "Part and product design in SOLIDWORKS, Creo and Onshape, with DFM and DFA; layout in InDesign and Photoshop.",
+      "Part and product design in Creo, SOLIDWORKS, Onshape and AutoCAD, with DFM and DFA; layout in InDesign and Photoshop.",
     items: [
       "SOLIDWORKS",
       "Creo",
       "Onshape",
+      "AutoCAD",
       "Product design",
       "Part design",
       "DFM",
@@ -26,7 +27,7 @@ export const toolkit: ToolkitGroup[] = [
     id: "prototyping",
     category: "Prototyping + Manufacturing",
     application:
-      "FDM, SLA and MJP printing, fixtures, and CNC and manual milling.",
+      "FDM, SLA and MJP printing, fixtures, CNC and manual milling, and soldering.",
     items: [
       "FDM 3D printing",
       "SLA 3D printing",
@@ -34,8 +35,9 @@ export const toolkit: ToolkitGroup[] = [
       "Slicing",
       "Fixtures",
       "Shop tools",
-      "Hand tools",
+      "Advanced hand tools",
       "CNC + manual milling",
+      "Soldering",
       "Material-driven iteration",
     ],
   },
@@ -88,7 +90,7 @@ export const credentials: Credential[] = [
   { abbr: "CSWA-AM", name: "Additive Manufacturing", issuer: "Dassault Systèmes" },
   { abbr: "CSWA-S", name: "Sustainability", issuer: "Dassault Systèmes" },
   { abbr: "SILVER", name: "STIHL Certified Silver Technician", issuer: "STIHL" },
-  { abbr: "LEAN", name: "Lean Green Belt", issuer: "Lean certification" },
+  { abbr: "LSS GB", name: "Lean Six Sigma Green Belt", issuer: "Lean Six Sigma certification" },
 ];
 
 export const languages = [
