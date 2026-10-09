@@ -47,6 +47,11 @@ export const toolkit: ToolkitGroup[] = [
     application:
       "Vibration, thermal, laser-intensity and mechanical reliability testing, with analysis in ANSYS, MATLAB, Python, C++ and Excel.",
     items: [
+      "ANSYS",
+      "MATLAB",
+      "Excel",
+      "Python",
+      "C++",
       "Experimental design",
       "Verification + validation",
       "Vibration testing",
@@ -56,11 +61,6 @@ export const toolkit: ToolkitGroup[] = [
       "Test fixtures",
       "HALT",
       "Instron testing",
-      "ANSYS",
-      "MATLAB",
-      "Python",
-      "C++",
-      "Excel",
     ],
   },
   {
