@@ -6,16 +6,19 @@ import { seoKeywords, site } from "@/content/site";
  * `opengraph-image.tsx`: under `output: "export"` the generated file is
  * emitted without an extension, and GitHub Pages then serves it as
  * application/octet-stream instead of an image.
+ *
+ * The filename is versioned on purpose: link previews (iMessage, LinkedIn,
+ * Slack) cache the image by URL, so a redesign needs a new name to show up.
  */
 const OG_IMAGE = {
-  url: `${site.url}/og.png`,
+  url: `${site.url}/og-v2.png`,
   width: 1200,
   height: 630,
   alt: `${site.name} — Mechanical Engineer. Technical Lead.`,
 };
 
 const DEFAULT_DESCRIPTION =
-  "Michael Marchev is a mechanical engineer and technical lead building precision physical systems: automated motion systems, precision test fixtures, human-centered devices and sustainable product concepts.";
+  "I design and build mechanical systems: precision motion systems, test fixtures, mobility devices and product concepts. CAD, prototyping, integration and testing.";
 
 /** Base metadata applied in the root layout. */
 export const baseMetadata: Metadata = {
