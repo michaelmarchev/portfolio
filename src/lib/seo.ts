@@ -10,11 +10,14 @@ import { seoKeywords, site } from "@/content/site";
  * The filename is versioned on purpose: link previews (iMessage, LinkedIn,
  * Slack) cache the image by URL, so a redesign needs a new name to show up.
  */
+/** The homepage's title, used as-is wherever the site is shared. */
+export const HOME_TITLE = "Design Engineering Portfolio - Michael Marchev.";
+
 const OG_IMAGE = {
   url: `${site.url}/og-v2.png`,
   width: 1200,
   height: 630,
-  alt: `${site.name} — Mechanical Engineer. Technical Lead.`,
+  alt: HOME_TITLE,
 };
 
 const DEFAULT_DESCRIPTION =
@@ -37,13 +40,13 @@ export const baseMetadata: Metadata = {
     siteName: site.name,
     locale: "en_US",
     url: `${site.url}/`,
-    title: `${site.name} — Mechanical Engineer. Technical Lead.`,
+    title: HOME_TITLE,
     description: DEFAULT_DESCRIPTION,
     images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Mechanical Engineer`,
+    title: HOME_TITLE,
     description: DEFAULT_DESCRIPTION,
     images: [OG_IMAGE.url],
   },
@@ -55,13 +58,19 @@ export const baseMetadata: Metadata = {
   category: "engineering",
 };
 
-/** Per-page metadata helper. */
+/**
+ * Per-page metadata helper. `absolute` uses the title exactly as given,
+ * without the " — Michael Marchev" suffix (the homepage).
+ */
 export function pageMetadata(options: {
   title: string;
   description: string;
   path: string;
+  absolute?: boolean;
 }): Metadata {
-  const { title, description, path } = options;
+  const { description, path, absolute } = options;
+  const shared = absolute ? options.title : `${options.title} — ${site.name}`;
+  const title = absolute ? { absolute: options.title } : options.title;
   // Absolute URLs throughout: with a base path in play, a root-relative
   // "/projects" would drop the sub-path the site is actually served from.
   const url = `${site.url}${path.endsWith("/") ? path : `${path}/`}`;
@@ -70,14 +79,14 @@ export function pageMetadata(options: {
     description,
     alternates: { canonical: url },
     openGraph: {
-      title: `${title} — ${site.name}`,
+      title: shared,
       description,
       url,
       type: "website",
       images: [OG_IMAGE],
     },
     twitter: {
-      title: `${title} — ${site.name}`,
+      title: shared,
       description,
       images: [OG_IMAGE.url],
     },

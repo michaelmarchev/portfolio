@@ -7,10 +7,11 @@ import { ContactCta } from "@/components/sections/ContactCta";
 import { CurrentlyPanel } from "@/components/sections/CurrentlyPanel";
 import { MetaLabel } from "@/components/ui/MetaLabel";
 import { getFeaturedProjects } from "@/content/projects";
-import { pageMetadata } from "@/lib/seo";
+import { HOME_TITLE, pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Mechanical Engineer. Technical Lead.",
+  title: HOME_TITLE,
+  absolute: true,
   description:
     "I design and build mechanical systems: precision motion systems, test fixtures, mobility devices and product concepts. CAD, prototyping, integration and testing.",
   path: "/",
