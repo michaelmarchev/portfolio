@@ -11,7 +11,8 @@ import { CornerAccents } from "@/components/graphics/CornerAccents";
 import { DimensionCallouts } from "@/components/graphics/DimensionCallouts";
 import { FlyInText } from "@/components/ui/FlyInText";
 import { Logo } from "@/components/ui/Logo";
-import { orgLogos } from "@/content/logos";
+import { logoFor, orgLogos } from "@/content/logos";
+import { experience } from "@/content/experience";
 
 /**
  * Homepage hero.
@@ -109,11 +110,27 @@ export function Hero() {
               Experience
             </Link>
             <ul className="m-0 mt-5 flex list-none flex-wrap items-center gap-x-10 gap-y-6 p-0">
-              {orgLogos.map((logo) => (
-                <li key={logo.id}>
-                  <Logo logo={logo} size={logo.width / logo.height > 2 ? 26 : 40} />
-                </li>
-              ))}
+              {orgLogos.map((logo) => {
+                // Each logo opens the most recent Experience entry for that
+                // organization (entries are newest first).
+                const entry = experience.find((e) => logoFor(e.organization)?.id === logo.id);
+                const mark = <Logo logo={logo} size={logo.width / logo.height > 2 ? 26 : 40} />;
+                return (
+                  <li key={logo.id}>
+                    {entry ? (
+                      <Link
+                        href={`/experience#${entry.id}`}
+                        aria-label={`${entry.organization} — Experience`}
+                        className="block no-underline"
+                      >
+                        {mark}
+                      </Link>
+                    ) : (
+                      mark
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>

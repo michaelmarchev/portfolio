@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { MetaLabel } from "@/components/ui/MetaLabel";
 import type { ExperienceEntry } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -20,10 +20,51 @@ const KIND_LABEL: Record<ExperienceEntry["kind"], string> = {
  * Expandable timeline. Every entry's summary is visible without interaction;
  * expanding reveals the detail. The first entry opens by default so the page
  * is never a column of closed rows.
+ *
+ * Each entry is a link target (`/experience#stryker`; the homepage logos
+ * use these). Arriving on one opens that entry and scrolls it into view
+ * once it has expanded.
  */
 export function Timeline({ entries }: { entries: ExperienceEntry[] }) {
   const [open, setOpen] = useState<string[]>(entries.length ? [entries[0].id] : []);
   const base = useId();
+
+  useEffect(() => {
+    const reveal = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      if (!entries.some((e) => e.id === id)) return;
+      setOpen((current) => (current.includes(id) ? current : [...current, id]));
+
+      // The page keeps changing height after this — the entry expanding,
+      // images loading, GridSnap padding blocks — so a single scroll lands
+      // short. Keep the entry aligned while the layout settles: for up to 5s,
+      // ending the moment the visitor scrolls, clicks, taps or types, so it
+      // never fights them. Instant, not the page's smooth
+      // scrolling: each re-align would restart the animation and never land.
+      const align = () =>
+        document.getElementById(id)?.scrollIntoView({ block: "start", behavior: "instant" });
+      const resizes = new ResizeObserver(align);
+      const stop = () => {
+        resizes.disconnect();
+        window.removeEventListener("wheel", stop);
+        window.removeEventListener("touchstart", stop);
+        window.removeEventListener("keydown", stop);
+        window.removeEventListener("pointerdown", stop);
+      };
+      setTimeout(() => {
+        align();
+        resizes.observe(document.body);
+      }, 0);
+      window.addEventListener("wheel", stop, { passive: true });
+      window.addEventListener("touchstart", stop, { passive: true });
+      window.addEventListener("keydown", stop);
+      window.addEventListener("pointerdown", stop);
+      setTimeout(stop, 5000);
+    };
+    reveal();
+    window.addEventListener("hashchange", reveal);
+    return () => window.removeEventListener("hashchange", reveal);
+  }, [entries]);
 
   const toggle = (id: string) =>
     setOpen((current) =>
@@ -37,7 +78,7 @@ export function Timeline({ entries }: { entries: ExperienceEntry[] }) {
         const panelId = `${base}-${entry.id}`;
 
         return (
-          <li key={entry.id} className="border-b border-line">
+          <li key={entry.id} id={entry.id} className="border-b border-line">
             <div className="relative grid grid-cols-1 gap-x-10 py-7 lg:grid-cols-[13rem_minmax(0,1fr)]">
               {/* Timeline marker: filled for the current role, hairline otherwise. */}
               <span
