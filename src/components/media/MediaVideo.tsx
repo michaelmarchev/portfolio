@@ -11,11 +11,10 @@ import { asset, cn } from "@/lib/utils";
  * `prefers-reduced-motion` it doesn't autoplay: the poster shows, with
  * controls, so the visitor chooses to play it.
  *
- * Size is capped by the viewport's height. Footage from a phone is 9:16, and
- * at the case-study hero's full width it would be far taller than the screen.
- * The cap is 1.1× "fits the screen" (owner, 2026-10-20: fitting exactly read
- * as small), so on a short window the bottom of the clip sits just below the
- * fold. The width follows from the cap, centred in its column.
+ * Height is capped to the viewport. Footage from a phone is 9:16, and at the
+ * case-study hero's width it would otherwise be taller than the screen; the
+ * width follows from the cap, centred in its column. (1.1× and 1.2× were
+ * tried and rejected, owner 2026-10-20.)
  */
 export function MediaVideo({
   media,
@@ -54,7 +53,7 @@ export function MediaVideo({
         className="media-round mx-auto block h-auto w-full bg-bg-deep"
         style={{
           aspectRatio: `${media.width} / ${media.height}`,
-          maxWidth: `calc((100svh - 11rem) * ${(ratio * 1.1).toFixed(4)})`,
+          maxWidth: `calc((100svh - 11rem) * ${ratio.toFixed(4)})`,
         }}
         src={asset(media.video)}
         poster={media.src ? asset(media.src) : undefined}
