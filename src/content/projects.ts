@@ -109,8 +109,8 @@ export const projects: Project[] = [
       src: "/images/optics-bench-motion-poster.jpg",
       video: "/videos/optics-bench-motion.mp4",
       alt: "Video of the optical positioning bench outside its cage: the tower head and gantry stage move through their axes.",
-      width: 720,
-      height: 1280,
+      width: 1080,
+      height: 1920,
     },
     sections: [
       {
