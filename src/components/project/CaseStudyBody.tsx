@@ -93,10 +93,16 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
                    *
                    * `break-inside-avoid` keeps a figure and its caption
                    * together; `wide` images opt out of the column flow.
+                   *
+                   * `mediaLayout: "pairs"` is the exception: a two-column grid
+                   * filled row by row, for sections whose photos are ordered in
+                   * related, same-shape pairs.
                    */
                   <div
                     className={cn(
-                      "max-w-[62rem] [column-gap:1.75rem] sm:[columns:2]",
+                      section.mediaLayout === "pairs"
+                        ? "grid max-w-[62rem] grid-cols-1 items-start gap-x-7 sm:grid-cols-2"
+                        : "max-w-[62rem] [column-gap:1.75rem] sm:[columns:2]",
                       // An image-only section starts level with its title.
                       (section.body.length > 0 || section.list) && "mt-10",
                     )}
@@ -106,7 +112,7 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
                         key={image.id}
                         className={
                           image.wide
-                            ? "mb-8 break-inside-avoid sm:[column-span:all]"
+                            ? "mb-8 break-inside-avoid sm:col-span-2 sm:[column-span:all]"
                             : "mb-8 break-inside-avoid"
                         }
                       >

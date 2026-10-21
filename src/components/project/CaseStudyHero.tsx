@@ -1,6 +1,7 @@
 import { GantryFigure } from "@/components/graphics/GantryFigure";
 import { Container } from "@/components/layout/Container";
 import { MediaFigure } from "@/components/media/MediaFigure";
+import { MediaVideo } from "@/components/media/MediaVideo";
 import { Logo } from "@/components/ui/Logo";
 import { MetaRun } from "@/components/ui/MetaLabel";
 import { MetaLabel } from "@/components/ui/MetaLabel";
@@ -65,6 +66,8 @@ export function CaseStudyHero({ project }: { project: Project }) {
                 label={project.hero.label}
                 caption={project.hero.caption}
               />
+            ) : project.heroVideo ? (
+              <MediaVideo media={project.heroVideo} />
             ) : (
               <MediaFigure
                 image={project.hero}

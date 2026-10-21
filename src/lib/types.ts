@@ -66,6 +66,11 @@ export interface ImageBrief {
    * two-column grid. For dimensioned drawings, where detail matters.
    */
   wide?: boolean;
+  /**
+   * Path under /public to a short silent MP4. When set the slot plays this
+   * clip and `src` is its poster frame. See `MediaVideo`.
+   */
+  video?: string;
 }
 
 /** A labelled key/value row in a case-study specification table. */
@@ -93,6 +98,12 @@ export interface CaseStudySection {
   note?: string;
   /** Media rendered with this section. */
   media?: ImageBrief[];
+  /**
+   * "pairs": media in rows of two, in order, so related photos sit side by
+   * side. Order them so each pair shares an aspect ratio, or the shorter one
+   * leaves a gap. Default is CSS columns (see CaseStudyBody).
+   */
+  mediaLayout?: "pairs";
 }
 
 export type ProjectCategory =
@@ -134,6 +145,11 @@ export interface Project {
   /** Optional per-project accent. Falls back to the site signal blue. */
   accent?: string;
   hero: ImageBrief;
+  /**
+   * Replaces `hero` at the top of the case study only, e.g. a clip of the
+   * system moving. The homepage and the social card keep `hero`.
+   */
+  heroVideo?: ImageBrief & { video: string };
   /** Card image for the archive and homepage spreads. */
   card: ImageBrief;
   /**
