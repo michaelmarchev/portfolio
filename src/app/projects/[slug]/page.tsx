@@ -47,8 +47,8 @@ export default async function ProjectPage({
 
   return (
     <article>
-      {/* A project with a `drawing` (luX-Ray's axonometric) shows it
-          in the hero in place of a photograph. */}
+      {/* The hero shows `heroVideo`, else `caseHero`, else a `drawing`,
+          else `hero` — see CaseStudyHero. */}
       <CaseStudyHero project={project} />
 
       <Section space="default" datum={project.title}>

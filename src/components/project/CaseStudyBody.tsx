@@ -1,4 +1,5 @@
 import { Container } from "@/components/layout/Container";
+import { GantryFigure } from "@/components/graphics/GantryFigure";
 import { MediaFigure } from "@/components/media/MediaFigure";
 import { Reveal } from "@/components/ui/Reveal";
 import type { CaseStudySection } from "@/lib/types";
@@ -116,6 +117,10 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
                             : "mb-8 break-inside-avoid"
                         }
                       >
+                        {image.drawing === "gantry-axonometric" ? (
+                          // GantryHero uses fixed ids: at most one per page.
+                          <GantryFigure label={image.label} caption={image.caption} />
+                        ) : (
                         <MediaFigure
                           image={image}
                           detail="full"
@@ -125,6 +130,7 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
                               : "(min-width: 1024px) 31vw, (min-width: 640px) 38vw, 94vw"
                           }
                         />
+                        )}
                       </div>
                     ))}
                   </div>

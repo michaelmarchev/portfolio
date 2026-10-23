@@ -60,14 +60,21 @@ export function CaseStudyHero({ project }: { project: Project }) {
 
           {/* --- Lead image, and the details when there is room beneath it --- */}
           <div className="lg:sticky lg:top-28">
-            {project.drawing === "gantry-axonometric" ? (
+            {project.heroVideo ? (
+              <MediaVideo media={project.heroVideo} />
+            ) : project.caseHero ? (
+              <MediaFigure
+                image={project.caseHero}
+                detail="full"
+                priority
+                sizes="(min-width: 1024px) 46vw, 100vw"
+              />
+            ) : project.drawing === "gantry-axonometric" ? (
               <GantryFigure
                 animate
                 label={project.hero.label}
                 caption={project.hero.caption}
               />
-            ) : project.heroVideo ? (
-              <MediaVideo media={project.heroVideo} />
             ) : (
               <MediaFigure
                 image={project.hero}

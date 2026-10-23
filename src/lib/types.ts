@@ -67,6 +67,12 @@ export interface ImageBrief {
    */
   wide?: boolean;
   /**
+   * Renders this slot as a hand-drawn figure instead of an image (`label`
+   * and `caption` still apply). Used to place luX-Ray's axonometric in a
+   * case-study section.
+   */
+  drawing?: "gantry-axonometric";
+  /**
    * Path under /public to a short silent MP4. When set the slot plays this
    * clip and `src` is its poster frame. See `MediaVideo`.
    */
@@ -150,6 +156,11 @@ export interface Project {
    * system moving. The homepage and the social card keep `hero`.
    */
   heroVideo?: ImageBrief & { video: string };
+  /**
+   * Replaces `hero` (or the `drawing`) beside the title on the case study
+   * only. The homepage spread and the Projects card keep `hero`/`drawing`.
+   */
+  caseHero?: ImageBrief;
   /** Card image for the archive and homepage spreads. */
   card: ImageBrief;
   /**
