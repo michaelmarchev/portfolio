@@ -154,7 +154,7 @@ export interface Project {
   card: ImageBrief;
   /**
    * A purpose-drawn illustration shown in place of the hero and card images.
-   * The X-Ray Scanner has no publishable CAD yet, so its axonometric drawing
+   * luX-Ray (the X-Ray Scanner) had no publishable CAD at first, so its axonometric drawing
    * stands in on the case study, the homepage and the archive. The hero and
    * card briefs still supply the label and caption.
    */

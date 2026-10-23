@@ -1698,8 +1698,8 @@ export const projects: Project[] = [
   {
     slug: "x-ray-scanner-lumafield",
     index: "06",
-    title: "X-Ray Scanner for Lumafield",
-    shortTitle: "X-Ray Scanner",
+    title: "luX-Ray",
+    shortTitle: "luX-Ray",
     organization: "Generate Product Development Studio / Lumafield project",
     role: "Mechanical Technical Lead",
     timeline: "Current / In Development",
@@ -1721,7 +1721,7 @@ export const projects: Project[] = [
       "Experimental Design",
     ],
     cardSummary:
-      "Leading development of a 5-axis, 7 ft × 7 ft × 4 ft gantry system to automate shielding-verification scans around an industrial X-ray CT scanner, targeting 2–5 mm repeatability.",
+      "Leading development of luX-Ray, a 5-axis, 7 ft × 7 ft × 4 ft gantry system to automate shielding-verification scans around an industrial X-ray CT scanner, targeting 2–5 mm repeatability.",
     summary:
       "A gantry-based system that automatically sweeps a radiation sensor across Lumafield's CT scanners to detect leaks, replacing the current manual survey process.",
     tools: ["SOLIDWORKS", "Onshape", "FDM + SLA prototyping", "Linear motion components", "Excel"],
@@ -1778,6 +1778,24 @@ export const projects: Project[] = [
         ],
         note:
           "This project is a measurement tool. Nothing here suggests that Lumafield scanners are unsafe or inadequately shielded.",
+        media: [
+          {
+            id: "luxray-cad",
+            orientation: "landscape",
+            kind: "cad-render",
+            label: "06.1 — GANTRY CAD",
+            subject: "CAD of the gantry frame around the scanner.",
+            composition: "As modelled.",
+            lighting: "CAD render.",
+            purpose: "Show the gantry design around the scanner.",
+            caption: "CAD of the gantry around the Neptune scanner: braced frame, rails on each side, and the carriage with its vertical axis.",
+            status: "final",
+            src: "/images/luxray-gantry-cad.png",
+            alt: "CAD model of a rectangular extrusion gantry frame with diagonal bracing standing over a CT scanner, with a carriage on overhead rails and a vertical axis hanging down the scanner's face.",
+            width: 981,
+            height: 924,
+          },
+        ],
       },
       {
         id: "role",

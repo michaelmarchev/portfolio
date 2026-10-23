@@ -12,7 +12,7 @@ export const experience: ExperienceEntry[] = [
     kind: "engineering",
     projectSlug: "x-ray-scanner-lumafield",
     summary:
-      "Leading mechanical development of an automated five-axis gantry system designed to map X-ray emissions around Lumafield Neptune CT scanners.",
+      "Leading mechanical development of luX-Ray, an automated five-axis gantry system designed to map X-ray emissions around Lumafield Neptune CT scanners.",
     detail: [
       "Design the top-level architecture of a ≈200 ft³, five-axis motorized gantry for detecting and logging errant X-ray emissions of industrial CT scanners, projected to save ≈1 hr of operator time per unit.",
       "Manage four mechanical engineers, direct subsystem design, assign action items, and run meetings.",
