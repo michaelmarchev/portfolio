@@ -6,7 +6,7 @@ import { site } from "@/content/site";
 
 /**
  * Large-type tagline, revealed word by word as it scrolls into view. Sits in
- * the homepage hero's reading column, below the Experience logos; at lg the hero panel stays pinned beside it while it scrolls past.
+ * the homepage hero's reading column, below the Experience logos; at lg the hero panel drifts beside it and catches as it starts to light.
  *
  * Words start at 15% of the text colour and come up to full colour, one at a
  * time in reading order, as each crosses a trigger line 60% of the way down

@@ -6,16 +6,24 @@ import { useEffect } from "react";
 const DRIFT = 0.75;
 /** The tagline's reveal line, as a fraction of the viewport height. */
 const REVEAL_LINE = 0.6;
+/** How far the hero (and the panel) runs past the reading column's end. */
+const OVERRUN = 80;
+/** Header height plus its border: the panel is at least one screen below it. */
+const HEADER = 69;
 
 /**
  * Slow-scrolls the homepage hero panel beside the reading column (lg only).
  *
- * The panel is one screen tall at the top of its grid cell. As the page
- * scrolls, it is translated down by 75% of the scroll distance, so on screen
- * it moves at a quarter of the page's speed. It "catches" — stops drifting
- * and scrolls with the page — when the tagline is half lit (the middle of
- * `catchId` crosses the reveal line), or earlier if it would otherwise run
- * past the bottom of the hero.
+ * As the page scrolls the panel is translated down by 75% of the scroll
+ * distance, so on screen it moves at a quarter of the page's speed. It
+ * "catches" — stops drifting and scrolls with the page — as the tagline starts
+ * to light (the top of `catchId` crosses the reveal line).
+ *
+ * Its height is set so that at the catch its bottom is level with the bottom
+ * of the hero, which runs OVERRUN px past the reading column:
+ *   height = (column + OVERRUN) − 0.75 × catchScroll   (≥ one screen)
+ * and a bottom margin of the same travel gives the grid that full height.
+ * The reading column is `lg:self-start`, so its height is its content's.
  *
  * A transform, not `position: sticky`, so layout is untouched (GridSnap
  * measures layout positions and subtracts transforms). Scroll work is batched
@@ -31,19 +39,34 @@ export function PanelDrift({ targetId, catchId }: { targetId: string; catchId?: 
     const lg = window.matchMedia("(min-width: 1024px)");
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
-    let travel = 0;
+
+    const column = grid.firstElementChild as HTMLElement | null;
+    let sizedFor = "";
 
     const measure = () => {
-      const room = Math.max(0, grid.offsetHeight - panel.offsetHeight);
-      const mark = catchId ? document.getElementById(catchId) : null;
-      if (!mark) {
-        travel = room;
+      if (!lg.matches || reduce.matches || !column) {
+        panel.style.height = "";
+        panel.style.marginBottom = "";
+        sizedFor = "";
         return;
       }
-      const middle =
-        mark.getBoundingClientRect().top + window.scrollY + mark.offsetHeight / 2;
-      const catchScroll = Math.max(0, middle - REVEAL_LINE * window.innerHeight);
-      travel = Math.min(room, catchScroll * DRIFT);
+      const mark = catchId ? document.getElementById(catchId) : null;
+      const top = mark
+        ? mark.getBoundingClientRect().top + window.scrollY
+        : column.offsetHeight;
+      const catchScroll = Math.max(0, top - REVEAL_LINE * window.innerHeight);
+      const bottom = column.offsetHeight + OVERRUN;
+      const height = Math.max(
+        window.innerHeight - HEADER,
+        bottom - catchScroll * DRIFT,
+      );
+      // Only write when the result changes: these writes resize the grid,
+      // which re-runs this observer and GridSnap.
+      const key = `${Math.round(height)}|${Math.round(bottom - height)}`;
+      if (key === sizedFor) return;
+      sizedFor = key;
+      panel.style.height = `${height}px`;
+      panel.style.marginBottom = `${Math.max(0, bottom - height)}px`;
     };
 
     const apply = () => {
@@ -52,7 +75,10 @@ export function PanelDrift({ targetId, catchId }: { targetId: string; catchId?: 
         panel.style.transform = "";
         return;
       }
-      const offset = Math.min(Math.max(window.scrollY * DRIFT, 0), travel);
+      // The catch is wherever the panel's bottom meets the grid's (GridSnap
+      // may have added a few px, so it is measured, not assumed).
+      const room = Math.max(0, grid.offsetHeight - panel.offsetHeight);
+      const offset = Math.min(Math.max(window.scrollY * DRIFT, 0), room);
       panel.style.transform = `translate3d(0, ${offset}px, 0)`;
     };
 
@@ -65,19 +91,27 @@ export function PanelDrift({ targetId, catchId }: { targetId: string; catchId?: 
       schedule();
     });
     resizes.observe(grid);
-    resizes.observe(panel);
+    if (column) resizes.observe(column);
 
     measure();
     apply();
     window.addEventListener("scroll", schedule, { passive: true });
-    lg.addEventListener("change", schedule);
+    const onChange = () => {
+      measure();
+      schedule();
+    };
+    lg.addEventListener("change", onChange);
+    window.addEventListener("resize", onChange);
 
     return () => {
       resizes.disconnect();
       window.removeEventListener("scroll", schedule);
-      lg.removeEventListener("change", schedule);
+      lg.removeEventListener("change", onChange);
+      window.removeEventListener("resize", onChange);
       if (frame) cancelAnimationFrame(frame);
       panel.style.transform = "";
+      panel.style.height = "";
+      panel.style.marginBottom = "";
     };
   }, [targetId, catchId]);
 

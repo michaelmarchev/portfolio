@@ -48,7 +48,7 @@ export function Hero() {
         {/* --- Reading column --- */}
         {/* Top-aligned at lg, level with the dark panel's label row (both
             start 3rem down). */}
-        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:justify-start lg:pr-[clamp(2rem,4vw,4.5rem)] lg:py-12">
+        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:justify-start lg:self-start lg:pr-[clamp(2rem,4vw,4.5rem)] lg:py-12">
           <div className="max-w-[46rem] lg:flex lg:flex-1 lg:flex-col lg:justify-between">
             <p className="u-meta text-fg-3">
               {site.location}
@@ -106,7 +106,7 @@ export function Hero() {
           {/* Logos of the organizations on the Experience page, then the
               tagline. At lg the gaps are deliberately large (128–160px, past
               the 96px top of the spacing scale, owner's call) so the column
-              runs long and the pinned panel holds through it. */}
+              runs long and the drifting panel holds through it. */}
           <div className="mt-16 border-t border-line pt-6 lg:mt-32">
             <Link href="/experience" className="u-meta u-link text-fg-4">
               Experience
@@ -142,27 +142,31 @@ export function Hero() {
         {/* --- Flagship system, dark panel --- */}
         <div
           data-panel="dark"
-          // At lg: one screen tall, drifting at a quarter of the scroll speed
-          // (PanelDrift) until the tagline is half lit, then scrolling with
-          // the page. Snapped by top only.
+          // At lg: drifts at a quarter of the scroll speed (PanelDrift) until
+          // the tagline starts to light, then scrolls with the page. PanelDrift
+          // sets its height so that at that point its bottom is level with
+          // the hero's. Snapped by top only.
           id="hero-panel"
           data-snap-height="parent"
-          className="relative flex flex-col justify-between overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:h-[calc(100svh-4.25rem-1px)] lg:self-start lg:px-10 lg:py-12 lg:will-change-transform"
+          className="relative flex flex-col justify-between overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:min-h-[calc(100svh-4.25rem-1px)] lg:self-start lg:px-10 lg:py-12 lg:will-change-transform"
         >
-          <div className="flex items-start justify-between gap-6">
-            <p className="u-meta text-accent">
-              {lead?.index}
-              <span aria-hidden="true" className="px-2 text-fg-4">
-                /
-              </span>
-              {lead?.title}
-            </p>
-            <p className="u-meta hidden shrink-0 text-fg-4 sm:block">
-              {lead?.timeline}
-            </p>
-          </div>
+          {/* The label and image fill the panel's first screen, whatever the
+              panel's total height; the description sits at its bottom. */}
+          <div className="lg:flex lg:h-[calc(100svh-4.25rem-1px-6rem)] lg:flex-col">
+            <div className="flex items-start justify-between gap-6">
+              <p className="u-meta text-accent">
+                {lead?.index}
+                <span aria-hidden="true" className="px-2 text-fg-4">
+                  /
+                </span>
+                {lead?.title}
+              </p>
+              <p className="u-meta hidden shrink-0 text-fg-4 sm:block">
+                {lead?.timeline}
+              </p>
+            </div>
 
-          {/* The image sizes to the height the panel gives it, so it grows to
+            {/* The image sizes to the height the panel gives it, so it grows to
               nearly meet the label above and the summary below without
               changing the panel's own height. Tailwind emits responsive
               variants after base utilities, so `lg:w-auto` wins over the
@@ -172,7 +176,7 @@ export function Hero() {
               needs room:
               - above: the radius callout, ink 15.5–26.5px above the image —
                 at least 40px to the label row (`mt-11` below lg; `lg:pt-10`
-                at lg, where the pinned one-screen panel leaves less centring
+                at lg, where the panel's one-screen first block leaves less centring
                 room — measured 47px at 1024×640 up to 90px at 2560×1440);
               - right: the height dimension, ≈ 36px — the image is 2rem
                 narrower than the column below lg, and the panel padding
@@ -180,14 +184,14 @@ export function Hero() {
               - below: the width dimension and the units note, ≈ 46px, or
                 ≈ 62px where the note wraps to two lines on a phone
                 (`mb-20` below lg, `lg:pb-12`). */}
-          <div className="mb-20 mt-11 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:pb-12 lg:pt-10">
-            {lead && (
-              <Link
-                href={`/projects/${lead.slug}`}
-                className="flex h-full w-full items-center justify-center no-underline"
-                aria-label={`${lead.title} — case study`}
-              >
-                {/*
+            <div className="mb-20 mt-11 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:pb-12 lg:pt-10">
+              {lead && (
+                <Link
+                  href={`/projects/${lead.slug}`}
+                  className="flex h-full w-full items-center justify-center no-underline"
+                  aria-label={`${lead.title} — case study`}
+                >
+                  {/*
                   This wrapper must hug the image exactly, because the corner
                   accents and the radius callout are positioned against it.
                   Anchoring them to the Link instead put them against the full
@@ -197,39 +201,44 @@ export function Hero() {
                   Height comes from the panel; width follows the asset's own
                   aspect ratio, so the box is the image and nothing else.
                 */}
-                <div
-                  className="relative mx-auto w-[calc(100%-2rem)] max-w-[27rem] lg:h-[90%] lg:w-auto lg:max-w-none"
-                  style={{
-                    aspectRatio: `${lead.hero.width} / ${lead.hero.height}`,
-                  }}
-                >
-                  {/* All the drawing marks — radius callout, corner accents,
+                  <div
+                    className="relative mx-auto w-[calc(100%-2rem)] max-w-[27rem] lg:h-[90%] lg:w-auto lg:max-w-none"
+                    style={{
+                      aspectRatio: `${lead.hero.width} / ${lead.hero.height}`,
+                    }}
+                  >
+                    {/* All the drawing marks — radius callout, corner accents,
                       dimensions — share the units note's grey. */}
-                  <RadiusCallout radius={10} className="z-10 text-fg-3" />
-                  <SpecPlate
-                    image={lead.hero}
-                    detail="brief"
-                    priority
-                    sizes="(min-width: 1024px) 40vw, 100vw"
-                    className="h-full w-full"
-                  />
-                  <CornerAccents radius={10} strokeWidth={3.6} className="text-fg-3" />
-                  <DimensionCallouts delay={450} className="text-fg-3" />
-                  {/* General note, as on a drawing sheet: bottom right, under
-                      the width dimension. */}
-                  <p className="u-meta pointer-events-none absolute right-0 top-[calc(100%+1.875rem)] z-10 w-max max-w-[calc(100vw-4rem)] text-right text-fg-3">
-                    <FlyInText
-                      text="ALL UNITS IN PIXELS UNLESS OTHERWISE NOTED"
-                      delay={1100}
-                      stagger={16}
+                    <RadiusCallout radius={10} className="z-10 text-fg-3" />
+                    <SpecPlate
+                      image={lead.hero}
+                      detail="brief"
+                      priority
+                      sizes="(min-width: 1024px) 40vw, 100vw"
+                      className="h-full w-full"
                     />
-                  </p>
-                </div>
-              </Link>
-            )}
+                    <CornerAccents
+                      radius={10}
+                      strokeWidth={3.6}
+                      className="text-fg-3"
+                    />
+                    <DimensionCallouts delay={450} className="text-fg-3" />
+                    {/* General note, as on a drawing sheet: bottom right, under
+                      the width dimension. */}
+                    <p className="u-meta pointer-events-none absolute right-0 top-[calc(100%+1.875rem)] z-10 w-max max-w-[calc(100vw-4rem)] text-right text-fg-3">
+                      <FlyInText
+                        text="ALL UNITS IN PIXELS UNLESS OTHERWISE NOTED"
+                        delay={1100}
+                        stagger={16}
+                      />
+                    </p>
+                  </div>
+                </Link>
+              )}
+            </div>
           </div>
 
-          {/* A brief description under the image. */}
+          {/* A brief description, at the bottom of the panel. */}
           {lead && (
             <p className="max-w-[52ch] border-t border-line pt-6 text-caption text-fg-2">
               {lead.cardSummary}
