@@ -4,8 +4,8 @@
    MICHAEL MARCHEV — DESIGN TOKENS
    "Precision engineering meets contemporary editorial art direction."
 
-   Two typefaces: Archivo (grotesque, wayfinding lineage) for display, UI and
-   body; DM Mono for metadata, coordinates, project numbers and specifications.
+   Two typefaces: Geist for display, UI and body; Geist Mono for metadata,
+   coordinates, project numbers and specifications.
    Eggshell field, charcoal ink, controlled royal blue. Dark panels are
    reserved for precision R&D work.
    ========================================================================== */
@@ -165,8 +165,8 @@
   --color-signal-bright: #87aaf2;
   --color-void: #0e0e0e;
 
-  --font-sans: var(--font-archivo), "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: var(--font-dm-mono), "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-sans: var(--font-geist), "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   --text-display: clamp(2.9rem, 8.2vw, 7.5rem);
   --text-display--line-height: 0.93;

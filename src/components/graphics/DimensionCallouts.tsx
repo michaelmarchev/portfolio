@@ -35,7 +35,7 @@ const EXT_GAP = 4;
 const EXT_PAST = 4;
 const HEAD_LEN = 8;
 const HEAD_HALF = 2.8;
-/** DM Mono at 13px: ink 10px above the baseline, 1px below. */
+/** Geist Mono at 13px: ink 10px above the baseline, 1px below (measured; same as DM Mono). */
 const INK_ABOVE = 10;
 const INK_BELOW = 1;
 const INK_MID = (INK_ABOVE - INK_BELOW) / 2;

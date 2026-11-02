@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, DM_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { DatumRail } from "@/components/layout/DatumRail";
 import { GridSnap } from "@/components/layout/GridSnap";
@@ -11,21 +11,22 @@ import { baseMetadata, personJsonLd } from "@/lib/seo";
 import "./globals.css";
 
 /**
- * Archivo: grotesque with a wayfinding lineage — industrial without reading as
- * futuristic. DM Mono: the technical register for metadata and coordinates.
+ * Geist for display, UI and body; Geist Mono for the technical register
+ * (labels, project numbers, coordinates, drawing callouts). Swapped from
+ * Archivo / DM Mono on 2026-11-01 per the design audit — reversible.
  */
-const archivo = Archivo({
+const sans = Geist({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-archivo",
+  variable: "--font-geist",
   weight: ["400", "500", "600"],
 });
 
-const dmMono = DM_Mono({
+const mono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-dm-mono",
-  weight: ["300", "400", "500"],
+  variable: "--font-geist-mono",
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = baseMetadata;
@@ -42,7 +43,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html
       lang="en"
       data-theme="dark"
-      className={`${archivo.variable} ${dmMono.variable}`}
+      className={`${sans.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
       <head>

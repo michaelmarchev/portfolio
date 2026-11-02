@@ -54,14 +54,14 @@ const RUN = 24;
 const TEXT_GAP = 6;
 
 /**
- * Half the ink height of the note in DM Mono at 13px (digits: 10px above the
+ * Half the ink height of the note in Geist Mono at 13px (digits: 10px above the
  * baseline, 1px below). Setting the baseline this far below the shoulder
  * centres the type on it. Measured in the browser, not assumed.
  */
 const INK_MID = 4.5;
 
 /**
- * DM Mono at 13px advances 7.8px per character; with the 1.3px letter
+ * Geist Mono at 13px advances 7.8px per character (measured, same as DM Mono); with the 1.3px letter
  * spacing each character sits 9.1px after the last. Characters are placed
  * individually so each can fly in on its own, like the page titles.
  */
@@ -161,7 +161,7 @@ export function fadeIn(delay: number, duration = 400): React.CSSProperties {
 /**
  * A callout note set one `<text>` per character, so each can fly in like a
  * title letter. Transforms do not apply to `<tspan>`, hence separate
- * elements; DM Mono is monospaced, so the positions are exact. `x` is the
+ * elements; Geist Mono is monospaced, so the positions are exact. `x` is the
  * left edge of the first character.
  */
 export function CalloutText({
