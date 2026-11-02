@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Overall dimensions for the homepage hero name, drawn like the image's
- * (`DimensionCallouts`): a width dimension above the name, from the left
+ * (`DimensionCallouts`): a width dimension below the name, from the left
  * edge of the M to the far point of the v, and a height dimension to its
  * left, from the top of the tallest letter in the first line (the dot of the
  * i) to the bottom of the last line. No radius callout.
@@ -23,12 +23,12 @@ import { cn } from "@/lib/utils";
  * re-measured on resize and once fonts load.
  *
  * Must sit in a positioned box that hugs the heading's top-left corner.
- * Needs ≈ 32px clear to the left of the name and ≈ 30px above it.
+ * Needs ≈ 32px clear to the left of the name and ≈ 30px below it.
  * Purely decorative.
  */
 
 /** Dimension line distance from the ink. */
-const OFFSET_ABOVE = 16;
+const OFFSET_BELOW = 16;
 const OFFSET_LEFT = 20;
 /** Gap between the ink and the start of an extension line. */
 const EXT_GAP = 4;
@@ -49,8 +49,8 @@ interface Geometry {
   top: number;
   bottom: number;
   /** Where the extension lines leave the ink. */
-  leftTop: number; // top of the first line's first letter (the M)
-  rightTop: number; // top of the letter at the far right (the v)
+  leftBottom: number; // bottom of the last line's first letter (the M)
+  rightBottom: number; // bottom of the letter at the far right (the v)
   topLeft: number; // left ink of the first line
   bottomLeft: number; // left ink of the last line
 }
@@ -91,8 +91,8 @@ function measure(heading: HTMLElement, origin: DOMRect): Geometry | null {
     right: far.right,
     top: Math.min(...first.map((g) => g.top)),
     bottom: Math.max(...last.map((g) => g.bottom)),
-    leftTop: first[0].top,
-    rightTop: far.top,
+    leftBottom: last[0].bottom,
+    rightBottom: far.bottom,
     topLeft: first[0].left,
     bottomLeft: last[0].left,
   };
@@ -151,18 +151,18 @@ export function NameDimensions({
 
 function WidthDimension({ g, delay }: { g: Geometry; delay: number }) {
   const value = String(Math.round(g.right - g.left));
-  const y = g.top - OFFSET_ABOVE;
+  const y = g.bottom + OFFSET_BELOW;
   const cx = (g.left + g.right) / 2;
   const half = (g.right - g.left) / 2;
   const gap = calloutWidth(value) / 2 + TEXT_PAD;
-  const leftExt = g.leftTop - EXT_GAP - (y - EXT_PAST);
-  const rightExt = g.rightTop - EXT_GAP - (y - EXT_PAST);
+  const leftExt = y + EXT_PAST - (g.leftBottom + EXT_GAP);
+  const rightExt = y + EXT_PAST - (g.rightBottom + EXT_GAP);
 
   return (
     <g>
-      {/* Extension lines rise from the M and the v to just past the line. */}
+      {/* Extension lines drop from the M and the v to just past the line. */}
       <path
-        d={`M${g.left} ${g.leftTop - EXT_GAP} V${y - EXT_PAST} M${g.right} ${g.rightTop - EXT_GAP} V${y - EXT_PAST}`}
+        d={`M${g.left} ${g.leftBottom + EXT_GAP} V${y + EXT_PAST} M${g.right} ${g.rightBottom + EXT_GAP} V${y + EXT_PAST}`}
         stroke="currentColor"
         strokeWidth="1"
         opacity="0.7"
