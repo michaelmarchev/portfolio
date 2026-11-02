@@ -409,10 +409,13 @@ hr {
 .tagline-word {
   /* "user-centered" must not break at its hyphen. */
   white-space: nowrap;
-  color: color-mix(in srgb, var(--c-fg) 15%, transparent);
+  color: color-mix(in srgb, var(--c-fg) 0%, transparent);
   transition: color 500ms var(--ease);
 }
-.tagline-word[data-lit] {
+.tagline-word[data-state="faint"] {
+  color: color-mix(in srgb, var(--c-fg) 15%, transparent);
+}
+.tagline-word[data-state="lit"] {
   color: var(--c-fg);
 }
 
@@ -944,7 +947,8 @@ hr {
     stroke-dasharray: 6 10;
   }
 
-  .tagline-word {
+  .tagline-word,
+  .tagline-word[data-state] {
     color: var(--c-fg);
     transition: none;
   }

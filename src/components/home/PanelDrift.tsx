@@ -19,10 +19,14 @@ const HEADER = 69;
  * "catches" — stops drifting and scrolls with the page — as the tagline starts
  * to light (the top of `catchId` crosses the reveal line).
  *
- * Its height is set so that at the catch its bottom is level with the bottom
- * of the hero, which runs OVERRUN px past the reading column:
- *   height = (column + OVERRUN) − 0.75 × catchScroll   (≥ one screen)
- * and a bottom margin of the same travel gives the grid that full height.
+ * Its height is set (not min-height, which GridSnap clears) so that at the
+ * catch its bottom is level with the bottom of the hero, which runs OVERRUN
+ * px past the reading column:
+ *   height = (column + OVERRUN) − 0.75 × catchScroll
+ * (at least one screen, and at least its content), and a bottom margin of
+ * the travel gives the grid that full height. Where the content is taller,
+ * the hero runs further past the column instead, so the catch stays with the
+ * tagline.
  * The reading column is `lg:self-start`, so its height is its content's.
  *
  * A transform, not `position: sticky`, so layout is untouched (GridSnap
@@ -55,18 +59,26 @@ export function PanelDrift({ targetId, catchId }: { targetId: string; catchId?: 
         ? mark.getBoundingClientRect().top + window.scrollY
         : column.offsetHeight;
       const catchScroll = Math.max(0, top - REVEAL_LINE * window.innerHeight);
-      const bottom = column.offsetHeight + OVERRUN;
+      const travel = catchScroll * DRIFT;
+      // The panel's own content height, without the height set below.
+      const previous = panel.style.height;
+      panel.style.height = "";
+      const content = panel.offsetHeight;
       const height = Math.max(
         window.innerHeight - HEADER,
-        bottom - catchScroll * DRIFT,
+        content,
+        column.offsetHeight + OVERRUN - travel,
       );
       // Only write when the result changes: these writes resize the grid,
       // which re-runs this observer and GridSnap.
-      const key = `${Math.round(height)}|${Math.round(bottom - height)}`;
-      if (key === sizedFor) return;
+      const key = `${Math.round(height)}|${Math.round(travel)}`;
+      if (key === sizedFor) {
+        panel.style.height = previous;
+        return;
+      }
       sizedFor = key;
       panel.style.height = `${height}px`;
-      panel.style.marginBottom = `${Math.max(0, bottom - height)}px`;
+      panel.style.marginBottom = `${travel}px`;
     };
 
     const apply = () => {

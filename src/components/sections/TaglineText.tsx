@@ -4,16 +4,27 @@ import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { site } from "@/content/site";
 
+/** Where words turn faint, then lit, as a fraction of the viewport height. */
+const FAINT_LINE = 0.85;
+const LIT_LINE = 0.6;
+/** Least scroll, in px, between one word changing and the next. */
+const STEP = 90;
+/** Delay between words that change in the same frame (a fast scroll). */
+const STAGGER = 90;
+
 /**
  * Large-type tagline, revealed word by word as it scrolls into view. Sits in
- * the homepage hero's reading column, below the Experience logos; at lg the hero panel drifts beside it and catches as it starts to light.
+ * the homepage hero's reading column, below the Experience logos; at lg the
+ * hero panel drifts beside it and catches as it starts to light.
  *
- * Words start at 15% of the text colour and come up to full colour, one at a
- * time in reading order, as each crosses a trigger line 60% of the way down
- * the viewport (an IntersectionObserver whose root is shrunk by 40% at the
- * bottom). Scrolling back up dims them again as they drop below the line.
- * Under `prefers-reduced-motion` every
- * word is full colour from the start (globals.css).
+ * Words start invisible, turn faint (15% of the text colour) as they cross a
+ * line 85% of the way down the viewport, and full colour as they cross one at
+ * 60% — one at a time, in reading order. Each word's trigger is its own
+ * position, but never less than STEP px of scroll after the previous word's,
+ * so a line of several words doesn't change all at once. State follows the
+ * scroll position, so scrolling back up reverses it. Under
+ * `prefers-reduced-motion` every word is full colour from the start
+ * (globals.css).
  */
 export function TaglineText({ className, id }: { className?: string; id?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,42 +33,48 @@ export function TaglineText({ className, id }: { className?: string; id?: string
     const root = ref.current;
     if (!root) return;
     const words = Array.from(root.querySelectorAll<HTMLElement>(".tagline-word"));
-    const io = new IntersectionObserver(
-      (entries) => {
-        // A whole line crosses the trigger at once; stagger each batch so the
-        // words still change one at a time — in reading order going down,
-        // in reverse going back up.
-        const order = (a: Element, b: Element) =>
-          words.indexOf(a as HTMLElement) - words.indexOf(b as HTMLElement);
-        const lighting = entries
-          .filter((e) => e.isIntersecting)
-          .map((e) => e.target as HTMLElement)
-          .sort(order);
-        // Only words that dropped back below the trigger line dim; a word
-        // leaving through the top of the screen stays lit.
-        const dimming = entries
-          .filter(
-            (e) =>
-              !e.isIntersecting &&
-              e.rootBounds &&
-              e.boundingClientRect.top >= e.rootBounds.bottom,
-          )
-          .map((e) => e.target as HTMLElement)
-          .sort(order)
-          .reverse();
-        lighting.forEach((word, k) => {
-          word.style.transitionDelay = `${k * 70}ms`;
-          word.setAttribute("data-lit", "");
-        });
-        dimming.forEach((word, k) => {
-          word.style.transitionDelay = `${k * 70}ms`;
-          word.removeAttribute("data-lit");
-        });
-      },
-      { rootMargin: "0px 0px -40% 0px" },
-    );
-    words.forEach((w) => io.observe(w));
-    return () => io.disconnect();
+    const states = words.map(() => 0);
+    const NAMES = ["", "faint", "lit"];
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const vh = window.innerHeight;
+      const y = window.scrollY;
+      let faintAt = -Infinity;
+      let litAt = -Infinity;
+      const rising: number[] = [];
+      const falling: number[] = [];
+      words.forEach((word, i) => {
+        const top = word.getBoundingClientRect().top + y;
+        faintAt = Math.max(top - FAINT_LINE * vh, faintAt + STEP);
+        litAt = Math.max(top - LIT_LINE * vh, litAt + STEP);
+        const next = y >= litAt ? 2 : y >= faintAt ? 1 : 0;
+        if (next > states[i]) rising.push(i);
+        else if (next < states[i]) falling.push(i);
+        states[i] = next;
+      });
+      // Rising in reading order going down, falling in reverse going up.
+      const set = (i: number, k: number) => {
+        words[i].style.transitionDelay = `${k * STAGGER}ms`;
+        if (states[i]) words[i].dataset.state = NAMES[states[i]];
+        else delete words[i].dataset.state;
+      };
+      rising.forEach(set);
+      falling.reverse().forEach(set);
+    };
+
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (

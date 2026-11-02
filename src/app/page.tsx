@@ -4,7 +4,6 @@ import { Section } from "@/components/layout/Section";
 import { ProjectSpread } from "@/components/project/ProjectSpread";
 import { ContactCta } from "@/components/sections/ContactCta";
 import { CurrentlyPanel } from "@/components/sections/CurrentlyPanel";
-import { MetaLabel } from "@/components/ui/MetaLabel";
 import { getFeaturedProjects } from "@/content/projects";
 import { HOME_TITLE, pageMetadata } from "@/lib/seo";
 
@@ -24,11 +23,8 @@ export default function HomePage() {
       <Hero />
 
       <Section datum="Selected projects" space="tight" id="selected-work">
-        <Container wide className="flex flex-wrap items-baseline justify-between gap-4">
-          <MetaLabel as="h2" tone="strong">
-            Selected projects
-          </MetaLabel>
-          <MetaLabel>{String(featured.length).padStart(2, "0")} projects · 2023—2026</MetaLabel>
+        <Container wide>
+          <h2 className="text-h1 text-fg">Selected projects</h2>
         </Container>
       </Section>
 

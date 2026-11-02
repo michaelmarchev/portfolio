@@ -12,6 +12,7 @@ import { DimensionCallouts } from "@/components/graphics/DimensionCallouts";
 import { FlyInText } from "@/components/ui/FlyInText";
 import { TaglineText } from "@/components/sections/TaglineText";
 import { PanelDrift } from "@/components/home/PanelDrift";
+import { SpecTable } from "@/components/project/SpecTable";
 import { Logo } from "@/components/ui/Logo";
 import { logoFor, orgLogos } from "@/content/logos";
 import { experience } from "@/content/experience";
@@ -151,7 +152,7 @@ export function Hero() {
           className="relative flex flex-col justify-between overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:min-h-[calc(100svh-4.25rem-1px)] lg:self-start lg:px-10 lg:py-12 lg:will-change-transform"
         >
           {/* The label and image fill the panel's first screen, whatever the
-              panel's total height; the description sits at its bottom. */}
+              panel's total height; the description fills the rest. */}
           <div className="lg:flex lg:h-[calc(100svh-4.25rem-1px-6rem)] lg:flex-col">
             <div className="flex items-start justify-between gap-6">
               <p className="u-meta text-accent">
@@ -238,11 +239,23 @@ export function Hero() {
             </div>
           </div>
 
-          {/* A brief description, at the bottom of the panel. */}
+          {/* Description: the summary under the image, the specifications
+              at the panel's bottom (level with the end of the reading column
+              once the panel catches). Both are the case study's own copy. */}
           {lead && (
-            <p className="max-w-[52ch] border-t border-line pt-6 text-caption text-fg-2">
-              {lead.cardSummary}
-            </p>
+            <div className="flex flex-col gap-12 border-t border-line pt-6 lg:flex-1 lg:justify-between">
+              <div>
+                <p className="max-w-[52ch] text-caption text-fg-2">{lead.summary}</p>
+                <p className="u-meta mt-4 text-fg-4">
+                  {lead.organization}
+                  <span aria-hidden="true" className="px-2">
+                    /
+                  </span>
+                  {lead.role}
+                </p>
+              </div>
+              <SpecTable specs={lead.specs} />
+            </div>
           )}
         </div>
       </div>
