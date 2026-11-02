@@ -42,7 +42,7 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
                 </div>
 
                 {section.links && (
-                  <ul className="m-0 mt-7 flex list-none flex-wrap gap-x-8 gap-y-3 p-0">
+                  <ul className="m-0 mt-8 flex list-none flex-wrap gap-x-8 gap-y-3 p-0">
                     {section.links.map((link) => (
                       <li key={link.href}>
                         <a
@@ -59,7 +59,7 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
                 )}
 
                 {section.list && (
-                  <ul className="m-0 mt-7 list-none border-t border-line p-0">
+                  <ul className="m-0 mt-8 list-none border-t border-line p-0">
                     {section.list.map((item) => (
                       <li
                         key={item}
@@ -76,7 +76,7 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
                 )}
 
                 {section.note && (
-                  <aside className="mt-7 border-l-2 border-accent bg-bg-deep px-5 py-4">
+                  <aside className="mt-8 border border-line bg-bg-deep px-6 py-4">
                     <p className="max-w-[60ch] text-caption leading-[1.6] text-fg-2">
                       {section.note}
                     </p>
@@ -102,7 +102,7 @@ export function CaseStudyBody({ sections }: { sections: CaseStudySection[] }) {
                   <div
                     className={cn(
                       section.mediaLayout === "pairs"
-                        ? "grid max-w-[62rem] grid-cols-1 items-start gap-x-7 sm:grid-cols-2"
+                        ? "grid max-w-[62rem] grid-cols-1 items-start gap-x-8 sm:grid-cols-2"
                         : "max-w-[62rem] [column-gap:1.75rem] sm:[columns:2]",
                       // An image-only section starts level with its title.
                       (section.body.length > 0 || section.list) && "mt-10",

@@ -60,14 +60,14 @@ export default async function ProjectPage({
                   categories rather than an empty heading and rule. */}
               {project.focus.length > 0 && (
                 <>
-                  <MetaLabel as="h2" className="mb-5">
+                  <MetaLabel as="h2" className="mb-6">
                     Focus areas
                   </MetaLabel>
                   <ul className="m-0 grid list-none grid-cols-1 gap-0 border-t border-line p-0 sm:grid-cols-2">
                     {project.focus.map((item) => (
                       <li
                         key={item}
-                        className="border-b border-line py-3 text-[0.9375rem] text-fg-2"
+                        className="border-b border-line py-3 text-body text-fg-2"
                       >
                         {item}
                       </li>
@@ -84,7 +84,7 @@ export default async function ProjectPage({
                 {project.categories.map((c) => (
                   <li
                     key={c}
-                    className="u-meta border border-line px-2.5 py-1.5 text-fg-3"
+                    className="u-meta border border-line px-3 py-2 text-fg-3"
                   >
                     {c}
                   </li>

@@ -12,7 +12,7 @@ import type { ToolkitGroup } from "@/lib/types";
  */
 export function SpecTile({ group, index }: { group: ToolkitGroup; index: number }) {
   return (
-    <article className="relative grid grid-cols-1 gap-x-10 gap-y-6 border-t border-line-strong pt-7 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+    <article className="relative grid grid-cols-1 gap-x-10 gap-y-6 border-t border-line-strong pt-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
       <span aria-hidden="true" className="absolute left-0 top-0 h-[3px] w-10 bg-accent" />
 
       <div>
@@ -22,7 +22,7 @@ export function SpecTile({ group, index }: { group: ToolkitGroup; index: number 
           </MetaLabel>
           <h3 className="text-h3 text-fg">{group.category}</h3>
         </div>
-        <p className="mt-5 max-w-[42ch] text-caption leading-[1.65] text-fg-2">
+        <p className="mt-6 max-w-[42ch] text-caption leading-[1.65] text-fg-2">
           {group.application}
         </p>
       </div>
@@ -31,7 +31,7 @@ export function SpecTile({ group, index }: { group: ToolkitGroup; index: number 
         {group.items.map((item) => (
           <li
             key={item}
-            className="u-mono inline-flex h-7 items-center border border-line bg-bg-deep px-2.5 text-[0.75rem] leading-none text-fg-2"
+            className="u-mono inline-flex h-7 items-center border border-line bg-bg-deep px-3 text-meta leading-none text-fg-2"
           >
             {item}
           </li>

@@ -72,7 +72,7 @@ export default function AboutPage() {
               <dl className="m-0 mt-6 border-t border-line">
                 <div className="border-b border-line py-4">
                   <dt className="u-meta text-fg-4">Degree</dt>
-                  <dd className="mt-1.5 ml-0 text-caption leading-[1.6] text-fg-2">
+                  <dd className="mt-2 ml-0 text-caption leading-[1.6] text-fg-2">
                     {education.degree}
                     <br />
                     {education.school} · {education.location}
@@ -82,7 +82,7 @@ export default function AboutPage() {
                 </div>
                 <div className="border-b border-line py-4">
                   <dt className="u-meta text-fg-4">Relevant coursework</dt>
-                  <dd className="mt-1.5 ml-0 text-caption leading-[1.6] text-fg-2">
+                  <dd className="mt-2 ml-0 text-caption leading-[1.6] text-fg-2">
                     {education.coursework.join(" · ")}
                   </dd>
                 </div>

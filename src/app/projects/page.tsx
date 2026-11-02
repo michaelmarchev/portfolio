@@ -19,7 +19,7 @@ export default function ProjectsPage() {
       <Section space="tight" datum="Projects" className="pt-12 md:pt-16">
         <Container wide>
           <AnimatedTitle className="text-h1 max-w-[26ch] text-fg">Projects</AnimatedTitle>
-          <p className="mt-8 max-w-[60ch] text-[1.0625rem] leading-[1.7] text-fg-2">
+          <p className="mt-8 max-w-[60ch] text-body text-fg-2">
             Six projects in automation, precision motion, product design and
             research.
           </p>

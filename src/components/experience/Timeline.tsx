@@ -79,7 +79,7 @@ export function Timeline({ entries }: { entries: ExperienceEntry[] }) {
 
         return (
           <li key={entry.id} id={entry.id} className="border-b border-line">
-            <div className="relative grid grid-cols-1 gap-x-10 py-7 lg:grid-cols-[13rem_minmax(0,1fr)]">
+            <div className="relative grid grid-cols-1 gap-x-10 py-8 lg:grid-cols-[13rem_minmax(0,1fr)]">
               {/* Timeline marker: filled for the current role, hairline otherwise. */}
               <span
                 aria-hidden="true"
@@ -109,21 +109,21 @@ export function Timeline({ entries }: { entries: ExperienceEntry[] }) {
               </div>
 
               <div className="mt-4 lg:mt-0">
-                <h3 className="text-[1.25rem] font-medium leading-[1.25] tracking-[-0.018em] text-fg">
+                <h3 className="text-h3 font-medium tracking-[-0.018em] text-fg">
                   {entry.role}
                 </h3>
                 <p className="mt-4 text-caption text-fg-3">{entry.organization}</p>
-                <p className="mt-4 max-w-[62ch] text-[1.0625rem] leading-[1.65] text-fg-2">
+                <p className="mt-4 max-w-[62ch] text-body text-fg-2">
                   {entry.summary}
                 </p>
 
-                <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
                   <button
                     type="button"
                     onClick={() => toggle(entry.id)}
                     aria-expanded={isOpen}
                     aria-controls={panelId}
-                    className="u-meta inline-flex items-center gap-2 border-b border-line-strong pb-1 text-fg-2 transition-colors duration-200 hover:border-accent hover:text-accent-text focus-visible:border-accent"
+                    className="u-meta inline-flex items-center gap-2 border-b border-line-strong pb-1 text-fg-2 transition-[color,background-color,border-color,scale] duration-300 ease-[var(--ease)] active:scale-[0.98] hover:border-accent hover:text-accent-text focus-visible:border-accent"
                   >
                     <span
                       aria-hidden="true"
@@ -155,13 +155,13 @@ export function Timeline({ entries }: { entries: ExperienceEntry[] }) {
                 <div
                   id={panelId}
                   hidden={!isOpen}
-                  className="mt-6 border-l border-line pl-5"
+                  className="mt-6 border-l border-line pl-6"
                 >
                   <ul className="m-0 list-none p-0">
                     {entry.detail.map((line) => (
                       <li
                         key={line}
-                        className="relative max-w-[70ch] py-1.5 pl-5 text-caption leading-[1.65] text-fg-2"
+                        className="relative max-w-[70ch] py-2 pl-6 text-caption leading-[1.65] text-fg-2"
                       >
                         <span
                           aria-hidden="true"

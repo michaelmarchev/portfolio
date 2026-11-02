@@ -12,7 +12,7 @@ export function TagList({
       {items.map((item) => (
         <li
           key={item}
-          className="u-meta border border-line px-2.5 py-1.5 text-fg-3"
+          className="u-meta border border-line px-3 py-2 text-fg-3"
         >
           {item}
         </li>

@@ -10,7 +10,7 @@ export function GalleryGrid({ images }: { images: ImageBrief[] }) {
   return (
     // Two across, three on wide screens. Eleven assets at half-width was a very
     // long scroll; three across everywhere made them too small to read.
-    <div className="grid grid-cols-1 gap-x-7 gap-y-9 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
       {images.map((image) => {
         const full =
           image.orientation === "wide" || image.orientation === "panoramic";

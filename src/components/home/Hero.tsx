@@ -85,13 +85,13 @@ export function Hero() {
                   href={site.linkedin}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="u-link text-[0.875rem] text-fg-3"
+                  className="u-link text-caption text-fg-3"
                 >
                   LinkedIn
                 </a>
                 <a
                   href={`mailto:${site.email}`}
-                  className="u-link text-[0.875rem] text-fg-3"
+                  className="u-link text-caption text-fg-3"
                 >
                   {site.email}
                 </a>
@@ -109,7 +109,7 @@ export function Hero() {
             <Link href="/experience" className="u-meta u-link text-fg-4">
               Experience
             </Link>
-            <ul className="m-0 mt-5 flex list-none flex-wrap items-center gap-x-10 gap-y-6 p-0">
+            <ul className="m-0 mt-6 flex list-none flex-wrap items-center gap-x-10 gap-y-6 p-0">
               {orgLogos.map((logo) => {
                 // Each logo opens the most recent Experience entry for that
                 // organization (entries are newest first).
@@ -228,11 +228,11 @@ export function Hero() {
               <dl className="m-0 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
                 <div>
                   <dt className="u-meta text-fg-4">Role</dt>
-                  <dd className="mt-1.5 text-caption text-fg-2">{lead.role}</dd>
+                  <dd className="mt-2 text-caption text-fg-2">{lead.role}</dd>
                 </div>
                 <div>
                   <dt className="u-meta text-fg-4">Focus</dt>
-                  <dd className="mt-1.5 text-caption text-fg-2">
+                  <dd className="mt-2 text-caption text-fg-2">
                     {lead.projectType.slice(0, 3).join(" · ")}
                   </dd>
                 </div>

@@ -39,7 +39,7 @@ export function ProjectArchive({
 
   return (
     <>
-      <div data-snap className="border-y border-line py-5">
+      <div data-snap className="border-y border-line py-6">
         <h2 className="sr-only">Filter projects by category</h2>
         <ul className="m-0 flex list-none flex-wrap gap-x-2 gap-y-2 p-0">
           <li>
@@ -70,7 +70,7 @@ export function ProjectArchive({
         </ul>
       </div>
 
-      <p aria-live="polite" className="u-meta py-5 text-fg-3">
+      <p aria-live="polite" className="u-meta py-6 text-fg-3">
         Showing {visible.length} of {projects.length} projects
         {active && (
           <>
@@ -154,7 +154,7 @@ function FilterButton({
       onClick={onClick}
       aria-pressed={pressed}
       className={cn(
-        "u-meta border px-3 py-2 transition-colors duration-200",
+        "u-meta border px-3 py-2 transition-[color,background-color,border-color,scale] duration-300 ease-[var(--ease)] active:scale-[0.98]",
         // Pressed matches the solid Button (see `.btn-solid` in globals.css).
         pressed
           ? "btn-solid"
@@ -198,7 +198,7 @@ function ArchiveCard({ project, wide }: { project: Project; wide: boolean }) {
         <h3
           className={cn(
             "caption-shift mt-4 text-fg",
-            wide ? "text-h3" : "text-[1.125rem] leading-[1.25] tracking-[-0.01em]",
+            wide ? "text-h3" : "text-lead tracking-[-0.01em]",
           )}
         >
           {project.title}
@@ -217,7 +217,7 @@ function ArchiveCard({ project, wide }: { project: Project; wide: boolean }) {
         </div>
       </dl>
 
-      <ul className="m-0 mt-3 flex list-none flex-wrap gap-x-2 gap-y-1.5 p-0">
+      <ul className="m-0 mt-3 flex list-none flex-wrap gap-x-2 gap-y-2 p-0">
         {project.categories.map((c) => (
           <li key={c} className="u-meta border border-line px-2 py-1 text-fg-4">
             {c}
@@ -225,10 +225,16 @@ function ArchiveCard({ project, wide }: { project: Project; wide: boolean }) {
         ))}
       </ul>
 
-      {/* The technical caption, revealed on hover and on keyboard focus. */}
-      <p className="mt-3 max-h-0 overflow-hidden text-caption text-fg-3 opacity-0 transition-[max-height,opacity] duration-500 ease-[var(--ease)] group-hover:max-h-32 group-hover:opacity-100 group-focus-within:max-h-32 group-focus-within:opacity-100">
-        {project.card.purpose}
-      </p>
+      {/* The technical caption, revealed on hover and on keyboard focus.
+          A 0fr → 1fr grid row rather than a max-height: it opens to the
+          text's exact height (a max-height cap clipped long captions and made
+          the timing uneven). Closed, the 12px top padding remains — the same
+          gap the old margin left. */}
+      <div className="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-500 ease-[var(--ease)] group-hover:grid-rows-[1fr] group-hover:opacity-100 group-focus-within:grid-rows-[1fr] group-focus-within:opacity-100">
+        <p className="m-0 min-h-0 overflow-hidden pt-3 text-caption text-fg-3">
+          {project.card.purpose}
+        </p>
+      </div>
     </article>
   );
 }

@@ -24,7 +24,7 @@ const STYLE: Record<Variant, string> = {
 };
 
 const SHARED =
-  "inline-flex items-center justify-center gap-2.5 px-5 py-3 text-[0.8125rem] font-medium tracking-[0.02em] no-underline transition-colors duration-200 ease-[var(--ease)]";
+  "inline-flex items-center justify-center gap-2.5 px-5 py-3 text-caption font-medium tracking-[0.02em] no-underline transition-[color,background-color,border-color,scale] duration-300 ease-[var(--ease)] active:scale-[0.98]";
 
 export function Button({
   children,

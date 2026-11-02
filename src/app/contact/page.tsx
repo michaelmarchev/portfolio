@@ -39,7 +39,7 @@ export default function ContactPage() {
       <Section space="tight" datum="Contact" className="pt-12 md:pt-16">
         <Container wide>
           <MetaLabel as="p">Contact</MetaLabel>
-          <AnimatedTitle className="text-h1 mt-7 max-w-[20ch] text-fg">
+          <AnimatedTitle className="text-h1 mt-8 max-w-[20ch] text-fg">
             {site.closingLine}
           </AnimatedTitle>
         </Container>
@@ -47,7 +47,7 @@ export default function ContactPage() {
 
       <Section space="default" datum="Contact">
         <Container wide>
-          <Reveal className="grid gap-x-16 gap-y-14 lg:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] lg:items-start">
+          <Reveal className="grid gap-x-16 gap-y-16 lg:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] lg:items-start">
             <div>
               <MetaLabel as="h2">Direct</MetaLabel>
               <dl className="m-0 mt-6 border-t border-line">
@@ -57,7 +57,7 @@ export default function ContactPage() {
                     className="grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-4 border-b border-line py-4"
                   >
                     <dt className="u-meta text-fg-4">{detail.label}</dt>
-                    <dd className="ml-0 text-[1.0625rem] text-fg-2">
+                    <dd className="ml-0 text-body text-fg-2">
                       {detail.href ? (
                         <a
                           href={detail.href}

@@ -10,7 +10,7 @@ export function SpecTable({ specs, title = "Specifications" }: { specs: Spec[]; 
 
   return (
     <div>
-      <MetaLabel as="h2" className="mb-5">
+      <MetaLabel as="h2" className="mb-6">
         {title}
       </MetaLabel>
       <dl className="m-0 border-t border-line">
@@ -20,7 +20,7 @@ export function SpecTable({ specs, title = "Specifications" }: { specs: Spec[]; 
             className="grid grid-cols-1 gap-1 border-b border-line py-3 sm:grid-cols-[minmax(0,10rem)_minmax(0,1fr)] sm:gap-6"
           >
             <dt className="u-meta pt-0.5 text-fg-4">{spec.label}</dt>
-            <dd className="u-mono text-[0.9375rem] leading-[1.5] text-fg">
+            <dd className="u-mono text-body text-fg">
               {spec.href ? (
                 <a href={spec.href} target="_blank" rel="noreferrer noopener" className="u-link">
                   {spec.value}

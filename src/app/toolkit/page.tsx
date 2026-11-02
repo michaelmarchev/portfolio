@@ -24,7 +24,7 @@ export default function ToolkitPage() {
           <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:items-start">
             <div>
               <AnimatedTitle className="text-h1 max-w-[24ch] text-fg">Toolkit</AnimatedTitle>
-              <p className="mt-8 max-w-[46ch] text-[1.0625rem] leading-[1.7] text-fg-2">
+              <p className="mt-8 max-w-[46ch] text-body text-fg-2">
                 Tools, methods and credentials.
               </p>
             </div>
@@ -33,13 +33,13 @@ export default function ToolkitPage() {
               <MetaLabel as="h2">Credentials</MetaLabel>
               {/* Two columns, one rule: compact enough to sit beside the
                   header rather than running down the page. */}
-              <ul className="m-0 mt-6 grid list-none grid-cols-1 gap-x-8 gap-y-5 border-t border-line p-0 pt-5 sm:grid-cols-2">
+              <ul className="m-0 mt-6 grid list-none grid-cols-1 gap-x-8 gap-y-6 border-t border-line p-0 pt-6 sm:grid-cols-2">
                 {credentials.map((credential) => (
                   <li key={credential.abbr}>
                     <span className="u-meta block text-accent-text">
                       {credential.abbr}
                     </span>
-                    <span className="mt-1.5 block text-caption leading-[1.45] text-fg-2">
+                    <span className="mt-2 block text-caption leading-[1.45] text-fg-2">
                       {credential.name}
                     </span>
                     <span className="u-meta mt-1 block text-fg-4">
@@ -66,7 +66,7 @@ export default function ToolkitPage() {
               </MetaLabel>
             </div>
 
-            <div className="grid grid-cols-1 gap-x-14 gap-y-14">
+            <div className="grid grid-cols-1 gap-x-16 gap-y-16">
               {toolkit.map((group, i) => (
                 <SpecTile key={group.id} group={group} index={i} />
               ))}

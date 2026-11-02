@@ -23,7 +23,7 @@ export default function ExperiencePage() {
       <Section space="tight" datum="Experience" className="pt-12 md:pt-16">
         <Container wide>
           <AnimatedTitle className="text-h1 max-w-[26ch] text-fg">Experience</AnimatedTitle>
-          <p className="mt-8 max-w-[58ch] text-[1.0625rem] leading-[1.7] text-fg-2">
+          <p className="mt-8 max-w-[58ch] text-body text-fg-2">
             Nine roles in medical-device R&D, product development, automation,
             equipment repair, research and student leadership.
           </p>
@@ -90,7 +90,7 @@ export default function ExperiencePage() {
               <dl className="m-0 mt-8 border-t border-line">
                 <div className="border-b border-line py-4">
                   <dt className="u-meta text-fg-4">Relevant coursework</dt>
-                  <dd className="mt-1.5 ml-0 text-caption leading-[1.6] text-fg-2">
+                  <dd className="mt-2 ml-0 text-caption leading-[1.6] text-fg-2">
                     {education.coursework.join(" · ")}
                   </dd>
                 </div>

@@ -36,7 +36,7 @@ export function ProjectSpread({
     >
       <Reveal
         className={cn(
-          "mx-auto grid max-w-[var(--max)] items-start gap-x-10 gap-y-7 px-[var(--gutter)]",
+          "mx-auto grid max-w-[var(--max)] items-start gap-x-10 gap-y-8 px-[var(--gutter)]",
           isFeature
             ? "lg:grid-cols-12"
             : "lg:grid-cols-2 lg:items-center lg:gap-x-[clamp(2.5rem,5vw,6rem)]",
@@ -87,7 +87,7 @@ export function ProjectSpread({
             <span className="u-meta text-fg-4">{project.timeline}</span>
           </div>
 
-          <h3 className={cn("mt-5 text-fg", isFeature ? "text-h1" : "text-h2")}>
+          <h3 className={cn("mt-6 text-fg", isFeature ? "text-h1" : "text-h2")}>
             <Link href={href} className="caption-shift inline-block no-underline">
               {project.title}
             </Link>
@@ -95,14 +95,14 @@ export function ProjectSpread({
 
           <p
             className={cn(
-              "mt-7 max-w-[58ch] text-fg-2",
-              isFeature ? "text-lead" : "text-[1.0625rem] leading-[1.65]",
+              "mt-8 max-w-[58ch] text-fg-2",
+              isFeature ? "text-lead" : "text-body",
             )}
           >
             {project.cardSummary}
           </p>
 
-          <dl className="mt-6 grid max-w-[44rem] grid-cols-1 gap-x-8 gap-y-3 border-t border-line pt-5 sm:grid-cols-2">
+          <dl className="mt-6 grid max-w-[44rem] grid-cols-1 gap-x-8 gap-y-3 border-t border-line pt-6 sm:grid-cols-2">
             <div>
               <dt className="u-meta text-fg-4">Role</dt>
               <dd className="mt-1 text-caption text-fg-2">{project.role}</dd>
@@ -117,7 +117,7 @@ export function ProjectSpread({
 
           <Link
             href={href}
-            className="u-meta mt-7 inline-flex items-center gap-3 border-b border-line-strong pb-1.5 text-fg no-underline transition-colors duration-200 hover:border-accent hover:text-accent-text focus-visible:border-accent"
+            className="u-meta mt-8 inline-flex items-center gap-3 border-b border-line-strong pb-2 text-fg no-underline transition-colors duration-300 hover:border-accent hover:text-accent-text focus-visible:border-accent"
           >
             View case study
             <span aria-hidden="true" className="text-fg-4">

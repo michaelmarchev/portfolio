@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { nav, site } from "@/content/site";
 import { asset, cn } from "@/lib/utils";
 
@@ -57,23 +57,23 @@ export function SiteHeader() {
       <div className="mx-auto flex h-[4.25rem] max-w-[var(--max)] items-center justify-between gap-6 px-[var(--gutter)]">
         <Link
           href="/"
-          className="group flex items-baseline gap-2.5 no-underline"
+          className="group flex items-baseline gap-3 no-underline"
           aria-label={`${site.name} — home`}
         >
-          <span className="text-[0.95rem] font-medium tracking-[-0.02em] text-fg">
+          <span className="text-body font-medium tracking-[-0.02em] text-fg">
             Michael Marchev
           </span>
           <span className="u-meta hidden text-fg-4 sm:block">Mech. Eng.</span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
           {nav.slice(1).map((item) => (
             <Link
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
               className={cn(
-                "relative py-2 text-[0.9rem] no-underline transition-colors duration-200",
+                "relative py-2 text-caption no-underline transition-colors duration-300",
                 isActive(item.href)
                   ? "text-fg"
                   : "text-fg-3 hover:text-fg focus-visible:text-fg",
@@ -92,7 +92,7 @@ export function SiteHeader() {
           <a
             href={asset(site.resume)}
             download
-            className="u-meta border border-line-strong px-3.5 py-2 text-fg-2 no-underline transition-colors duration-200 hover:border-accent hover:text-accent-text focus-visible:border-accent"
+            className="u-meta border border-line-strong px-4 py-2 text-fg-2 no-underline transition-[color,background-color,border-color,scale] duration-300 ease-[var(--ease)] active:scale-[0.98] hover:border-accent hover:text-accent-text focus-visible:border-accent"
           >
             Resume
           </a>
@@ -104,7 +104,7 @@ export function SiteHeader() {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls="mobile-nav"
-          className="u-meta -mr-1 flex items-center gap-2 px-1 py-2 text-fg md:hidden"
+          className="u-meta -mr-1 flex items-center gap-2 px-1 py-2 text-fg transition-transform duration-300 ease-[var(--ease)] active:scale-[0.98] md:hidden"
         >
           {open ? "Close" : "Menu"}
           <span aria-hidden="true" className="flex w-4 flex-col gap-[3px]">
@@ -124,16 +124,22 @@ export function SiteHeader() {
         </button>
       </div>
 
-      {/* Mobile panel. Numbered because the list is the site index. */}
+      {/* Mobile panel. Numbered because the list is the site index. Full
+          height below the bar (the page behind is scroll-locked while open);
+          links arrive in reading order, 60ms apart — see .menu-item. */}
       <div
         id="mobile-nav"
         ref={panelRef}
         hidden={!open}
-        className="border-t border-line bg-bg md:hidden"
+        className="h-[calc(100dvh-4.25rem-1px)] overflow-y-auto border-t border-line bg-bg md:hidden"
       >
         <ul className="m-0 list-none p-0">
-          {nav.map((item) => (
-            <li key={item.href} className="border-b border-line">
+          {nav.map((item, i) => (
+            <li
+              key={item.href}
+              className="menu-item border-b border-line"
+              style={{ "--i": i } as CSSProperties}
+            >
               <Link
                 href={item.href}
                 aria-current={isActive(item.href) ? "page" : undefined}
@@ -142,7 +148,7 @@ export function SiteHeader() {
                 <span className="u-meta w-6 text-fg-4">{item.datum}</span>
                 <span
                   className={cn(
-                    "text-[1.35rem] tracking-[-0.02em]",
+                    "text-h3 tracking-[-0.02em]",
                     isActive(item.href) ? "text-accent-text" : "text-fg",
                   )}
                 >
@@ -152,7 +158,10 @@ export function SiteHeader() {
             </li>
           ))}
         </ul>
-        <div className="flex flex-wrap gap-x-6 gap-y-2 px-[var(--gutter)] py-5">
+        <div
+          className="menu-item flex flex-wrap gap-x-6 gap-y-2 px-[var(--gutter)] py-6"
+          style={{ "--i": nav.length } as CSSProperties}
+        >
           <a href={asset(site.resume)} download className="u-meta text-fg-2 no-underline">
             Download resume
           </a>

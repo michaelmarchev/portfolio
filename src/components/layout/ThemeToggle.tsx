@@ -51,7 +51,7 @@ export function ThemeToggle({ className }: { className?: string }) {
             onClick={() => set(option)}
             aria-pressed={active}
             className={cn(
-              "u-meta px-3 py-2 transition-colors duration-200",
+              "u-meta px-3 py-2 transition-[color,background-color,border-color,scale] duration-300 ease-[var(--ease)] active:scale-[0.98]",
               active
                 ? "btn-solid"
                 : "text-fg-4 hover:text-fg",

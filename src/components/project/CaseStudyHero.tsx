@@ -41,13 +41,13 @@ export function CaseStudyHero({ project }: { project: Project }) {
         <div className="grid gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] lg:items-start">
           {/* --- Title, summary, details --- */}
           <div>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <span className="u-meta text-accent-text">{project.index}</span>
               <MetaRun items={[project.status, project.timeline]} />
               {logo && <Logo logo={logo} size={24} />}
             </div>
 
-            <AnimatedTitle className="text-h1 mt-7 max-w-[22ch] text-fg">
+            <AnimatedTitle className="text-h1 mt-8 max-w-[22ch] text-fg">
               {project.title}
             </AnimatedTitle>
 
@@ -103,7 +103,7 @@ function DetailList({
           <MetaLabel as="dt" tone="muted">
             {row.term}
           </MetaLabel>
-          <dd className="mt-1.5 ml-0 text-caption leading-[1.55] text-fg-2">
+          <dd className="mt-2 ml-0 text-caption leading-[1.55] text-fg-2">
             {row.value}
           </dd>
         </div>

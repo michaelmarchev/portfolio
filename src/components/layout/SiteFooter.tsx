@@ -15,7 +15,7 @@ export function SiteFooter() {
             <p className="text-h3 max-w-[22ch] text-fg">{site.closingLine}</p>
             <a
               href={`mailto:${site.email}`}
-              className="u-link mt-5 inline-block text-[0.95rem] text-fg-2"
+              className="u-link mt-6 inline-block text-body text-fg-2"
             >
               {site.email}
             </a>
@@ -27,7 +27,7 @@ export function SiteFooter() {
             <ul className="m-0 list-none space-y-2 p-0">
               {nav.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="u-link text-[0.9rem] text-fg-2">
+                  <Link href={item.href} className="u-link text-caption text-fg-2">
                     {item.label}
                   </Link>
                 </li>
@@ -43,18 +43,18 @@ export function SiteFooter() {
                   href={site.linkedin}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="u-link text-[0.9rem] text-fg-2"
+                  className="u-link text-caption text-fg-2"
                 >
                   LinkedIn
                 </a>
               </li>
               <li>
-                <a href={asset(site.resume)} download className="u-link text-[0.9rem] text-fg-2">
+                <a href={asset(site.resume)} download className="u-link text-caption text-fg-2">
                   {site.resumeLabel}
                 </a>
               </li>
               <li>
-                <a href={`tel:${site.phoneHref}`} className="u-link text-[0.9rem] text-fg-2">
+                <a href={`tel:${site.phoneHref}`} className="u-link text-caption text-fg-2">
                   {site.phone}
                 </a>
               </li>
