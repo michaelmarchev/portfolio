@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { asset } from "@/lib/utils";
 import { SpecPlate } from "@/components/media/SpecPlate";
 import { Button } from "@/components/ui/Button";
 import { MetaRun } from "@/components/ui/MetaLabel";
@@ -74,22 +73,16 @@ export function Hero() {
 
             {/* Buttons and links move as one block. */}
             <div className="mt-10">
-              {/* One primary action. The resume sits with the other links
-                  as a text link (and stays in the header). */}
               <div className="flex flex-wrap items-center gap-3">
                 <Button href="/projects" variant="solid">
                   Explore selected work
                 </Button>
+                <Button href={site.resume} variant="outline" download>
+                  Download resume
+                </Button>
               </div>
 
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
-                <a
-                  href={asset(site.resume)}
-                  download
-                  className="u-link text-caption text-fg-3"
-                >
-                  Download resume
-                </a>
                 <a
                   href={site.linkedin}
                   target="_blank"
