@@ -47,7 +47,7 @@ export function MediaVideo({
   const ratio = (media.width ?? 9) / (media.height ?? 16);
 
   return (
-    <figure className={cn("group @container m-0", className)}>
+    <figure className={cn("@container m-0", className)}>
       <video
         ref={ref}
         className="media-round mx-auto block h-auto w-full bg-bg-deep"

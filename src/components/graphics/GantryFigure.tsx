@@ -40,7 +40,7 @@ export function GantryFigure({
   className?: string;
 }) {
   return (
-    <figure className={cn("group @container m-0", className)}>
+    <figure className={cn("@container m-0", className)}>
       <GantryPlate animate={animate} />
       {(label || caption) && (
         <figcaption className="mt-3 flex flex-col gap-1 border-t border-line pt-3 @lg:flex-row @lg:items-baseline @lg:gap-4">

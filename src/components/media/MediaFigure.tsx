@@ -28,7 +28,7 @@ export function MediaFigure({
   const caption = image.caption;
 
   return (
-    <figure className={cn("group @container m-0", className)}>
+    <figure className={cn("@container m-0", className)}>
       <SpecPlate
         image={image}
         detail={detail}
