@@ -6,8 +6,7 @@ import { site } from "@/content/site";
 
 /**
  * Large-type tagline, revealed word by word as it scrolls into view. Sits in
- * the homepage hero's reading column, between the fields line and the
- * buttons; at lg the hero panel stays pinned beside it while it scrolls past.
+ * the homepage hero's reading column, below the Experience logos; at lg the hero panel stays pinned beside it while it scrolls past.
  *
  * Words start at 15% of the text colour and come up to full colour, one at a
  * time in reading order, as each crosses a trigger line 60% of the way down
@@ -66,7 +65,7 @@ export function TaglineText({ className }: { className?: string }) {
       {site.tagline.map((sentence, s) => (
         <p
           key={s}
-          className="text-h1 font-semibold text-balance text-fg [&+&]:mt-6 lg:[&+&]:mt-24"
+          className="text-h1 font-semibold text-balance text-fg [&+&]:mt-6 lg:[&+&]:mt-32"
         >
           {sentence.split(" ").map((word, w) => (
             <span key={w}>

@@ -46,9 +46,10 @@ export function Hero() {
       >
         {/* --- Reading column --- */}
         {/* Top-aligned at lg, level with the dark panel's label row (both
-            start 3rem down), rather than centred in a column that is much
-            taller than the text. */}
-        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:justify-start lg:pr-[clamp(2rem,4vw,4.5rem)] lg:py-12">
+            start 3rem down). The 40svh bottom padding holds the pinned panel
+            until the tagline's last word has crossed the reveal line (60% down
+            the screen); then column and panel move on together. */}
+        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:justify-start lg:pr-[clamp(2rem,4vw,4.5rem)] lg:pt-12 lg:pb-[40svh]">
           <div className="max-w-[46rem] lg:flex lg:flex-1 lg:flex-col lg:justify-between">
             <p className="u-meta text-fg-3">
               {site.location}
@@ -62,20 +63,19 @@ export function Hero() {
               {education.expected.replace("Expected ", "")}
             </p>
 
-            <AnimatedTitle id="hero-name" gradient className="text-display mt-16 text-fg lg:mt-24">
+            <AnimatedTitle id="hero-name" gradient className="text-display mt-16 text-fg lg:mt-32">
               {"Michael\nMarchev"}
             </AnimatedTitle>
 
-            <p className="text-h2 mt-16 max-w-[24ch] text-fg-2 lg:mt-24">
+            <p className="text-h2 mt-16 max-w-[24ch] text-fg-2 lg:mt-32">
               <FlipWords words={site.roles} />
             </p>
 
-            <MetaRun items={site.descriptor} separator="•" className="mt-10 lg:mt-24" />
+            <MetaRun items={site.descriptor} separator="•" className="mt-10 lg:mt-32" />
 
-            <TaglineText className="mt-16 lg:mt-24" />
 
             {/* Buttons and links move as one block. */}
-            <div className="mt-10 lg:mt-24">
+            <div className="mt-10 lg:mt-32">
               <div className="flex flex-wrap items-center gap-3">
                 <Button href="/projects" variant="solid" size="lg">
                   Explore selected work
@@ -104,13 +104,11 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Logos of the organizations on the Experience page. At lg they
-              sit at the foot of the column, level with the bottom of the
-              dark panel's content (both inset 3rem). The text above takes the
-              rest of the height: its margins are minimum gaps, and
-              `justify-between` shares the leftover among them, so it ends
-              4rem above the logos' rule. */}
-          <div className="mt-16 border-t border-line pt-6">
+          {/* Logos of the organizations on the Experience page, then the
+              tagline. At lg the gaps are deliberately large (128–160px, past
+              the 96px top of the spacing scale, owner's call) so the column
+              runs long and the pinned panel holds through it. */}
+          <div className="mt-16 border-t border-line pt-6 lg:mt-32">
             <Link href="/experience" className="u-meta u-link text-fg-4">
               Experience
             </Link>
@@ -138,6 +136,8 @@ export function Hero() {
               })}
             </ul>
           </div>
+
+          <TaglineText className="mt-16 lg:mt-40" />
         </div>
 
         {/* --- Flagship system, dark panel --- */}
