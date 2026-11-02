@@ -62,20 +62,20 @@ export function Hero() {
               {education.expected.replace("Expected ", "")}
             </p>
 
-            <AnimatedTitle id="hero-name" gradient className="text-display mt-16 text-fg">
+            <AnimatedTitle id="hero-name" gradient className="text-display mt-16 text-fg lg:mt-24">
               {"Michael\nMarchev"}
             </AnimatedTitle>
 
-            <p className="text-h2 mt-16 max-w-[24ch] text-fg-2">
+            <p className="text-h2 mt-16 max-w-[24ch] text-fg-2 lg:mt-24">
               <FlipWords words={site.roles} />
             </p>
 
-            <MetaRun items={site.descriptor} separator="•" className="mt-10" />
+            <MetaRun items={site.descriptor} separator="•" className="mt-10 lg:mt-24" />
 
-            <TaglineText className="mt-16" />
+            <TaglineText className="mt-16 lg:mt-24" />
 
             {/* Buttons and links move as one block. */}
-            <div className="mt-10">
+            <div className="mt-10 lg:mt-24">
               <div className="flex flex-wrap items-center gap-3">
                 <Button href="/projects" variant="solid" size="lg">
                   Explore selected work
@@ -230,40 +230,6 @@ export function Hero() {
               </Link>
             )}
           </div>
-
-          {lead && (
-            <div className="flex flex-col gap-6 border-t border-line pt-6">
-              <p className="text-caption max-w-[52ch] text-fg-2">
-                {lead.cardSummary}
-              </p>
-
-              <dl className="m-0 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
-                <div>
-                  <dt className="u-meta text-fg-4">Role</dt>
-                  <dd className="mt-2 text-caption text-fg-2">{lead.role}</dd>
-                </div>
-                <div>
-                  <dt className="u-meta text-fg-4">Focus</dt>
-                  <dd className="mt-2 text-caption text-fg-2">
-                    {lead.projectType.slice(0, 3).join(" · ")}
-                  </dd>
-                </div>
-              </dl>
-
-              <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3">
-                <Link
-                  href={`/projects/${lead.slug}`}
-                  className="u-meta u-link text-accent-text"
-                >
-                  Read the case study
-                </Link>
-                <Link href="/projects" className="u-meta u-link text-fg-3">
-                  All projects
-                </Link>
-                <span className="u-meta text-fg-4">Non-confidential summary</span>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </section>

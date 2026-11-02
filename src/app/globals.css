@@ -409,7 +409,7 @@ hr {
 .tagline-word {
   /* "user-centered" must not break at its hyphen. */
   white-space: nowrap;
-  color: color-mix(in srgb, var(--c-fg) 30%, transparent);
+  color: color-mix(in srgb, var(--c-fg) 15%, transparent);
   transition: color 500ms var(--ease);
 }
 .tagline-word[data-lit] {

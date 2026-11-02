@@ -9,7 +9,7 @@ import { site } from "@/content/site";
  * the homepage hero's reading column, between the fields line and the
  * buttons; at lg the hero panel stays pinned beside it while it scrolls past.
  *
- * Words start at 30% of the text colour and come up to full colour, one at a
+ * Words start at 15% of the text colour and come up to full colour, one at a
  * time in reading order, as each crosses a trigger line 60% of the way down
  * the viewport (an IntersectionObserver whose root is shrunk by 40% at the
  * bottom). Scrolling back up dims them again as they drop below the line.
@@ -66,7 +66,7 @@ export function TaglineText({ className }: { className?: string }) {
       {site.tagline.map((sentence, s) => (
         <p
           key={s}
-          className="text-h1 font-semibold text-balance text-fg [&+&]:mt-6"
+          className="text-h1 font-semibold text-balance text-fg [&+&]:mt-6 lg:[&+&]:mt-24"
         >
           {sentence.split(" ").map((word, w) => (
             <span key={w}>
