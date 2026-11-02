@@ -155,7 +155,7 @@ export function Timeline({ entries }: { entries: ExperienceEntry[] }) {
                 <div
                   id={panelId}
                   hidden={!isOpen}
-                  className="mt-6 border-l border-line pl-6"
+                  className="mt-6 border border-line bg-bg-deep px-6 py-4"
                 >
                   <ul className="m-0 list-none p-0">
                     {entry.detail.map((line) => (
