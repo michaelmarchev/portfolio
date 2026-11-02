@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Container } from "@/components/layout/Container";
-import { Section } from "@/components/layout/Section";
+import { cn } from "@/lib/utils";
 import { site } from "@/content/site";
 
 /**
- * Large-type tagline, revealed word by word as it scrolls into view.
+ * Large-type tagline, revealed word by word as it scrolls into view. Sits in
+ * the homepage hero's reading column, between the fields line and the
+ * buttons; at lg the hero panel stays pinned beside it while it scrolls past.
  *
  * Words start at 30% of the text colour and come up to full colour, one at a
  * time in reading order, as each crosses a trigger line 60% of the way down
@@ -15,7 +16,7 @@ import { site } from "@/content/site";
  * Under `prefers-reduced-motion` every
  * word is full colour from the start (globals.css).
  */
-export function TaglineReveal() {
+export function TaglineText({ className }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -61,24 +62,20 @@ export function TaglineReveal() {
   }, []);
 
   return (
-    <Section datum="Tagline" space="loose" className="border-t border-line">
-      <Container wide>
-        <div ref={ref} className="max-w-[42.5rem]">
-          {site.tagline.map((sentence, s) => (
-            <p
-              key={s}
-              className="text-h1 font-semibold text-balance text-fg [&+&]:mt-6"
-            >
-              {sentence.split(" ").map((word, w) => (
-                <span key={w}>
-                  <span className="tagline-word">{word}</span>
-                  {w < sentence.split(" ").length - 1 ? " " : ""}
-                </span>
-              ))}
-            </p>
+    <div ref={ref} className={cn("max-w-[42.5rem]", className)}>
+      {site.tagline.map((sentence, s) => (
+        <p
+          key={s}
+          className="text-h1 font-semibold text-balance text-fg [&+&]:mt-6"
+        >
+          {sentence.split(" ").map((word, w) => (
+            <span key={w}>
+              <span className="tagline-word">{word}</span>
+              {w < sentence.split(" ").length - 1 ? " " : ""}
+            </span>
           ))}
-        </div>
-      </Container>
-    </Section>
+        </p>
+      ))}
+    </div>
   );
 }

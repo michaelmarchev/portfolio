@@ -21,14 +21,15 @@ export const site = {
     "I work on precision fixtures, automated motion systems, mobility devices, product concepts, fabrication, and mechanical repair.",
   currently:
     "I am the Mechanical Technical Lead on luX-Ray, an in-development automated X-ray emission-scanning system for Lumafield.",
-  closingLine: "Let’s build.",
+  closingLine: "Let’s talk.",
   /**
-   * Homepage tagline section (TaglineReveal), one entry per sentence; each
-   * sentence is a balanced block, so lines break between thoughts.
+   * Hero tagline (TaglineText, in the hero's reading column), one entry per
+   * sentence; each sentence is a balanced block, so lines break between
+   * thoughts.
    */
   tagline: [
-    "Passionate about solving engineering challenges through thoughtful, user-centered design.",
-    "Always seeking to collaborate.",
+    "Solving engineering challenges through thoughtful, user-centered design.",
+    "Let’s talk.",
   ],
   location: "Boston, MA",
   email: "marchev.m@northeastern.edu",
@@ -45,17 +46,6 @@ export const site = {
    */
   url: "https://michaelmarchev.com",
 } as const;
-
-export const capabilityBand = [
-  "Mechanical Systems",
-  "Motion + Positioning",
-  "CAD + DFM/DFA",
-  "Prototyping",
-  "Testing + Validation",
-  "Additive Manufacturing",
-  "Product Development",
-  "Technical Leadership",
-] as const;
 
 export const nav = [
   { href: "/", label: "Index", datum: "00" },

@@ -117,7 +117,7 @@
   background-color: var(--void-2);
 }
 
-/* In the light theme, panel sections (homepage hero, "Let's build", dark
+/* In the light theme, panel sections (homepage hero, "Let's talk", dark
    project spreads, the gantry plate) take the light palette on the slightly
    deeper eggshell — the light counterpart of the lifted dark surface above —
    rather than staying near-black on a light page. --c-fg-4 darkens with it:
@@ -133,7 +133,7 @@
   background-color: var(--paper-deep);
 }
 
-/* Section-level panels: hero panel, Let's build, dark spreads, deep
+/* Section-level panels: hero panel, Let's talk, dark spreads, deep
    sections. A tint rather than an opaque fill, so the page grid shows
    through. Panels are only ever laid on the page itself —
    never on another panel — so the composite is always exact. */

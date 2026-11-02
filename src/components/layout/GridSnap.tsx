@@ -57,11 +57,14 @@ export function GridSnap() {
       const main = document.getElementById("main");
       if (!main) return;
       applying = true;
-      const els = Array.from(document.querySelectorAll<HTMLElement>(SELECTOR));
-      for (const el of els) {
+      // Sticky blocks are never adjusted: once the page has scrolled, a
+      // stuck element's on-screen position isn't its layout position.
+      const all = Array.from(document.querySelectorAll<HTMLElement>(SELECTOR));
+      for (const el of all) {
         el.style.marginTop = "";
         el.style.minHeight = "";
       }
+      const els = all.filter((el) => getComputedStyle(el).position !== "sticky");
       const origin = main.getBoundingClientRect().top;
       // The grid's y origin is the measured top of <main>, not the nominal
       // 4.25rem + 1px: at fractional device-pixel ratios the header border
@@ -118,9 +121,9 @@ export function GridSnap() {
 
         for (let i = els.length - 1; i >= 0; i--) {
           const el = els[i];
-          // A block whose height its parent sets (the hero panel fills its
-          // grid row) is snapped by top only. Snapping both its height and
-          // the parent's made the two undo each other on every pass.
+          // `data-snap-height="parent"`: snapped by top only, for a block
+          // whose height its parent sets (snapping both made them undo each
+          // other on every pass).
           if (el.dataset.snapHeight === "parent") continue;
           const before = el.style.minHeight;
           el.style.minHeight = "";

@@ -10,6 +10,7 @@ import { RadiusCallout } from "@/components/graphics/RadiusCallout";
 import { CornerAccents } from "@/components/graphics/CornerAccents";
 import { DimensionCallouts } from "@/components/graphics/DimensionCallouts";
 import { FlyInText } from "@/components/ui/FlyInText";
+import { TaglineText } from "@/components/sections/TaglineText";
 import { Logo } from "@/components/ui/Logo";
 import { logoFor, orgLogos } from "@/content/logos";
 import { experience } from "@/content/experience";
@@ -70,6 +71,8 @@ export function Hero() {
             </p>
 
             <MetaRun items={site.descriptor} separator="•" className="mt-10" />
+
+            <TaglineText className="mt-16" />
 
             {/* Buttons and links move as one block. */}
             <div className="mt-10">
@@ -140,8 +143,13 @@ export function Hero() {
         {/* --- Flagship system, dark panel --- */}
         <div
           data-panel="dark"
+          // Pinned at lg: one screen tall below the header, it stays put
+          // while the taller reading column (with the tagline) scrolls past,
+          // then the two move on together. GridSnap skips it while sticky
+          // (on-screen position isn't layout position once scrolled); below
+          // lg it is snapped by top only, its height set by the grid row.
           data-snap-height="parent"
-          className="relative flex flex-col justify-between overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:px-10 lg:py-12"
+          className="relative flex flex-col justify-between overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:sticky lg:top-[calc(4.25rem+1px)] lg:h-[calc(100svh-4.25rem-1px)] lg:self-start lg:px-10 lg:py-12"
         >
           <div className="flex items-start justify-between gap-6">
             <p className="u-meta text-accent">
@@ -173,7 +181,7 @@ export function Hero() {
               - below: the width dimension and the units note, ≈ 46px, or
                 ≈ 62px where the note wraps to two lines on a phone
                 (`mb-20` below lg, `lg:pb-12`). */}
-          <div className="mb-20 mt-11 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:pb-12 lg:pt-4">
+          <div className="mb-20 mt-11 lg:my-0 lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center lg:pb-12 lg:pt-10">
             {lead && (
               <Link
                 href={`/projects/${lead.slug}`}
