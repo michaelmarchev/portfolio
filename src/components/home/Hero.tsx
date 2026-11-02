@@ -74,10 +74,10 @@ export function Hero() {
             {/* Buttons and links move as one block. */}
             <div className="mt-10">
               <div className="flex flex-wrap items-center gap-3">
-                <Button href="/projects" variant="solid">
+                <Button href="/projects" variant="solid" size="lg">
                   Explore selected work
                 </Button>
-                <Button href={site.resume} variant="outline" download>
+                <Button href={site.resume} variant="outline" size="lg" download>
                   Download resume
                 </Button>
               </div>
