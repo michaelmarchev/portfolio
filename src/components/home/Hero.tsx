@@ -10,6 +10,7 @@ import { FlipWords } from "@/components/home/FlipWords";
 import { RadiusCallout } from "@/components/graphics/RadiusCallout";
 import { CornerAccents } from "@/components/graphics/CornerAccents";
 import { DimensionCallouts } from "@/components/graphics/DimensionCallouts";
+import { NameDimensions } from "@/components/graphics/NameDimensions";
 import { FlyInText } from "@/components/ui/FlyInText";
 import { TaglineText } from "@/components/sections/TaglineText";
 
@@ -59,9 +60,14 @@ export function Hero() {
               {education.expected.replace("Expected ", "")}
             </p>
 
-            <AnimatedTitle id="hero-name" gradient className="text-display mt-20 text-fg lg:mt-40">
-              {"Michael\nMarchev"}
-            </AnimatedTitle>
+            {/* Overall dimensions of the name (lg only: below it the gutter
+                is too narrow for the height dimension on the left). */}
+            <div className="relative mt-20 lg:mt-40">
+              <AnimatedTitle id="hero-name" gradient className="text-display text-fg">
+                {"Michael\nMarchev"}
+              </AnimatedTitle>
+              <NameDimensions targetId="hero-name" className="hidden text-fg-3 lg:block" />
+            </div>
 
             <p className="text-h2 mt-16 max-w-[24ch] text-fg-2 lg:mt-32">
               <FlipWords words={site.roles} />
