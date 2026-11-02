@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Fragment } from "react";
 import { SpecPlate } from "@/components/media/SpecPlate";
 import { Button } from "@/components/ui/Button";
 import { MetaRun } from "@/components/ui/MetaLabel";
@@ -91,7 +92,7 @@ export function Hero() {
           // is sticky. Snapped by top only.
           id="hero-panel"
           data-snap-height="parent"
-          className="@container relative flex flex-col overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:sticky lg:top-[calc(4.25rem+1px)] lg:h-[calc(100svh-4.25rem-1px)] lg:self-start lg:px-10 lg:py-12"
+          className="@container relative flex flex-col overflow-hidden surface-panel lg:[container-type:size] px-[var(--gutter)] py-8 text-fg lg:sticky lg:top-[calc(4.25rem+1px)] lg:h-[calc(100svh-4.25rem-1px)] lg:self-start lg:px-10 lg:py-12"
         >
           {/* At lg the row's height is fixed, so the image keeps the size it
               had with the old label ("01 / title" + dates): two lines (31px)
@@ -170,12 +171,40 @@ export function Hero() {
             )}
           </div>
 
-          {/* Spec line, centred under the image, in the room below the units
-              note (51px on a phone, 68–91px at lg, 1024 → 1920 wide).
-              Positioned, so it changes neither the panel's height nor the
-              image's size. */}
-          <p className="absolute inset-x-[var(--gutter)] bottom-3 text-center text-meta text-fg-2 @min-[30.375rem]:text-caption lg:inset-x-10 lg:bottom-6">
-            {site.heroPanel.specs}
+          {/* Spec line, in the hero's mono caps, semibold. At lg it is
+              positioned (`.hero-specs` in globals.css) centred between the
+              units note and the panel's bottom, so it changes neither the
+              panel's height nor the image's size; --label-h is the label
+              row's fixed height above. Below lg it follows in flow, 32px
+              from the note and from the panel's bottom. Items don't break
+              internally; each separator stays with the item before it. */}
+          <p className="hero-specs u-meta mt-3.5 text-center font-semibold text-fg-2 lg:mt-0 lg:[--label-h:1.9375rem] lg:@min-[35.0625rem]:[--label-h:0.9375rem]">
+            {site.heroPanel.specs.map((item, i) => {
+              const last = i === site.heroPanel.specs.length - 1;
+              return (
+                <Fragment key={item}>
+                  <span className="whitespace-nowrap">
+                    {/* Units after a number stay lower case: uppercased,
+                        "10µm" reads "10µM" (micromolar). */}
+                    {item.split(/(?<=\d)(µm|mm)\b/).map((part, k) =>
+                      k % 2 ? (
+                        <span key={k} className="normal-case">
+                          {part}
+                        </span>
+                      ) : (
+                        part
+                      ),
+                    )}
+                    {!last && (
+                      <span aria-hidden="true" className="pl-2 text-fg-4">
+                        •
+                      </span>
+                    )}
+                  </span>
+                  {!last && " "}
+                </Fragment>
+              );
+            })}
           </p>
         </div>
       </div>

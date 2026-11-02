@@ -25,7 +25,8 @@ const mono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-geist-mono",
-  weight: ["400", "500"],
+  // 600: the hero panel's spec line.
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = baseMetadata;

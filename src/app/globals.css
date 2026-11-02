@@ -402,6 +402,22 @@ hr {
   opacity: 0.85;
 }
 
+/* Homepage hero spec line, at lg: centred between the units note and the
+   panel's bottom. The panel is a size container, so 100cqh is its content
+   height. The image area's content height is H = 100cqh − label row − 88px
+   (its pt-10 + pb-12); the image is 0.9H, centred, and the note ends 45.4px
+   below it. So the note → panel-bottom gap is 50.6px + 0.05H, and its middle
+   is half that above the panel's bottom. */
+@media (min-width: 1024px) {
+  .hero-specs {
+    position: absolute;
+    left: 2.5rem;
+    right: 2.5rem;
+    bottom: calc(25.3px + 0.025 * (100cqh - var(--label-h) - 88px));
+    transform: translateY(50%);
+  }
+}
+
 /* Homepage tagline: each word muted until it crosses the trigger line
    (TaglineReveal), then full colour on the base curve. */
 .tagline-word {

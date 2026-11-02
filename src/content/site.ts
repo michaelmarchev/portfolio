@@ -30,7 +30,12 @@ export const site = {
   /** Homepage hero panel: credit (top right) and spec line (under the image). */
   heroPanel: {
     credit: "Stryker - R&D Mechanical Engineering Co-op",
-    specs: "10µm resolution - 4 motorized + 4 manual axes - 600mm stroke",
+    specs: [
+      "10µm Resolution",
+      "4 Motorized + 4 Manual Axes",
+      "600mm Stroke",
+      "Custom Modular Magnetic Fixturing",
+    ],
   },
   tagline: [
     "Solving engineering challenges through thoughtful, user-centered design.",
