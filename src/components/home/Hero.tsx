@@ -42,6 +42,7 @@ export function Hero() {
           height GridSnap adds goes to the panel row; shared between both rows
           it moved the panel's top and the snap passes never settled. */}
       <div
+        id="hero-grid"
         data-snap
         className="grid grid-rows-[auto_1fr] border-b border-line lg:grid-rows-none lg:min-h-[calc(100svh-4.25rem)] lg:grid-cols-[round(down,47%,20px)_minmax(0,1fr)]"
       >
@@ -83,7 +84,7 @@ export function Hero() {
             </div>
           </div>
 
-          <TaglineText id="hero-tagline" className="mb-4 mt-24 lg:mb-32 lg:mt-64" />
+          <TaglineText id="hero-tagline" doneBy="hero-grid" className="mb-4 mt-24 lg:mb-32 lg:mt-64" />
         </div>
 
         {/* --- Flagship system, dark panel --- */}
