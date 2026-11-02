@@ -22,6 +22,14 @@ export const site = {
   currently:
     "I am the Mechanical Technical Lead on luX-Ray, an in-development automated X-ray emission-scanning system for Lumafield.",
   closingLine: "Let’s build.",
+  /**
+   * Homepage tagline section (TaglineReveal), one entry per sentence; each
+   * sentence is a balanced block, so lines break between thoughts.
+   */
+  tagline: [
+    "Passionate about solving engineering challenges through thoughtful, user-centered design.",
+    "Always seeking to collaborate.",
+  ],
   location: "Boston, MA",
   email: "marchev.m@northeastern.edu",
   phone: "+1 (617) 943-6574",

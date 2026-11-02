@@ -5,6 +5,7 @@ import { ProjectSpread } from "@/components/project/ProjectSpread";
 import { CapabilityBand } from "@/components/sections/CapabilityBand";
 import { ContactCta } from "@/components/sections/ContactCta";
 import { CurrentlyPanel } from "@/components/sections/CurrentlyPanel";
+import { TaglineReveal } from "@/components/sections/TaglineReveal";
 import { MetaLabel } from "@/components/ui/MetaLabel";
 import { getFeaturedProjects } from "@/content/projects";
 import { HOME_TITLE, pageMetadata } from "@/lib/seo";
@@ -43,6 +44,7 @@ export default function HomePage() {
         />
       ))}
 
+      <TaglineReveal />
       <CapabilityBand />
       <CurrentlyPanel />
       <ContactCta />

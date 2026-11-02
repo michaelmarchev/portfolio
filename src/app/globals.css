@@ -404,6 +404,18 @@ hr {
   opacity: 0.85;
 }
 
+/* Homepage tagline: each word muted until it crosses the trigger line
+   (TaglineReveal), then full colour on the base curve. */
+.tagline-word {
+  /* "user-centered" must not break at its hyphen. */
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--c-fg) 30%, transparent);
+  transition: color 500ms var(--ease);
+}
+.tagline-word[data-lit] {
+  color: var(--c-fg);
+}
+
 /* Mobile menu: links fade up in reading order, 60ms apart, each over
    300ms, so the last link starts at 300ms. --i is set per item. */
 .menu-item {
@@ -951,6 +963,11 @@ hr {
 
   .trace-path {
     stroke-dasharray: 6 10;
+  }
+
+  .tagline-word {
+    color: var(--c-fg);
+    transition: none;
   }
 
   /* Mobile menu: a plain fade, all links together, no movement. */
