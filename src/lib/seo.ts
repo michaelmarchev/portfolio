@@ -14,7 +14,7 @@ import { seoKeywords, site } from "@/content/site";
 export const HOME_TITLE = "Design Engineering Portfolio - Michael Marchev.";
 
 const OG_IMAGE = {
-  url: `${site.url}/og-v2.png`,
+  url: `${site.url}/og-v3.png`,
   width: 1200,
   height: 630,
   alt: HOME_TITLE,
