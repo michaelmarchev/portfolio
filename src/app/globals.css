@@ -573,7 +573,7 @@ hr {
 /*
  * Per-letter animations make every letter an inline-block, and the browser
  * may wrap a line between any two inline-blocks — "Scanne / r". AnimatedTitle
- * and FlutterHover therefore group each word's letters in `.letter-word`, so
+ * therefore groups each word's letters in `.letter-word`, so
  * lines only break at the spaces between words.
  */
 .letter-word {
@@ -740,34 +740,6 @@ hr {
   border: 0;
 }
 
-/*
- * Hover flutter.
- *
- * Each letter lifts in turn — the same motion as the title reveal, but fired
- * on pointer enter only. The per-letter stagger is set inline by
- * FlutterHover, which splits the label into spans on first hover.
- */
-.flutter-letter {
-  display: inline-block;
-  white-space: pre;
-}
-
-.flutter-letter.is-fluttering {
-  animation: flutter-lift 0.42s var(--ease) both;
-  animation-delay: var(--flutter-delay, 0ms);
-}
-
-@keyframes flutter-lift {
-  0% {
-    transform: translateY(0);
-  }
-  45% {
-    transform: translateY(-0.3em);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
 
 /*
  * Solid button / pressed filter chip.
@@ -935,7 +907,6 @@ hr {
     transition-duration: 0.001ms !important;
   }
 
-  .flutter-letter.is-fluttering,
   .flip-words__word.is-entering,
   .flip-words__word.is-leaving {
     animation: none !important;

@@ -131,13 +131,7 @@ export function Timeline({ entries }: { entries: ExperienceEntry[] }) {
                     >
                       {isOpen ? "–" : "+"}
                     </span>
-                    {/* FlutterHover replaces the hovered target's text nodes
-                        with letter spans, after which React would keep
-                        updating the detached originals. Keying the label
-                        remounts it with fresh text on toggle; `caption-shift`
-                        makes it the only flutter target, so the +/– glyph is
-                        never split. */}
-                    <span key={isOpen ? "open" : "closed"} className="caption-shift">
+                    <span className="caption-shift">
                       {isOpen ? "Hide detail" : "Detail"}
                     </span>
                   </button>
