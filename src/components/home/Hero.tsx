@@ -11,6 +11,7 @@ import { CornerAccents } from "@/components/graphics/CornerAccents";
 import { DimensionCallouts } from "@/components/graphics/DimensionCallouts";
 import { FlyInText } from "@/components/ui/FlyInText";
 import { TaglineText } from "@/components/sections/TaglineText";
+import { PanelDrift } from "@/components/home/PanelDrift";
 import { Logo } from "@/components/ui/Logo";
 import { logoFor, orgLogos } from "@/content/logos";
 import { experience } from "@/content/experience";
@@ -46,10 +47,8 @@ export function Hero() {
       >
         {/* --- Reading column --- */}
         {/* Top-aligned at lg, level with the dark panel's label row (both
-            start 3rem down). The 40svh bottom padding holds the pinned panel
-            until the tagline's last word has crossed the reveal line (60% down
-            the screen); then column and panel move on together. */}
-        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:justify-start lg:pr-[clamp(2rem,4vw,4.5rem)] lg:pt-12 lg:pb-[40svh]">
+            start 3rem down). */}
+        <div className="flex flex-col justify-center px-[var(--gutter)] py-[clamp(3rem,8vh,6rem)] lg:justify-start lg:pr-[clamp(2rem,4vw,4.5rem)] lg:py-12">
           <div className="max-w-[46rem] lg:flex lg:flex-1 lg:flex-col lg:justify-between">
             <p className="u-meta text-fg-3">
               {site.location}
@@ -137,19 +136,18 @@ export function Hero() {
             </ul>
           </div>
 
-          <TaglineText className="mt-16 lg:mt-40" />
+          <TaglineText id="hero-tagline" className="mt-20 lg:mt-48" />
         </div>
 
         {/* --- Flagship system, dark panel --- */}
         <div
           data-panel="dark"
-          // Pinned at lg: one screen tall below the header, it stays put
-          // while the taller reading column (with the tagline) scrolls past,
-          // then the two move on together. GridSnap skips it while sticky
-          // (on-screen position isn't layout position once scrolled); below
-          // lg it is snapped by top only, its height set by the grid row.
+          // At lg: one screen tall, drifting at a quarter of the scroll speed
+          // (PanelDrift) until the tagline is half lit, then scrolling with
+          // the page. Snapped by top only.
+          id="hero-panel"
           data-snap-height="parent"
-          className="relative flex flex-col justify-between overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:sticky lg:top-[calc(4.25rem+1px)] lg:h-[calc(100svh-4.25rem-1px)] lg:self-start lg:px-10 lg:py-12"
+          className="relative flex flex-col justify-between overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:h-[calc(100svh-4.25rem-1px)] lg:self-start lg:px-10 lg:py-12 lg:will-change-transform"
         >
           <div className="flex items-start justify-between gap-6">
             <p className="u-meta text-accent">
@@ -230,8 +228,16 @@ export function Hero() {
               </Link>
             )}
           </div>
+
+          {/* A brief description under the image. */}
+          {lead && (
+            <p className="max-w-[52ch] border-t border-line pt-6 text-caption text-fg-2">
+              {lead.cardSummary}
+            </p>
+          )}
         </div>
       </div>
+      <PanelDrift targetId="hero-panel" catchId="hero-tagline" />
     </section>
   );
 }

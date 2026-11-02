@@ -15,7 +15,7 @@ import { site } from "@/content/site";
  * Under `prefers-reduced-motion` every
  * word is full colour from the start (globals.css).
  */
-export function TaglineText({ className }: { className?: string }) {
+export function TaglineText({ className, id }: { className?: string; id?: string }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export function TaglineText({ className }: { className?: string }) {
   }, []);
 
   return (
-    <div ref={ref} className={cn("max-w-[42.5rem]", className)}>
+    <div ref={ref} id={id} className={cn("max-w-[42.5rem]", className)}>
       {site.tagline.map((sentence, s) => (
         <p
           key={s}

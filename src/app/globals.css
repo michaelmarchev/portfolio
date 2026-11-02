@@ -594,6 +594,14 @@ hr {
   --title-grad-to: #9b9b9b;
 }
 .title-gradient .title-letter {
+  /* Tight tracking makes each letter box narrower than its ink (the "v" of
+     Marchev overhangs by ~2px), and a background only paints inside the
+     box. Pad the paint area on every side and cancel it with an equal
+     negative margin so layout is unchanged; overhang past the gradient's
+     end takes the end colour. */
+  padding: 0.12em;
+  margin: -0.12em;
+  background-color: var(--title-grad-to);
   background-image: linear-gradient(90deg, var(--title-grad-from), var(--title-grad-to));
   background-size: var(--title-w, 100%) 100%;
   background-position: calc(var(--letter-x, 0px) * -1) 0;
