@@ -154,7 +154,12 @@ export function GridSnap() {
           const border =
             style.borderBottomStyle !== "none" ? parseFloat(style.borderBottomWidth) || 0 : 0;
           const bottom = layoutTop(el) + height - border - origin;
-          const pitch = ruled(el, "Bottom") ? MAJOR : G;
+          // `data-snap-bottom="major"`: a block directly above a full-width
+          // rule ends on the rule's major line itself, so the slack lands
+          // inside it (where it can choose where to put it) rather than as a
+          // margin above the rule.
+          const pitch =
+            ruled(el, "Bottom") || el.dataset.snapBottom === "major" ? MAJOR : G;
           if (offLine(bottom, pitch)) {
             const target = Math.ceil(bottom / pitch) * pitch;
             el.style.minHeight = `${height + target - bottom}px`;

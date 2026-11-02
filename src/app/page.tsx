@@ -23,10 +23,20 @@ export default function HomePage() {
     <>
       <Hero />
 
-      <Section datum="Selected projects" space="tight" id="selected-work">
+      {/* The first project's rule sits on a major grid line, so this section
+          ends on that line (`data-snap-bottom`) with its content at the
+          bottom: the heading is always 32px above the rule, and the snap's
+          slack goes above the logos instead. */}
+      <Section
+        datum="Selected Projects"
+        space="flush"
+        id="selected-work"
+        className="flex flex-col justify-end pb-8 pt-[clamp(2.5rem,5vh,4rem)]"
+        snapBottomMajor
+      >
         <Container wide className="flex flex-col items-center text-center">
           <ExperienceLogos className="justify-center gap-x-16" />
-          <h2 className="text-h1 mt-20 text-fg">Selected projects</h2>
+          <h2 className="text-h1 mt-20 text-fg">Selected Projects</h2>
         </Container>
       </Section>
 
