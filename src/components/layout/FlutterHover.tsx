@@ -23,6 +23,9 @@ export function FlutterHover() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    const restoreTimers = new Map<HTMLElement, ReturnType<typeof setTimeout>>();
+    const originals = new Map<HTMLElement, string>();
+
     /** Wrap each character of each text node in its own span. */
     const split = (el: HTMLElement) => {
       if (el.querySelector(`.${LETTER}`)) return;
@@ -90,7 +93,21 @@ export function FlutterHover() {
       if (related instanceof Node && control.contains(related)) return;
 
       for (const target of targets(control)) {
+        // Splitting into inline-block letters drops kerning, which makes the
+        // text a few px wider. A title that only just fits one line would
+        // wrap to two (seen: the Sageware title at ~1610–1650px). If the split
+        // changes the height, put the original text back and skip the flutter.
+        const before = target.getBoundingClientRect().height;
+        // The kerned original, kept until it is restored (a second hover
+        // mid-flutter would otherwise save the split version).
+        const original = originals.get(target) ?? target.innerHTML;
+        originals.set(target, original);
         split(target);
+        if (Math.abs(target.getBoundingClientRect().height - before) > 0.5) {
+          target.innerHTML = original;
+          originals.delete(target);
+          continue;
+        }
         const letters = target.querySelectorAll<HTMLElement>(`.${LETTER}`);
         letters.forEach((letter, i) => {
           // Re-adding a class mid-animation is a no-op, so clear it and flush
@@ -100,6 +117,19 @@ export function FlutterHover() {
         });
         void target.offsetWidth;
         letters.forEach((letter) => letter.classList.add(CLASS));
+        // Put the kerned text back once the last letter has landed, so a
+        // later resize can't leave the split (wider) text wrapping.
+        const done = letters.length * STAGGER + 450;
+        const prev = restoreTimers.get(target);
+        if (prev) clearTimeout(prev);
+        restoreTimers.set(
+          target,
+          setTimeout(() => {
+            target.innerHTML = original;
+            restoreTimers.delete(target);
+            originals.delete(target);
+          }, done),
+        );
       }
     };
 
@@ -114,6 +144,7 @@ export function FlutterHover() {
     document.addEventListener("animationend", clear, true);
 
     return () => {
+      restoreTimers.forEach((t) => clearTimeout(t));
       document.removeEventListener("pointerover", enter);
       document.removeEventListener("animationend", clear, true);
     };
