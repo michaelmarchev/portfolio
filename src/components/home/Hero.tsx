@@ -173,8 +173,9 @@ export function Hero() {
               The image carries drawing callouts on three sides, and each
               needs room:
               - above: the radius callout, ink 15.5–26.5px above the image —
-                at least 40px to the label row (`mt-11` below lg; the
-                centring room gives 43–74px at lg);
+                at least 40px to the label row (`mt-11` below lg; `lg:pt-10`
+                at lg, where the pinned one-screen panel leaves less centring
+                room — measured 47px at 1024×640 up to 90px at 2560×1440);
               - right: the height dimension, ≈ 36px — the image is 2rem
                 narrower than the column below lg, and the panel padding
                 covers it at lg;
