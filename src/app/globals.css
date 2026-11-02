@@ -418,12 +418,25 @@ hr {
 .tagline-word[data-state="lit"] {
   color: var(--c-fg);
 }
-/* "Let’s talk." links to Contact: underlined in the word's own (fading)
-   colour; accent on hover once lit. */
-.tagline-link-word {
-  text-decoration-line: underline;
-  text-decoration-thickness: 0.06em;
-  text-underline-offset: 0.12em;
+/* "Let’s talk." links to Contact. The underline is a background line at
+   full colour, drawn left to right once both words are lit (TaglineText sets
+   data-drawn); accent on hover. */
+.tagline-link {
+  --underline: var(--c-fg);
+  background-image: linear-gradient(var(--underline), var(--underline));
+  background-repeat: no-repeat;
+  /* The content box ends 0.297em below the baseline (Geist, measured); this
+     puts the 0.04em line 0.12em below the baseline, as the old underline. */
+  background-position: 0 calc(100% - 0.137em);
+  background-size: 0% 0.04em;
+  transition: background-size 500ms var(--ease);
+}
+.tagline-link[data-drawn] {
+  background-size: 100% 0.04em;
+}
+.tagline-link:hover,
+.tagline-link:focus-visible {
+  --underline: var(--c-accent-text);
 }
 .tagline-link:hover .tagline-word[data-state="lit"],
 .tagline-link:focus-visible .tagline-word[data-state="lit"] {
@@ -961,6 +974,10 @@ hr {
   .tagline-word,
   .tagline-word[data-state] {
     color: var(--c-fg);
+    transition: none;
+  }
+  .tagline-link {
+    background-size: 100% 0.04em;
     transition: none;
   }
 

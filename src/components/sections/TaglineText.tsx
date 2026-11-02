@@ -28,9 +28,10 @@ const STAGGER = 90;
  * `prefers-reduced-motion` every word is full colour from the start
  * (globals.css).
  *
- * The closing line ("Let’s talk.") links to the contact page. Its underline is
- * on each word (the space is inside the first word's span) so it fades with
- * the words; one on the link itself would be drawn in the link's own colour.
+ * The closing line ("Let’s talk.") links to the contact page. Its underline
+ * is the link's own background line, drawn left to right at full colour once
+ * the last word has finished lighting (its stagger delay + the 500ms colour
+ * transition), and withdrawn as soon as that word dims.
  */
 export function TaglineText({ className, id }: { className?: string; id?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -41,6 +42,14 @@ export function TaglineText({ className, id }: { className?: string; id?: string
     const words = Array.from(root.querySelectorAll<HTMLElement>(".tagline-word"));
     const states = words.map(() => 0);
     const NAMES = ["", "faint", "lit"];
+    const delays = words.map(() => 0);
+    const link = root.querySelector<HTMLElement>(".tagline-link");
+    const lastLinkWord = link
+      ? words.indexOf(link.querySelectorAll<HTMLElement>(".tagline-word")[
+          link.querySelectorAll(".tagline-word").length - 1
+        ])
+      : -1;
+    let drawTimer = 0;
     let frame = 0;
 
     const update = () => {
@@ -62,12 +71,28 @@ export function TaglineText({ className, id }: { className?: string; id?: string
       });
       // Rising in reading order going down, falling in reverse going up.
       const set = (i: number, k: number) => {
-        words[i].style.transitionDelay = `${k * STAGGER}ms`;
+        delays[i] = k * STAGGER;
+        words[i].style.transitionDelay = `${delays[i]}ms`;
         if (states[i]) words[i].dataset.state = NAMES[states[i]];
         else delete words[i].dataset.state;
       };
       rising.forEach(set);
       falling.reverse().forEach(set);
+
+      if (link && lastLinkWord >= 0) {
+        if (states[lastLinkWord] === 2) {
+          if (!drawTimer && !("drawn" in link.dataset)) {
+            drawTimer = window.setTimeout(() => {
+              link.dataset.drawn = "";
+              drawTimer = 0;
+            }, delays[lastLinkWord] + 500);
+          }
+        } else {
+          window.clearTimeout(drawTimer);
+          drawTimer = 0;
+          delete link.dataset.drawn;
+        }
+      }
     };
 
     const schedule = () => {
@@ -80,6 +105,7 @@ export function TaglineText({ className, id }: { className?: string; id?: string
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
       if (frame) cancelAnimationFrame(frame);
+      window.clearTimeout(drawTimer);
     };
   }, []);
 
@@ -88,19 +114,12 @@ export function TaglineText({ className, id }: { className?: string; id?: string
       {site.tagline.map((sentence, s) => {
         const words = sentence.split(" ");
         const link = sentence === site.closingLine;
-        const text = words.map((word, w) => {
-          const last = w === words.length - 1;
-          return link ? (
-            <span key={w} className="tagline-word tagline-link-word">
-              {last ? word : `${word} `}
-            </span>
-          ) : (
-            <span key={w}>
-              <span className="tagline-word">{word}</span>
-              {last ? "" : " "}
-            </span>
-          );
-        });
+        const text = words.map((word, w) => (
+          <span key={w}>
+            <span className="tagline-word">{word}</span>
+            {w < words.length - 1 ? " " : ""}
+          </span>
+        ));
         return (
           <p
             key={s}

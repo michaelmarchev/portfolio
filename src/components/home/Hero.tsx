@@ -83,7 +83,7 @@ export function Hero() {
             </div>
           </div>
 
-          <TaglineText id="hero-tagline" className="mt-20 lg:mt-48" />
+          <TaglineText id="hero-tagline" className="mb-4 mt-24 lg:mb-32 lg:mt-64" />
         </div>
 
         {/* --- Flagship system, dark panel --- */}
@@ -189,7 +189,7 @@ export function Hero() {
               Experience logos at the panel's bottom (level with the end of
               the reading column once the panel catches). */}
           {lead && (
-            <div className="flex flex-col gap-12 border-t border-line pt-6 lg:flex-1 lg:justify-between">
+            <div className="flex flex-col gap-12 border-t border-line pt-6 lg:mt-20 lg:flex-1 lg:justify-between">
               <div>
                 <p className="max-w-[52ch] text-lead text-fg-2">{lead.summary}</p>
                 <p className="u-meta mt-4 text-fg-4">
