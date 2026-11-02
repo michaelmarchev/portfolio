@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils";
  */
 
 /** Dimension line distance from the ink. */
-const OFFSET_BELOW = 20;
+const OFFSET_BELOW = 23;
 const OFFSET_LEFT = 20;
 /** Gap between the ink and the start of an extension line. */
 const EXT_GAP = 4;
