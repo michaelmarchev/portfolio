@@ -27,6 +27,11 @@ export const site = {
    * sentence; each sentence is a balanced block, so lines break between
    * thoughts.
    */
+  /** Homepage hero panel: credit (top right) and spec line (under the image). */
+  heroPanel: {
+    credit: "Stryker - R&D Mechanical Engineering Co-op",
+    specs: "10µm resolution - 4 motorized + 4 manual axes - 600mm stroke",
+  },
   tagline: [
     "Solving engineering challenges through thoughtful, user-centered design.",
     "Let’s talk.",

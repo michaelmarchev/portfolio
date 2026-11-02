@@ -23,18 +23,26 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* Content at the bottom, so the few px GridSnap adds to reach a line
-          go above the logos and the heading stays 32px above the first
-          project's top. */}
+      {/* The logos sit in a band one major square tall whose edges GridSnap
+          puts on major lines, so they're centred between two of them. The
+          heading is pushed to the bottom (mt-auto), so the few px GridSnap
+          adds to the section go between the logos and the heading, and the
+          heading stays 32px above the first project. */}
       <Section
         datum="Selected Projects"
         space="flush"
         id="selected-work"
-        className="flex flex-col justify-end pb-8 pt-[clamp(2.5rem,5vh,4rem)]"
+        className="flex flex-col pb-8 pt-8"
       >
-        <Container wide className="flex flex-col items-center text-center">
-          <ExperienceLogos className="justify-center gap-x-16" />
-          <h2 className="text-h1 mt-20 text-fg">Selected Projects</h2>
+        <Container wide className="flex flex-1 flex-col items-center text-center">
+          <div
+            data-snap
+            data-snap-pitch="major"
+            className="flex min-h-[100px] w-full items-center justify-center"
+          >
+            <ExperienceLogos className="justify-center gap-x-16 lg:gap-x-24" />
+          </div>
+          <h2 className="text-h1 mt-auto pt-12 text-fg">Selected Projects</h2>
         </Container>
       </Section>
 

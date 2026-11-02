@@ -104,6 +104,8 @@ export function GridSnap() {
       // bottom rule, the homepage spreads, the footer) reads as a bold line,
       // so it goes on a major line, not just any line (owner, 2026-11-02).
       // Narrower bordered blocks (cards, buttons) stay on the minor grid.
+      // `data-snap-pitch="major"` puts any snapped block's edges on major
+      // lines (the homepage logo band, centred between two of them).
       const mainWidth = box.width;
       const ruled = (el: HTMLElement, side: "Top" | "Bottom") => {
         const s = getComputedStyle(el);
@@ -126,7 +128,7 @@ export function GridSnap() {
           const before = el.style.marginTop;
           el.style.marginTop = "";
           const top = layoutTop(el) - origin;
-          const pitch = ruled(el, "Top") ? MAJOR : G;
+          const pitch = ruled(el, "Top") || el.dataset.snapPitch === "major" ? MAJOR : G;
           if (offLine(top, pitch)) {
             const delta = Math.ceil(top / pitch) * pitch - top;
             const margin = parseFloat(getComputedStyle(el).marginTop) || 0;
@@ -154,7 +156,7 @@ export function GridSnap() {
           const border =
             style.borderBottomStyle !== "none" ? parseFloat(style.borderBottomWidth) || 0 : 0;
           const bottom = layoutTop(el) + height - border - origin;
-          const pitch = ruled(el, "Bottom") ? MAJOR : G;
+          const pitch = ruled(el, "Bottom") || el.dataset.snapPitch === "major" ? MAJOR : G;
           if (offLine(bottom, pitch)) {
             const target = Math.ceil(bottom / pitch) * pitch;
             el.style.minHeight = `${height + target - bottom}px`;

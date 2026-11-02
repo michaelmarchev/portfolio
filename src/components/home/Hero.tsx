@@ -91,18 +91,18 @@ export function Hero() {
           // is sticky. Snapped by top only.
           id="hero-panel"
           data-snap-height="parent"
-          className="relative flex flex-col overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:sticky lg:top-[calc(4.25rem+1px)] lg:h-[calc(100svh-4.25rem-1px)] lg:self-start lg:px-10 lg:py-12"
+          className="@container relative flex flex-col overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:sticky lg:top-[calc(4.25rem+1px)] lg:h-[calc(100svh-4.25rem-1px)] lg:self-start lg:px-10 lg:py-12"
         >
-          <div className="flex items-start justify-between gap-6">
-            <p className="u-meta text-accent">
-              {lead?.index}
-              <span aria-hidden="true" className="px-2 text-fg-4">
-                /
-              </span>
-              {lead?.title}
-            </p>
-            <p className="u-meta hidden shrink-0 text-fg-4 sm:block">
-              {lead?.timeline}
+          {/* At lg the row's height is fixed, so the image keeps the size it
+              had with the old label ("01 / title" + dates): two lines (31px)
+              while the panel is under 561px inside, where that label wrapped,
+              else one (15px). The longer credit can wrap where the old label
+              didn't; it then hangs into the room above the image (≥ 47px to
+              the image at 1280) instead of shrinking it. */}
+          <div className="flex items-start justify-between gap-6 lg:h-[1.9375rem] lg:@min-[35.0625rem]:h-[0.9375rem]">
+            <p className="u-meta text-accent">{lead?.title}</p>
+            <p className="u-meta hidden text-right text-fg-4 sm:block">
+              {site.heroPanel.credit}
             </p>
           </div>
 
@@ -169,6 +169,14 @@ export function Hero() {
               </Link>
             )}
           </div>
+
+          {/* Spec line, centred under the image, in the room below the units
+              note (51px on a phone, 68–91px at lg, 1024 → 1920 wide).
+              Positioned, so it changes neither the panel's height nor the
+              image's size. */}
+          <p className="absolute inset-x-[var(--gutter)] bottom-3 text-center text-meta text-fg-2 @min-[30.375rem]:text-caption lg:inset-x-10 lg:bottom-6">
+            {site.heroPanel.specs}
+          </p>
         </div>
       </div>
     </section>
