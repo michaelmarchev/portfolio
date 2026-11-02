@@ -128,7 +128,14 @@ export function GridSnap() {
           const before = el.style.minHeight;
           el.style.minHeight = "";
           const height = el.getBoundingClientRect().height;
-          const bottom = layoutTop(el) + height - origin;
+          // A bottom border is a drawn line: its pixel row goes on the grid
+          // line, not the edge below it (which left the hero's rule 1px
+          // above a line, reading as a double line). The next block then
+          // starts 1px past a line, which offLine accepts.
+          const style = getComputedStyle(el);
+          const border =
+            style.borderBottomStyle !== "none" ? parseFloat(style.borderBottomWidth) || 0 : 0;
+          const bottom = layoutTop(el) + height - border - origin;
           if (offLine(bottom)) {
             const target = Math.ceil(bottom / G) * G;
             el.style.minHeight = `${height + target - bottom}px`;

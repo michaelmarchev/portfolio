@@ -5,10 +5,9 @@ import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { site } from "@/content/site";
 
-/** Where words turn faint, then lit, as a fraction of the viewport height.
- *  PanelDrift catches the hero panel on LIT_LINE. */
+/** Where words turn faint, then lit, as a fraction of the viewport height. */
 const FAINT_LINE = 0.95;
-export const LIT_LINE = 0.8;
+const LIT_LINE = 0.8;
 /** Least scroll, in px, between one word changing and the next. */
 const STEP = 90;
 /** With `doneBy`, the least step is smaller, so the cascade can always fit. */
@@ -21,8 +20,7 @@ const STAGGER = 90;
 
 /**
  * Large-type tagline, revealed word by word as it scrolls into view. Sits in
- * the homepage hero's reading column, below the Experience logos; at lg the
- * hero panel drifts beside it and catches as it starts to light.
+ * the homepage hero's reading column, beside the pinned hero panel.
  *
  * Words start invisible, turn faint (15% of the text colour), then full
  * colour, one at a time in reading order. The first word lights as it crosses

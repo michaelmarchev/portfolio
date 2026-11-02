@@ -7,7 +7,8 @@ import { nav } from "@/content/site";
 /**
  * The site's signature device: a fixed machinist's scale down the left edge.
  *
- * Ticked every 24px (minor) and 96px (major), with a cursor tracking scroll
+ * Ticked on every line of the page grid (20px minor, 100px major), moving
+ * with the page so the ticks stay on the lines, with a cursor tracking scroll
  * position and a readout naming the current page. Desktop only, purely
  * informational, and inert to assistive technology.
  *
@@ -32,6 +33,7 @@ function labelFor(pathname: string): string {
 
 export function DatumRail() {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const ticksRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -39,6 +41,7 @@ export function DatumRail() {
 
     const measure = () => {
       frame = 0;
+      ticksRef.current?.style.setProperty("--scroll-y", `${window.scrollY}px`);
       if (!cursorRef.current) return;
       const total = Math.max(
         1,
@@ -68,7 +71,7 @@ export function DatumRail() {
 
   return (
     <div className="datum-rail" aria-hidden="true">
-      <div className="datum-rail__ticks" />
+      <div ref={ticksRef} className="datum-rail__ticks" />
       <div ref={cursorRef} className="datum-rail__cursor" />
       <div className="datum-rail__readout u-meta">
         <span className="text-fg-2">{labelFor(pathname)}</span>

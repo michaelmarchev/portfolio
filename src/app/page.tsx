@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/Hero";
+import { ExperienceLogos } from "@/components/home/ExperienceLogos";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { ProjectSpread } from "@/components/project/ProjectSpread";
@@ -23,8 +24,9 @@ export default function HomePage() {
       <Hero />
 
       <Section datum="Selected projects" space="tight" id="selected-work">
-        <Container wide>
-          <h2 className="text-h1 text-fg">Selected projects</h2>
+        <Container wide className="flex flex-col items-center text-center">
+          <ExperienceLogos className="justify-center" />
+          <h2 className="text-h1 mt-16 text-fg">Selected projects</h2>
         </Container>
       </Section>
 
