@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useLayoutEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 /** Milliseconds between letters. */
@@ -19,6 +20,12 @@ const STAGGER = 51;
  *
  * A "\n" in the text becomes a line break, and the stagger carries across it,
  * so a two-line name reveals as one continuous sweep.
+ *
+ * `gradient` (the homepage hero) fills the text with a left-to-right
+ * gradient. `background-clip: text` on the heading can't reach the
+ * individually animated letters, so each letter carries the same gradient,
+ * sized to the widest line and shifted by the letter's own x offset — it
+ * reads as one sweep across the name. Re-measured on resize.
  */
 export function AnimatedTitle({
   children,
@@ -26,6 +33,7 @@ export function AnimatedTitle({
   stagger = STAGGER,
   as: Tag = "h1",
   id,
+  gradient = false,
 }: {
   children: string;
   className?: string;
@@ -33,8 +41,32 @@ export function AnimatedTitle({
   as?: "h1" | "h2" | "span";
   /** Needed where a landmark points at the title with aria-labelledby. */
   id?: string;
+  /** Left-to-right text gradient (see .title-gradient in globals.css). */
+  gradient?: boolean;
 }) {
   const pathname = usePathname();
+  const ref = useRef<HTMLHeadingElement>(null);
+
+  useLayoutEffect(() => {
+    const root = ref.current;
+    if (!gradient || !root) return;
+    const measure = () => {
+      const letters = Array.from(root.querySelectorAll<HTMLElement>(".title-letter"));
+      if (!letters.length) return;
+      // Transforms are vertical only, so horizontal positions are exact.
+      const left = Math.min(...letters.map((l) => l.getBoundingClientRect().left));
+      const right = Math.max(...letters.map((l) => l.getBoundingClientRect().right));
+      root.style.setProperty("--title-w", `${right - left}px`);
+      for (const l of letters) {
+        l.style.setProperty("--letter-x", `${l.getBoundingClientRect().left - left}px`);
+      }
+    };
+    measure();
+    const resizes = new ResizeObserver(measure);
+    resizes.observe(root);
+    document.fonts?.ready.then(measure);
+    return () => resizes.disconnect();
+  }, [gradient, pathname]);
   const lines = children.split("\n");
 
   let index = 0;
@@ -42,8 +74,9 @@ export function AnimatedTitle({
   return (
     <Tag
       key={pathname}
+      ref={ref}
       id={id}
-      className={cn(className)}
+      className={cn(gradient && "title-gradient", className)}
       aria-label={children.replace(/\n/g, " ")}
     >
       {lines.map((line, lineNo) => (

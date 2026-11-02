@@ -568,6 +568,28 @@ hr {
 }
 
 /* Stagger is set by AnimatedTitle (51ms per letter). */
+/* Hero heading text gradient, left to right (design skill values). Each
+   letter paints one slice of a gradient as wide as the whole name; the
+   offsets come from AnimatedTitle. Text only, never a background. */
+:root {
+  --title-grad-from: #000000;
+  --title-grad-to: #666666;
+}
+:root[data-theme="dark"] {
+  --title-grad-from: #ffffff;
+  --title-grad-to: #9b9b9b;
+}
+.title-gradient .title-letter {
+  background-image: linear-gradient(90deg, var(--title-grad-from), var(--title-grad-to));
+  background-size: var(--title-w, 100%) 100%;
+  background-position: calc(var(--letter-x, 0px) * -1) 0;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
 .title-letter {
   display: inline-block;
   white-space: pre;

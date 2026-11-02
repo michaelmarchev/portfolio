@@ -61,7 +61,7 @@ export function Hero() {
               {education.expected.replace("Expected ", "")}
             </p>
 
-            <AnimatedTitle id="hero-name" className="text-display mt-16 text-fg">
+            <AnimatedTitle id="hero-name" gradient className="text-display mt-16 text-fg">
               {"Michael\nMarchev"}
             </AnimatedTitle>
 
