@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
+import localFont from "next/font/local";
 import type { ReactNode } from "react";
 import { DatumRail } from "@/components/layout/DatumRail";
 import { GridSnap } from "@/components/layout/GridSnap";
@@ -21,12 +22,18 @@ const sans = Geist({
   weight: ["400", "500", "600"],
 });
 
-const mono = Geist_Mono({
-  subsets: ["latin"],
+/*
+ * Geist Mono is self-hosted: Google's latin variable file (weights 100–900;
+ * includes µ and •), OFL licence alongside. Requesting weight 600 from Google
+ * at build time intermittently returned a font URL with no file extension,
+ * which crashes next/font's parser and failed the deploy (2026-11-02; about
+ * 1 response in 15 for 400;500;600, none for 400;500).
+ */
+const mono = localFont({
+  src: "./fonts/GeistMono-Latin.woff2",
+  weight: "100 900",
   display: "swap",
   variable: "--font-geist-mono",
-  // 600: the hero panel's spec line.
-  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = baseMetadata;
