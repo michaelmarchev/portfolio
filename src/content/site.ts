@@ -32,7 +32,8 @@ export const site = {
     credit: "Stryker - R&D Mechanical Engineering Co-op",
     specs: [
       "10µm Resolution",
-      "4 Motorized + 4 Manual Axes",
+      "4 Motorized",
+      "4 Manual Axes",
       "600mm Stroke",
       "Custom Modular Magnetic Fixturing",
     ],

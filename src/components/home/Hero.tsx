@@ -178,7 +178,7 @@ export function Hero() {
               row's fixed height above. Below lg it follows in flow, 32px
               from the note and from the panel's bottom. Items don't break
               internally; each separator stays with the item before it. */}
-          <p className="hero-specs u-meta mt-3.5 text-center font-semibold text-fg-2 lg:mt-0 lg:[--label-h:1.9375rem] lg:@min-[35.0625rem]:[--label-h:0.9375rem]">
+          <p className="hero-specs u-meta mt-3.5 text-center text-[0.75rem] font-semibold text-fg-2 lg:mt-0 lg:[--label-h:1.9375rem] lg:@min-[35.0625rem]:[--label-h:0.9375rem]">
             {site.heroPanel.specs.map((item, i) => {
               const last = i === site.heroPanel.specs.length - 1;
               return (
