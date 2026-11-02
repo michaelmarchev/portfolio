@@ -118,6 +118,10 @@ export function GridSnap() {
 
         for (let i = els.length - 1; i >= 0; i--) {
           const el = els[i];
+          // A block whose height its parent sets (the hero panel fills its
+          // grid row) is snapped by top only. Snapping both its height and
+          // the parent's made the two undo each other on every pass.
+          if (el.dataset.snapHeight === "parent") continue;
           const before = el.style.minHeight;
           el.style.minHeight = "";
           const height = el.getBoundingClientRect().height;

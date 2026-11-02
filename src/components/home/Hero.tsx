@@ -36,10 +36,12 @@ export function Hero() {
           whole squares, and the reading column is rounded down to whole
           squares so the panel's left edge falls on a vertical line. The
           rule is on this grid rather than the section so the snapped height
-          includes it. */}
+          includes it. Below lg the two stacked rows are `auto 1fr`, so any
+          height GridSnap adds goes to the panel row; shared between both rows
+          it moved the panel's top and the snap passes never settled. */}
       <div
         data-snap
-        className="grid border-b border-line lg:min-h-[calc(100svh-4.25rem)] lg:grid-cols-[round(down,47%,20px)_minmax(0,1fr)]"
+        className="grid grid-rows-[auto_1fr] border-b border-line lg:grid-rows-none lg:min-h-[calc(100svh-4.25rem)] lg:grid-cols-[round(down,47%,20px)_minmax(0,1fr)]"
       >
         {/* --- Reading column --- */}
         {/* Top-aligned at lg, level with the dark panel's label row (both
@@ -138,6 +140,7 @@ export function Hero() {
         {/* --- Flagship system, dark panel --- */}
         <div
           data-panel="dark"
+          data-snap-height="parent"
           className="relative flex flex-col justify-between overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:px-10 lg:py-12"
         >
           <div className="flex items-start justify-between gap-6">

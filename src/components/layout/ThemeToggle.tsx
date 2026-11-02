@@ -54,7 +54,7 @@ export function ThemeToggle({ className }: { className?: string }) {
               "u-meta px-3 py-2 transition-[color,background-color,border-color,scale] duration-300 ease-[var(--ease)] active:scale-[0.98]",
               active
                 ? "btn-solid"
-                : "text-fg-4 hover:text-fg",
+                : "text-fg-4 hover:bg-bg-deep hover:text-fg",
             )}
           >
             {option === "light" ? "Light" : "Dark"}

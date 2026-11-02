@@ -13,11 +13,21 @@ export function SiteHeader() {
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
+  // The bar turns translucent once the page has scrolled 24px. Observed with
+  // a 24px sentinel at the top of the document rather than a scroll
+  // listener, so nothing runs on every scroll frame.
   useEffect(() => {
-    const onScroll = () => setLifted(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const sentinel = document.createElement("div");
+    sentinel.setAttribute("aria-hidden", "true");
+    sentinel.style.cssText =
+      "position:absolute;top:0;left:0;width:1px;height:24px;pointer-events:none;visibility:hidden";
+    document.body.prepend(sentinel);
+    const io = new IntersectionObserver(([entry]) => setLifted(!entry.isIntersecting));
+    io.observe(sentinel);
+    return () => {
+      io.disconnect();
+      sentinel.remove();
+    };
   }, []);
 
   // Close the mobile panel on route change.
@@ -49,9 +59,15 @@ export function SiteHeader() {
     <header
       className={cn(
         "sticky top-0 z-40 border-b transition-[background-color,border-color] duration-300",
-        lifted || open
-          ? "border-line bg-bg/92 backdrop-blur-[10px]"
-          : "border-transparent bg-transparent",
+        // Open, the header (bar plus full-height menu) is the theme's base
+        // surface at high opacity over a strong blur. The menu panel itself is
+        // transparent: a backdrop-filter nested inside this one would only
+        // blur the header, not the page.
+        open
+          ? "border-line bg-bg/90 backdrop-blur-xl"
+          : lifted
+            ? "border-line bg-bg/92 backdrop-blur-[10px]"
+            : "border-transparent bg-transparent",
       )}
     >
       <div className="mx-auto flex h-[4.25rem] max-w-[var(--max)] items-center justify-between gap-6 px-[var(--gutter)]">
@@ -92,7 +108,7 @@ export function SiteHeader() {
           <a
             href={asset(site.resume)}
             download
-            className="u-meta border border-line-strong px-4 py-2 text-fg-2 no-underline transition-[color,background-color,border-color,scale] duration-300 ease-[var(--ease)] active:scale-[0.98] hover:border-accent hover:text-accent-text focus-visible:border-accent"
+            className="u-meta border border-line-strong px-4 py-2 text-fg-2 no-underline transition-[color,background-color,border-color,scale] duration-300 ease-[var(--ease)] active:scale-[0.98] hover:border-accent hover:bg-bg-deep hover:text-accent-text focus-visible:border-accent"
           >
             Resume
           </a>
@@ -131,7 +147,7 @@ export function SiteHeader() {
         id="mobile-nav"
         ref={panelRef}
         hidden={!open}
-        className="h-[calc(100dvh-4.25rem-1px)] overflow-y-auto border-t border-line bg-bg md:hidden"
+        className="h-[calc(100dvh-4.25rem-1px)] overflow-y-auto border-t border-line md:hidden"
       >
         <ul className="m-0 list-none p-0">
           {nav.map((item, i) => (

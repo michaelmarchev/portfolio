@@ -473,7 +473,7 @@ export const projects: Project[] = [
             composition: "As shot.",
             lighting: "Available light.",
             purpose: "Document the build.",
-            caption: "A cable pass-through in the cage wall.",
+            caption: "A cable passthrough in the cage wall.",
             status: "final",
             src: "/images/optics-bench-cage-port.jpg",
             alt: "A round cable pass-through with a brush seal set into a black cage panel.",

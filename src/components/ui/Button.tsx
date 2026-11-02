@@ -19,8 +19,8 @@ const STYLE: Record<Variant, string> = {
    */
   solid: "btn-solid border",
   outline:
-    "border border-line-strong text-fg hover:border-accent hover:text-accent-text focus-visible:border-accent",
-  quiet: "border border-transparent text-fg-2 hover:text-accent-text",
+    "border border-line-strong text-fg hover:border-accent hover:bg-bg-deep hover:text-accent-text focus-visible:border-accent",
+  quiet: "border border-transparent text-fg-2 hover:bg-bg-deep hover:text-accent-text",
 };
 
 const SHARED =

@@ -158,7 +158,7 @@ function FilterButton({
         // Pressed matches the solid Button (see `.btn-solid` in globals.css).
         pressed
           ? "btn-solid"
-          : "border-line text-fg-3 hover:border-line-strong hover:text-fg",
+          : "border-line text-fg-3 hover:border-line-strong hover:bg-bg-deep hover:text-fg",
       )}
     >
       {children}

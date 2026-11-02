@@ -58,10 +58,10 @@
   --measure: 65ch;
 
   /* --- motion --- */
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 300ms;
   --dur: 380ms;
-  --dur-slow: 900ms;
+  --dur-slow: 700ms; /* scroll reveal: 600–800ms per the design skill */
 }
 
 @media (min-width: 640px) {
@@ -273,6 +273,8 @@ h4 {
 
 p {
   margin: 0;
+  /* No single word alone on a paragraph's last line. */
+  text-wrap: pretty;
 }
 
 ::selection {
@@ -409,7 +411,7 @@ hr {
 @keyframes menu-in {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(24px);
   }
 }
 
@@ -570,7 +572,7 @@ hr {
   white-space: pre;
   opacity: 0;
   transform: translateY(0.45em);
-  animation: letter-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation: letter-in 0.5s var(--ease) forwards;
   animation-delay: var(--letter-delay, 0ms);
 }
 
@@ -590,7 +592,7 @@ hr {
   opacity: 0;
   transform: translateY(0.45em);
   transform-box: fill-box;
-  animation: letter-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation: letter-in 0.5s var(--ease) forwards;
   animation-delay: var(--letter-delay, 0ms);
 }
 
@@ -651,13 +653,13 @@ hr {
 }
 
 .flip-words__word.is-entering {
-  animation: flip-in 0.46s cubic-bezier(0.18, 0.72, 0.3, 1) both;
+  animation: flip-in 0.46s var(--ease) both;
   /* Starts only once the outgoing word has cleared the box. */
   animation-delay: 0.42s;
 }
 
 .flip-words__word.is-leaving {
-  animation: flip-out 0.4s cubic-bezier(0.6, 0.02, 0.8, 0.2) both;
+  animation: flip-out 0.4s var(--ease) both;
 }
 
 @keyframes flip-in {
@@ -714,7 +716,7 @@ hr {
 }
 
 .flutter-letter.is-fluttering {
-  animation: flutter-lift 0.42s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: flutter-lift 0.42s var(--ease) both;
   animation-delay: var(--flutter-delay, 0ms);
 }
 
@@ -810,7 +812,7 @@ hr {
 
 [data-reveal] {
   opacity: 0;
-  transform: translate3d(0, 18px, 0);
+  transform: translate3d(0, 32px, 0);
   transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
   transition-delay: var(--reveal-delay, 0ms);
 }
