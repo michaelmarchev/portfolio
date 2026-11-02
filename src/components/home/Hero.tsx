@@ -12,6 +12,7 @@ import { DimensionCallouts } from "@/components/graphics/DimensionCallouts";
 import { FlyInText } from "@/components/ui/FlyInText";
 import { TaglineText } from "@/components/sections/TaglineText";
 import { PanelDrift } from "@/components/home/PanelDrift";
+import { GapMatch } from "@/components/home/GapMatch";
 import { Logo } from "@/components/ui/Logo";
 import { logoFor, orgLogos } from "@/content/logos";
 import { experience } from "@/content/experience";
@@ -96,7 +97,7 @@ export function Hero() {
           // the hero's. Snapped by top only.
           id="hero-panel"
           data-snap-height="parent"
-          className="relative flex flex-col justify-between overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:min-h-[calc(100svh-4.25rem-1px)] lg:self-start lg:px-10 lg:py-12 lg:will-change-transform"
+          className="relative flex flex-col overflow-hidden surface-panel px-[var(--gutter)] py-8 text-fg lg:min-h-[calc(100svh-4.25rem-1px)] lg:self-start lg:px-10 lg:py-12 lg:will-change-transform"
         >
           {/* The label and image fill the panel's first screen, whatever the
               panel's total height; the description fills the rest. */}
@@ -173,7 +174,7 @@ export function Hero() {
                     <DimensionCallouts delay={450} className="text-fg-3" />
                     {/* General note, as on a drawing sheet: bottom right, under
                       the width dimension. */}
-                    <p className="u-meta pointer-events-none absolute right-0 top-[calc(100%+1.875rem)] z-10 w-max max-w-[calc(100vw-4rem)] text-right text-fg-3">
+                    <p id="hero-units-note" className="u-meta pointer-events-none absolute right-0 top-[calc(100%+1.875rem)] z-10 w-max max-w-[calc(100vw-4rem)] text-right text-fg-3">
                       <FlyInText
                         text="ALL UNITS IN PIXELS UNLESS OTHERWISE NOTED"
                         delay={1100}
@@ -186,14 +187,15 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Description: the case study's summary under the image, and the
-              Experience logos at the panel's bottom (level with the end of
-              the reading column once the panel catches). */}
+          {/* Description: the case study's summary under the image, then the
+              Experience logos. GapMatch makes the gap above the Experience
+              rule equal the one from the units note to the description's
+              rule (owner, 2026-11-02); mt-12 is the no-JS fallback. */}
           {lead && (
-            <div className="flex flex-col gap-12 border-t border-line pt-6 lg:mt-20 lg:flex-1 lg:justify-between">
+            <div id="hero-desc" className="mt-8 border-t border-line pt-6 lg:mt-20">
               <div>
                 <p className="max-w-[52ch] text-lead text-fg-2">{lead.summary}</p>
-                <p className="u-meta mt-4 text-fg-4">
+                <p id="hero-org" className="u-meta mt-4 text-fg-4">
                   {lead.organization}
                   <span aria-hidden="true" className="px-2">
                     /
@@ -202,7 +204,7 @@ export function Hero() {
                 </p>
               </div>
               {/* Logos of the organizations on the Experience page. */}
-              <div className="border-t border-line pt-6">
+              <div id="hero-experience" className="mt-12 border-t border-line pt-6">
                 <Link href="/experience" className="u-meta u-link text-fg-4">
                   Experience
                 </Link>
@@ -235,6 +237,10 @@ export function Hero() {
         </div>
       </div>
       <PanelDrift targetId="hero-panel" catchId="hero-tagline" />
+      <GapMatch
+        reference={["hero-units-note", "hero-desc"]}
+        target={["hero-org", "hero-experience"]}
+      />
     </section>
   );
 }

@@ -3,32 +3,30 @@
 import { useEffect } from "react";
 import { LIT_LINE } from "@/components/sections/TaglineText";
 
-/** Share of the page's scroll the panel cancels out: it moves at 25% speed. */
-const DRIFT = 0.75;
+/** The most of the page's scroll the panel may cancel out: at 0.9 it moves
+ *  at 10% of the page's speed. */
+const MAX_DRIFT = 0.9;
 /** The tagline's lit line, as a fraction of the viewport height. */
 const REVEAL_LINE = LIT_LINE;
 /** How far the hero (and the panel) runs past the reading column's end. */
 const OVERRUN = 80;
-/** Header height plus its border: the panel is at least one screen below it. */
-const HEADER = 69;
 
 /**
  * Slow-scrolls the homepage hero panel beside the reading column (lg only).
  *
- * As the page scrolls the panel is translated down by 75% of the scroll
- * distance, so on screen it moves at a quarter of the page's speed. It
- * "catches" — stops drifting and scrolls with the page — as the tagline starts
- * to light (the top of `catchId` crosses the reveal line).
+ * The panel keeps its content's height. The hero runs OVERRUN px past the
+ * reading column (`lg:self-start`, so its height is its content's), and a
+ * bottom margin on the panel of
+ *   travel = (column + OVERRUN) − panel
+ * gives the grid that height. As the page scrolls the panel is translated
+ * down by drift × the scroll distance, so on screen it moves at (1 − drift)
+ * of the page's speed, until it has covered `travel`: there it "catches" —
+ * its bottom level with the hero's — and scrolls with the page.
  *
- * Its height is set (not min-height, which GridSnap clears) so that at the
- * catch its bottom is level with the bottom of the hero, which runs OVERRUN
- * px past the reading column:
- *   height = (column + OVERRUN) − 0.75 × catchScroll
- * (at least one screen, and at least its content), and a bottom margin of
- * the travel gives the grid that full height. Where the content is taller,
- * the hero runs further past the column instead, so the catch stays with the
- * tagline.
- * The reading column is `lg:self-start`, so its height is its content's.
+ * drift is chosen so the catch falls as the tagline starts to light (the top
+ * of `catchId` crosses the reveal line), but never above MAX_DRIFT; when the
+ * panel is short next to a long column that cap applies and the catch comes
+ * later (owner preferred a shorter panel that scrolls slower, 2026-11-02).
  *
  * A transform, not `position: sticky`, so layout is untouched (GridSnap
  * measures layout positions and subtracts transforms). Scroll work is batched
@@ -47,12 +45,13 @@ export function PanelDrift({ targetId, catchId }: { targetId: string; catchId?: 
 
     const column = grid.firstElementChild as HTMLElement | null;
     let sizedFor = "";
+    let drift = 0;
 
     const measure = () => {
       if (!lg.matches || reduce.matches || !column) {
-        panel.style.height = "";
         panel.style.marginBottom = "";
         sizedFor = "";
+        drift = 0;
         return;
       }
       const mark = catchId ? document.getElementById(catchId) : null;
@@ -60,25 +59,13 @@ export function PanelDrift({ targetId, catchId }: { targetId: string; catchId?: 
         ? mark.getBoundingClientRect().top + window.scrollY
         : column.offsetHeight;
       const catchScroll = Math.max(0, top - REVEAL_LINE * window.innerHeight);
-      const travel = catchScroll * DRIFT;
-      // The panel's own content height, without the height set below.
-      const previous = panel.style.height;
-      panel.style.height = "";
-      const content = panel.offsetHeight;
-      const height = Math.max(
-        window.innerHeight - HEADER,
-        content,
-        column.offsetHeight + OVERRUN - travel,
-      );
-      // Only write when the result changes: these writes resize the grid,
+      const travel = Math.max(0, column.offsetHeight + OVERRUN - panel.offsetHeight);
+      drift = catchScroll > 0 ? Math.min(MAX_DRIFT, travel / catchScroll) : MAX_DRIFT;
+      // Only write when the result changes: the margin resizes the grid,
       // which re-runs this observer and GridSnap.
-      const key = `${Math.round(height)}|${Math.round(travel)}`;
-      if (key === sizedFor) {
-        panel.style.height = previous;
-        return;
-      }
+      const key = `${Math.round(travel)}`;
+      if (key === sizedFor) return;
       sizedFor = key;
-      panel.style.height = `${height}px`;
       panel.style.marginBottom = `${travel}px`;
     };
 
@@ -91,7 +78,7 @@ export function PanelDrift({ targetId, catchId }: { targetId: string; catchId?: 
       // The catch is wherever the panel's bottom meets the grid's (GridSnap
       // may have added a few px, so it is measured, not assumed).
       const room = Math.max(0, grid.offsetHeight - panel.offsetHeight);
-      const offset = Math.min(Math.max(window.scrollY * DRIFT, 0), room);
+      const offset = Math.min(Math.max(window.scrollY * drift, 0), room);
       panel.style.transform = `translate3d(0, ${offset}px, 0)`;
     };
 
@@ -104,6 +91,7 @@ export function PanelDrift({ targetId, catchId }: { targetId: string; catchId?: 
       schedule();
     });
     resizes.observe(grid);
+    resizes.observe(panel);
     if (column) resizes.observe(column);
 
     measure();
@@ -123,7 +111,6 @@ export function PanelDrift({ targetId, catchId }: { targetId: string; catchId?: 
       window.removeEventListener("resize", onChange);
       if (frame) cancelAnimationFrame(frame);
       panel.style.transform = "";
-      panel.style.height = "";
       panel.style.marginBottom = "";
     };
   }, [targetId, catchId]);
