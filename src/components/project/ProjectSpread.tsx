@@ -30,7 +30,7 @@ export function ProjectSpread({
       // A dark spread swaps in the inverted token set.
       data-panel={project.theme === "dark" ? "dark" : undefined}
       className={cn(
-        "group border-t border-line py-[clamp(3rem,7vh,6rem)]",
+        "group relative border-t border-line py-[clamp(3rem,7vh,6rem)]",
         project.theme === "dark" && "surface-panel",
       )}
     >
@@ -87,9 +87,19 @@ export function ProjectSpread({
             <span className="u-meta text-fg-4">{project.timeline}</span>
           </div>
 
+          {/* The title's link is stretched over the whole section (::after,
+              positioned against the article), so a click anywhere in it opens
+              the case study — the whole section already reacts on hover. The
+              image and "View case study" links go to the same page. */}
           <h3 className={cn("mt-6 text-fg", isFeature ? "text-h1" : "text-h2")}>
-            <Link href={href} className="caption-shift inline-block no-underline">
-              {project.title}
+            <Link
+              href={href}
+              className="no-underline after:absolute after:inset-0 after:z-10 after:content-['']"
+            >
+              {/* The hover shift is on this span, not the link: a transform
+                  on the link would make it the containing block for ::after
+                  and shrink the click area to the title while hovered. */}
+              <span className="caption-shift inline-block">{project.title}</span>
             </Link>
           </h3>
 
