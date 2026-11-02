@@ -268,7 +268,9 @@ h2,
 h3,
 h4 {
   margin: 0;
-  font-weight: 500;
+  /* Headings semibold; titles and UI (buttons, role titles) stay medium,
+     body regular. The all-caps mono labels set their own 400. */
+  font-weight: 600;
   text-wrap: balance;
 }
 
