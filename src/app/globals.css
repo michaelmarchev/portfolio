@@ -418,6 +418,17 @@ hr {
 .tagline-word[data-state="lit"] {
   color: var(--c-fg);
 }
+/* "Let’s talk." links to Contact: underlined in the word's own (fading)
+   colour; accent on hover once lit. */
+.tagline-link-word {
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.12em;
+}
+.tagline-link:hover .tagline-word[data-state="lit"],
+.tagline-link:focus-visible .tagline-word[data-state="lit"] {
+  color: var(--c-accent-text);
+}
 
 /* Mobile menu: links fade up in reading order, 60ms apart, each over
    300ms, so the last link starts at 300ms. --i is set per item. */

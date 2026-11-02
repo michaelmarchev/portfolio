@@ -1,12 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { site } from "@/content/site";
 
-/** Where words turn faint, then lit, as a fraction of the viewport height. */
-const FAINT_LINE = 0.85;
-const LIT_LINE = 0.6;
+/** Where words turn faint, then lit, as a fraction of the viewport height.
+ *  PanelDrift catches the hero panel on LIT_LINE. */
+const FAINT_LINE = 0.95;
+export const LIT_LINE = 0.7;
 /** Least scroll, in px, between one word changing and the next. */
 const STEP = 90;
 /** Delay between words that change in the same frame (a fast scroll). */
@@ -18,13 +20,17 @@ const STAGGER = 90;
  * hero panel drifts beside it and catches as it starts to light.
  *
  * Words start invisible, turn faint (15% of the text colour) as they cross a
- * line 85% of the way down the viewport, and full colour as they cross one at
- * 60% — one at a time, in reading order. Each word's trigger is its own
+ * line 95% of the way down the viewport, and full colour as they cross one at
+ * 70% — one at a time, in reading order. Each word's trigger is its own
  * position, but never less than STEP px of scroll after the previous word's,
  * so a line of several words doesn't change all at once. State follows the
  * scroll position, so scrolling back up reverses it. Under
  * `prefers-reduced-motion` every word is full colour from the start
  * (globals.css).
+ *
+ * The closing line ("Let’s talk.") links to the contact page. Its underline is
+ * on each word (the space is inside the first word's span) so it fades with
+ * the words; one on the link itself would be drawn in the link's own colour.
  */
 export function TaglineText({ className, id }: { className?: string; id?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -79,19 +85,37 @@ export function TaglineText({ className, id }: { className?: string; id?: string
 
   return (
     <div ref={ref} id={id} className={cn("max-w-[42.5rem]", className)}>
-      {site.tagline.map((sentence, s) => (
-        <p
-          key={s}
-          className="text-h1 font-semibold text-balance text-fg [&+&]:mt-6 lg:[&+&]:mt-32"
-        >
-          {sentence.split(" ").map((word, w) => (
+      {site.tagline.map((sentence, s) => {
+        const words = sentence.split(" ");
+        const link = sentence === site.closingLine;
+        const text = words.map((word, w) => {
+          const last = w === words.length - 1;
+          return link ? (
+            <span key={w} className="tagline-word tagline-link-word">
+              {last ? word : `${word} `}
+            </span>
+          ) : (
             <span key={w}>
               <span className="tagline-word">{word}</span>
-              {w < sentence.split(" ").length - 1 ? " " : ""}
+              {last ? "" : " "}
             </span>
-          ))}
-        </p>
-      ))}
+          );
+        });
+        return (
+          <p
+            key={s}
+            className="text-h1 font-semibold text-balance text-fg [&+&]:mt-6 lg:[&+&]:mt-32"
+          >
+            {link ? (
+              <Link href="/contact" className="tagline-link no-underline">
+                {text}
+              </Link>
+            ) : (
+              text
+            )}
+          </p>
+        );
+      })}
     </div>
   );
 }

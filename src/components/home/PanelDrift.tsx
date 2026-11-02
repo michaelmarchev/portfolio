@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
+import { LIT_LINE } from "@/components/sections/TaglineText";
 
 /** Share of the page's scroll the panel cancels out: it moves at 25% speed. */
 const DRIFT = 0.75;
-/** The tagline's reveal line, as a fraction of the viewport height. */
-const REVEAL_LINE = 0.6;
+/** The tagline's lit line, as a fraction of the viewport height. */
+const REVEAL_LINE = LIT_LINE;
 /** How far the hero (and the panel) runs past the reading column's end. */
 const OVERRUN = 80;
 /** Header height plus its border: the panel is at least one screen below it. */

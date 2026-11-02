@@ -12,7 +12,6 @@ import { DimensionCallouts } from "@/components/graphics/DimensionCallouts";
 import { FlyInText } from "@/components/ui/FlyInText";
 import { TaglineText } from "@/components/sections/TaglineText";
 import { PanelDrift } from "@/components/home/PanelDrift";
-import { SpecTable } from "@/components/project/SpecTable";
 import { Logo } from "@/components/ui/Logo";
 import { logoFor, orgLogos } from "@/content/logos";
 import { experience } from "@/content/experience";
@@ -63,7 +62,7 @@ export function Hero() {
               {education.expected.replace("Expected ", "")}
             </p>
 
-            <AnimatedTitle id="hero-name" gradient className="text-display mt-16 text-fg lg:mt-32">
+            <AnimatedTitle id="hero-name" gradient className="text-display mt-20 text-fg lg:mt-40">
               {"Michael\nMarchev"}
             </AnimatedTitle>
 
@@ -74,67 +73,14 @@ export function Hero() {
             <MetaRun items={site.descriptor} separator="•" className="mt-10 lg:mt-32" />
 
 
-            {/* Buttons and links move as one block. */}
-            <div className="mt-10 lg:mt-32">
-              <div className="flex flex-wrap items-center gap-3">
-                <Button href="/projects" variant="solid" size="lg">
-                  Explore selected work
-                </Button>
-                <Button href={site.resume} variant="outline" size="lg" download>
-                  Download resume
-                </Button>
-              </div>
-
-              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
-                <a
-                  href={site.linkedin}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="u-link text-caption text-fg-3"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="u-link text-caption text-fg-3"
-                >
-                  {site.email}
-                </a>
-              </div>
+            <div className="mt-10 flex flex-wrap items-center gap-3 lg:mt-32">
+              <Button href="/projects" variant="solid" size="lg">
+                Explore selected work
+              </Button>
+              <Button href={site.resume} variant="outline" size="lg" download>
+                Download resume
+              </Button>
             </div>
-          </div>
-
-          {/* Logos of the organizations on the Experience page, then the
-              tagline. At lg the gaps are deliberately large (128–160px, past
-              the 96px top of the spacing scale, owner's call) so the column
-              runs long and the drifting panel holds through it. */}
-          <div className="mt-16 border-t border-line pt-6 lg:mt-32">
-            <Link href="/experience" className="u-meta u-link text-fg-4">
-              Experience
-            </Link>
-            <ul className="m-0 mt-6 flex list-none flex-wrap items-center gap-x-10 gap-y-6 p-0">
-              {orgLogos.map((logo) => {
-                // Each logo opens the most recent Experience entry for that
-                // organization (entries are newest first).
-                const entry = experience.find((e) => logoFor(e.organization)?.id === logo.id);
-                const mark = <Logo logo={logo} size={logo.width / logo.height > 2 ? 26 : 40} />;
-                return (
-                  <li key={logo.id}>
-                    {entry ? (
-                      <Link
-                        href={`/experience#${entry.id}`}
-                        aria-label={`${entry.organization} — Experience`}
-                        className="block no-underline"
-                      >
-                        {mark}
-                      </Link>
-                    ) : (
-                      mark
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
           </div>
 
           <TaglineText id="hero-tagline" className="mt-20 lg:mt-48" />
@@ -239,13 +185,13 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Description: the summary under the image, the specifications
-              at the panel's bottom (level with the end of the reading column
-              once the panel catches). Both are the case study's own copy. */}
+          {/* Description: the case study's summary under the image, and the
+              Experience logos at the panel's bottom (level with the end of
+              the reading column once the panel catches). */}
           {lead && (
             <div className="flex flex-col gap-12 border-t border-line pt-6 lg:flex-1 lg:justify-between">
               <div>
-                <p className="max-w-[52ch] text-caption text-fg-2">{lead.summary}</p>
+                <p className="max-w-[52ch] text-lead text-fg-2">{lead.summary}</p>
                 <p className="u-meta mt-4 text-fg-4">
                   {lead.organization}
                   <span aria-hidden="true" className="px-2">
@@ -254,7 +200,35 @@ export function Hero() {
                   {lead.role}
                 </p>
               </div>
-              <SpecTable specs={lead.specs} />
+              {/* Logos of the organizations on the Experience page. */}
+              <div className="border-t border-line pt-6">
+                <Link href="/experience" className="u-meta u-link text-fg-4">
+                  Experience
+                </Link>
+                <ul className="m-0 mt-6 flex list-none flex-wrap items-center gap-x-10 gap-y-6 p-0">
+                  {orgLogos.map((logo) => {
+                    // Each logo opens the most recent Experience entry for that
+                    // organization (entries are newest first).
+                    const entry = experience.find((e) => logoFor(e.organization)?.id === logo.id);
+                    const mark = <Logo logo={logo} size={logo.width / logo.height > 2 ? 26 : 40} />;
+                    return (
+                      <li key={logo.id}>
+                        {entry ? (
+                          <Link
+                            href={`/experience#${entry.id}`}
+                            aria-label={`${entry.organization} — Experience`}
+                            className="block no-underline"
+                          >
+                            {mark}
+                          </Link>
+                        ) : (
+                          mark
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
           )}
         </div>
