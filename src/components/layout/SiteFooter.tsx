@@ -18,6 +18,13 @@ export function SiteFooter() {
             >
               {site.email}
             </a>
+            <br />
+            <a
+              href={`tel:${site.phoneHref}`}
+              className="u-link mt-2 inline-block text-body text-fg-2"
+            >
+              {site.phone}
+            </a>
             <p className="u-meta mt-4 text-fg-4">{site.location}</p>
           </div>
 
