@@ -26,8 +26,9 @@
   --signal-text: #1a357f;
   /* Tuned for the near-black button fill: 7.86:1 on #151515. 80% saturation. */
   --signal-bright: #87aaf2;
-  --void: #0e0e0e;
-  --void-2: #171716;
+  /* Dark surfaces snapped to the design skill's palette (2026-11-01). */
+  --void: #000000;
+  --void-2: #181818;
 
   /* --- semantic, swapped inside dark panels --- */
   --c-bg: var(--paper);
@@ -85,7 +86,7 @@
   --c-fg: #f0ede6;
   --c-fg-2: #b9b5ac;
   --c-fg-3: #8b8780;
-  --c-fg-4: #807d76;
+  --c-fg-4: #838079; /* 4.51:1 on #181818, 5.33:1 on #000 */
   --c-tick: #4a4843;
   --c-line: rgb(240 237 230 / 0.16);
   --c-line-strong: rgb(240 237 230 / 0.34);
@@ -93,21 +94,21 @@
   --c-accent-text: #8cabf2;
   --c-grid: rgb(240 237 230 / 0.03);
   --c-grid-major: rgb(240 237 230 / 0.06);
-  /* Over --void this composites to #1e1e1c, the panel's --c-bg below. */
-  --c-panel: rgb(239 239 214 / 0.07);
+  /* Over --void (#000) this composites to #1f1f1f, the panel's --c-bg below. */
+  --c-panel: rgb(255 255 255 / 0.1216);
   color-scheme: dark;
 }
 
 /* In the dark theme the page is already near-black, so a "dark panel" would
    vanish. Give it the slightly lifted surface instead, so panel sections stay
    legible as sections.
-   The muted greys have to lift with it: #807d76 is 4.70:1 on #0e0e0e but only
-   4.37:1 on #171716, which fails AA. */
+   The muted greys have to lift with it (panel greys checked on #1f1f1f and
+   #272727: #96928a 5.32 / 4.82, #918e86 5.04 / 4.57). */
 :root[data-theme="dark"] [data-panel="dark"] {
   /* The panel tint's composite (see --c-panel), so opaque fills inside a
-     panel match it. Greys checked on it: #96928a 5.39:1, #918e86 5.10:1. */
-  --c-bg: #1e1e1c;
-  --c-bg-deep: #252523;
+     panel match it. Greys checked on it: #96928a 5.32:1, #918e86 5.04:1. */
+  --c-bg: #1f1f1f;
+  --c-bg-deep: #272727;
   --c-fg-3: #96928a;
   --c-fg-4: #918e86;
 }
@@ -163,7 +164,7 @@
   --color-aluminum: #a9a69d;
   --color-signal: #1f3fbf;
   --color-signal-bright: #87aaf2;
-  --color-void: #0e0e0e;
+  --color-void: #000000;
 
   --font-sans: var(--font-geist), "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
