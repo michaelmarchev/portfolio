@@ -396,19 +396,9 @@ hr {
 .datum-rail__ticks {
   position: absolute;
   inset: 0;
-  /* A tick on every line of the page grid: 6px on each 20px line, 12px on
-     each 100px line, against the rail's edge. The rail is fixed and the grid
-     scrolls, so DatumRail sets --scroll-y and the ticks move with the page,
-     staying on the lines. (Was 24px / 96px, with gradients drawn across
-     rather than down — a solid 12px bar, not ticks.) */
-  background-image:
-    linear-gradient(var(--c-tick) 1px, transparent 1px),
-    linear-gradient(var(--c-tick) 1px, transparent 1px);
-  background-repeat: repeat-y;
-  background-size: 12px 100px, 6px 20px;
-  background-position:
-    right 0 top calc(var(--grid-y, 0px) - var(--scroll-y, 0px)),
-    right 0 top calc(var(--grid-y, 0px) - var(--scroll-y, 0px));
+  /* A solid 12px bar down the rail's outer edge (owner's choice, 2026-11-02;
+     it began as tick marks drawn sideways, and he preferred the bar). */
+  background-image: linear-gradient(to right, var(--c-tick) 0 12px, transparent 12px);
   opacity: 0.85;
 }
 

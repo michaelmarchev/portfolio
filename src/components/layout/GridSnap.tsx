@@ -3,8 +3,9 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-/** Minor pitch of the page grid in globals.css (`background-size`). */
+/** Minor and major pitch of the page grid in globals.css (`background-size`). */
 const G = 20;
+const MAJOR = 100;
 /** Width of a grid line, plus slack for sub-pixel borders. */
 const LINE = 1.05;
 
@@ -75,12 +76,14 @@ export function GridSnap() {
       );
       // x origin: the homepage hero panel's left edge, so a major vertical
       // line runs along it. At lg the hero's reading column is
-      // round(down, 47%, 20px) of <main>'s width (Hero.tsx); the same formula
-      // is used on every page so the grid never shifts between pages. Below
-      // lg the hero stacks and the panel starts at the content's left edge.
+      // round(down, 47%, 100px) of <main>'s width (Hero.tsx) — whole major
+      // squares, so <main>'s left edge (the datum rail's border) is a major
+      // line too; at 20px it fell a square short of one. The same formula is
+      // used on every page so the grid never shifts between pages. Below lg
+      // the hero stacks and the panel starts at the content's left edge.
       const box = main.getBoundingClientRect();
       const lg = window.matchMedia("(min-width: 1024px)").matches;
-      const column = lg ? Math.floor((box.width * 0.47) / G) * G : 0;
+      const column = lg ? Math.floor((box.width * 0.47) / MAJOR) * MAJOR : 0;
       document.documentElement.style.setProperty(
         "--grid-x",
         `${box.left + window.scrollX + column}px`,
@@ -92,9 +95,23 @@ export function GridSnap() {
       // bottom border is not pushed down a whole square; just short of a line
       // is off it and gets nudged onto it (sub-pixel errors would otherwise
       // accumulate down the page).
-      const offLine = (y: number) => {
-        const r = ((y % G) + G) % G;
-        return r > LINE && r < G - 0.05;
+      const offLine = (y: number, pitch = G) => {
+        const r = ((y % pitch) + pitch) % pitch;
+        return r > LINE && r < pitch - 0.05;
+      };
+
+      // A full-width rule (a bordered block as wide as <main>, e.g. the hero's
+      // bottom rule, the homepage spreads, the footer) reads as a bold line,
+      // so it goes on a major line, not just any line (owner, 2026-11-02).
+      // Narrower bordered blocks (cards, buttons) stay on the minor grid.
+      const mainWidth = box.width;
+      const ruled = (el: HTMLElement, side: "Top" | "Bottom") => {
+        const s = getComputedStyle(el);
+        const width = parseFloat(s[`border${side}Width`]) || 0;
+        return s[`border${side}Style`] !== "none" && width > 0 &&
+          el.getBoundingClientRect().width >= mainWidth * 0.9
+          ? width
+          : 0;
       };
 
       // Each pass recomputes every adjustment from the block's natural
@@ -109,8 +126,9 @@ export function GridSnap() {
           const before = el.style.marginTop;
           el.style.marginTop = "";
           const top = layoutTop(el) - origin;
-          if (offLine(top)) {
-            const delta = Math.ceil(top / G) * G - top;
+          const pitch = ruled(el, "Top") ? MAJOR : G;
+          if (offLine(top, pitch)) {
+            const delta = Math.ceil(top / pitch) * pitch - top;
             const margin = parseFloat(getComputedStyle(el).marginTop) || 0;
             el.style.marginTop = `${margin + delta}px`;
           }
@@ -136,8 +154,9 @@ export function GridSnap() {
           const border =
             style.borderBottomStyle !== "none" ? parseFloat(style.borderBottomWidth) || 0 : 0;
           const bottom = layoutTop(el) + height - border - origin;
-          if (offLine(bottom)) {
-            const target = Math.ceil(bottom / G) * G;
+          const pitch = ruled(el, "Bottom") ? MAJOR : G;
+          if (offLine(bottom, pitch)) {
+            const target = Math.ceil(bottom / pitch) * pitch;
             el.style.minHeight = `${height + target - bottom}px`;
           }
           if (Math.abs((parseFloat(el.style.minHeight) || 0) - (parseFloat(before) || 0)) > 0.1) {

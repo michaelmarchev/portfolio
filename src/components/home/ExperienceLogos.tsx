@@ -12,7 +12,7 @@ export function ExperienceLogos({ className }: { className?: string }) {
   return (
     <ul
       aria-label="Experience"
-      className={cn("m-0 flex list-none flex-wrap items-center gap-x-10 gap-y-6 p-0", className)}
+      className={cn("m-0 flex list-none flex-wrap items-center gap-y-6 p-0", className)}
     >
       {orgLogos.map((logo) => {
         const entry = experience.find((e) => logoFor(e.organization)?.id === logo.id);

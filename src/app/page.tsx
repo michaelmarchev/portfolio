@@ -25,8 +25,8 @@ export default function HomePage() {
 
       <Section datum="Selected projects" space="tight" id="selected-work">
         <Container wide className="flex flex-col items-center text-center">
-          <ExperienceLogos className="justify-center" />
-          <h2 className="text-h1 mt-16 text-fg">Selected projects</h2>
+          <ExperienceLogos className="justify-center gap-x-16" />
+          <h2 className="text-h1 mt-20 text-fg">Selected projects</h2>
         </Container>
       </Section>
 

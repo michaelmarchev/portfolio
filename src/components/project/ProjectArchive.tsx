@@ -39,7 +39,9 @@ export function ProjectArchive({
 
   return (
     <>
-      <div data-snap className="border-y border-line py-6">
+      {/* Its rules go on major grid lines (GridSnap), which can add height;
+          the chips stay centred between them. */}
+      <div data-snap className="flex flex-col justify-center border-y border-line py-6">
         <h2 className="sr-only">Filter projects by category</h2>
         <ul className="m-0 flex list-none flex-wrap gap-x-2 gap-y-2 p-0">
           <li>
