@@ -12,10 +12,9 @@ export function SiteFooter() {
       <Container wide className="py-12 md:py-16">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <p className="text-h3 max-w-[22ch] text-fg">{site.closingLine}</p>
             <a
               href={`mailto:${site.email}`}
-              className="u-link mt-6 inline-block text-body text-fg-2"
+              className="u-link inline-block text-body text-fg-2"
             >
               {site.email}
             </a>
