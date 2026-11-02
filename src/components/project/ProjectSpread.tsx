@@ -16,10 +16,13 @@ export function ProjectSpread({
   project,
   variant = "split",
   flip = false,
+  rule = true,
 }: {
   project: Project;
   variant?: "feature" | "split";
   flip?: boolean;
+  /** The rule above the spread; off for the first, under the section heading. */
+  rule?: boolean;
 }) {
   const href = `/projects/${project.slug}`;
   const isFeature = variant === "feature";
@@ -30,7 +33,8 @@ export function ProjectSpread({
       // A dark spread swaps in the inverted token set.
       data-panel={project.theme === "dark" ? "dark" : undefined}
       className={cn(
-        "group relative border-t border-line py-[clamp(3rem,7vh,6rem)]",
+        "group relative py-[clamp(3rem,7vh,6rem)]",
+        rule && "border-t border-line",
         project.theme === "dark" && "surface-panel",
       )}
     >

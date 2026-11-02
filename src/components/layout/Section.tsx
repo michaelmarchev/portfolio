@@ -16,8 +16,6 @@ interface SectionProps {
   /** Vertical rhythm. `flush` removes padding for full-bleed media. */
   space?: "default" | "tight" | "loose" | "flush";
   as?: "section" | "div" | "footer" | "header";
-  /** End on a major grid line (GridSnap), for a block directly above a full-width rule. */
-  snapBottomMajor?: boolean;
 }
 
 const SPACE: Record<NonNullable<SectionProps["space"]>, string> = {
@@ -35,14 +33,12 @@ export function Section({
   className,
   space = "default",
   as: Tag = "section",
-  snapBottomMajor,
 }: SectionProps) {
   return (
     <Tag
       id={id}
       data-panel={panel === "dark" ? "dark" : undefined}
       data-datum={datum}
-      data-snap-bottom={snapBottomMajor ? "major" : undefined}
       className={cn(
         "relative",
         panel === "dark" && "surface-panel text-fg",

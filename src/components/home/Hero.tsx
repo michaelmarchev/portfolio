@@ -32,15 +32,14 @@ export function Hero() {
       {/* `data-snap` and the column rounding put the panel's edges on the
           page grid: its top is a major line, `GridSnap` rounds its height to
           whole squares, and the reading column is rounded down to whole
-          100px squares so the panel's left edge falls on a major line. The
-          rule is on this grid rather than the section so the snapped height
-          includes it. Below lg the two stacked rows are `auto 1fr`, so any
+          100px squares so the panel's left edge falls on a major line. No
+          rule below the hero (owner removed it, 2026-11-02). Below lg the two stacked rows are `auto 1fr`, so any
           height GridSnap adds goes to the panel row; shared between both rows
           it moved the panel's top and the snap passes never settled. */}
       <div
         id="hero-grid"
         data-snap
-        className="grid grid-rows-[auto_1fr] border-b border-line lg:grid-rows-none lg:min-h-[calc(100svh-4.25rem)] lg:grid-cols-[round(down,47%,100px)_minmax(0,1fr)]"
+        className="grid grid-rows-[auto_1fr] lg:grid-rows-none lg:min-h-[calc(100svh-4.25rem)] lg:grid-cols-[round(down,47%,100px)_minmax(0,1fr)]"
       >
         {/* --- Reading column --- */}
         {/* Top-aligned at lg, level with the dark panel's label row (both

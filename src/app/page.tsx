@@ -23,16 +23,14 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* The first project's rule sits on a major grid line, so this section
-          ends on that line (`data-snap-bottom`) with its content at the
-          bottom: the heading is always 32px above the rule, and the snap's
-          slack goes above the logos instead. */}
+      {/* Content at the bottom, so the few px GridSnap adds to reach a line
+          go above the logos and the heading stays 32px above the first
+          project's top. */}
       <Section
         datum="Selected Projects"
         space="flush"
         id="selected-work"
         className="flex flex-col justify-end pb-8 pt-[clamp(2.5rem,5vh,4rem)]"
-        snapBottomMajor
       >
         <Container wide className="flex flex-col items-center text-center">
           <ExperienceLogos className="justify-center gap-x-16" />
@@ -47,6 +45,8 @@ export default function HomePage() {
           // `flip` puts the media on the right. Alternating from the first
           // one keeps the rhythm without singling out the lead project.
           flip={i % 2 === 0}
+          // No rule between the section heading and the first project.
+          rule={i > 0}
         />
       ))}
 
